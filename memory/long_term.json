@@ -5,7 +5,12 @@
       "updated": "2026-06-09"
     }
   },
-  "preferences": {},
+  "preferences": {
+    "currency": {
+      "value": "INR",
+      "updated": "2026-06-12"
+    }
+  },
   "projects": {},
   "relationships": {
     "visha_language_preference": {
