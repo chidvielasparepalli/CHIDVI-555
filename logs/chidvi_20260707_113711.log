@@ -1,0 +1,8 @@
+[2026-07-07 11:37:24] INFO     core.personality_manager:97: Personalities loaded: CHIDVI, HINATA
+[2026-07-07 11:37:34] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-07 11:37:34] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-07 11:37:36] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-07 11:37:53] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-07 11:37:57] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-07 11:38:49] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-07 11:38:55] INFO     HINATA:20: Avatar State -> IDLE

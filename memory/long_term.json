@@ -1,0 +1,97 @@
+{
+  "identity": {
+    "user_name": {
+      "value": "Hinata",
+      "updated": "2026-07-01"
+    },
+    "photo_ownership": {
+      "value": "my photo 1.png",
+      "updated": "2026-06-12"
+    },
+    "email": {
+      "value": "siddvilasparab11@gmail.com",
+      "updated": "2026-06-17"
+    },
+    "religious_identity": {
+      "value": "Muslim",
+      "updated": "2026-06-17"
+    },
+    "name": {
+      "value": "CHIDVILAS",
+      "updated": "2026-07-01"
+    },
+    "academic_year": {
+      "value": "2nd year student",
+      "updated": "2026-06-18"
+    },
+    "2nd_year_start_date": {
+      "value": "June 1st",
+      "updated": "2026-06-18"
+    },
+    "assistant_name": {
+      "value": "CHIDVI",
+      "updated": "2026-06-28"
+    }
+  },
+  "preferences": {
+    "currency": {
+      "value": "INR",
+      "updated": "2026-06-12"
+    },
+    "language": {
+      "value": "Telugu",
+      "updated": "2026-06-30"
+    }
+  },
+  "projects": {
+    "portfolio_style": {
+      "value": "Solo Leveling anime system",
+      "updated": "2026-06-17"
+    },
+    "clients_contacted_today": {
+      "value": "5",
+      "updated": "2026-06-19"
+    }
+  },
+  "relationships": {
+    "visha_language_preference": {
+      "value": "English",
+      "updated": "2026-06-09"
+    },
+    "friend_personality": {
+      "value": "introvert",
+      "updated": "2026-06-14"
+    },
+    "girl_personality": {
+      "value": "extrovert",
+      "updated": "2026-06-14"
+    },
+    "best_friend_name": {
+      "value": "HIMA VERSHITHA",
+      "updated": "2026-06-18"
+    }
+  },
+  "wishes": {},
+  "notes": {
+    "context": {
+      "value": "User stated interaction is all for Jarvis",
+      "updated": "2026-06-12"
+    },
+    "personal_note": {
+      "value": "If I don't say it there, I will give it behind the houses",
+      "updated": "2026-06-13"
+    },
+    "amount_taken": {
+      "value": "10000",
+      "updated": "2026-06-14"
+    },
+    "creator": {
+      "value": "CHIDVIELAS",
+      "updated": "2026-06-18"
+    },
+    "last_update_context": {
+      "value": "User updated and added features to CHIDVI",
+      "updated": "2026-06-29"
+    }
+  }
+}
