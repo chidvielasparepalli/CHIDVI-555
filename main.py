@@ -921,15 +921,28 @@ class JarvisLive:
         with self._speaking_lock:
             return self._is_speaking
 
+    def _is_local_command_text(self, text: str) -> bool:
+        return self.command_router.parse(text).type == CommandType.LOCAL
+
+    def _clear_pending_audio(self):
+        if not self.audio_in_queue:
+            return
+        while True:
+            try:
+                self.audio_in_queue.get_nowait()
+            except asyncio.QueueEmpty:
+                break
+
     async def _receive_audio(self):
         print("[JARVIS]‚ Recv started")
         out_buf, in_buf = [], []
+        suppress_turn_output = False
 
         try:
             while True:
                 async for response in self.session.receive():
 
-                    if response.data:
+                    if response.data and not suppress_turn_output:
                         if self._turn_done_event and self._turn_done_event.is_set():
                             self._turn_done_event.clear()
                         try:
@@ -948,13 +961,21 @@ class JarvisLive:
 
                         if sc.output_transcription and sc.output_transcription.text:
                             txt = _clean_transcript(sc.output_transcription.text)
-                            if txt:
+                            if txt and not suppress_turn_output:
                                 out_buf.append(txt)
 
                         if sc.input_transcription and sc.input_transcription.text:
                             txt = _clean_transcript(sc.input_transcription.text)
                             if txt:
                                 in_buf.append(txt)
+                                candidate = " ".join(in_buf).strip()
+                                if candidate and not suppress_turn_output and self._is_local_command_text(candidate):
+                                    suppress_turn_output = True
+                                    out_buf = []
+                                    self._clear_pending_audio()
+                                    self.set_speaking(False)
+                                    self.ui.write_log(f"You: {candidate}")
+                                    await self._handle_user_text(candidate, allow_remote=False)
 
                         if sc.turn_complete:
                             if self._turn_done_event:
@@ -964,8 +985,9 @@ class JarvisLive:
 
                             if full_in:
 
-                                self.ui.write_log(f"You: {full_in}")
-                                await self._handle_user_text(full_in, allow_remote=False)
+                                if not suppress_turn_output:
+                                    self.ui.write_log(f"You: {full_in}")
+                                    await self._handle_user_text(full_in, allow_remote=False)
 
                                 if hasattr(self.ui, "start_work_music"):
                                     self.ui.start_work_music()
@@ -978,6 +1000,7 @@ class JarvisLive:
                                 self.ui.write_log(f"Jarvis: {full_out}")
                         
                             out_buf = []
+                            suppress_turn_output = False
 
                     if response.tool_call:
                         fn_responses = []
