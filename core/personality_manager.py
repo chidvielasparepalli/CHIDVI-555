@@ -17,8 +17,11 @@ Replaces duplicate personality managers throughout the codebase.
 from typing import Dict, List, Optional, Callable
 from dataclasses import dataclass
 from enum import Enum
+import json
+from pathlib import Path
 import threading
 import asyncio
+from core.config import CONFIG_DIR
 from core.logging import get_logger
 from core.event_bus import publish_event, subscribe_to_event, EventType
 
@@ -54,12 +57,13 @@ class PersonalityManager:
     Ensures all subsystems stay in sync.
     """
     
-    def __init__(self):
+    def __init__(self, state_path: Optional[Path] = None):
         self._current_personality: Optional[PersonalityID] = None
         self._profiles: Dict[PersonalityID, PersonalityProfile] = {}
         self._lock = threading.RLock()
         self._session_restart_callback: Optional[Callable] = None
         self._transition_in_progress = False
+        self._state_path = Path(state_path) if state_path else CONFIG_DIR / "personality_state.json"
         
         self._load_personalities()
         self._setup_event_listeners()
@@ -92,9 +96,32 @@ class PersonalityManager:
             color_secondary=(150, 50, 200),
         )
         
-        # Set default
-        self._current_personality = PersonalityID.CHIDVI
+        # Set saved personality or default.
+        self._current_personality = self._load_saved_personality() or PersonalityID.CHIDVI
         logger.info("Personalities loaded: CHIDVI, HINATA")
+
+    def _load_saved_personality(self) -> Optional[PersonalityID]:
+        try:
+            if not self._state_path.exists():
+                return None
+            data = json.loads(self._state_path.read_text(encoding="utf-8"))
+            return PersonalityID[str(data.get("active_personality", "")).upper()]
+        except Exception as exc:
+            logger.warning(f"Failed to load saved personality: {exc}")
+            return None
+
+    def _save_current_personality(self):
+        try:
+            self._state_path.parent.mkdir(parents=True, exist_ok=True)
+            self._state_path.write_text(
+                json.dumps(
+                    {"active_personality": self._current_personality.value},
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+        except Exception as exc:
+            logger.warning(f"Failed to save active personality: {exc}")
     
     def _load_personality_prompt(self, name: str) -> str:
         """Load a personality's system prompt."""
@@ -192,6 +219,7 @@ class PersonalityManager:
         
         if personality == self._current_personality:
             logger.debug(f"Already using {personality.value}")
+            self._save_current_personality()
             return True
         
         with self._lock:
@@ -213,6 +241,7 @@ class PersonalityManager:
             # Update current personality
             with self._lock:
                 self._current_personality = personality
+                self._save_current_personality()
             
             profile = self.get_profile(personality)
             
@@ -327,6 +356,7 @@ def set_personality(name: str) -> bool:
         pid = PersonalityID[name.upper()]
         manager = get_personality_manager()
         manager._current_personality = pid
+        manager._save_current_personality()
         logger.debug(f"Set personality to {pid.value} (sync mode)")
         return True
     except KeyError:

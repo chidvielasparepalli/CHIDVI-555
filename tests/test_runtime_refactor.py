@@ -1,9 +1,18 @@
+import asyncio
 import unittest
+from tempfile import TemporaryDirectory
+from pathlib import Path
 
 from api.key_pool import APIKeyPool
 from commands.router import CommandCategory, CommandRouter, CommandType
 from core.config import ConfigManager
-from core.personality_manager import get_system_prompt, set_personality
+from core.personality_manager import (
+    PersonalityID,
+    PersonalityManager,
+    get_personality_manager,
+    get_system_prompt,
+    set_personality,
+)
 from personality.personality_loader import get_personality as legacy_get_personality
 
 
@@ -71,13 +80,31 @@ class APIKeyPoolTests(unittest.TestCase):
 
 class PersonalityCompatibilityTests(unittest.TestCase):
     def test_legacy_loader_reads_core_personality_state(self):
-        self.assertTrue(set_personality("HINATA"))
-        self.assertEqual(legacy_get_personality(), "HINATA")
-        self.assertIn("HINATA", get_system_prompt())
+        manager = get_personality_manager()
+        original_path = manager._state_path
+        with TemporaryDirectory() as tmpdir:
+            manager._state_path = Path(tmpdir) / "personality_state.json"
+            try:
+                self.assertTrue(set_personality("HINATA"))
+                self.assertEqual(legacy_get_personality(), "HINATA")
+                self.assertIn("HINATA", get_system_prompt())
 
-        self.assertTrue(set_personality("CHIDVI"))
-        self.assertEqual(legacy_get_personality(), "CHIDVI")
-        self.assertIn("CHIDVI", get_system_prompt())
+                self.assertTrue(set_personality("CHIDVI"))
+                self.assertEqual(legacy_get_personality(), "CHIDVI")
+                self.assertIn("CHIDVI", get_system_prompt())
+            finally:
+                manager._state_path = original_path
+
+    def test_personality_manager_persists_active_personality(self):
+        with TemporaryDirectory() as tmpdir:
+            state_path = Path(tmpdir) / "personality_state.json"
+            manager = PersonalityManager(state_path=state_path)
+
+            self.assertTrue(asyncio.run(manager.switch_to(PersonalityID.HINATA)))
+            self.assertTrue(state_path.exists())
+
+            restored = PersonalityManager(state_path=state_path)
+            self.assertEqual(restored.get_current(), PersonalityID.HINATA)
 
 
 class ConfigTests(unittest.TestCase):
