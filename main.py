@@ -614,6 +614,18 @@ class JarvisLive:
                 return True
             return True
 
+        if command.category == CommandCategory.AVATAR:
+            action = command.args.get("action")
+            if not action:
+                return False
+            if hasattr(self.ui, "perform_avatar_action"):
+                self.ui.perform_avatar_action(action)
+            self.speak(
+                f"[LOCAL AVATAR ACTION] The avatar is performing '{action}'. "
+                "Reply naturally in character as if this is your body."
+            )
+            return True
+
         if command.category == CommandCategory.CONTROL:
             action = command.args.get("action")
             if action == "restart":

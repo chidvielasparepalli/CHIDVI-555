@@ -44,6 +44,8 @@ let blink = 0
 let nextBlink = 2
 let avatarEmotion = "idle"
 let mouthPhase = 0
+let activeAction = null
+let actionStartedAt = 0
 const expressionTargets = {}
 
 const emotionExpressions = {
@@ -86,6 +88,92 @@ function applyEmotionTarget(emotion) {
 
 window.setAvatarEmotion = applyEmotionTarget
 window.setAvatarState = applyEmotionTarget
+window.performAvatarAction = (action) => {
+    activeAction = String(action || "").toLowerCase()
+    actionStartedAt = clock.elapsedTime
+    if (activeAction === "smile") {
+        applyEmotionTarget("happy")
+    } else if (activeAction === "laugh") {
+        applyEmotionTarget("laughing")
+    }
+}
+
+function getBone(name) {
+    return currentVRM?.humanoid?.getNormalizedBoneNode(name) || null
+}
+
+function setBoneRotation(name, x = 0, y = 0, z = 0, blend = 1) {
+    const bone = getBone(name)
+    if (!bone) {
+        return
+    }
+    bone.rotation.x = THREE.MathUtils.lerp(bone.rotation.x, x, blend)
+    bone.rotation.y = THREE.MathUtils.lerp(bone.rotation.y, y, blend)
+    bone.rotation.z = THREE.MathUtils.lerp(bone.rotation.z, z, blend)
+}
+
+function applyProceduralPose(t, delta) {
+    const blend = Math.min(1, delta * 7)
+    const breathing = Math.sin(t * 2.1) * 0.025
+    const sway = Math.sin(t * 0.7) * 0.035
+    const attentive = avatarEmotion === "listening" ? 1 : 0
+    const thoughtful = avatarEmotion === "thinking" || avatarEmotion === "confused" ? 1 : 0
+    const speaking = avatarEmotion === "speaking" || avatarEmotion === "laughing" ? 1 : 0
+
+    setBoneRotation("chest", breathing, sway * 0.3, -sway * 0.2, blend)
+    setBoneRotation("spine", breathing * 0.45, 0, sway * 0.15, blend)
+    setBoneRotation("neck", -0.03 * attentive, 0, sway * 0.25, blend)
+    setBoneRotation("head", -0.05 * thoughtful + Math.sin(t * 0.9) * 0.018, sway * 0.4, sway * 0.15, blend)
+
+    // Relaxed arm posture to avoid static T-pose.
+    setBoneRotation("leftUpperArm", 0.25 + speaking * 0.08, 0.08, 1.15, blend)
+    setBoneRotation("rightUpperArm", 0.25 + speaking * 0.08, -0.08, -1.15, blend)
+    setBoneRotation("leftLowerArm", 0.12, 0.03, 0.25, blend)
+    setBoneRotation("rightLowerArm", 0.12, -0.03, -0.25, blend)
+    setBoneRotation("leftHand", 0, 0, 0.08, blend)
+    setBoneRotation("rightHand", 0, 0, -0.08, blend)
+
+    const eyeYaw = Math.sin(t * 0.45) * 0.08
+    setBoneRotation("leftEye", 0, eyeYaw, 0, blend)
+    setBoneRotation("rightEye", 0, eyeYaw, 0, blend)
+}
+
+function applyActionPose(t, delta) {
+    if (!activeAction) {
+        return
+    }
+
+    const elapsed = t - actionStartedAt
+    if (elapsed > 2.8) {
+        activeAction = null
+        return
+    }
+
+    const blend = Math.min(1, delta * 12)
+    const pulse = Math.sin(elapsed * Math.PI * 4)
+    const once = Math.sin(Math.min(1, elapsed / 1.4) * Math.PI)
+
+    if (activeAction === "wave") {
+        setBoneRotation("rightUpperArm", -0.75, -0.15, -2.15, blend)
+        setBoneRotation("rightLowerArm", -0.75, -0.3, -0.35 + pulse * 0.55, blend)
+        setBoneRotation("rightHand", 0.1, pulse * 0.35, -0.2, blend)
+    } else if (activeAction === "nod") {
+        setBoneRotation("head", -0.22 + pulse * 0.18, 0, 0, blend)
+    } else if (activeAction === "shake_head") {
+        setBoneRotation("head", 0, pulse * 0.35, 0, blend)
+    } else if (activeAction === "bow") {
+        setBoneRotation("chest", -0.42 * once, 0, 0, blend)
+        setBoneRotation("head", -0.22 * once, 0, 0, blend)
+    } else if (activeAction === "look_left") {
+        setBoneRotation("head", 0, 0.45 * once, 0, blend)
+    } else if (activeAction === "look_right") {
+        setBoneRotation("head", 0, -0.45 * once, 0, blend)
+    } else if (activeAction === "look_up") {
+        setBoneRotation("head", 0.24 * once, 0, 0, blend)
+    } else if (activeAction === "look_down") {
+        setBoneRotation("head", -0.24 * once, 0, 0, blend)
+    }
+}
 
 const params = new URLSearchParams(window.location.search);
 
@@ -198,6 +286,9 @@ function animate() {
             breathe,
             breathe
         );
+
+        applyProceduralPose(t, delta)
+        applyActionPose(t, delta)
 
     }
 

@@ -37,6 +37,7 @@ class CommandCategory(Enum):
     """Categories of local commands."""
     PERSONALITY = "personality"
     AUDIO = "audio"
+    AVATAR = "avatar"
     CONTROL = "control"
     SETTINGS = "settings"
 
@@ -90,6 +91,22 @@ class CommandRouter:
                 "wake up",
                 "silence",
                 "quiet",
+            ],
+            CommandCategory.AVATAR: [
+                "wave",
+                "wave hand",
+                "wave your hand",
+                "nod",
+                "nod your head",
+                "shake head",
+                "shake your head",
+                "bow",
+                "smile",
+                "laugh",
+                "look left",
+                "look right",
+                "look up",
+                "look down",
             ],
             CommandCategory.CONTROL: [
                 "shutdown",
@@ -181,6 +198,16 @@ class CommandRouter:
                 return {"action": "mute"}
             if pattern in {"unmute", "wake up"}:
                 return {"action": "unmute"}
+
+        if category == CommandCategory.AVATAR:
+            action = pattern.replace(" your ", " ").replace(" hand", "")
+            if action == "nod head":
+                action = "nod"
+            if action == "shake head":
+                action = "shake_head"
+            if action.startswith("look "):
+                action = action.replace(" ", "_")
+            return {"action": action}
 
         if category == CommandCategory.CONTROL:
             if pattern == "restart":

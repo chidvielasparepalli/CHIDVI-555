@@ -47,6 +47,12 @@ class CommandRouterTests(unittest.TestCase):
         self.assert_local("restart", CommandCategory.CONTROL, action="restart")
         self.assert_local("sleep mode", CommandCategory.CONTROL, action="sleep")
 
+    def test_avatar_action_commands_are_local(self):
+        self.assert_local("wave your hand", CommandCategory.AVATAR, action="wave")
+        self.assert_local("nod your head", CommandCategory.AVATAR, action="nod")
+        self.assert_local("shake your head", CommandCategory.AVATAR, action="shake_head")
+        self.assert_local("look left", CommandCategory.AVATAR, action="look_left")
+
 
 class APIKeyPoolTests(unittest.TestCase):
     def test_round_robin_preserves_order_and_skips_limited_keys(self):

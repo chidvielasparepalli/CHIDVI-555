@@ -1791,7 +1791,14 @@ class JarvisUI:
 
     def write_log(self, text: str):
         self._win._log_sig.emit(text)
-        
+
+    def perform_avatar_action(self, action: str):
+        if hasattr(self.hud, "page"):
+            safe_action = json.dumps(action)
+            self.hud.page().runJavaScript(
+                f"window.performAvatarAction && window.performAvatarAction({safe_action});"
+            )
+
     def switch_theme(self, personality: str):
 
         theme_manager.switch(personality)
