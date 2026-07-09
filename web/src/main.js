@@ -180,38 +180,60 @@ const params = new URLSearchParams(window.location.search);
 const avatar =
     params.get("avatar") || "Chidvi.vrm";
 
-loader.load(
-
-    `/${avatar}`,
-
-    (gltf) => {
-
-        const vrm = gltf.userData.vrm
-
-        VRMUtils.rotateVRM0(vrm)
-
-        scene.add(vrm.scene)
-
-        currentVRM = vrm
-        applyEmotionTarget(avatarEmotion)
-
-    },
-
-    (progress) => {
-
-        console.log(progress.loaded)
-
-    },
-
-    (error) => {
-
-        console.error(error)
-
+function disposeCurrentVRM() {
+    if (!currentVRM) {
+        return
     }
 
-)
+    scene.remove(currentVRM.scene)
+    VRMUtils.deepDispose(currentVRM.scene)
+    currentVRM = null
+}
+
+function loadAvatar(avatarFile) {
+    const nextAvatar = avatarFile || "Chidvi.vrm"
+    disposeCurrentVRM()
+
+    loader.load(
+
+        `/${nextAvatar}`,
+
+        (gltf) => {
+
+            const vrm = gltf.userData.vrm
+
+            VRMUtils.rotateVRM0(vrm)
+
+            scene.add(vrm.scene)
+
+            currentVRM = vrm
+            activeAction = null
+            blink = 0
+            nextBlink = clock.elapsedTime + 1 + Math.random() * 2
+            applyEmotionTarget(avatarEmotion)
+
+        },
+
+        (progress) => {
+
+            console.log(progress.loaded)
+
+        },
+
+        (error) => {
+
+            console.error(error)
+
+        }
+
+    )
+}
+
+window.loadAvatar = loadAvatar
 
 const clock = new THREE.Clock()
+
+loadAvatar(avatar)
 
 function animate() {
 

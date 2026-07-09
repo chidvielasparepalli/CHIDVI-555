@@ -1807,9 +1807,10 @@ class JarvisUI:
 
             avatar = "Hinata.vrm" if personality == "HINATA" else "Chidvi.vrm"
 
-            self.hud.setUrl(
-                QUrl(f"http://localhost:5173/?avatar={avatar}")
-            )  
+            safe_avatar = json.dumps(avatar)
+            self.hud.page().runJavaScript(
+                f"window.loadAvatar ? window.loadAvatar({safe_avatar}) : window.location.href='/?avatar={avatar}';"
+            )
 
         elif hasattr(self.hud, "change_video"):
 
