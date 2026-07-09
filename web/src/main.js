@@ -40,6 +40,8 @@ loader.register((parser) => {
 })
 
 let currentVRM = null
+let currentAvatarFile = null
+let avatarLoadSerial = 0
 let blink = 0
 let nextBlink = 2
 let avatarEmotion = "idle"
@@ -183,20 +185,23 @@ const avatar =
 function disposeCurrentVRM() {
     if (!currentVRM) {
         console.info("[CHIDVI avatar] dispose skipped: no active VRM")
+        currentAvatarFile = null
         return
     }
 
-    const oldName = currentVRM.meta?.name || currentVRM.scene?.name || "unknown"
+    const oldName = currentAvatarFile || currentVRM.meta?.name || currentVRM.scene?.name || "unknown"
     console.info(`[CHIDVI avatar] disposing current VRM: ${oldName}`)
     scene.remove(currentVRM.scene)
     VRMUtils.deepDispose(currentVRM.scene)
     currentVRM = null
+    currentAvatarFile = null
     console.info("[CHIDVI avatar] current VRM disposed")
 }
 
 function loadAvatar(avatarFile) {
     const nextAvatar = avatarFile || "Chidvi.vrm"
-    console.info(`[CHIDVI avatar] load request received: ${nextAvatar}`)
+    const requestSerial = ++avatarLoadSerial
+    console.info(`[CHIDVI avatar] load request received: ${nextAvatar}; request=${requestSerial}`)
     disposeCurrentVRM()
 
     loader.load(
@@ -207,11 +212,24 @@ function loadAvatar(avatarFile) {
 
             const vrm = gltf.userData.vrm
 
+            if (requestSerial !== avatarLoadSerial) {
+                console.warn(
+                    `[CHIDVI avatar] stale load ignored: ${nextAvatar}; request=${requestSerial}; active=${avatarLoadSerial}`
+                )
+                if (vrm?.scene) {
+                    VRMUtils.deepDispose(vrm.scene)
+                } else if (gltf.scene) {
+                    VRMUtils.deepDispose(gltf.scene)
+                }
+                return
+            }
+
             VRMUtils.rotateVRM0(vrm)
 
             scene.add(vrm.scene)
 
             currentVRM = vrm
+            currentAvatarFile = nextAvatar
             activeAction = null
             blink = 0
             nextBlink = clock.elapsedTime + 1 + Math.random() * 2
@@ -219,6 +237,9 @@ function loadAvatar(avatarFile) {
             applyProceduralPose(clock.elapsedTime, 1)
             console.info(
                 `[CHIDVI avatar] loaded ${nextAvatar}; scene children=${scene.children.length}; expressions=${Boolean(vrm.expressionManager)}; humanoid=${Boolean(vrm.humanoid)}`
+            )
+            console.info(
+                `[CHIDVI avatar] controllers attached -> avatar=${currentAvatarFile}; emotion=${avatarEmotion}; proceduralPose=${Boolean(vrm.humanoid)}`
             )
 
         },
@@ -239,6 +260,13 @@ function loadAvatar(avatarFile) {
 }
 
 window.loadAvatar = loadAvatar
+window.avatarDiagnostics = () => ({
+    currentAvatarFile,
+    hasActiveVRM: Boolean(currentVRM),
+    sceneChildren: scene.children.length,
+    emotion: avatarEmotion,
+    activeAction,
+})
 
 const clock = new THREE.Clock()
 

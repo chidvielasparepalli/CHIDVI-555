@@ -1279,13 +1279,11 @@ class MainWindow(QMainWindow):
         body.addWidget(self._left_panel, stretch=0)
 
         self.hud = QWebEngineView()
-
-        from core.personality_manager import get_personality
-
-        avatar = "Hinata.vrm" if get_personality() == "HINATA" else "Chidvi.vrm"
-
-        self.hud.load(
-            QUrl(f"http://localhost:5173/?avatar={avatar}")
+        self.hud.loadStarted.connect(
+            lambda: self._log_sig.emit("SYS: Renderer page load started.")
+        )
+        self.hud.loadFinished.connect(
+            lambda ok: self._log_sig.emit(f"SYS: Renderer page load finished -> {ok}.")
         )
         self.hud.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         body.addWidget(self.hud, stretch=5)
@@ -1309,6 +1307,14 @@ class MainWindow(QMainWindow):
 
         self._log_sig.connect(self._log.append_log)
         self._state_sig.connect(self._apply_state)
+
+        from core.personality_manager import get_personality
+
+        avatar = "Hinata.vrm" if get_personality() == "HINATA" else "Chidvi.vrm"
+        self._log_sig.emit(f"SYS: Renderer initial avatar -> {avatar}")
+        self.hud.load(
+            QUrl(f"http://localhost:5173/?avatar={avatar}")
+        )
         self._work_music = WorkMusicPlayer(
             _first_media_file("work_background_music", _WORK_AUDIO_NAMES),
             0.30,
@@ -1822,14 +1828,27 @@ class JarvisUI:
             script = (
                 "window.loadAvatar "
                 f"? window.loadAvatar({safe_avatar}) "
-                f": (console.warn('[CHIDVI avatar] loadAvatar missing; reloading {avatar}'), "
-                f"window.location.href='/?avatar={avatar}');"
+                ": (console.warn('[CHIDVI avatar] loadAvatar missing; reloading ' + "
+                f"{safe_avatar}), window.location.href='/?avatar=' + encodeURIComponent({safe_avatar}));"
             )
+
+            def _log_avatar_diagnostics(result=None, avatar=avatar):
+                self.write_log(f"SYS: VRM switch command sent -> {avatar}")
+
+                def _write_diagnostics(diagnostics):
+                    self.write_log(f"SYS: Renderer diagnostics -> {diagnostics}")
+
+                QTimer.singleShot(
+                    1200,
+                    lambda: hud.page().runJavaScript(
+                        "JSON.stringify(window.avatarDiagnostics ? window.avatarDiagnostics() : null);",
+                        _write_diagnostics,
+                    ),
+                )
+
             hud.page().runJavaScript(
                 script,
-                lambda result=None, avatar=avatar: self.write_log(
-                    f"SYS: VRM switch command sent -> {avatar}"
-                ),
+                _log_avatar_diagnostics,
             )
 
         elif hasattr(hud, "change_video"):
