@@ -38,7 +38,6 @@ import json
 import sys
 import traceback
 from pathlib import Path
-import sounddevice as sd
 from google import genai
 from google.genai import types
 from ui import JarvisUI
@@ -64,6 +63,7 @@ from actions.web_search        import web_search as web_search_action
 from actions.computer_control  import computer_control
 from actions.game_updater      import game_updater
 from core.runtime import run_desktop_app
+from core.audio.microphone import Microphone
 from core.audio.speaker import Speaker
 
 def get_base_dir():
@@ -540,6 +540,7 @@ class JarvisLive:
         self._restart_requested = False
         self._active_api_key = None
         self.state_manager = get_state_manager()
+        self.microphone = Microphone(sample_rate=SEND_SAMPLE_RATE, chunk_size=CHUNK_SIZE)
         self.speaker = Speaker(device=3, sample_rate=RECEIVE_SAMPLE_RATE, chunk_size=CHUNK_SIZE)
         self.state_manager.set_personality(get_personality())
         get_personality_manager().set_session_restart_callback(self._request_restart)
@@ -885,33 +886,21 @@ class JarvisLive:
 
     async def _listen_audio(self):
         print("[JARVIS] Mic started")
-        loop = asyncio.get_event_loop()
-
-        def callback(indata, frames, time_info, status):
-            with self._speaking_lock:
-                jarvis_speaking = self._is_speaking 
-
-            if not jarvis_speaking and not self.ui.muted:
-                data = indata.tobytes()
-                loop.call_soon_threadsafe(
-                    self.out_queue.put_nowait,
-                    {"data": data, "mime_type": "audio/pcm"}
-                )
 
         try:
-            with sd.InputStream(
-                samplerate=16000,
-                channels=1,
-                dtype="int16",
-                blocksize=CHUNK_SIZE,
-                callback=callback,
-            ):
-                print("[JARVIS] Mic stream open")
-                while True:
-                    await asyncio.sleep(0.1)
+            print("[JARVIS] Mic stream open")
+            await self.microphone.stream_to_queue(
+                self.out_queue,
+                self._get_speaking,
+                lambda: self.ui.muted,
+            )
         except Exception as e:
             print(f"[JARVIS] Mic: {e}")
             raise
+
+    def _get_speaking(self) -> bool:
+        with self._speaking_lock:
+            return self._is_speaking
 
     async def _receive_audio(self):
         print("[JARVIS]‚ Recv started")
