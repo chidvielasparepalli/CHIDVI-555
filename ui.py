@@ -1793,35 +1793,50 @@ class JarvisUI:
         self._win._log_sig.emit(text)
 
     def perform_avatar_action(self, action: str):
-        if hasattr(self.hud, "page"):
+        hud = self._win.hud
+        if hasattr(hud, "page"):
             safe_action = json.dumps(action)
-            self.hud.page().runJavaScript(
+            self.write_log(f"SYS: Avatar action -> {action}")
+            hud.page().runJavaScript(
                 f"window.performAvatarAction && window.performAvatarAction({safe_action});"
             )
 
     def apply_personality_profile(self, profile):
         personality = getattr(getattr(profile, "id", None), "value", None) or getattr(profile, "name", "")
         avatar = getattr(profile, "avatar_model", None)
+        self.write_log(f"SYS: Applying avatar profile -> {personality} / {avatar}")
         self.switch_theme(personality, avatar_model=avatar)
 
     def switch_theme(self, personality: str, avatar_model: str | None = None):
 
         theme_manager.switch(personality)
+        self.write_log(f"SYS: UI theme -> {personality}")
+        hud = self._win.hud
 
-        if hasattr(self.hud, "page"):
+        if hasattr(hud, "page"):
 
             avatar = avatar_model or ("Hinata.vrm" if personality == "HINATA" else "Chidvi.vrm")
 
             safe_avatar = json.dumps(avatar)
-            self.hud.page().runJavaScript(
-                f"window.loadAvatar ? window.loadAvatar({safe_avatar}) : window.location.href='/?avatar={avatar}';"
+            self.write_log(f"SYS: Forwarding VRM switch -> {avatar}")
+            script = (
+                "window.loadAvatar "
+                f"? window.loadAvatar({safe_avatar}) "
+                f": (console.warn('[CHIDVI avatar] loadAvatar missing; reloading {avatar}'), "
+                f"window.location.href='/?avatar={avatar}');"
+            )
+            hud.page().runJavaScript(
+                script,
+                lambda result=None, avatar=avatar: self.write_log(
+                    f"SYS: VRM switch command sent -> {avatar}"
+                ),
             )
 
-        elif hasattr(self.hud, "change_video"):
+        elif hasattr(hud, "change_video"):
 
             theme = theme_manager.get()
 
-            self.hud.change_video(
+            hud.change_video(
                 Path(theme["background_video"])
             )
 

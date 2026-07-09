@@ -182,16 +182,21 @@ const avatar =
 
 function disposeCurrentVRM() {
     if (!currentVRM) {
+        console.info("[CHIDVI avatar] dispose skipped: no active VRM")
         return
     }
 
+    const oldName = currentVRM.meta?.name || currentVRM.scene?.name || "unknown"
+    console.info(`[CHIDVI avatar] disposing current VRM: ${oldName}`)
     scene.remove(currentVRM.scene)
     VRMUtils.deepDispose(currentVRM.scene)
     currentVRM = null
+    console.info("[CHIDVI avatar] current VRM disposed")
 }
 
 function loadAvatar(avatarFile) {
     const nextAvatar = avatarFile || "Chidvi.vrm"
+    console.info(`[CHIDVI avatar] load request received: ${nextAvatar}`)
     disposeCurrentVRM()
 
     loader.load(
@@ -211,18 +216,22 @@ function loadAvatar(avatarFile) {
             blink = 0
             nextBlink = clock.elapsedTime + 1 + Math.random() * 2
             applyEmotionTarget(avatarEmotion)
+            applyProceduralPose(clock.elapsedTime, 1)
+            console.info(
+                `[CHIDVI avatar] loaded ${nextAvatar}; scene children=${scene.children.length}; expressions=${Boolean(vrm.expressionManager)}; humanoid=${Boolean(vrm.humanoid)}`
+            )
 
         },
 
         (progress) => {
 
-            console.log(progress.loaded)
+            console.info(`[CHIDVI avatar] loading ${nextAvatar}: ${progress.loaded}`)
 
         },
 
         (error) => {
 
-            console.error(error)
+            console.error(`[CHIDVI avatar] failed to load ${nextAvatar}`, error)
 
         }
 

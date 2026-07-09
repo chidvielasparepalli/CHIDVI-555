@@ -603,6 +603,9 @@ class JarvisLive:
             switched = await switch_personality(target)
             if switched:
                 profile = get_personality_manager().get_profile(PersonalityID[target])
+                self.ui.write_log(
+                    f"SYS: Avatar profile -> {profile.id.value} uses {profile.avatar_model}"
+                )
                 self.state_manager.set_personality(profile.id.value, avatar=profile.avatar_model)
                 self.ui.apply_personality_profile(profile)
                 avatar_service.handle_event(AvatarEvent.IDLE)
