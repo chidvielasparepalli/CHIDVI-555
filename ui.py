@@ -1280,7 +1280,7 @@ class MainWindow(QMainWindow):
 
         self.hud = QWebEngineView()
 
-        from personality.personality_loader import get_personality
+        from core.personality_manager import get_personality
 
         avatar = "Hinata.vrm" if get_personality() == "HINATA" else "Chidvi.vrm"
 
@@ -1706,6 +1706,9 @@ class MainWindow(QMainWindow):
 
         self.hud.state    = state
         self.hud.speaking = (state == "SPEAKING")
+        if hasattr(self.hud, "page"):
+            safe_state = json.dumps(state.lower())
+            self.hud.page().runJavaScript(f"window.setAvatarState && window.setAvatarState({safe_state});")
     def _check_config(self) -> bool:
         if not API_FILE.exists(): return False
         try:
