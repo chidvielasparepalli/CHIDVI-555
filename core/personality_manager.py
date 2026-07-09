@@ -43,10 +43,30 @@ class PersonalityProfile:
     system_prompt: str
     voice: str
     theme: str
-    animation_style: str
     avatar_model: str
+    idle_animation: str
+    emotion_profile: str
+    greeting_style: str
+    animation_style: str
     color_primary: tuple = (0, 100, 150)
     color_secondary: tuple = (100, 50, 150)
+
+    def to_runtime_dict(self) -> dict:
+        return {
+            "id": self.id.value,
+            "name": self.name,
+            "voice": self.voice,
+            "theme": self.theme,
+            "avatar_model": self.avatar_model,
+            "idle_animation": self.idle_animation,
+            "emotion_profile": self.emotion_profile,
+            "greeting_style": self.greeting_style,
+            "animation_style": self.animation_style,
+            "colors": {
+                "primary": self.color_primary,
+                "secondary": self.color_secondary,
+            },
+        }
 
 
 class PersonalityManager:
@@ -77,8 +97,11 @@ class PersonalityManager:
             system_prompt=self._load_personality_prompt("chidvi"),
             voice="Charon",
             theme="CHIDVI",
-            animation_style="professional",
             avatar_model="Chidvi.vrm",
+            idle_animation="chidvi_idle",
+            emotion_profile="chidvi",
+            greeting_style="professional",
+            animation_style="professional",
             color_primary=(0, 100, 150),
             color_secondary=(100, 50, 150),
         )
@@ -90,8 +113,11 @@ class PersonalityManager:
             system_prompt=self._load_personality_prompt("hinata"),
             voice="Aoede",
             theme="HINATA",
-            animation_style="energetic",
             avatar_model="Hinata.vrm",
+            idle_animation="hinata_idle",
+            emotion_profile="hinata",
+            greeting_style="warm_playful",
+            animation_style="energetic",
             color_primary=(200, 50, 100),
             color_secondary=(150, 50, 200),
         )
@@ -248,6 +274,10 @@ class PersonalityManager:
             # Publish theme change event
             publish_event(EventType.UI_THEME_CHANGED, {
                 "theme": profile.theme,
+                "avatar_model": profile.avatar_model,
+                "idle_animation": profile.idle_animation,
+                "emotion_profile": profile.emotion_profile,
+                "greeting_style": profile.greeting_style,
                 "colors": {
                     "primary": profile.color_primary,
                     "secondary": profile.color_secondary,
@@ -259,6 +289,8 @@ class PersonalityManager:
                 "personality": personality.value,
                 "model": profile.avatar_model,
                 "animation_style": profile.animation_style,
+                "idle_animation": profile.idle_animation,
+                "emotion_profile": profile.emotion_profile,
             })
             
             # Restart Gemini session if callback is set
@@ -269,11 +301,7 @@ class PersonalityManager:
             # Publish completion event
             publish_event(EventType.PERSONALITY_CHANGED, {
                 "personality": personality.value,
-                "profile": {
-                    "voice": profile.voice,
-                    "theme": profile.theme,
-                    "animation_style": profile.animation_style,
-                }
+                "profile": profile.to_runtime_dict(),
             })
             
             logger.info(f"Personality switched to {personality.value}")
@@ -329,6 +357,11 @@ def get_voice() -> str:
 def get_theme() -> str:
     """Get current theme."""
     return get_personality_manager().get_theme()
+
+
+def get_active_profile() -> PersonalityProfile:
+    """Get current complete personality profile."""
+    return get_personality_manager().get_profile()
 
 
 async def switch_personality(personality: str) -> bool:

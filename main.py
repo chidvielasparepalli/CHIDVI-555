@@ -11,6 +11,8 @@ from ui_core.themes.theme_manager import theme_manager
 from ui_core.themes.chidvi_theme import CHIDVI_THEME
 from ui_core.themes.hinata_theme import HINATA_THEME
 from core.personality_manager import (
+    PersonalityID,
+    get_active_profile,
     get_system_prompt,
     get_voice,
     get_personality,
@@ -538,11 +540,13 @@ class JarvisLive:
         self.ui.on_text_command = self._on_text_command
         self._turn_done_event: asyncio.Event | None = None
         self._restart_requested = False
+        self._restart_event: asyncio.Event | None = None
         self._active_api_key = None
         self.state_manager = get_state_manager()
         self.microphone = Microphone(sample_rate=SEND_SAMPLE_RATE, chunk_size=CHUNK_SIZE)
         self.speaker = Speaker(device=3, sample_rate=RECEIVE_SAMPLE_RATE, chunk_size=CHUNK_SIZE)
-        self.state_manager.set_personality(get_personality())
+        profile = get_active_profile()
+        self.state_manager.set_personality(profile.id.value, avatar=profile.avatar_model)
         get_personality_manager().set_session_restart_callback(self._request_restart)
 
     def _on_text_command(self, text: str):
@@ -555,6 +559,8 @@ class JarvisLive:
 
     async def _request_restart(self):
         self._restart_requested = True
+        if self._restart_event:
+            self._restart_event.set()
 
     async def _handle_user_text(self, text: str, allow_remote: bool = True) -> bool:
         text = text.strip()
@@ -594,10 +600,11 @@ class JarvisLive:
                 return False
 
             self.ui.write_log(f"SYS: Switching personality -> {target}")
-            self.ui.switch_theme(target)
             switched = await switch_personality(target)
             if switched:
-                self.state_manager.set_personality(target)
+                profile = get_personality_manager().get_profile(PersonalityID[target])
+                self.state_manager.set_personality(profile.id.value, avatar=profile.avatar_model)
+                self.ui.apply_personality_profile(profile)
                 avatar_service.handle_event(AvatarEvent.IDLE)
                 self.ui.write_log(f"SYS: Personality active -> {target}")
             return switched
@@ -1024,6 +1031,7 @@ class JarvisLive:
                     self.audio_in_queue = asyncio.Queue(maxsize=200)
                     self.out_queue = asyncio.Queue(maxsize=100)
                     self._turn_done_event = asyncio.Event()
+                    self._restart_event = asyncio.Event()
 
                     print("[JARVIS] Connected.")
                     mark_api_key_success(key)
@@ -1036,10 +1044,14 @@ class JarvisLive:
                     tg.create_task(self._play_audio())
 
                     while True:
-                        await asyncio.sleep(0.2)
+                        try:
+                            await asyncio.wait_for(self._restart_event.wait(), timeout=0.2)
+                        except asyncio.TimeoutError:
+                            pass
 
-                        if self._restart_requested:
+                        if self._restart_requested or self._restart_event.is_set():
                             self._restart_requested = False
+                            self._restart_event.clear()
                             print("[JARVIS] Restarting session...")
                             raise ConnectionResetError("SESSION_RESTART")
 
@@ -1057,6 +1069,7 @@ class JarvisLive:
                     traceback.print_exc()
 
             self.set_speaking(False)
+            self._restart_event = None
             self._set_runtime_state(RuntimeState.RECONNECTING)
             print(f"[JARVIS] Reconnecting in {reconnect_delay}s...")
             await asyncio.sleep(reconnect_delay)

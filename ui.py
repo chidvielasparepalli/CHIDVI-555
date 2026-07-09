@@ -1799,13 +1799,18 @@ class JarvisUI:
                 f"window.performAvatarAction && window.performAvatarAction({safe_action});"
             )
 
-    def switch_theme(self, personality: str):
+    def apply_personality_profile(self, profile):
+        personality = getattr(getattr(profile, "id", None), "value", None) or getattr(profile, "name", "")
+        avatar = getattr(profile, "avatar_model", None)
+        self.switch_theme(personality, avatar_model=avatar)
+
+    def switch_theme(self, personality: str, avatar_model: str | None = None):
 
         theme_manager.switch(personality)
 
         if hasattr(self.hud, "page"):
 
-            avatar = "Hinata.vrm" if personality == "HINATA" else "Chidvi.vrm"
+            avatar = avatar_model or ("Hinata.vrm" if personality == "HINATA" else "Chidvi.vrm")
 
             safe_avatar = json.dumps(avatar)
             self.hud.page().runJavaScript(

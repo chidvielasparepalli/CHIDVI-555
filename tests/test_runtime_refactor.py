@@ -106,6 +106,29 @@ class PersonalityCompatibilityTests(unittest.TestCase):
             restored = PersonalityManager(state_path=state_path)
             self.assertEqual(restored.get_current(), PersonalityID.HINATA)
 
+    def test_personality_profiles_own_runtime_assets(self):
+        manager = PersonalityManager()
+
+        chidvi = manager.get_profile(PersonalityID.CHIDVI)
+        hinata = manager.get_profile(PersonalityID.HINATA)
+
+        self.assertEqual(chidvi.avatar_model, "Chidvi.vrm")
+        self.assertEqual(chidvi.voice, "Charon")
+        self.assertEqual(chidvi.theme, "CHIDVI")
+        self.assertEqual(chidvi.emotion_profile, "chidvi")
+        self.assertEqual(chidvi.idle_animation, "chidvi_idle")
+
+        self.assertEqual(hinata.avatar_model, "Hinata.vrm")
+        self.assertEqual(hinata.voice, "Aoede")
+        self.assertEqual(hinata.theme, "HINATA")
+        self.assertEqual(hinata.emotion_profile, "hinata")
+        self.assertEqual(hinata.idle_animation, "hinata_idle")
+        self.assertNotEqual(chidvi.greeting_style, hinata.greeting_style)
+
+        runtime_profile = hinata.to_runtime_dict()
+        self.assertEqual(runtime_profile["avatar_model"], "Hinata.vrm")
+        self.assertEqual(runtime_profile["voice"], "Aoede")
+
 
 class ConfigTests(unittest.TestCase):
     def test_config_loads_key_array(self):
