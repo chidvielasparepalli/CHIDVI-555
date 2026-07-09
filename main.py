@@ -23,6 +23,7 @@ from api.key_pool import (
     mark_api_key_rate_limited,
     mark_api_key_success,
 )
+from core.state_manager import RuntimeState, get_state_manager
 from personality.emotion_engine import EmotionEngine, Emotion
 
 os.environ["QT_LOGGING_RULES"] = "*.debug=false"
@@ -537,6 +538,8 @@ class JarvisLive:
         self._turn_done_event: asyncio.Event | None = None
         self._restart_requested = False
         self._active_api_key = None
+        self.state_manager = get_state_manager()
+        self.state_manager.set_personality(get_personality())
         get_personality_manager().set_session_restart_callback(self._request_restart)
 
     def _on_text_command(self, text: str):
@@ -591,6 +594,7 @@ class JarvisLive:
             self.ui.switch_theme(target)
             switched = await switch_personality(target)
             if switched:
+                self.state_manager.set_personality(target)
                 avatar_service.handle_event(AvatarEvent.IDLE)
                 self.ui.write_log(f"SYS: Personality active -> {target}")
             return switched
@@ -599,9 +603,11 @@ class JarvisLive:
             action = command.args.get("action")
             if action == "mute" and not self.ui.muted:
                 self.ui.muted = True
+                self.state_manager.set_muted(True)
                 return True
             if action == "unmute" and self.ui.muted:
                 self.ui.muted = False
+                self.state_manager.set_muted(False)
                 return True
             return True
 
@@ -619,6 +625,7 @@ class JarvisLive:
             if action == "sleep":
                 if not self.ui.muted:
                     self.ui.muted = True
+                self.state_manager.set_muted(True)
                 return True
 
         if command.category == CommandCategory.SETTINGS:
@@ -663,11 +670,15 @@ class JarvisLive:
 
         if value:
             avatar_service.handle_event(AvatarEvent.AI_STARTED_SPEAKING)
-            self.ui.set_state("SPEAKING")
+            self._set_runtime_state(RuntimeState.SPEAKING)
         else:
             avatar_service.handle_event(AvatarEvent.AI_STOPPED_SPEAKING)
             if not self.ui.muted:
-                self.ui.set_state("LISTENING")
+                self._set_runtime_state(RuntimeState.LISTENING)
+
+    def _set_runtime_state(self, state: RuntimeState | str):
+        runtime = self.state_manager.set_runtime(state).runtime
+        self.ui.set_state(runtime.value.upper())
 
     def speak(self, text: str):
         if not self._loop or not self.session:
@@ -731,7 +742,7 @@ class JarvisLive:
         print(f"[JARVIS] {name}  {args}")
         if hasattr(self.ui, "start_work_music"):
             self.ui.start_work_music()
-        self.ui.set_state("THINKING")
+        self._set_runtime_state(RuntimeState.THINKING)
 
         avatar_service.handle_event(
             AvatarEvent.AI_STARTED_THINKING
@@ -745,7 +756,7 @@ class JarvisLive:
                 update_memory({category: {key: {"value": value}}})
                 print(f"[Memory] ðŸ’¾ save_memory: {category}/{key} = {value}")
             if not self.ui.muted:
-                self.ui.set_state("LISTENING")
+                self._set_runtime_state(RuntimeState.LISTENING)
             return types.FunctionResponse(
                 id=fc.id, name=name,
                 response={"result": "ok", "silent": True}
@@ -857,7 +868,7 @@ class JarvisLive:
             self.speak_error(name, e)
 
         if not self.ui.muted:
-            self.ui.set_state("LISTENING")
+            self._set_runtime_state(RuntimeState.LISTENING)
 
         print(f"[JARVIS] {name} {str(result)[:80]}")
         return types.FunctionResponse(
@@ -1052,7 +1063,7 @@ class JarvisLive:
 
             try:
                 print("[JARVIS] Connecting...")
-                self.ui.set_state("THINKING")
+                self._set_runtime_state(RuntimeState.THINKING)
                 config = self._build_config()
 
                 async with (
@@ -1067,7 +1078,7 @@ class JarvisLive:
 
                     print("[JARVIS] Connected.")
                     mark_api_key_success(key)
-                    self.ui.set_state("LISTENING")
+                    self._set_runtime_state(RuntimeState.LISTENING)
                     self.ui.write_log("SYS: JARVIS online.")
 
                     tg.create_task(self._send_realtime())
@@ -1097,7 +1108,7 @@ class JarvisLive:
                     traceback.print_exc()
 
             self.set_speaking(False)
-            self.ui.set_state("THINKING")
+            self._set_runtime_state(RuntimeState.RECONNECTING)
             print(f"[JARVIS] Reconnecting in {reconnect_delay}s...")
             await asyncio.sleep(reconnect_delay)
 
