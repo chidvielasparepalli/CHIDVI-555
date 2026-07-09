@@ -1,7 +1,11 @@
 import os
-from core.speech.command_router import CommandRouter
+from commands.router import (
+    Command,
+    CommandCategory,
+    CommandType,
+    get_command_router,
+)
 from avatars.avatar_service import avatar_service
-from core.personality_manager import set_personality
 from avatars.avatar_events import AvatarEvent
 from ui_core.themes.theme_manager import theme_manager
 from ui_core.themes.chidvi_theme import CHIDVI_THEME
@@ -10,6 +14,14 @@ from core.personality_manager import (
     get_system_prompt,
     get_voice,
     get_personality,
+    get_personality_manager,
+    switch_personality,
+)
+from api.key_pool import (
+    get_next_api_key,
+    mark_api_key_failed,
+    mark_api_key_rate_limited,
+    mark_api_key_success,
 )
 from personality.emotion_engine import EmotionEngine, Emotion
 
@@ -67,14 +79,27 @@ RECEIVE_SAMPLE_RATE = 24000
 CHUNK_SIZE          = 1024
 
 def _get_api_key() -> str:
-    api_key = os.getenv("GEMINI_API_KEY")
+    api_key = get_next_api_key() or os.getenv("GEMINI_API_KEY")
 
     if not api_key:
-        raise ValueError("GEMINI_API_KEY not found in .env")
+        raise ValueError("No Gemini API key found in config/api_keys.json or .env")
 
     return api_key
 
-print(_get_api_key()[:10])
+def _is_rate_limit_error(error: Exception | str) -> bool:
+    text = str(error).lower()
+    return any(
+        token in text
+        for token in (
+            "429",
+            "quota",
+            "rate limit",
+            "rate_limit",
+            "resource exhausted",
+            "unavailable",
+            "api unavailable",
+        )
+    )
 
 
 _CTRL_RE = re.compile(r"<ctrl\d+>", re.IGNORECASE)
@@ -497,7 +522,9 @@ TOOL_DECLARATIONS = [
 class JarvisLive:
 
     def __init__(self, ui: JarvisUI):
-        self.command_router = CommandRouter(self)
+        self.command_router = get_command_router()
+        self.command_router.register_handler(CommandType.LOCAL, self._handle_local_command)
+        self.command_router.register_handler(CommandType.REMOTE, self._handle_remote_command)
         self.ui             = ui
         self.emotion = EmotionEngine()
         self.session        = None
@@ -509,93 +536,126 @@ class JarvisLive:
         self.ui.on_text_command = self._on_text_command
         self._turn_done_event: asyncio.Event | None = None
         self._restart_requested = False
-        self._pending_personality = None
+        self._active_api_key = None
+        get_personality_manager().set_session_restart_callback(self._request_restart)
 
     def _on_text_command(self, text: str):
-
-        if self.command_router.handle(text):
+        if not self._loop:
             return
+        asyncio.run_coroutine_threadsafe(
+            self._handle_user_text(text, allow_remote=True),
+            self._loop,
+        )
 
-        if not self._loop or not self.session:
-            return
+    async def _request_restart(self):
+        self._restart_requested = True
+
+    async def _handle_user_text(self, text: str, allow_remote: bool = True) -> bool:
+        text = text.strip()
+        if not text:
+            return False
+
+        self._update_emotion_from_text(text)
+        command = self.command_router.parse(text)
+        if command.type == CommandType.LOCAL:
+            return await self.command_router.route(command)
+
+        if not allow_remote:
+            return False
+
+        return await self.command_router.route(command)
+
+    async def _handle_remote_command(self, command: Command) -> bool:
+        if not self.session:
+            return False
 
         avatar_service.handle_event(
             AvatarEvent.USER_STARTED_SPEAKING
         )
-    
-        asyncio.run_coroutine_threadsafe(
-            self.session.send_client_content(
-                turns={"parts": [{"text": text}]},
-                turn_complete=True,
-            ),
-            self._loop,
+
+        await self.session.send_client_content(
+            turns={"parts": [{"text": command.text}]},
+            turn_complete=True,
         )
-    # -----------------------------
-    # Emotion Detection
-    # -----------------------------
-        if get_personality() == "HINATA":
+        return True
 
-            if any(word in command for word in [
-                "another girl",
-                "other girl",
-                "beautiful girl",
-                "pretty girl",
-                "girlfriend",
-                "crush",
-                "girl",
-                "love another girl",
-                "vere ammai",
-                "inko ammai",
-                "ammai",
-                "ammayi",
-            ]):
-                self.emotion.set(
-                    Emotion.JEALOUS,
-                    intensity=9,
-                    reason="User is talking about another girl.",
-                )
+    async def _handle_local_command(self, command: Command) -> bool:
+        text = command.text.lower().strip()
 
-            elif any(word in command for word in [
-                "love you",
-                "i love you",
-                "cute",
-                "beautiful",
-                "pretty",
-                "nuvvu bagunnav",
-                "kiss",
-                "hug",
-            ]):
-                self.emotion.set(
-                    Emotion.BLUSH,
-                    intensity=8,
-                    reason="User showed affection.",
-                )
+        if command.category == CommandCategory.PERSONALITY:
+            target = command.args.get("personality")
+            if not target:
+                return False
 
-            elif any(word in command for word in [
-                "sorry",
-                "forgive",
-                "please",
-            ]):
-                self.emotion.calm_down()
+            self.ui.write_log(f"SYS: Switching personality -> {target}")
+            self.ui.switch_theme(target)
+            switched = await switch_personality(target)
+            if switched:
+                avatar_service.handle_event(AvatarEvent.IDLE)
+                self.ui.write_log(f"SYS: Personality active -> {target}")
+            return switched
 
-        # -----------------------------
-        # Personality Switching
-        # -----------------------------
-        
-        avatar_service.handle_event(
-            AvatarEvent.USER_STARTED_SPEAKING
-        )
+        if command.category == CommandCategory.AUDIO:
+            action = command.args.get("action")
+            if action == "mute" and not self.ui.muted:
+                self.ui.muted = True
+                return True
+            if action == "unmute" and self.ui.muted:
+                self.ui.muted = False
+                return True
+            return True
 
-        if not self._loop or not self.session:
+        if command.category == CommandCategory.CONTROL:
+            action = command.args.get("action")
+            if action == "restart":
+                self.ui.write_log("SYS: Restarting Gemini session.")
+                self._restart_requested = True
+                return True
+            if action == "shutdown":
+                self.ui.write_log("SYS: Shutdown requested.")
+                self.speak("Goodbye, sir.")
+                threading.Timer(1.0, lambda: os._exit(0)).start()
+                return True
+            if action == "sleep":
+                if not self.ui.muted:
+                    self.ui.muted = True
+                return True
+
+        if command.category == CommandCategory.SETTINGS:
+            self.ui.write_log("SYS: Settings command received.")
+            return True
+
+        return False
+
+    def _update_emotion_from_text(self, text: str):
+        command = text.lower().strip()
+
+        if get_personality() != "HINATA":
             return
 
-        asyncio.run_coroutine_threadsafe(
-            self.session.send_client_content(
-                turns={"parts": [{"text": text}]},
-                turn_complete=True,
-            ),
-            self._loop,
-        )
+        if any(word in command for word in [
+            "another girl", "other girl", "beautiful girl", "pretty girl",
+            "girlfriend", "crush", "girl", "love another girl",
+            "vere ammai", "inko ammai", "ammai", "ammayi",
+        ]):
+            self.emotion.set(
+                Emotion.JEALOUS,
+                intensity=9,
+                reason="User is talking about another girl.",
+            )
+
+        elif any(word in command for word in [
+            "love you", "i love you", "cute", "beautiful", "pretty",
+            "nuvvu bagunnav", "kiss", "hug",
+        ]):
+            self.emotion.set(
+                Emotion.BLUSH,
+                intensity=8,
+                reason="User showed affection.",
+            )
+
+        elif any(word in command for word in ["sorry", "forgive", "please"]):
+            self.emotion.calm_down()
 
     def set_speaking(self, value: bool):
         with self._speaking_lock:
@@ -878,13 +938,14 @@ class JarvisLive:
                         if sc.turn_complete:
                             if self._turn_done_event:
                                 self._turn_done_event.set()
-                        
+
                             full_in = " ".join(in_buf).strip()
-                        
+
                             if full_in:
-                            
+
                                 self.ui.write_log(f"You: {full_in}")
-                        
+                                await self._handle_user_text(full_in, allow_remote=False)
+
                                 if hasattr(self.ui, "start_work_music"):
                                     self.ui.start_work_music()
                         
@@ -980,12 +1041,15 @@ class JarvisLive:
             stream.close()
 
     async def run(self):
-        client = genai.Client(
-            api_key=_get_api_key(),
-            http_options={"api_version": "v1beta"}
-        )
-
         while True:
+            key = _get_api_key()
+            self._active_api_key = key
+            reconnect_delay = 3
+            client = genai.Client(
+                api_key=key,
+                http_options={"api_version": "v1beta"}
+            )
+
             try:
                 print("[JARVIS] Connecting...")
                 self.ui.set_state("THINKING")
@@ -1002,6 +1066,7 @@ class JarvisLive:
                     self._turn_done_event = asyncio.Event()
 
                     print("[JARVIS] Connected.")
+                    mark_api_key_success(key)
                     self.ui.set_state("LISTENING")
                     self.ui.write_log("SYS: JARVIS online.")
 
@@ -1021,14 +1086,20 @@ class JarvisLive:
             except Exception as e:
                 if str(e) == "SESSION_RESTART":
                     print("[JARVIS] Reloading personality...")
+                elif _is_rate_limit_error(e):
+                    print("[JARVIS] API key limited/unavailable; rotating key.")
+                    mark_api_key_rate_limited(key, cooldown_minutes=60)
+                    self.ui.write_log("SYS: Rotating Gemini API key.")
+                    reconnect_delay = 0.5
                 else:
                     print(f"[JARVIS] {e}")
+                    mark_api_key_failed(key, str(e))
                     traceback.print_exc()
-                    
+
             self.set_speaking(False)
             self.ui.set_state("THINKING")
-            print("[JARVIS] Reconnecting in 3s...")
-            await asyncio.sleep(3)
+            print(f"[JARVIS] Reconnecting in {reconnect_delay}s...")
+            await asyncio.sleep(reconnect_delay)
 
 def main():
     ui = JarvisUI("face.png")

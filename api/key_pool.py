@@ -47,7 +47,7 @@ class APIKeyEntry:
     
     def is_available(self) -> bool:
         """Check if key is available for use."""
-        if self.status == KeyStatus.HEALTHY:
+        if self.status in (KeyStatus.HEALTHY, KeyStatus.UNKNOWN):
             return True
         
         if self.status == KeyStatus.RATE_LIMITED:
@@ -113,8 +113,14 @@ class APIKeyPool:
             logger.warning("No API keys configured")
             return
         
-        # Remove duplicates and empty keys
-        unique_keys = [k.strip() for k in set(keys) if k and k.strip()]
+        # Remove duplicates and empty keys while preserving configured order.
+        seen = set()
+        unique_keys = []
+        for raw_key in keys:
+            key = raw_key.strip() if raw_key else ""
+            if key and key not in seen:
+                seen.add(key)
+                unique_keys.append(key)
         
         for key in unique_keys:
             self._keys.append(APIKeyEntry(key=key))
@@ -144,12 +150,14 @@ class APIKeyPool:
                 attempts += 1
                 
                 if entry.is_available():
+                    self._rotation_count += 1
                     logger.debug(f"Using key: {entry.key[:10]}...")
                     return entry.key
             
             # If no healthy keys found, return the one with fewest errors
             logger.warning("All keys unavailable, using least-failed key")
             best_entry = min(self._keys, key=lambda e: e.error_count)
+            self._rotation_count += 1
             return best_entry.key
     
     def mark_success(self, key: str):

@@ -130,7 +130,7 @@ class CommandRouter:
             Classified command
         """
         # Normalize input
-        normalized = text.lower().strip()
+        normalized = self._normalize(text)
         
         logger.debug(f"Parsing command: {text}")
         
@@ -142,6 +142,7 @@ class CommandRouter:
                         text=text,
                         type=CommandType.LOCAL,
                         category=category,
+                        args=self._extract_args(category, normalized, pattern),
                     )
                     logger.debug(f"Classified as {category.value}: {normalized}")
                     return cmd
@@ -154,6 +155,45 @@ class CommandRouter:
         )
         logger.debug(f"Classified as REMOTE (sending to Gemini)")
         return cmd
+
+    def _normalize(self, text: str) -> str:
+        """Normalize user text for command matching."""
+        text = text.lower().strip()
+        text = re.sub(r"[^\w\s]", " ", text)
+        text = re.sub(r"\s+", " ", text)
+        return text.strip()
+
+    def _extract_args(
+        self,
+        category: CommandCategory,
+        text: str,
+        pattern: str,
+    ) -> Dict[str, Any]:
+        """Extract structured command args from a matched local command."""
+        if category == CommandCategory.PERSONALITY:
+            if "hinata" in text or "hinata" in pattern:
+                return {"personality": "HINATA"}
+            if "chidvi" in text or "chidvi" in pattern:
+                return {"personality": "CHIDVI"}
+
+        if category == CommandCategory.AUDIO:
+            if pattern in {"mute", "stop listening", "silence", "quiet"}:
+                return {"action": "mute"}
+            if pattern in {"unmute", "wake up"}:
+                return {"action": "unmute"}
+
+        if category == CommandCategory.CONTROL:
+            if pattern == "restart":
+                return {"action": "restart"}
+            if pattern == "shutdown":
+                return {"action": "shutdown"}
+            if pattern in {"sleep", "sleep mode", "rest"}:
+                return {"action": "sleep"}
+
+        if category == CommandCategory.SETTINGS:
+            return {"action": "settings"}
+
+        return {}
     
     def _matches_pattern(self, text: str, pattern: str) -> bool:
         """
@@ -190,14 +230,18 @@ class CommandRouter:
         # Check if all pattern words are in text
         pattern_words = pattern.split()
         text_words = text.split()
-        
+        if len(pattern_words) == 1:
+            return False
+        if not any(tword.startswith(pattern_words[0][:3]) for tword in text_words):
+            return False
+
+        required_words = [word for word in pattern_words if word not in {"to"}]
         match_count = 0
-        for pword in pattern_words:
+        for pword in required_words:
             if any(tword.startswith(pword[:3]) for tword in text_words):
                 match_count += 1
-        
-        # If most pattern words are found, it's similar
-        return match_count >= len(pattern_words) - 1
+
+        return match_count == len(required_words)
     
     async def route(self, command: Command) -> bool:
         """

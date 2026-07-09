@@ -1,38 +1,15 @@
-from core.personality_manager import set_personality
+"""
+Compatibility wrapper for the canonical command router.
 
-LOCAL_COMMANDS = {
-    "switch to hinata": "HINATA",
-    "enable hinata": "HINATA",
-    "hinata": "HINATA",
+New code should import from commands.router. This module remains so older
+imports do not silently keep a separate command path alive.
+"""
 
-    "switch to chidvi": "CHIDVI",
-    "enable chidvi": "CHIDVI",
-    "chidvi": "CHIDVI",
-}
-
-
-class CommandRouter:
-
-    def __init__(self, jarvis):
-        self.jarvis = jarvis
-
-    def handle(self, text: str):
-
-        command = text.lower().strip()
-
-        if command not in LOCAL_COMMANDS:
-            return False
-
-        personality = LOCAL_COMMANDS[command]
-
-        self.jarvis._pending_personality = personality
-
-        self.jarvis.ui.switch_theme(personality)
-
-        self.jarvis.ui.write_log(
-            f"SYS: Personality -> {personality}"
-        )
-
-        self.jarvis._restart_requested = True
-
-        return True
+from commands.router import (  # noqa: F401
+    Command,
+    CommandCategory,
+    CommandRouter,
+    CommandType,
+    get_command_router,
+    parse_and_route_command,
+)

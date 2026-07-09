@@ -103,11 +103,14 @@ class ConfigManager:
     def _load_api_config(self) -> dict:
         """Load API configuration."""
         api_config = self._load_json_file("api_keys.json", {})
-        
+        keys = (
+            api_config.get("keys")
+            or api_config.get("gemini_keys")
+            or [api_config.get("gemini_api_key") or os.getenv("GEMINI_API_KEY", "")]
+        )
+
         return {
-            "gemini_keys": api_config.get("gemini_keys", [
-                api_config.get("gemini_api_key") or os.getenv("GEMINI_API_KEY", "")
-            ]),
+            "gemini_keys": keys,
             "model": os.getenv("GEMINI_MODEL", "models/gemini-2.5-flash-native-audio-preview-12-2025"),
             "timeout": 30,
             "max_retries": 3,
@@ -182,9 +185,19 @@ class ConfigManager:
         """Load command configuration."""
         return {
             "local_commands": {
-                "personality": ["switch to hinata", "switch to chidvi", "hinata", "chidvi"],
-                "audio": ["mute", "unmute", "stop listening", "wake up"],
-                "control": ["shutdown", "restart", "sleep mode", "open settings"],
+                "personality": [
+                    "switch to hinata",
+                    "switch to chidvi",
+                    "enable hinata",
+                    "enable chidvi",
+                    "activate hinata",
+                    "activate chidvi",
+                    "hinata",
+                    "chidvi",
+                ],
+                "audio": ["mute", "unmute", "stop listening", "wake up", "silence", "quiet"],
+                "control": ["shutdown", "restart", "sleep mode", "sleep", "rest"],
+                "settings": ["open settings", "settings", "preferences", "show settings"],
             },
         }
     
