@@ -64,6 +64,7 @@ from actions.dev_agent         import dev_agent
 from actions.web_search        import web_search as web_search_action
 from actions.computer_control  import computer_control
 from actions.game_updater      import game_updater
+from core.runtime import run_desktop_app
 
 def get_base_dir():
     if getattr(sys, "frozen", False):
@@ -1113,18 +1114,7 @@ class JarvisLive:
             await asyncio.sleep(reconnect_delay)
 
 def main():
-    ui = JarvisUI("face.png")
-
-    def runner():
-        ui.wait_for_api_key()
-        jarvis = JarvisLive(ui)
-        try:
-            asyncio.run(jarvis.run())
-        except KeyboardInterrupt:
-            print("Shutting down...")
-
-    threading.Thread(target=runner, daemon=True).start()
-    ui.root.mainloop()
+    run_desktop_app(JarvisUI, JarvisLive)
 
 if __name__ == "__main__":
     main()
