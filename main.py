@@ -37,7 +37,6 @@ import threading
 import json
 import sys
 import traceback
-from array import array
 from pathlib import Path
 import sounddevice as sd
 from google import genai
@@ -65,6 +64,7 @@ from actions.web_search        import web_search as web_search_action
 from actions.computer_control  import computer_control
 from actions.game_updater      import game_updater
 from core.runtime import run_desktop_app
+from core.audio.speaker import Speaker
 
 def get_base_dir():
     if getattr(sys, "frozen", False):
@@ -540,6 +540,7 @@ class JarvisLive:
         self._restart_requested = False
         self._active_api_key = None
         self.state_manager = get_state_manager()
+        self.speaker = Speaker(device=3, sample_rate=RECEIVE_SAMPLE_RATE, chunk_size=CHUNK_SIZE)
         self.state_manager.set_personality(get_personality())
         get_personality_manager().set_session_restart_callback(self._request_restart)
 
@@ -984,73 +985,19 @@ class JarvisLive:
             traceback.print_exc()
             raise
 
-    def _boost_voice_chunk(self, chunk: bytes) -> bytes:
-        try:
-            samples = array("h")
-            samples.frombytes(chunk)
-            for i, sample in enumerate(samples):
-                value = int(sample * 1.18)
-                if value > 32767:
-                    value = 32767
-                elif value < -32768:
-                    value = -32768
-                samples[i] = value
-            return samples.tobytes()
-        except Exception:
-            return chunk
     async def _play_audio(self):
         print("[JARVIS] Play started")
-
-        stream = sd.RawOutputStream(
-            device=3,
-            samplerate=24000,
-            channels=2,
-            dtype="int16",
-            blocksize=CHUNK_SIZE,
-        )
-        stream.start()
-
         try:
-            while True:
-                try:
-                    chunk = await asyncio.wait_for(
-                        self.audio_in_queue.get(),
-                        timeout=0.1
-                    )
-                except asyncio.TimeoutError:
-                    if (
-                        self._turn_done_event
-                        and self._turn_done_event.is_set()
-                        and self.audio_in_queue.empty()
-                    ):
-                        self.set_speaking(False)
-                        self._turn_done_event.clear()
-
-                    continue
-                self.set_speaking(True)
-                
-                mono = self._boost_voice_chunk(chunk)
-
-                stereo = bytearray()
-
-                for i in range(0, len(mono), 2):
-                    sample = mono[i:i+2]
-                    stereo.extend(sample)
-                    stereo.extend(sample)
-
-                await asyncio.to_thread(
-                    stream.write,
-                    bytes(stereo)
-                )
-
-
+            await self.speaker.play_queue(
+                self.audio_in_queue,
+                self._turn_done_event,
+                self.set_speaking,
+            )
         except Exception as e:
             print(f"[JARVIS] Play: {e}")
             raise
         finally:
             self.set_speaking(False)
-            stream.stop()
-            stream.close()
 
     async def run(self):
         while True:
