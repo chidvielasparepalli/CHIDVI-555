@@ -1,0 +1,22 @@
+[2026-07-09 20:15:20] INFO     core.personality_manager:97: Personalities loaded: CHIDVI, HINATA
+[2026-07-09 20:15:29] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-09 20:15:30] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 20:15:32] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 20:15:41] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-09 20:15:43] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-09 20:15:44] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 20:15:45] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 20:15:54] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-09 20:15:57] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 20:15:57] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 20:15:58] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 20:16:01] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 20:16:17] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-09 20:16:20] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 20:16:21] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 20:16:57] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-09 20:16:59] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 20:17:01] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 20:17:34] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-09 20:17:38] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 20:17:47] INFO     HINATA:20: Avatar State -> IDLE

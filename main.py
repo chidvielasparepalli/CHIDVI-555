@@ -1,4 +1,5 @@
 import os
+from core.speech.command_router import CommandRouter
 from avatars.avatar_service import avatar_service
 from core.personality_manager import set_personality
 from avatars.avatar_events import AvatarEvent
@@ -496,6 +497,7 @@ TOOL_DECLARATIONS = [
 class JarvisLive:
 
     def __init__(self, ui: JarvisUI):
+        self.command_router = CommandRouter(self)
         self.ui             = ui
         self.emotion = EmotionEngine()
         self.session        = None
@@ -510,27 +512,24 @@ class JarvisLive:
         self._pending_personality = None
 
     def _on_text_command(self, text: str):
-        if command in (
-            "switch to hinata",
-            "enable hinata",
-            "hinata",
-        ):
-            self._pending_personality = "HINATA"
-            self.ui.switch_theme("HINATA")
-            self.ui.write_log("SYS: Personality -> HINATA")
-            self._restart_requested = True
+
+        if self.command_router.handle(text):
             return
 
-        if command in (
-            "switch to chidvi",
-            "chidvi",
-        ):
-            self._pending_personality = "CHIDVI"
-            self.ui.switch_theme("CHIDVI")
-            self.ui.write_log("SYS: Personality -> CHIDVI")
-            self._restart_requested = True
+        if not self._loop or not self.session:
             return
-        command = text.lower().strip()
+
+        avatar_service.handle_event(
+            AvatarEvent.USER_STARTED_SPEAKING
+        )
+    
+        asyncio.run_coroutine_threadsafe(
+            self.session.send_client_content(
+                turns={"parts": [{"text": text}]},
+                turn_complete=True,
+            ),
+            self._loop,
+        )
     # -----------------------------
     # Emotion Detection
     # -----------------------------
@@ -885,18 +884,6 @@ class JarvisLive:
                             if full_in:
                             
                                 self.ui.write_log(f"You: {full_in}")
-                        
-                                command = full_in.lower().strip()
-                        
-                                if command in (
-                                    "hinata",
-                                    "switch to hinata",
-                                    "enable hinata",
-                                    "chidvi",
-                                    "switch to chidvi",
-                                ):
-                                    self._on_text_command(full_in)
-                                    continue
                         
                                 if hasattr(self.ui, "start_work_music"):
                                     self.ui.start_work_music()

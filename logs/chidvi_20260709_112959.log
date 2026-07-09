@@ -1,0 +1,70 @@
+[2026-07-09 11:31:03] INFO     core.personality_manager:97: Personalities loaded: CHIDVI, HINATA
+[2026-07-09 11:31:11] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-09 11:31:14] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 11:31:14] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-09 11:31:23] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+[2026-07-09 11:31:28] INFO     primp:444: response: https://www.bing.com/search?q=cricket+match+details 200
+[2026-07-09 11:31:31] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-09 11:31:36] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+[2026-07-09 11:31:37] INFO     primp:444: response: https://www.bing.com/search?q=cricket+matches+today+July+9+2026 200
+[2026-07-09 11:31:39] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:31:46] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:31:47] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:31:52] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:32:03] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 11:32:03] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-09 11:32:12] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+[2026-07-09 11:32:13] INFO     primp:444: response: https://www.bing.com/search?q=cricket+match+results+July+8+2026+and+July+7+2026 200
+[2026-07-09 11:32:13] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:32:13] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-09 11:32:20] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+[2026-07-09 11:32:20] INFO     primp:444: response: https://www.bing.com/search?q=cricket+match+India+vs+Australia+July+7-8+2026 200
+[2026-07-09 11:32:25] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 11:32:28] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:32:32] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 11:32:32] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:32:32] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-09 11:32:37] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+[2026-07-09 11:32:37] INFO     primp:444: response: https://www.bing.com/search?q=India+vs+Australia+cricket+match+result+July+7+2026 200
+[2026-07-09 11:32:38] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 11:32:38] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:32:38] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-09 11:32:46] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+[2026-07-09 11:32:46] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:32:46] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:32:48] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 11:32:49] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:32:49] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-09 11:32:58] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+[2026-07-09 11:32:58] INFO     primp:444: response: https://www.bing.com/search?q=India+vs+Australia+cricket+match+result+July+8+2026 200
+[2026-07-09 11:33:11] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:33:17] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:33:19] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:34:10] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 11:34:12] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:34:20] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:34:28] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:34:28] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-09 11:34:30] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:34:33] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:34:37] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:34:40] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:34:49] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:34:59] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:35:11] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:36:09] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:36:15] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:36:28] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:36:41] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:36:49] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:36:58] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:37:08] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:37:09] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:37:11] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:37:20] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:37:30] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:37:38] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:37:53] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:38:00] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-09 11:38:19] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-09 11:38:22] INFO     HINATA:20: Avatar State -> IDLE

@@ -22,3 +22,6 @@ youtube-transcript-api
 pywinauto
 python-pptx
 pyqt6
+dotenv
+PyQt6-WebEngine
+faster-whisper
