@@ -42,6 +42,9 @@ loader.register((parser) => {
 let currentVRM = null
 let currentAvatarFile = null
 let avatarLoadSerial = 0
+let avatarSwitchInProgress = false
+let queuedAvatarFile = null
+let avatarUpdatePaused = false
 let blink = 0
 let nextBlink = 2
 let avatarEmotion = "idle"
@@ -177,92 +180,219 @@ function applyActionPose(t, delta) {
     }
 }
 
+function logAvatar(stage, status = "OK", details = "") {
+    const suffix = details ? `: ${details}` : ""
+    console.info(`[AVATAR] ${stage} -> ${status}${suffix}`)
+}
+
 const params = new URLSearchParams(window.location.search);
 
 const avatar =
     params.get("avatar") || "Chidvi.vrm";
 
-function disposeCurrentVRM() {
+function pauseAvatarRuntime() {
+    avatarUpdatePaused = true
+    activeAction = null
+    resetEmotionTargets()
+    logAvatar("Current avatar paused")
+    logAvatar("Animation stopped")
+    logAvatar("Emotion controller detached")
+    logAvatar("Lip sync detached")
+    logAvatar("Look-at detached")
+}
+
+function resumeAvatarRuntime() {
+    avatarUpdatePaused = false
+}
+
+function disposeSceneResources(root) {
+    const counts = {
+        geometry: 0,
+        material: 0,
+        texture: 0,
+        skeleton: 0,
+    }
+    const disposedTextures = new Set()
+
+    root.traverse((object) => {
+        if (object.geometry?.dispose) {
+            object.geometry.dispose()
+            counts.geometry += 1
+        }
+
+        const materials = Array.isArray(object.material)
+            ? object.material
+            : object.material
+              ? [object.material]
+              : []
+
+        for (const material of materials) {
+            for (const value of Object.values(material)) {
+                if (value?.isTexture && !disposedTextures.has(value)) {
+                    value.dispose()
+                    disposedTextures.add(value)
+                    counts.texture += 1
+                }
+            }
+            if (material.dispose) {
+                material.dispose()
+                counts.material += 1
+            }
+        }
+
+        if (object.skeleton?.dispose) {
+            object.skeleton.dispose()
+            counts.skeleton += 1
+        }
+    })
+
+    logAvatar("Geometry disposed", "OK", String(counts.geometry))
+    logAvatar("Textures disposed", "OK", String(counts.texture))
+    logAvatar("Materials disposed", "OK", String(counts.material))
+    logAvatar("Skeleton disposed", "OK", String(counts.skeleton))
+}
+
+async function garbageCollectionSafePoint() {
+    await new Promise((resolve) => requestAnimationFrame(() => resolve()))
+    logAvatar("Garbage collection safe point")
+}
+
+async function disposeCurrentVRM() {
     if (!currentVRM) {
-        console.info("[CHIDVI avatar] dispose skipped: no active VRM")
+        logAvatar("Dispose old VRM", "SKIPPED", "no active VRM")
         currentAvatarFile = null
         return
     }
 
     const oldName = currentAvatarFile || currentVRM.meta?.name || currentVRM.scene?.name || "unknown"
-    console.info(`[CHIDVI avatar] disposing current VRM: ${oldName}`)
-    scene.remove(currentVRM.scene)
-    VRMUtils.deepDispose(currentVRM.scene)
+    const oldScene = currentVRM.scene
+    logAvatar("Dispose old VRM", "START", oldName)
+    scene.remove(oldScene)
+    logAvatar("Old VRM removed from scene", "OK", oldName)
+    disposeSceneResources(oldScene)
     currentVRM = null
     currentAvatarFile = null
-    console.info("[CHIDVI avatar] current VRM disposed")
+    logAvatar("Dispose old VRM", "OK", oldName)
+    await garbageCollectionSafePoint()
 }
 
-function loadAvatar(avatarFile) {
+async function loadVRMModel(avatarFile) {
+    logAvatar(`Loading ${avatarFile}`)
+    const gltf = await loader.loadAsync(`/${avatarFile}`)
+    const vrm = gltf.userData.vrm
+    if (!vrm) {
+        throw new Error(`No VRM data found in ${avatarFile}`)
+    }
+    logAvatar("VRM loaded successfully", "OK", avatarFile)
+    return vrm
+}
+
+function attachVRM(vrm, avatarFile) {
+    VRMUtils.rotateVRM0(vrm)
+    scene.add(vrm.scene)
+
+    currentVRM = vrm
+    currentAvatarFile = avatarFile
+    activeAction = null
+    blink = 0
+    nextBlink = clock.elapsedTime + 1 + Math.random() * 2
+    applyEmotionTarget("idle")
+    applyProceduralPose(clock.elapsedTime, 1)
+
+    logAvatar(
+        "Controllers attached",
+        "OK",
+        `avatar=${avatarFile}; expressions=${Boolean(vrm.expressionManager)}; humanoid=${Boolean(vrm.humanoid)}`
+    )
+    logAvatar("Idle animation started", "OK", avatarFile)
+}
+
+async function restorePreviousAvatar(previousAvatar, failedAvatar) {
+    if (!previousAvatar) {
+        logAvatar("Rollback", "SKIPPED", "no previous avatar")
+        return
+    }
+
+    try {
+        logAvatar("Rollback", "START", `${failedAvatar} -> ${previousAvatar}`)
+        const previousVRM = await loadVRMModel(previousAvatar)
+        attachVRM(previousVRM, previousAvatar)
+        logAvatar("Rollback", "OK", previousAvatar)
+    } catch (error) {
+        console.error(`[AVATAR] Rollback failed -> ERROR: ${previousAvatar}`, error)
+    }
+}
+
+async function switchAvatarNow(nextAvatar, requestSerial) {
+    const previousAvatar = currentAvatarFile
+
+    pauseAvatarRuntime()
+    await disposeCurrentVRM()
+
+    try {
+        const vrm = await loadVRMModel(nextAvatar)
+        if (requestSerial !== avatarLoadSerial) {
+            logAvatar(
+                "Stale avatar load ignored",
+                "SKIPPED",
+                `${nextAvatar}; request=${requestSerial}; active=${avatarLoadSerial}`
+            )
+            VRMUtils.deepDispose(vrm.scene)
+            return false
+        }
+        attachVRM(vrm, nextAvatar)
+        logAvatar("Avatar switch completed", "OK", nextAvatar)
+        return true
+    } catch (error) {
+        console.error(`[AVATAR] Avatar switch failed -> ERROR: ${nextAvatar}`, error)
+        await restorePreviousAvatar(previousAvatar, nextAvatar)
+        return false
+    }
+}
+
+async function drainQueuedAvatarSwitch() {
+    if (!queuedAvatarFile || queuedAvatarFile === currentAvatarFile) {
+        queuedAvatarFile = null
+        return
+    }
+
+    const queued = queuedAvatarFile
+    queuedAvatarFile = null
+    await loadAvatar(queued)
+}
+
+async function loadAvatar(avatarFile) {
     const nextAvatar = avatarFile || "Chidvi.vrm"
     const requestSerial = ++avatarLoadSerial
-    console.info(`[CHIDVI avatar] load request received: ${nextAvatar}; request=${requestSerial}`)
-    disposeCurrentVRM()
+    logAvatar("Avatar switch requested", "START", `${nextAvatar}; request=${requestSerial}`)
 
-    loader.load(
+    if (avatarSwitchInProgress) {
+        queuedAvatarFile = nextAvatar
+        logAvatar("Avatar switch queued", "OK", nextAvatar)
+        return false
+    }
 
-        `/${nextAvatar}`,
+    avatarSwitchInProgress = true
 
-        (gltf) => {
-
-            const vrm = gltf.userData.vrm
-
-            if (requestSerial !== avatarLoadSerial) {
-                console.warn(
-                    `[CHIDVI avatar] stale load ignored: ${nextAvatar}; request=${requestSerial}; active=${avatarLoadSerial}`
-                )
-                if (vrm?.scene) {
-                    VRMUtils.deepDispose(vrm.scene)
-                } else if (gltf.scene) {
-                    VRMUtils.deepDispose(gltf.scene)
-                }
-                return
-            }
-
-            VRMUtils.rotateVRM0(vrm)
-
-            scene.add(vrm.scene)
-
-            currentVRM = vrm
-            currentAvatarFile = nextAvatar
-            activeAction = null
-            blink = 0
-            nextBlink = clock.elapsedTime + 1 + Math.random() * 2
-            applyEmotionTarget(avatarEmotion)
-            applyProceduralPose(clock.elapsedTime, 1)
-            console.info(
-                `[CHIDVI avatar] loaded ${nextAvatar}; scene children=${scene.children.length}; expressions=${Boolean(vrm.expressionManager)}; humanoid=${Boolean(vrm.humanoid)}`
-            )
-            console.info(
-                `[CHIDVI avatar] controllers attached -> avatar=${currentAvatarFile}; emotion=${avatarEmotion}; proceduralPose=${Boolean(vrm.humanoid)}`
-            )
-
-        },
-
-        (progress) => {
-
-            console.info(`[CHIDVI avatar] loading ${nextAvatar}: ${progress.loaded}`)
-
-        },
-
-        (error) => {
-
-            console.error(`[CHIDVI avatar] failed to load ${nextAvatar}`, error)
-
-        }
-
-    )
+    try {
+        return await switchAvatarNow(nextAvatar, requestSerial)
+    } catch (error) {
+        console.error(`[AVATAR] Unhandled avatar switch error -> ERROR: ${nextAvatar}`, error)
+        return false
+    } finally {
+        resumeAvatarRuntime()
+        avatarSwitchInProgress = false
+        await drainQueuedAvatarSwitch()
+    }
 }
 
 window.loadAvatar = loadAvatar
 window.avatarDiagnostics = () => ({
     currentAvatarFile,
     hasActiveVRM: Boolean(currentVRM),
+    avatarSwitchInProgress,
+    queuedAvatarFile,
+    avatarUpdatePaused,
     sceneChildren: scene.children.length,
     emotion: avatarEmotion,
     activeAction,
@@ -278,12 +408,14 @@ function animate() {
 
     const delta = clock.getDelta()
 
-    if (currentVRM) {
+    if (!avatarUpdatePaused && currentVRM) {
 
-        currentVRM.update(delta);
+        const vrm = currentVRM
+
+        vrm.update(delta);
 
         const t = clock.elapsedTime;
-        const expressionManager = currentVRM.expressionManager
+        const expressionManager = vrm.expressionManager
 
         if (expressionManager) {
             if (avatarEmotion === "speaking" || avatarEmotion === "laughing") {
@@ -331,16 +463,16 @@ function animate() {
         const thoughtful = avatarEmotion === "thinking" || avatarEmotion === "confused" ? 1 : 0
         const speaking = avatarEmotion === "speaking" || avatarEmotion === "laughing" ? 1 : 0
 
-        currentVRM.scene.rotation.y =
+        vrm.scene.rotation.y =
             Math.sin(t * (0.45 + speaking * 0.35)) * (0.06 + attentive * 0.03);
-        currentVRM.scene.rotation.x =
+        vrm.scene.rotation.x =
             Math.sin(t * 0.7) * 0.015 - thoughtful * 0.04;
 
         // Breathing
         const breathe =
             1 + Math.sin(t * 2.2) * 0.012;
 
-        currentVRM.scene.scale.set(
+        vrm.scene.scale.set(
             breathe,
             breathe,
             breathe
