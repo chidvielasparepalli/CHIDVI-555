@@ -103,10 +103,18 @@ class CommandRouter:
                 "bow",
                 "smile",
                 "laugh",
+                "point",
+                "point at me",
+                "clap",
+                "thinking pose",
+                "think",
+                "greeting",
+                "greet me",
                 "look left",
                 "look right",
                 "look up",
                 "look down",
+                "look at me",
             ],
             CommandCategory.CONTROL: [
                 "shutdown",
@@ -205,6 +213,16 @@ class CommandRouter:
                 action = "nod"
             if action == "shake head":
                 action = "shake_head"
+            if action == "point at me":
+                action = "point"
+            if action == "thinking pose":
+                action = "thinking"
+            if action == "think":
+                action = "thinking"
+            if action == "greet me":
+                action = "greeting"
+            if action == "look at me":
+                action = "look_forward"
             if action.startswith("look "):
                 action = action.replace(" ", "_")
             return {"action": action}

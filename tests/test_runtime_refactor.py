@@ -61,6 +61,11 @@ class CommandRouterTests(unittest.TestCase):
         self.assert_local("nod your head", CommandCategory.AVATAR, action="nod")
         self.assert_local("shake your head", CommandCategory.AVATAR, action="shake_head")
         self.assert_local("look left", CommandCategory.AVATAR, action="look_left")
+        self.assert_local("look at me", CommandCategory.AVATAR, action="look_forward")
+        self.assert_local("point at me", CommandCategory.AVATAR, action="point")
+        self.assert_local("clap", CommandCategory.AVATAR, action="clap")
+        self.assert_local("thinking pose", CommandCategory.AVATAR, action="thinking")
+        self.assert_local("greet me", CommandCategory.AVATAR, action="greeting")
 
 
 class APIKeyPoolTests(unittest.TestCase):

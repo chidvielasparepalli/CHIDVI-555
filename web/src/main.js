@@ -100,6 +100,10 @@ window.performAvatarAction = (action) => {
         applyEmotionTarget("happy")
     } else if (activeAction === "laugh") {
         applyEmotionTarget("laughing")
+    } else if (activeAction === "thinking") {
+        applyEmotionTarget("thinking")
+    } else if (activeAction === "greeting") {
+        applyEmotionTarget("happy")
     }
 }
 
@@ -159,9 +163,23 @@ function applyActionPose(t, delta) {
     const once = Math.sin(Math.min(1, elapsed / 1.4) * Math.PI)
 
     if (activeAction === "wave") {
-        setBoneRotation("rightUpperArm", -0.75, -0.15, -2.15, blend)
-        setBoneRotation("rightLowerArm", -0.75, -0.3, -0.35 + pulse * 0.55, blend)
-        setBoneRotation("rightHand", 0.1, pulse * 0.35, -0.2, blend)
+        setBoneRotation("rightUpperArm", -0.55, -0.25, -1.85, blend)
+        setBoneRotation("rightLowerArm", -0.8, -0.2, -0.45 + pulse * 0.45, blend)
+        setBoneRotation("rightHand", 0.08, pulse * 0.32, -0.18, blend)
+    } else if (activeAction === "point") {
+        setBoneRotation("chest", -0.04, 0.08 * once, 0, blend)
+        setBoneRotation("rightUpperArm", -1.05, -0.28, -1.2, blend)
+        setBoneRotation("rightLowerArm", -0.38, -0.12, -0.08, blend)
+        setBoneRotation("rightHand", 0, -0.08, -0.02, blend)
+        setBoneRotation("head", -0.02, 0.08 * once, 0, blend)
+    } else if (activeAction === "clap") {
+        const clap = Math.abs(Math.sin(elapsed * Math.PI * 3))
+        setBoneRotation("leftUpperArm", -0.45, 0.25, 0.85 - clap * 0.35, blend)
+        setBoneRotation("rightUpperArm", -0.45, -0.25, -0.85 + clap * 0.35, blend)
+        setBoneRotation("leftLowerArm", -0.45, 0.15, 0.65 - clap * 0.45, blend)
+        setBoneRotation("rightLowerArm", -0.45, -0.15, -0.65 + clap * 0.45, blend)
+        setBoneRotation("leftHand", 0, 0, 0.22 - clap * 0.2, blend)
+        setBoneRotation("rightHand", 0, 0, -0.22 + clap * 0.2, blend)
     } else if (activeAction === "nod") {
         setBoneRotation("head", -0.22 + pulse * 0.18, 0, 0, blend)
     } else if (activeAction === "shake_head") {
@@ -169,6 +187,21 @@ function applyActionPose(t, delta) {
     } else if (activeAction === "bow") {
         setBoneRotation("chest", -0.42 * once, 0, 0, blend)
         setBoneRotation("head", -0.22 * once, 0, 0, blend)
+    } else if (activeAction === "laugh") {
+        setBoneRotation("chest", Math.sin(elapsed * Math.PI * 5) * 0.045, 0, 0, blend)
+        setBoneRotation("head", -0.08 + Math.sin(elapsed * Math.PI * 5) * 0.05, 0, 0, blend)
+        setBoneRotation("leftUpperArm", 0.18, 0.08, 1.0, blend)
+        setBoneRotation("rightUpperArm", 0.18, -0.08, -1.0, blend)
+    } else if (activeAction === "thinking") {
+        setBoneRotation("head", -0.08, 0.1 * once, 0.04, blend)
+        setBoneRotation("rightUpperArm", -0.45, -0.18, -0.95, blend)
+        setBoneRotation("rightLowerArm", -1.05, -0.18, -0.45, blend)
+        setBoneRotation("rightHand", -0.18, -0.12, -0.08, blend)
+    } else if (activeAction === "greeting") {
+        setBoneRotation("chest", -0.16 * once, 0, 0, blend)
+        setBoneRotation("head", -0.08 * once, 0, 0, blend)
+        setBoneRotation("rightUpperArm", -0.65, -0.18, -1.72, blend)
+        setBoneRotation("rightLowerArm", -0.7, -0.18, -0.35 + pulse * 0.22, blend)
     } else if (activeAction === "look_left") {
         setBoneRotation("head", 0, 0.45 * once, 0, blend)
     } else if (activeAction === "look_right") {
@@ -177,6 +210,9 @@ function applyActionPose(t, delta) {
         setBoneRotation("head", 0.24 * once, 0, 0, blend)
     } else if (activeAction === "look_down") {
         setBoneRotation("head", -0.24 * once, 0, 0, blend)
+    } else if (activeAction === "look_forward") {
+        setBoneRotation("head", -0.02, 0, 0, blend)
+        setBoneRotation("neck", -0.02, 0, 0, blend)
     }
 }
 
