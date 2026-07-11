@@ -2,7 +2,9 @@ import './style.css'
 
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import { VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm'
+import { createAnimationManager } from './animation-manager.js'
 
 const scene = new THREE.Scene()
 scene.background = null
@@ -56,6 +58,10 @@ let activeAction = null
 let actionStartedAt = 0
 const expressionTargets = {}
 
+// AnimationManager: loads/caches/plays Mixamo FBX clips on the active VRM.
+const fbxLoader = new FBXLoader()
+const animManager = createAnimationManager(fbxLoader)
+
 const emotionExpressions = {
     idle: { relaxed: 0.35 },
     listening: { relaxed: 0.2, happy: 0.08 },
@@ -92,12 +98,36 @@ function applyEmotionTarget(emotion) {
     for (const [name, value] of Object.entries(values)) {
         setExpressionTarget(name, value)
     }
+    // Phase 3/5: drive skeleton animations from the runtime state/emotion.
+    animManager.onStateChange(avatarEmotion)
 }
 
 window.setAvatarEmotion = applyEmotionTarget
 window.setAvatarState = applyEmotionTarget
 window.performAvatarAction = (action) => {
-    activeAction = String(action || "").toLowerCase()
+    const a = String(action || "").toLowerCase()
+    // Prefer a real Mixamo FBX clip when one is available for this action.
+    if (animManager.hasAnimation(a)) {
+        animManager.playGesture(a)
+        // Keep facial expression in sync for actions that carry an emotion.
+        if (a === "smile" || a === "happy") {
+            applyEmotionTarget("happy")
+        } else if (a === "laugh" || a === "laughing") {
+            applyEmotionTarget("laughing")
+        } else if (a === "thinking") {
+            applyEmotionTarget("thinking")
+        } else if (a === "greeting" || a === "wave" || a === "salute") {
+            applyEmotionTarget("happy")
+        } else if (a === "angry") {
+            applyEmotionTarget("angry")
+        } else if (a === "sad") {
+            applyEmotionTarget("sad")
+        }
+        return
+    }
+    // Fall back to procedural bone animation for actions without an FBX
+    // (e.g. look_left, look_right, look_up, look_down, look_forward).
+    activeAction = a
     actionStartedAt = clock.elapsedTime
     if (activeAction === "smile") {
         applyEmotionTarget("happy")
@@ -125,6 +155,8 @@ function setBoneRotation(name, x = 0, y = 0, z = 0, blend = 1) {
 }
 
 function applyProceduralPose(t, delta) {
+    // Back off when an FBX clip is driving the skeleton to avoid fighting it.
+    if (animManager.isFBXActive()) return
     const blend = Math.min(1, delta * 7)
     const breathing = Math.sin(t * 2.1) * 0.025
     const sway = Math.sin(t * 0.7) * 0.035
@@ -311,6 +343,10 @@ async function disposeCurrentVRM() {
         return
     }
 
+    // Release AnimationManager actions bound to the outgoing mixer.
+    // Clips stay cached so they are not re-downloaded after a switch.
+    animManager.unbindMixer()
+
     const oldName = currentAvatarFile || currentVRM.meta?.name || currentVRM.scene?.name || "unknown"
     const oldVRM = currentVRM
     const oldScene = currentVRM.scene
@@ -350,6 +386,9 @@ function attachVRM(vrm, avatarFile) {
     currentVRM = vrm
     currentAvatarFile = avatarFile
     currentMixer = new THREE.AnimationMixer(vrm.scene)
+    // Bind the AnimationManager to the new mixer and start the idle loop.
+    animManager.bindMixer(currentMixer)
+    animManager.playIdle()
     logAvatar("Mixer created", "OK", avatarFile)
     activeAction = null
     blink = 0
@@ -465,6 +504,9 @@ async function loadAvatar(avatarFile) {
 }
 
 window.loadAvatar = loadAvatar
+window.playAnimation = (name, options) => {
+    animManager.play(name, options || {})
+}
 window.avatarDiagnostics = () => ({
     currentAvatarFile,
     hasActiveVRM: Boolean(currentVRM),
@@ -477,11 +519,22 @@ window.avatarDiagnostics = () => ({
     sceneChildren: scene.children.length,
     emotion: avatarEmotion,
     activeAction,
+    animation: animManager.getDiagnostics(),
 })
 
 const clock = new THREE.Clock()
 
 loadAvatar(avatar)
+
+// Preload the most-used clips so the first state/gesture switch is instant.
+// Non-blocking: errors only log a warning.
+animManager.preload([
+    'idle',
+    'breathing_idle',
+    'talking',
+    'thinking',
+    'wave',
+]).catch((err) => console.warn('[VRM] Animation preload error:', err))
 
 function animate() {
 
@@ -496,6 +549,8 @@ function animate() {
         vrm.update(delta);
         if (currentMixer) {
             currentMixer.update(delta)
+            // Drive AnimationManager cross-fades every frame.
+            animManager.update(delta)
         }
 
         const t = clock.elapsedTime;

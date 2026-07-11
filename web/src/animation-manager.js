@@ -522,8 +522,12 @@ export function createAnimationManager(loader) {
             }
         },
 
-        /** Tear down everything (called on VRM disposal). */
-        dispose() {
+        /**
+         * Release actions bound to the current mixer but KEEP the clip cache,
+         * so FBX files are not re-downloaded on every avatar switch.
+         * Called from disposeCurrentVRM() before the mixer is torn down.
+         */
+        unbindMixer() {
             if (finishedHandler && mixer) {
                 mixer.removeEventListener('finished', finishedHandler)
             }
@@ -532,7 +536,6 @@ export function createAnimationManager(loader) {
                 try { action.stop() } catch (_) { /* noop */ }
             })
             actionCache.clear()
-            clipCache.clear()
             currentAction = null
             idleAction = null
             activeName = null
@@ -540,6 +543,13 @@ export function createAnimationManager(loader) {
             queue.length = 0
             setFBXActive(false)
             mixer = null
+            log('Unbound mixer (clips kept cached)')
+        },
+
+        /** Tear down everything including the clip cache. */
+        dispose() {
+            api.unbindMixer()
+            clipCache.clear()
             log('Disposed')
         },
     }
