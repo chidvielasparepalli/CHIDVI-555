@@ -1236,6 +1236,7 @@ class MainWindow(QMainWindow):
     _state_sig = pyqtSignal(str)
     _avatar_switch_sig = pyqtSignal(str)
     _avatar_action_sig = pyqtSignal(str)
+    _animation_sig = pyqtSignal(str, dict)
     
     def switch_theme(self, personality: str):
 
@@ -1313,6 +1314,7 @@ class MainWindow(QMainWindow):
         self._state_sig.connect(self._apply_state)
         self._avatar_switch_sig.connect(self._request_avatar_switch)
         self._avatar_action_sig.connect(self._perform_avatar_action)
+        self._animation_sig.connect(self._play_animation)
 
         from core.personality_manager import get_personality
 
@@ -1728,6 +1730,15 @@ class MainWindow(QMainWindow):
             self._log_sig.emit(f"[VRM] Avatar action requested -> {action}")
             self.hud.page().runJavaScript(
                 f"window.performAvatarAction && window.performAvatarAction({safe_action});"
+            )
+
+    def _play_animation(self, name: str, options: dict = None):
+        if hasattr(self.hud, "page"):
+            safe_name = json.dumps(name)
+            safe_opts = json.dumps(options or {})
+            self._log_sig.emit(f"[VRM] Animation requested -> {name}")
+            self.hud.page().runJavaScript(
+                f"window.playAnimation && window.playAnimation({safe_name}, {safe_opts});"
             )
 
     def _request_avatar_switch(self, avatar: str):
