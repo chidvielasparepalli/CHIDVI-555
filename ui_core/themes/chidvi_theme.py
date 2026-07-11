@@ -14,7 +14,7 @@ CHIDVI_THEME = {
 
     "avatar": "CHIDVI",
 
-    "music": "media/background_song.mp3",
+    "music": "media/final work bgm.mp3",
 
     "background_video": "media/interface_video.mp4",
 

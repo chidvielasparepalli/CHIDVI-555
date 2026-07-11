@@ -2,6 +2,7 @@ from __future__ import annotations
 from ui_core.themes.theme_manager import theme_manager
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 import json
+import logging
 import math
 import os
 import platform
@@ -59,7 +60,7 @@ _BACKGROUND_AUDIO_NAMES = (
     "jarvis_background.mp3", "wake_song.mp3", "theme.mp3", "song.mp3",
 )
 _WORK_AUDIO_NAMES = (
-    "work_background_music.mp3", "work_background_music.mpeg",
+    "", "work_background_music.mpeg",
     "work_background_music.wav", "work_background_music.m4a",
     "working_music.mp3", "command_music.mp3",
 )
@@ -1233,6 +1234,8 @@ class SetupOverlay(QWidget):
 class MainWindow(QMainWindow):
     _log_sig   = pyqtSignal(str)
     _state_sig = pyqtSignal(str)
+    _avatar_switch_sig = pyqtSignal(str)
+    _avatar_action_sig = pyqtSignal(str)
     
     def switch_theme(self, personality: str):
 
@@ -1306,7 +1309,10 @@ class MainWindow(QMainWindow):
         self._update_metrics()
 
         self._log_sig.connect(self._log.append_log)
+        self._log_sig.connect(lambda text: logging.getLogger("ui.runtime").info(text))
         self._state_sig.connect(self._apply_state)
+        self._avatar_switch_sig.connect(self._request_avatar_switch)
+        self._avatar_action_sig.connect(self._perform_avatar_action)
 
         from core.personality_manager import get_personality
 
@@ -1715,6 +1721,84 @@ class MainWindow(QMainWindow):
         if hasattr(self.hud, "page"):
             safe_state = json.dumps(state.lower())
             self.hud.page().runJavaScript(f"window.setAvatarState && window.setAvatarState({safe_state});")
+
+    def _perform_avatar_action(self, action: str):
+        if hasattr(self.hud, "page"):
+            safe_action = json.dumps(action)
+            self._log_sig.emit(f"[VRM] Avatar action requested -> {action}")
+            self.hud.page().runJavaScript(
+                f"window.performAvatarAction && window.performAvatarAction({safe_action});"
+            )
+
+    def _request_avatar_switch(self, avatar: str):
+        if not hasattr(self.hud, "page"):
+            self._log_sig.emit(f"[VRM] Avatar request failed -> no renderer page for {avatar}")
+            return
+
+        safe_avatar = json.dumps(avatar)
+        self._log_sig.emit(f"[PERSONALITY] Avatar request sent -> {avatar}")
+        self._log_sig.emit(f"[PERSONALITY] Waiting for renderer -> {avatar}")
+        script = (
+            "(function(){"
+            "if (!window.loadAvatar) {"
+            "console.warn('[VRM] loadAvatar missing; reloading ' + "
+            f"{safe_avatar});"
+            "window.location.href='/?avatar=' + encodeURIComponent("
+            f"{safe_avatar});"
+            "return 'reload';"
+            "}"
+            f"window.loadAvatar({safe_avatar});"
+            "return 'sent';"
+            "})();"
+        )
+
+        def _command_sent(result=None, avatar=avatar):
+            self._log_sig.emit(f"[VRM] Switch command sent -> {avatar}; result={result}")
+            QTimer.singleShot(250, lambda: self._poll_avatar_ready(avatar, 0))
+
+        self.hud.page().runJavaScript(script, _command_sent)
+
+    def _poll_avatar_ready(self, avatar: str, attempt: int):
+        if not hasattr(self.hud, "page"):
+            self._log_sig.emit(f"[VRM] Avatar ready failed -> renderer page missing for {avatar}")
+            return
+
+        script = "JSON.stringify(window.avatarDiagnostics ? window.avatarDiagnostics() : {missing:true});"
+
+        def _handle_diagnostics(raw, avatar=avatar, attempt=attempt):
+            try:
+                diagnostics = json.loads(raw) if raw else {}
+            except Exception:
+                diagnostics = {"parse_error": str(raw)}
+
+            ready = (
+                diagnostics.get("currentAvatarFile") == avatar
+                and diagnostics.get("hasActiveVRM") is True
+                and diagnostics.get("avatarSwitchInProgress") is False
+                and diagnostics.get("avatarUpdatePaused") is False
+            )
+
+            if ready:
+                self._log_sig.emit(f"[VRM] Avatar Ready -> {avatar}")
+                self._log_sig.emit(f"[VRM] Renderer diagnostics -> {diagnostics}")
+                return
+
+            if diagnostics.get("lastAvatarSwitchError"):
+                self._log_sig.emit(
+                    f"[VRM] Avatar switch error -> {diagnostics.get('lastAvatarSwitchError')}"
+                )
+
+            if attempt >= 60:
+                self._log_sig.emit(f"[VRM] Avatar Ready timeout -> {avatar}; diagnostics={diagnostics}")
+                return
+
+            if attempt in {0, 4, 12, 24, 40}:
+                self._log_sig.emit(f"[VRM] Waiting for Avatar Ready -> {avatar}; diagnostics={diagnostics}")
+
+            QTimer.singleShot(250, lambda: self._poll_avatar_ready(avatar, attempt + 1))
+
+        self.hud.page().runJavaScript(script, _handle_diagnostics)
+
     def _check_config(self) -> bool:
         if not API_FILE.exists(): return False
         try:
@@ -1799,13 +1883,8 @@ class JarvisUI:
         self._win._log_sig.emit(text)
 
     def perform_avatar_action(self, action: str):
-        hud = self._win.hud
-        if hasattr(hud, "page"):
-            safe_action = json.dumps(action)
-            self.write_log(f"SYS: Avatar action -> {action}")
-            hud.page().runJavaScript(
-                f"window.performAvatarAction && window.performAvatarAction({safe_action});"
-            )
+        self.write_log(f"SYS: Avatar action -> {action}")
+        self._win._avatar_action_sig.emit(action)
 
     def apply_personality_profile(self, profile):
         personality = getattr(getattr(profile, "id", None), "value", None) or getattr(profile, "name", "")
@@ -1817,45 +1896,19 @@ class JarvisUI:
 
         theme_manager.switch(personality)
         self.write_log(f"SYS: UI theme -> {personality}")
-        hud = self._win.hud
 
-        if hasattr(hud, "page"):
+        if hasattr(self._win, "_avatar_switch_sig"):
 
             avatar = avatar_model or ("Hinata.vrm" if personality == "HINATA" else "Chidvi.vrm")
 
-            safe_avatar = json.dumps(avatar)
             self.write_log(f"SYS: Forwarding VRM switch -> {avatar}")
-            script = (
-                "window.loadAvatar "
-                f"? window.loadAvatar({safe_avatar}) "
-                ": (console.warn('[CHIDVI avatar] loadAvatar missing; reloading ' + "
-                f"{safe_avatar}), window.location.href='/?avatar=' + encodeURIComponent({safe_avatar}));"
-            )
+            self._win._avatar_switch_sig.emit(avatar)
 
-            def _log_avatar_diagnostics(result=None, avatar=avatar):
-                self.write_log(f"SYS: VRM switch command sent -> {avatar}")
-
-                def _write_diagnostics(diagnostics):
-                    self.write_log(f"SYS: Renderer diagnostics -> {diagnostics}")
-
-                QTimer.singleShot(
-                    1200,
-                    lambda: hud.page().runJavaScript(
-                        "JSON.stringify(window.avatarDiagnostics ? window.avatarDiagnostics() : null);",
-                        _write_diagnostics,
-                    ),
-                )
-
-            hud.page().runJavaScript(
-                script,
-                _log_avatar_diagnostics,
-            )
-
-        elif hasattr(hud, "change_video"):
+        elif hasattr(self._win.hud, "change_video"):
 
             theme = theme_manager.get()
 
-            hud.change_video(
+            self._win.hud.change_video(
                 Path(theme["background_video"])
             )
 

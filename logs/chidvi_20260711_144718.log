@@ -1,0 +1,109 @@
+[2026-07-11 14:47:27] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-11 14:47:27] INFO     ui.runtime:1312: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-11 14:47:29] INFO     commands.router:70: Command router initialized
+[2026-07-11 14:47:29] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-11 14:47:29] INFO     ui.runtime:1312: SYS: Renderer page load started.
+[2026-07-11 14:47:31] INFO     ui.runtime:1312: SYS: Renderer page load finished -> False.
+[2026-07-11 14:47:32] INFO     ui.runtime:1312: SYS: JARVIS online.
+[2026-07-11 14:48:09] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-11 14:48:10] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:48:15] INFO     ui.runtime:1312: SYS: Renderer page load started.
+[2026-07-11 14:48:16] INFO     ui.runtime:1312: SYS: Renderer page load finished -> True.
+[2026-07-11 14:48:21] INFO     ui.runtime:1312: You: <noise>
+[2026-07-11 14:48:21] INFO     ui.runtime:1312: Jarvis: Haha, interesting perspective! I'm not facing any financial challenges. I'm CHIDVI, your intelligent desktop agent, ready to help you with any task. ఏం కావాలి? చెప్పండి.
+[2026-07-11 14:48:21] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:48:26] INFO     ui.runtime:1312: You: సర్వర్ సర్
+[2026-07-11 14:48:31] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:48:32] INFO     commands.router:310: Handling local command: personality - switch to hinata
+[2026-07-11 14:48:32] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-11 14:48:32] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-11 14:48:32] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:48:32] INFO     commands.router:332: Local command executed: switch to hinata
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: SYS: Switching personality -> HINATA
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: SYS: Avatar profile -> HINATA uses Hinata.vrm
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: SYS: Applying avatar profile -> HINATA / Hinata.vrm
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: SYS: UI theme -> HINATA
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: SYS: Forwarding VRM switch -> Hinata.vrm
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: [PERSONALITY] Avatar request sent -> Hinata.vrm
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: [PERSONALITY] Waiting for renderer -> Hinata.vrm
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: SYS: Personality active -> HINATA
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: [VRM] Switch command sent -> Hinata.vrm; result=sent
+[2026-07-11 14:48:32] INFO     ui.runtime:1312: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None}
+[2026-07-11 14:48:33] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-11 14:48:34] INFO     ui.runtime:1312: [VRM] Avatar Ready -> Hinata.vrm
+[2026-07-11 14:48:34] INFO     ui.runtime:1312: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'reconnecting', 'activeAction': None}
+[2026-07-11 14:48:39] INFO     ui.runtime:1312: SYS: JARVIS online.
+[2026-07-11 14:49:59] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-11 14:49:59] INFO     ui.runtime:1312: [open_app] Notepad
+[2026-07-11 14:50:00] INFO     ui.runtime:1312: You: <noise>
+[2026-07-11 14:50:00] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:50:03] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:50:03] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-11 14:50:03] INFO     ui.runtime:1312: [open_app] Chrome
+[2026-07-11 14:50:04] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:50:05] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-11 14:50:09] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:50:11] INFO     ui.runtime:1312: You: . Sudah semua sudah sele
+[2026-07-11 14:50:11] INFO     ui.runtime:1312: Jarvis: Chrome open చేస్తున్నా! సరే, Chrome తెరిచాను.
+[2026-07-11 14:50:11] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:50:12] INFO     commands.router:310: Handling local command: personality - switch to chidvi
+[2026-07-11 14:50:12] INFO     core.personality_manager:259: Switching personality to CHIDVI
+[2026-07-11 14:50:12] INFO     core.personality_manager:307: Personality switched to CHIDVI
+[2026-07-11 14:50:12] INFO     commands.router:332: Local command executed: switch to chidvi
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: SYS: Switching personality -> CHIDVI
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: SYS: Avatar profile -> CHIDVI uses Chidvi.vrm
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: SYS: Applying avatar profile -> CHIDVI / Chidvi.vrm
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: SYS: UI theme -> CHIDVI
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: SYS: Forwarding VRM switch -> Chidvi.vrm
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: [PERSONALITY] Avatar request sent -> Chidvi.vrm
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: [PERSONALITY] Waiting for renderer -> Chidvi.vrm
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: SYS: Personality active -> CHIDVI
+[2026-07-11 14:50:12] INFO     ui.runtime:1312: [VRM] Switch command sent -> Chidvi.vrm; result=sent
+[2026-07-11 14:50:13] INFO     ui.runtime:1312: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None}
+[2026-07-11 14:50:13] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6J... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-11 14:50:14] INFO     ui.runtime:1312: [VRM] Avatar Ready -> Chidvi.vrm
+[2026-07-11 14:50:14] INFO     ui.runtime:1312: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'idle', 'activeAction': None}
+[2026-07-11 14:50:18] INFO     ui.runtime:1312: SYS: JARVIS online.
+[2026-07-11 14:50:25] INFO     ui.runtime:1312: You: <noise>
+[2026-07-11 14:50:30] INFO     ui.runtime:1312: You: 2 0 , 15.
+[2026-07-11 14:50:31] INFO     commands.router:310: Handling local command: personality - switch to hinata
+[2026-07-11 14:50:31] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-11 14:50:31] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-11 14:50:31] INFO     commands.router:332: Local command executed: switch to hinata
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: SYS: Switching personality -> HINATA
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: SYS: Avatar profile -> HINATA uses Hinata.vrm
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: SYS: Applying avatar profile -> HINATA / Hinata.vrm
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: SYS: UI theme -> HINATA
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: SYS: Forwarding VRM switch -> Hinata.vrm
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: [PERSONALITY] Avatar request sent -> Hinata.vrm
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: [PERSONALITY] Waiting for renderer -> Hinata.vrm
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: SYS: Personality active -> HINATA
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: [VRM] Switch command sent -> Hinata.vrm; result=sent
+[2026-07-11 14:50:31] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6L... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-11 14:50:31] INFO     ui.runtime:1312: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None}
+[2026-07-11 14:50:33] INFO     ui.runtime:1312: [VRM] Avatar Ready -> Hinata.vrm
+[2026-07-11 14:50:33] INFO     ui.runtime:1312: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'idle', 'activeAction': None}
+[2026-07-11 14:50:36] INFO     ui.runtime:1312: SYS: JARVIS online.
+[2026-07-11 14:51:29] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-11 14:51:30] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:51:34] INFO     ui.runtime:1312: Jarvis: Hehe, hi Chidvilas! How are you doing today?
+[2026-07-11 14:51:34] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:51:50] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-11 14:51:54] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:52:01] INFO     ui.runtime:1312: Jarvis: Ayy, pandhi... you're just saying that, aren't you? Hehe... making me blush for no reason...
+[2026-07-11 14:52:01] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:52:08] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:52:12] INFO     ui.runtime:1312: You: सम थिंग लाइ क
+[2026-07-11 14:52:12] INFO     ui.runtime:1312: Jarvis: Hmm? Something like what, Chidvilas? Tell me...
+[2026-07-11 14:52:12] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:52:27] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:52:31] INFO     ui.runtime:1312: You: <noise>
+[2026-07-11 14:52:31] INFO     ui.runtime:1312: Jarvis: Oh no! What happened? Tell me, are you okay?
+[2026-07-11 14:52:31] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:53:26] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:53:27] INFO     ui.runtime:1312: Jarvis: Ohh, I see... so
+[2026-07-11 14:53:29] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 14:53:49] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 14:53:59] INFO     ui.runtime:1312: You: py tho n ka py thon kaikkia
+[2026-07-11 14:53:59] INFO     ui.runtime:1312: Jarvis: Hehe, so it was you, huh? Pandhi! You made me like this... so possessive and everything... seriously!
+[2026-07-11 14:53:59] INFO     HINATA:20: Avatar State -> IDLE

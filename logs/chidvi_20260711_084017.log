@@ -1,0 +1,5 @@
+[2026-07-11 08:40:39] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-11 08:40:42] INFO     commands.router:70: Command router initialized
+[2026-07-11 08:40:42] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-11 08:41:30] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (1006 None. Abnormal closure.)
+[2026-07-11 08:41:43] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6J... (timed out during opening handshake)

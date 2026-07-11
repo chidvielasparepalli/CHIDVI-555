@@ -41,10 +41,13 @@ loader.register((parser) => {
 
 let currentVRM = null
 let currentAvatarFile = null
+let currentMixer = null
 let avatarLoadSerial = 0
 let avatarSwitchInProgress = false
 let queuedAvatarFile = null
 let avatarUpdatePaused = false
+let lastAvatarSwitchStatus = "initializing"
+let lastAvatarSwitchError = null
 let blink = 0
 let nextBlink = 2
 let avatarEmotion = "idle"
@@ -218,7 +221,7 @@ function applyActionPose(t, delta) {
 
 function logAvatar(stage, status = "OK", details = "") {
     const suffix = details ? `: ${details}` : ""
-    console.info(`[AVATAR] ${stage} -> ${status}${suffix}`)
+    console.info(`[VRM] ${stage} -> ${status}${suffix}`)
 }
 
 const params = new URLSearchParams(window.location.search);
@@ -230,15 +233,22 @@ function pauseAvatarRuntime() {
     avatarUpdatePaused = true
     activeAction = null
     resetEmotionTargets()
-    logAvatar("Current avatar paused")
+    logAvatar("Renderer paused")
     logAvatar("Animation stopped")
+    logAvatar("Idle animation stopped")
     logAvatar("Emotion controller detached")
     logAvatar("Lip sync detached")
     logAvatar("Look-at detached")
+    logAvatar("Controllers detached")
 }
 
 function resumeAvatarRuntime() {
     avatarUpdatePaused = false
+    logAvatar("Renderer resumed")
+}
+
+function formatAvatarError(error) {
+    return error?.stack || error?.message || String(error)
 }
 
 function disposeSceneResources(root) {
@@ -297,17 +307,27 @@ async function disposeCurrentVRM() {
     if (!currentVRM) {
         logAvatar("Dispose old VRM", "SKIPPED", "no active VRM")
         currentAvatarFile = null
+        currentMixer = null
         return
     }
 
     const oldName = currentAvatarFile || currentVRM.meta?.name || currentVRM.scene?.name || "unknown"
+    const oldVRM = currentVRM
     const oldScene = currentVRM.scene
     logAvatar("Dispose old VRM", "START", oldName)
+    currentVRM = null
+    currentAvatarFile = null
+    currentMixer = null
+    logAvatar("Animation mixer disposed", "OK", oldName)
     scene.remove(oldScene)
     logAvatar("Old VRM removed from scene", "OK", oldName)
     disposeSceneResources(oldScene)
-    currentVRM = null
-    currentAvatarFile = null
+    if (oldVRM.springBoneManager?.dispose) {
+        oldVRM.springBoneManager.dispose()
+        logAvatar("Physics disposed", "OK", oldName)
+    } else {
+        logAvatar("Physics disposed", "SKIPPED", "none")
+    }
     logAvatar("Dispose old VRM", "OK", oldName)
     await garbageCollectionSafePoint()
 }
@@ -329,6 +349,8 @@ function attachVRM(vrm, avatarFile) {
 
     currentVRM = vrm
     currentAvatarFile = avatarFile
+    currentMixer = new THREE.AnimationMixer(vrm.scene)
+    logAvatar("Mixer created", "OK", avatarFile)
     activeAction = null
     blink = 0
     nextBlink = clock.elapsedTime + 1 + Math.random() * 2
@@ -355,7 +377,9 @@ async function restorePreviousAvatar(previousAvatar, failedAvatar) {
         attachVRM(previousVRM, previousAvatar)
         logAvatar("Rollback", "OK", previousAvatar)
     } catch (error) {
-        console.error(`[AVATAR] Rollback failed -> ERROR: ${previousAvatar}`, error)
+        lastAvatarSwitchStatus = "rollback_failed"
+        lastAvatarSwitchError = formatAvatarError(error)
+        console.error(`[VRM] Rollback failed -> ERROR: ${previousAvatar}`, lastAvatarSwitchError)
     }
 }
 
@@ -377,10 +401,15 @@ async function switchAvatarNow(nextAvatar, requestSerial) {
             return false
         }
         attachVRM(vrm, nextAvatar)
+        lastAvatarSwitchStatus = "ready"
+        lastAvatarSwitchError = null
         logAvatar("Avatar switch completed", "OK", nextAvatar)
+        logAvatar("Avatar Ready", "OK", nextAvatar)
         return true
     } catch (error) {
-        console.error(`[AVATAR] Avatar switch failed -> ERROR: ${nextAvatar}`, error)
+        lastAvatarSwitchStatus = "failed"
+        lastAvatarSwitchError = formatAvatarError(error)
+        console.error(`[VRM] Avatar switch failed -> ERROR: ${nextAvatar}`, lastAvatarSwitchError)
         await restorePreviousAvatar(previousAvatar, nextAvatar)
         return false
     }
@@ -400,20 +429,33 @@ async function drainQueuedAvatarSwitch() {
 async function loadAvatar(avatarFile) {
     const nextAvatar = avatarFile || "Chidvi.vrm"
     const requestSerial = ++avatarLoadSerial
+    lastAvatarSwitchStatus = "requested"
+    lastAvatarSwitchError = null
     logAvatar("Avatar switch requested", "START", `${nextAvatar}; request=${requestSerial}`)
+
+    if (nextAvatar === currentAvatarFile && currentVRM && !avatarSwitchInProgress) {
+        lastAvatarSwitchStatus = "ready"
+        logAvatar("Avatar switch requested", "SKIPPED", `${nextAvatar} already active`)
+        logAvatar("Avatar Ready", "OK", nextAvatar)
+        return true
+    }
 
     if (avatarSwitchInProgress) {
         queuedAvatarFile = nextAvatar
+        lastAvatarSwitchStatus = "queued"
         logAvatar("Avatar switch queued", "OK", nextAvatar)
         return false
     }
 
     avatarSwitchInProgress = true
+    lastAvatarSwitchStatus = "switching"
 
     try {
         return await switchAvatarNow(nextAvatar, requestSerial)
     } catch (error) {
-        console.error(`[AVATAR] Unhandled avatar switch error -> ERROR: ${nextAvatar}`, error)
+        lastAvatarSwitchStatus = "failed"
+        lastAvatarSwitchError = formatAvatarError(error)
+        console.error(`[VRM] Unhandled avatar switch error -> ERROR: ${nextAvatar}`, lastAvatarSwitchError)
         return false
     } finally {
         resumeAvatarRuntime()
@@ -426,9 +468,12 @@ window.loadAvatar = loadAvatar
 window.avatarDiagnostics = () => ({
     currentAvatarFile,
     hasActiveVRM: Boolean(currentVRM),
+    hasMixer: Boolean(currentMixer),
     avatarSwitchInProgress,
     queuedAvatarFile,
     avatarUpdatePaused,
+    lastAvatarSwitchStatus,
+    lastAvatarSwitchError,
     sceneChildren: scene.children.length,
     emotion: avatarEmotion,
     activeAction,
@@ -449,6 +494,9 @@ function animate() {
         const vrm = currentVRM
 
         vrm.update(delta);
+        if (currentMixer) {
+            currentMixer.update(delta)
+        }
 
         const t = clock.elapsedTime;
         const expressionManager = vrm.expressionManager

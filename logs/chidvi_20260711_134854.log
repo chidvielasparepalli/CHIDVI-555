@@ -1,0 +1,20 @@
+[2026-07-11 13:48:59] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-11 13:48:59] INFO     ui.runtime:1312: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-11 13:49:00] INFO     commands.router:70: Command router initialized
+[2026-07-11 13:49:00] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-11 13:49:00] INFO     ui.runtime:1312: SYS: Renderer page load started.
+[2026-07-11 13:49:01] INFO     ui.runtime:1312: SYS: Renderer page load finished -> True.
+[2026-07-11 13:49:01] INFO     ui.runtime:1312: SYS: JARVIS online.
+[2026-07-11 13:49:15] INFO     ui.runtime:1312: You: ఏం చే సి ంది చె ప్పి ంది
+[2026-07-11 13:49:18] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-11 13:49:20] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-11 13:49:25] INFO     ui.runtime:1312: You: ఏం చే యించ ే సి నా కూడా ఇస్తది అది.
+[2026-07-11 13:49:25] INFO     ui.runtime:1312: Jarvis: నేను చాలా పనులు చేయగలను, చిద్వి. మీ డెస్క్‌టాప్‌ను నియంత్రించడం, ఫైళ్లను నిర్వహించడం, వెబ్‌లో శోధించడం, రిమైండర్‌లను సెట్ చేయడం, కోడ్ రాయడం వంటివి అన్నీ చేయగలను. మీరు ఏమి చేయాలనుకుంటున్నారు?
+[2026-07-11 13:49:33] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 13:49:37] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-11 13:49:38] INFO     ui.runtime:1312: You: చూస్తున్నావ
+[2026-07-11 13:49:38] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 13:49:49] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-11 13:49:49] INFO     ui.runtime:1312: [Computer] type
+[2026-07-11 13:49:49] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-11 13:49:49] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (1 sub-exception))

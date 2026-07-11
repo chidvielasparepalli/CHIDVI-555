@@ -1,0 +1,23 @@
+[2026-07-10 10:15:26] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-10 10:15:31] INFO     commands.router:70: Command router initialized
+[2026-07-10 10:15:31] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-10 10:15:43] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-10 10:15:43] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:15:47] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-10 10:16:04] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:16:10] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-10 10:17:31] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:17:40] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-10 10:18:20] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:18:21] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-10 10:18:26] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:18:31] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-10 10:18:31] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:18:31] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-10 10:18:32] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:18:38] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-10 10:18:40] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:18:45] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-10 10:19:34] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-10 10:19:35] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-10 10:19:36] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (1 sub-exception))

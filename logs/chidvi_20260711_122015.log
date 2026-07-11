@@ -1,0 +1,11 @@
+[2026-07-11 12:20:22] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-11 12:20:23] INFO     commands.router:70: Command router initialized
+[2026-07-11 12:20:23] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-11 12:21:14] INFO     commands.router:310: Handling local command: personality - switch to hinata
+[2026-07-11 12:21:14] INFO     __main__:605: [PERSONALITY] Switch requested -> HINATA
+[2026-07-11 12:21:14] INFO     __main__:608: [PERSONALITY] Activating profile -> HINATA
+[2026-07-11 12:21:14] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-11 12:21:14] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-11 12:21:14] INFO     __main__:613: [PERSONALITY] Profile activation result -> True
+[2026-07-11 12:21:14] INFO     __main__:628: [PERSONALITY] Loading profile assets -> prompt=OK voice=Aoede theme=HINATA avatar=Hinata.vrm
+[2026-07-11 12:21:14] INFO     __main__:636: [PERSONALITY] Runtime state saved -> HINATA / Hinata.vrm

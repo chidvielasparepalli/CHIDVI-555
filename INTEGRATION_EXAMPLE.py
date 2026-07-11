@@ -17,7 +17,7 @@ from core.personality_manager import get_personality_manager, PersonalityID
 from core.session_manager import get_session_manager
 from api.key_pool import get_api_key_pool, get_next_api_key
 from commands.router import get_command_router, CommandType
-from avatar.animation_engine import get_animation_controller
+from assets.avatar.animation_engine import get_animation_controller
 
 logger = get_logger(__name__)
 

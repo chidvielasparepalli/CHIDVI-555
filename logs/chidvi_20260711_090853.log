@@ -1,0 +1,1110 @@
+[2026-07-11 09:08:56] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-11 09:08:56] INFO     commands.router:70: Command router initialized
+[2026-07-11 09:08:56] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-11 09:10:05] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'c\x008\x01\...v\x03\xcd\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'c\x008\x01\...v\x03\xcd\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:05] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xa2\x01\x0...1\xfd\x80\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xa2\x01\x0...1\xfd\x80\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:05] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xca\xfd2\x...\x84\x01M\x02', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xca\xfd2\x...\x84\x01M\x02', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:05] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'B\x014\xff\...0\x00\x93\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'B\x014\xff\...0\x00\x93\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:05] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'H\xff\x18\x...a\x03\x94\x02', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'H\xff\x18\x...a\x03\x94\x02', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:05] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'u\x02\x9d\x...\xe0\x01s\x05', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'u\x02\x9d\x...\xe0\x01s\x05', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:05] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\n\x05\xd9\...1\xfc\xf8\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\n\x05\xd9\...1\xfc\xf8\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:05] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xfc\xfc8\x...xfcB\xfeD\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xfc\xfc8\x...xfcB\xfeD\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'R\x01\xf9\x...<\xff\xcf\xfb', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'R\x01\xf9\x...<\xff\xcf\xfb', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'Q\xfc\xb0\x...d\xff\x96\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'Q\xfc\xb0\x...d\xff\x96\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x97\x00g\x...6\x00\x8c\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x97\x00g\x...6\x00\x8c\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xef\xfeh\x...m\x02\xe8\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xef\xfeh\x...m\x02\xe8\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xd9\xfd~\x...c\x01\x89\x04', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xd9\xfd~\x...c\x01\x89\x04', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xe0\x02z\x...2\xff\xf1\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xe0\x02z\x...2\xff\xf1\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x97\x01\xb...9\x05\x18\x05', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x97\x01\xb...9\x05\x18\x05', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'h\x05N\x05\...\xb2\xfdm\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'h\x05N\x05\...\xb2\xfdm\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xc7\xfd\x1...6\xfc\x13\xfb', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xc7\xfd\x1...6\xfc\x13\xfb', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x96\xfb\x1...xad\xf7\n\xf7', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x96\xfb\x1...xad\xf7\n\xf7', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'R\xf6\xfe\x...x9e\x08\xef\t', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'R\xf6\xfe\x...x9e\x08\xef\t', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x8e\n\xfe\...3\xf5\xf1\xf4', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x8e\n\xfe\...3\xf5\xf1\xf4', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b"{\xf3W\xf1\...x01E\x02:\x03", 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b"{\xf3W\xf1\...x01E\x02:\x03", 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xe4\x02\x1...e\xfd\xee\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xe4\x02\x1...e\xfd\xee\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:06] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'y\xfc\xeb\x...E\x02\xde\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'y\xfc\xeb\x...E\x02\xde\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b')\x02\xbf\x...\x17\xfc/\xfa', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b')\x02\xbf\x...\x17\xfc/\xfa', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xac\xf8\xa...x05F\x06V\x07', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xac\xf8\xa...x05F\x06V\x07', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x04\x07\xa...8\x01\x0c\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x04\x07\xa...8\x01\x0c\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x8b\xfe\x9...z\xfa\x14\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x8b\xfe\x9...z\xfa\x14\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'7\x01\x9f\x...\xc0\xfcc\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'7\x01\x9f\x...\xc0\xfcc\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xe3\xff\x0...\x88\xfer\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xe3\xff\x0...\x88\xfer\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x0c\x02\x0...\x11\x04.\x02', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x0c\x02\x0...\x11\x04.\x02', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'C\x00%\xff$...*\xfd\xd8\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'C\x00%\xff$...*\xfd\xd8\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x18\xfe\xb...7\xff\x90\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x18\xfe\xb...7\xff\x90\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x94\xfd\xb...0\x00\x07\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x94\xfd\xb...0\x00\x07\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xf6\x03F\x...\x8d\x04n\x05', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xf6\x03F\x...\x8d\x04n\x05', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'J\x05\xc7\x...f\x00\xfa\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'J\x05\xc7\x...f\x00\xfa\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'B\xfe\t\xfc...d\x00\xbe\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'B\xfe\t\xfc...d\x00\xbe\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x83\x00\xa...x00`\xfej\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x83\x00\xa...x00`\xfej\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xef\xfa\xd...8\x01\xcf\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xef\xfa\xd...8\x01\xcf\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:07] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b's\x00\x1d\x...\x95\x00Z\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b's\x00\x1d\x...\x95\x00Z\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'-\x03\xff\x...8\x00\xf2\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'-\x03\xff\x...8\x00\xf2\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x84\x00\xe...\xdb\xfdb\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x84\x00\xe...\xdb\xfdb\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'`\xfe\xbd\x...\xe7\x01P\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'`\xfe\xbd\x...\xe7\x01P\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xb9\x01\xc...\x88\x003\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xb9\x01\xc...\x88\x003\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'U\x01\xb9\x...xff+\x00S\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'U\x01\xb9\x...xff+\x00S\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xbf\x00\xc...6\x03\xe4\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xbf\x00\xc...6\x03\xe4\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xe3\x02\x9...f\x00\x8b\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xe3\x02\x9...f\x00\x8b\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x84\x000\x...9\x00\xb8\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x84\x000\x...9\x00\xb8\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xc5\xff\xc...r\xfe\x00\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xc5\xff\xc...r\xfe\x00\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x11\xff\xe...b\x07\xee\x05', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x11\xff\xe...b\x07\xee\x05', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'N\x03v\x03\...\x04\x01+\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'N\x03v\x03\...\x04\x01+\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'W\xf7\xc6\x...f\xfc\xd4\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'W\xf7\xc6\x...f\xfc\xd4\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xd5\xfd8\x...3\xff\xdf\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xd5\xfd8\x...3\xff\xdf\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xfb\x01\xa...x04^\x05L\x05', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xfb\x01\xa...x04^\x05L\x05', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'r\x04\x8c\x...x03V\x010\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'r\x04\x8c\x...x03V\x010\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:08] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'T\xff\xbe\x...O\x00\x97\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'T\xff\xbe\x...O\x00\x97\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x15\xfd\x9...xf8]\xf86\xf9', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x15\xfd\x9...xf8]\xf86\xf9', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x0c\xfb_\x...6\x02\xc1\x04', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x0c\xfb_\x...6\x02\xc1\x04', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'v\x05\xc5\x...6\x00\x9f\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'v\x05\xc5\x...6\x00\x9f\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'R\x01E\x01\...0\xfd\xe5\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'R\x01E\x01\...0\xfd\xe5\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xe3\xfe\xd...x00E\x02 \x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xe3\xfe\xd...x00E\x02 \x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x84\x02\x0...>\xff\x1a\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x84\x02\x0...>\xff\x1a\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'9\xff\xd0\x...e\xff\x0f\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'9\xff\xd0\x...e\xff\x0f\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'O\xfd\x17\x...01\'\x01<\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'O\xfd\x17\x...01\'\x01<\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b':\x01W\x02k...a\x03\xa7\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b':\x01W\x02k...a\x03\xa7\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'h\x03\xd3\x...b\xff\x1b\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'h\x03\xd3\x...b\xff\x1b\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b']\xfdk\xfd\...\\x02\xdc\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b']\xfdk\xfd\...\\x02\xdc\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'4\x00\xa8\x...k\x00\xb4\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'4\x00\xa8\x...k\x00\xb4\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xf2\xff\xd...\xdc\xfcK\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xf2\xff\xd...\xdc\xfcK\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b"\xf8\xfc\xe...xffG\xfeR\xfe", 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b"\xf8\xfc\xe...xffG\xfeR\xfe", 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:09] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x83\xff\xa...\x80\xfdF\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x83\xff\xa...\x80\xfdF\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xa6\xfc\xe...\xa8\x000\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xa6\xfc\xe...\xa8\x000\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xda\x00n\x...3\x03\xd7\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xda\x00n\x...3\x03\xd7\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xd3\x02\x8...xffy\xfd:\xfb', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xd3\x02\x8...xffy\xfd:\xfb', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'$\xf9/\xf8\...}\xf8\x11\xf8', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'$\xf9/\xf8\...}\xf8\x11\xf8', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xc9\xf9\xb....\xfe\xc3\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xc9\xf9\xb....\xfe\xc3\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b']\xffz\x00L...2\x04\xa0\x05', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b']\xffz\x00L...2\x04\xa0\x05', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x05\x04\x1...6\x02\xb0\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x05\x04\x1...6\x02\xb0\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xa3\x01x\x...w\xff\xe4\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xa3\x01x\x...w\xff\xe4\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xf1\xfdf\x...4\xff\xe6\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xf1\xfdf\x...4\xff\xe6\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xed\xfe\xd...3\x01\xdb\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xed\xfe\xd...3\x01\xdb\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'F\x012\x01\...9\xfe\xe4\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'F\x012\x01\...9\xfe\xe4\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xce\x002\x...X\xfc\xb9\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xce\x002\x...X\xfc\xb9\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xd9\xfc\x9...b\x00\x17\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xd9\xfc\x9...b\x00\x17\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xa0\xff\xf...\xfd\x025\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xa0\xff\xf...\xfd\x025\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x1a\x02v\x...d\xfd\x86\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x1a\x02v\x...d\xfd\x86\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:10] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'4\xfe\x18\x...6\x00\xcd\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'4\xfe\x18\x...6\x00\xcd\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xb2\x00\xc...x01_\x01?\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xb2\x00\xc...x01_\x01?\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'u\xfe4\xff\...5\xf7\xaf\xf7', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'u\xfe4\xff\...5\xf7\xaf\xf7', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xd0\xf9\xb...x04<\x04)\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xd0\xf9\xb...x04<\x04)\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'g\x02b\x02w...6\x02\xb2\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'g\x02b\x02w...6\x02\xb2\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'T\x01\xd7\x...f\x03\xb4\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'T\x01\xd7\x...f\x03\xb4\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xc2\xfc\x9...-\xfd\xf8\xf9', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xc2\xfc\x9...-\xfd\xf8\xf9', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xbc\xfbN\x...xa0\xf7\r\xf5', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xbc\xfbN\x...xa0\xf7\r\xf5', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xb6\xf5@\x...k\x01\xcc\x02', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xb6\xf5@\x...k\x01\xcc\x02', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xb5\x04C\x...?\x01\xce\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xb5\x04C\x...?\x01\xce\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x93\x02\x9...b\xfd\xd6\xfb', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x93\x02\x9...b\xfd\xd6\xfb', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xaf\xfa\xa...x04|\x01K\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xaf\xfa\xa...x04|\x01K\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xf7\xfe^\x...b\xfb\xdb\xfa', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xf7\xfe^\x...b\xfb\xdb\xfa', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xc5\xfb\x1...xfeo\x00G\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xc5\xfb\x1...xfeo\x00G\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\n\xff=\xff...x00?\x019\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\n\xff=\xff...x00?\x019\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x07\x04D\x...\x9d\x05@\x04', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x07\x04D\x...\x9d\x05@\x04', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:11] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x13\x02\x8...z\xff\x8f\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x13\x02\x8...z\xff\x8f\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'W\xfbv\xfb\...7\x02\xbc\x02', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'W\xfbv\xfb\...7\x02\xbc\x02', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xdc\x02k\x...\xbe\x00|\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xdc\x02k\x...\xbe\x00|\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'2\x02\x00\x...1\xfd\xf3\xfc', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'2\x02\x00\x...1\xfd\xf3\xfc', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'M\xfb\x9d\x...\xdd\x00c\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'M\xfb\x9d\x...\xdd\x00c\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x83\x02g\x...f\xfe\xca\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x83\x02g\x...f\xfe\xca\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xb4\xfd\xc...e\xfe\xca\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xb4\xfd\xc...e\xfe\xca\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x9c\xffU\x...~\xfe\x02\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x9c\xffU\x...~\xfe\x02\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x0f\x00\xf...d\x01\xc4\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x0f\x00\xf...d\x01\xc4\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xe8\x01\x8...\xa8\xfaN\xfa', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xe8\x01\x8...\xa8\xfaN\xfa', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xae\xf9\x0...\xd2\xfe^\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xae\xf9\x0...\xd2\xfe^\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xbd\xff\xf...j\x00\xcf\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xbd\xff\xf...j\x00\xcf\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xd3\x00^\x...9\xff\xd4\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xd3\x00^\x...9\xff\xd4\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xbd\xffK\x...xba\xff\\\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xbd\xffK\x...xba\xff\\\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b']\xff{\xff\...M\xfc\xf2\xfb', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b']\xff{\xff\...M\xfc\xf2\xfb', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:12] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b't\xfb\xae\x...\xd1\xfdM\xfd', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b't\xfb\xae\x...\xd1\xfdM\xfd', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xa0\xfd\x1...a\x00\x8f\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xa0\xfd\x1...a\x00\x8f\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'$\x00\x81\x....\x00\xbd\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'$\x00\x81\x....\x00\xbd\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'7\x02~\x01\...q\xff\x9b\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'7\x02~\x01\...q\xff\x9b\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x08\xfe\xc...\xd1\x011\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x08\xfe\xc...\xd1\x011\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x1c\x05\x1...+\x03\xa5\x03', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x1c\x05\x1...+\x03\xa5\x03', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\t\x03\x1d\...3\xff\x06\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\t\x03\x1d\...3\xff\x06\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x91\x00;\x...x03K\x05M\x05', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x91\x00;\x...x03K\x05M\x05', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'F\x03\xb5\x...7\x02\xe8\x04', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'F\x03\xb5\x...7\x02\xe8\x04', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x15\x05\xa...e\xfe\x8a\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x15\x05\xa...e\xfe\x8a\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b':\xff+\x00\...*\xfe\x89\xfb', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b':\xff+\x00\...*\xfe\x89\xfb', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xfe\xfa!\x...$\x02\xc2\x02', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xfe\xfa!\x...$\x02\xc2\x02', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b"?\x049\x03W...\x8c\xfcl\xfd", 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b"?\x049\x03W...\x8c\xfcl\xfd", 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xc2\xfdu\x...\xe9\x01{\x02', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xc2\xfdu\x...\xe9\x01{\x02', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'?\x03 \x03o...r\x04\x9d\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'?\x03 \x03o...r\x04\x9d\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'#\xfe\xaf\x...b\xff\x03\xfe', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'#\xfe\xaf\x...b\xff\x03\xfe', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:13] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xf8\xfc\x1...\xa6\xfdN\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xf8\xfc\x1...\xa6\xfdN\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:14] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\xcd\x00\xd...0\xfe\xc5\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\xcd\x00\xd...0\xfe\xc5\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:14] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x14\xfe\x9...\x84\xffw\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x14\xfe\x9...\x84\xffw\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:14] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'3\x01f\x00\...3\xff\x85\x00', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'3\x01f\x00\...3\xff\x85\x00', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:14] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'x\x02\xd5\x...4\x04\xf2\x01', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'x\x02\xd5\x...4\x04\xf2\x01', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:14] ERROR    asyncio:1833: Exception in callback Queue.put_nowait({'data': b'\x9b\x01\xe...xfcW\xfeX\xff', 'mime_type': 'audio/pcm'})
+handle: <Handle Queue.put_nowait({'data': b'\x9b\x01\xe...xfcW\xfeX\xff', 'mime_type': 'audio/pcm'})>
+Traceback (most recent call last):
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\chidv\AppData\Local\Programs\Python\Python312\Lib\asyncio\queues.py", line 143, in put_nowait
+    raise QueueFull
+asyncio.queues.QueueFull
+[2026-07-11 09:10:14] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (2 sub-exceptions))
+[2026-07-11 09:10:27] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6J... (timed out during opening handshake)
+[2026-07-11 09:10:32] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6L... (Multiple exceptions: [WinError 1236] The network connection was aborted by the local system, [WinError 1232] The network location cannot be reached. For information about network troubleshooting, see Windows Help, [WinError 1232] The network location cannot be reached. For information about network troubleshooting, see Windows Help, [WinError 1232] The network location cannot be reached. For information about network troubleshooting, see Windows Help, [WinError 1232] The network location cannot be reached. For information about network troubleshooting, see Windows Help, [WinError 1232] The network location cannot be reached. For information about network troubleshooting, see Windows Help, [WinError 1232] The network location cannot be reached. For information about network troubleshooting, see Windows Help, [WinError 1232] The network location cannot be reached. For information about network troubleshooting, see Windows Help)

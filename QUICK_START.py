@@ -298,7 +298,7 @@ OLD:
 NEW:
 """
 
-from avatar.animation_engine import (
+from assets.avatar.animation_engine import (
     get_animation_controller,
     set_avatar_state,
     set_avatar_emotion,
