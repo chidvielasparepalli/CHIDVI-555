@@ -1,0 +1,595 @@
+import * as THREE from 'three'
+
+/**
+ * AnimationManager
+ * ----------------
+ * Loads, caches, blends, and plays Mixamo FBX animations on the
+ * currently active VRM. Supports cross-fading, queueing, and an
+ * automatic return-to-idle loop.
+ *
+ * Design notes:
+ * - No side effects on import. Call createAnimationManager(loader) to build one.
+ * - Owns no mixer. The renderer binds the current mixer via bindMixer()
+ *   after every avatar load/switch so clips always target the live skeleton.
+ * - Mixamo FBX clips use generic bone names ("mixamorigHips", ...). They still
+ *   play through THREE.AnimationMixer on the VRM scene root; humanoid-normalized
+ *   bones are driven by track names that match the skeleton hierarchy. We use
+ *   retargetSwitches so clips bind to the VRM scene object graph.
+ * - Procedural bone animation in main.js must back off whenever an FBX clip is
+ *   active. Use isFBXActive() to gate it.
+ */
+
+// ---------------------------------------------------------------------------
+// Animation registry
+// Semantic name -> file URL under /public/animations/
+// ---------------------------------------------------------------------------
+const ANIMATION_MAP = {
+    // Idle loops
+    idle:           '/animations/idle.fbx',
+    breathing_idle: '/animations/breathing_idle.fbx',
+    sad_idle:       '/animations/sad_idle.fbx',
+    // Greetings / one-shot gestures
+    wave:           '/animations/wave.fbx',
+    wave2:          '/animations/wave2.fbx',
+    bow:            '/animations/bow.fbx',
+    clap:           '/animations/clap.fbx',
+    nod:            '/animations/nod.fbx',
+    shake_head:     '/animations/shake_head.fbx',
+    shrug:          '/animations/shrug.fbx',
+    salute:         '/animations/salute.fbx',
+    jump:           '/animations/jump.fbx',
+    blow_kiss:      '/animations/blow_kiss.fbx',
+    blow_kiss2:     '/animations/blow_kiss2.fbx',
+    // Emotions
+    happy:          '/animations/happy.fbx',
+    laughing:       '/animations/laughing.fbx',
+    angry:          '/animations/angry.fbx',
+    bashful:        '/animations/bashful.fbx',
+    cheer:          '/animations/cheer.fbx',
+    yell:           '/animations/yell.fbx',
+    thinking:       '/animations/thinking.fbx',
+    // Talking variants
+    talking:        '/animations/talking.fbx',
+    talking2:       '/animations/talking2.fbx',
+    secret:         '/animations/secret.fbx',
+    pointing:       '/animations/pointing.fbx',
+}
+
+// ---------------------------------------------------------------------------
+// Phase 3: runtime state -> animation name
+// ---------------------------------------------------------------------------
+const STATE_ANIMATIONS = {
+    listening:   'breathing_idle',
+    thinking:    'thinking',
+    speaking:    'talking',
+    idle:        'idle',
+}
+
+// ---------------------------------------------------------------------------
+// Phase 5: emotion -> animation name
+// ---------------------------------------------------------------------------
+const EMOTION_ANIMATIONS = {
+    happy:       'happy',
+    sad:         'sad_idle',
+    thinking:    'thinking',
+    excited:     'cheer',
+    embarrassed: 'bashful',
+    angry:       'angry',
+    laughing:    'laughing',
+}
+
+const DEFAULT_CROSS_FADE = 0.35   // seconds
+const DEFAULT_IDLE = 'idle'
+const EPSILON = 0.0001
+
+/**
+ * Build an AnimationManager bound to a THREE.FBXLoader instance.
+ *
+ * @param {THREE.FBXLoader} loader
+ * @returns {object} AnimationManager API
+ */
+export function createAnimationManager(loader) {
+    // --- state -------------------------------------------------------------
+    // URL -> THREE.AnimationGroup-like object (the FBX root scene with .animations)
+    const clipCache = new Map()      // url -> AnimationClip[]
+    const actionCache = new Map()    // clip.uuid -> AnimationAction (per mixer lifecycle)
+    let mixer = null
+    let currentAction = null         // currently playing non-idle action (or null)
+    let idleAction = null            // looping idle action (always alive while bound)
+    let idleName = DEFAULT_IDLE
+    let currentState = 'idle'
+    let queue = []
+    let pendingFade = null           // { from, to, t, duration, onDone }
+    let fbxActive = false            // true while an FBX clip drives the skeleton
+    let crossFadeDuration = DEFAULT_CROSS_FADE
+    let debug = false
+
+    // Active action metadata so the renderer/procedural layer can introspect.
+    let activeName = null
+
+    // -------------------------------------------------------------------------
+    // Internal helpers
+    // -------------------------------------------------------------------------
+
+    function log(...args) {
+        if (debug) console.info('[AnimManager]', ...args)
+    }
+
+    function warn(...args) {
+        console.warn('[AnimManager]', ...args)
+    }
+
+    function urlFor(name) {
+        return ANIMATION_MAP[name] || null
+    }
+
+    /**
+     * Load (and cache) the AnimationClip[] for a semantic animation name.
+     * Mixamo FBX files expose their clip on result.animations.
+     */
+    async function loadClips(name) {
+        const url = urlFor(name)
+        if (!url) {
+            warn(`Unknown animation name: ${name}`)
+            return null
+        }
+        if (clipCache.has(url)) {
+            return clipCache.get(url)
+        }
+        try {
+            const result = await loader.loadAsync(url)
+            const clips = result.animations || []
+            if (clips.length === 0) {
+                warn(`No animations found in ${url}`)
+                return null
+            }
+            clipCache.set(url, clips)
+            log(`Loaded ${name} (${clips.length} clip(s)) from ${url}`)
+            return clips
+        } catch (err) {
+            warn(`Failed to load animation ${name} (${url}):`, err?.message || err)
+            return null
+        }
+    }
+
+    /**
+     * Create or fetch a cached AnimationAction for a clip on the current mixer.
+     */
+    function actionFor(clip) {
+        if (!mixer) return null
+        const key = clip.uuid
+        if (actionCache.has(key)) {
+            return actionCache.get(key)
+        }
+        const action = mixer.clipAction(clip)
+        actionCache.set(key, action)
+        return action
+    }
+
+    /**
+     * Stop and forget a single action (fade out gracefully if requested).
+     */
+    function stopAction(action, fadeSeconds = 0) {
+        if (!action) return
+        if (fadeSeconds > 0) {
+            action.fadeOut(fadeSeconds)
+        } else {
+            action.stop()
+        }
+    }
+
+    /**
+     * Begin a managed cross-fade between two actions.
+     * Weights are driven here each frame via update().
+     */
+    function startCrossFade(fromAction, toAction, duration, onDone) {
+        if (!toAction) {
+            if (onDone) onDone()
+            return
+        }
+        toAction.reset()
+        toAction.setEffectiveWeight(0)
+        toAction.setEnabled(true)
+        toAction.play()
+
+        pendingFade = {
+            from: fromAction,
+            to: toAction,
+            t: 0,
+            duration: Math.max(EPSILON, duration),
+            onDone: onDone || null,
+        }
+
+        if (fromAction) {
+            // three's built-in crossFadeTo also works, but managing weights
+            // ourselves lets us keep the idle action alive underneath.
+        }
+    }
+
+    /**
+     * Advance the active cross-fade. Called every frame from update().
+     */
+    function tickCrossFade(delta) {
+        if (!pendingFade) return
+        pendingFade.t += delta
+        const k = Math.min(1, pendingFade.t / pendingFade.duration)
+
+        if (pendingFade.from) {
+            pendingFade.from.setEffectiveWeight(1 - k)
+        }
+        if (pendingFade.to) {
+            pendingFade.to.setEffectiveWeight(k)
+        }
+
+        if (k >= 1) {
+            if (pendingFade.from) {
+                pendingFade.from.stop()
+                pendingFade.from.setEffectiveWeight(1)
+            }
+            const done = pendingFade.onDone
+            pendingFade = null
+            if (done) done()
+        }
+    }
+
+    /**
+     * Mark the manager as driving the skeleton (so procedural pose backs off),
+     * or not (so procedural idle can resume).
+     */
+    function setFBXActive(value) {
+        fbxActive = value
+    }
+
+    /**
+     * Play the idle loop (looping). If a non-idle action is currently active
+     * it is left alone; idle is faded in underneath so it is ready when the
+     * one-shot ends.
+     */
+    function ensureIdle() {
+        if (!mixer) return null
+        if (idleAction) {
+            // Already created for this mixer lifecycle.
+            return idleAction
+        }
+        // Async: load if needed, then start looping.
+        loadClips(idleName).then((clips) => {
+            if (!clips || !mixer || idleAction) return
+            const action = actionFor(clips[0])
+            if (!action) return
+            action.setLoop(THREE.LoopRepeat, Infinity)
+            action.clampWhenFinished = false
+            action.setEffectiveWeight(currentAction ? 0 : 1)
+            action.setEnabled(true)
+            action.play()
+            idleAction = action
+            log(`Idle loop started: ${idleName}`)
+        })
+        return null
+    }
+
+    /**
+     * Called when a non-idle action finishes (one-shot gesture/emotion).
+     * Drains the queue, otherwise returns to idle.
+     */
+    function onActionFinished() {
+        log(`Action finished: ${activeName}`)
+        const finishedAction = currentAction
+        currentAction = null
+        activeName = null
+
+        if (queue.length > 0) {
+            const next = queue.shift()
+            log(`Queue -> playing next: ${next}`)
+            playOneShot(next, null)
+            return
+        }
+
+        // Return to idle: fade idle weight back up, fade out the finished clip.
+        if (idleAction && finishedAction) {
+            startCrossFade(finishedAction, idleAction, crossFadeDuration, () => {
+                setFBXActive(false)
+                // idle is now the only thing driving bones -> procedural resumes.
+            })
+        } else if (idleAction) {
+            idleAction.setEffectiveWeight(1)
+            setFBXActive(false)
+        } else {
+            setFBXActive(false)
+            ensureIdle()
+        }
+    }
+
+    /**
+     * Play a one-shot (non-looping) animation, cross-fading from whatever is
+     * currently driving the skeleton.
+     */
+    function playOneShot(name, afterPlay) {
+        loadClips(name).then((clips) => {
+            if (!clips || !mixer) {
+                warn(`Cannot play ${name}: no clips or no mixer`)
+                return
+            }
+            const clip = clips[0]
+            const next = actionFor(clip)
+            if (!next) return
+
+            next.setLoop(THREE.LoopOnce, 1)
+            next.clampWhenFinished = true
+            next.time = 0
+
+            // Clear any stale 'finished' listener from a prior action.
+            mixer.removeEventListener('finished', finishedHandler)
+            finishedHandler = (event) => {
+                if (event.action === next) {
+                    onActionFinished()
+                    if (afterPlay) afterPlay()
+                }
+            }
+            mixer.addEventListener('finished', finishedHandler)
+
+            const from = currentAction || idleAction
+            startCrossFade(from, next, crossFadeDuration, () => {
+                currentAction = next
+                activeName = name
+                setFBXActive(true)
+                log(`Playing: ${name}`)
+            })
+        })
+    }
+
+    // Holder for the current mixer 'finished' listener so we can swap it.
+    let finishedHandler = null
+
+    // -------------------------------------------------------------------------
+    // Public API
+    // -------------------------------------------------------------------------
+
+    const api = {
+        /**
+         * Attach to the renderer's current AnimationMixer. Called after every
+         * avatar load/switch. Resets per-mixer caches.
+         */
+        bindMixer(newMixer) {
+            if (mixer === newMixer) return
+            if (finishedHandler && mixer) {
+                mixer.removeEventListener('finished', finishedHandler)
+            }
+            mixer = newMixer
+            actionCache.clear()
+            currentAction = null
+            idleAction = null
+            activeName = null
+            pendingFade = null
+            setFBXActive(false)
+            log(`Mixer bound: ${mixer ? 'yes' : 'no'}`)
+        },
+
+        /**
+         * Preload a list of semantic animation names (or raw URLs).
+         */
+        async preload(names) {
+            const list = Array.isArray(names) ? names : [names]
+            await Promise.all(
+                list.map(async (entry) => {
+                    const name = entryToName(entry)
+                    if (name) await loadClips(name)
+                })
+            )
+        },
+
+        /**
+         * Start (or restart) the idle loop. Optionally change which animation
+         * is used as the idle.
+         */
+        playIdle(name) {
+            if (name) {
+                idleName = name
+            }
+            currentState = 'idle'
+            ensureIdle()
+        },
+
+        /**
+         * Play a named animation with options.
+         * @param {string} name semantic animation name
+         * @param {object} [options]
+         *   - loop: boolean (default false)
+         *   - crossFadeDuration: number (seconds)
+         *   - afterPlay: function called when a non-loop finishes
+         */
+        play(name, options = {}) {
+            if (options.crossFadeDuration != null) {
+                crossFadeDuration = options.crossFadeDuration
+            }
+            if (options.loop) {
+                playLooping(name)
+            } else {
+                playOneShot(name, options.afterPlay || null)
+            }
+        },
+
+        /**
+         * Play a one-shot gesture then return to idle. Convenience wrapper.
+         */
+        playGesture(name, afterPlay) {
+            playOneShot(name, afterPlay || null)
+        },
+
+        /**
+         * Add an animation to the playback queue. Played when the current
+         * one-shot finishes.
+         */
+        queueAnimation(name) {
+            queue.push(name)
+            log(`Queued: ${name} (queue len=${queue.length})`)
+        },
+
+        /** Empty the queue. */
+        clearQueue() {
+            queue.length = 0
+        },
+
+        /** Fade out whatever is playing and return to idle immediately. */
+        stop() {
+            queue.length = 0
+            if (currentAction) {
+                startCrossFade(currentAction, idleAction, crossFadeDuration, () => {
+                    setFBXActive(false)
+                })
+                currentAction = null
+                activeName = null
+            }
+        },
+
+        /**
+         * Phase 3 hook: called when the runtime emotion/state string changes.
+         * Maps the state to its animation and plays it. States that map to
+         * looping clips (idle/listening/speaking) play as loops; one-shot
+         * emotions fall back to play().
+         */
+        onStateChange(stateOrEmotion) {
+            const key = String(stateOrEmotion || 'idle').toLowerCase()
+
+            // Try runtime-state mapping first.
+            if (STATE_ANIMATIONS[key]) {
+                const anim = STATE_ANIMATIONS[key]
+                currentState = key
+                if (key === 'idle') {
+                    playIdle(idleName)
+                } else {
+                    // Listening / thinking / speaking are sustained loops.
+                    playLooping(anim)
+                }
+                return
+            }
+
+            // Then emotion mapping (Phase 5).
+            if (EMOTION_ANIMATIONS[key]) {
+                playOneShot(EMOTION_ANIMATIONS[key], null)
+                return
+            }
+
+            // Unknown -> idle is the safe default.
+            currentState = 'idle'
+            playIdle(idleName)
+        },
+
+        /** Per-frame update. Call from the render loop with the frame delta. */
+        update(delta) {
+            if (!mixer) return
+            tickCrossFade(delta)
+        },
+
+        /** True when an FBX clip is driving the skeleton (procedural should back off). */
+        isFBXActive() {
+            return fbxActive
+        },
+
+        /** True if the semantic name is a known animation. */
+        hasAnimation(name) {
+            return Boolean(urlFor(name))
+        },
+
+        /** Current semantic name being played (or null). */
+        getActiveName() {
+            return activeName
+        },
+
+        /** Current runtime state string. */
+        getCurrentState() {
+            return currentState
+        },
+
+        /** Enable/disable verbose console logging. */
+        setDebug(value) {
+            debug = Boolean(value)
+        },
+
+        /** Snapshot for diagnostics. */
+        getDiagnostics() {
+            return {
+                mixerBound: Boolean(mixer),
+                fbxActive,
+                activeName,
+                currentState,
+                idleName,
+                idleActionAlive: Boolean(idleAction),
+                hasCurrentAction: Boolean(currentAction),
+                queueLength: queue.length,
+                queue,
+                cachedClips: clipCache.size,
+                pendingFade: Boolean(pendingFade),
+            }
+        },
+
+        /** Tear down everything (called on VRM disposal). */
+        dispose() {
+            if (finishedHandler && mixer) {
+                mixer.removeEventListener('finished', finishedHandler)
+            }
+            finishedHandler = null
+            actionCache.forEach((action) => {
+                try { action.stop() } catch (_) { /* noop */ }
+            })
+            actionCache.clear()
+            clipCache.clear()
+            currentAction = null
+            idleAction = null
+            activeName = null
+            pendingFade = null
+            queue.length = 0
+            setFBXActive(false)
+            mixer = null
+            log('Disposed')
+        },
+    }
+
+    /**
+     * Play a looping clip (e.g. idle/listening/speaking). The idle action is
+     * faded out while a non-idle loop runs; when stopped it fades back.
+     */
+    function playLooping(name) {
+        loadClips(name).then((clips) => {
+            if (!clips || !mixer) {
+                warn(`Cannot play loop ${name}: no clips or no mixer`)
+                return
+            }
+            const clip = clips[0]
+            const next = actionFor(clip)
+            if (!next) return
+
+            next.setLoop(THREE.LoopRepeat, Infinity)
+            next.clampWhenFinished = false
+            next.time = 0
+
+            const from = currentAction || idleAction
+            startCrossFade(from, next, crossFadeDuration, () => {
+                // If this loop replaces the idle, keep idleAction reference but
+                // it remains at weight 0 underneath.
+                if (name === idleName) {
+                    idleAction = next
+                    currentAction = null
+                    activeName = null
+                    setFBXActive(false)
+                } else {
+                    currentAction = next
+                    activeName = name
+                    setFBXActive(true)
+                }
+                log(`Looping: ${name}`)
+            })
+        })
+    }
+
+    function entryToName(entry) {
+        if (!entry) return null
+        if (ANIMATION_MAP[entry]) return entry
+        // Allow passing a raw URL.
+        for (const [n, u] of Object.entries(ANIMATION_MAP)) {
+            if (u === entry) return n
+        }
+        return null
+    }
+
+    return api
+}
