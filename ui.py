@@ -1897,6 +1897,10 @@ class JarvisUI:
         self.write_log(f"SYS: Avatar action -> {action}")
         self._win._avatar_action_sig.emit(action)
 
+    def play_animation(self, name: str, options: dict = None):
+        self.write_log(f"SYS: Animation -> {name}")
+        self._win._animation_sig.emit(name, options or {})
+
     def apply_personality_profile(self, profile):
         personality = getattr(getattr(profile, "id", None), "value", None) or getattr(profile, "name", "")
         avatar = getattr(profile, "avatar_model", None)
