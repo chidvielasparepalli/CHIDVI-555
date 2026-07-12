@@ -11,10 +11,8 @@ import * as THREE from 'three'
  * - No side effects on import. Call createAnimationManager(loader) to build one.
  * - Owns no mixer. The renderer binds the current mixer via bindMixer()
  *   after every avatar load/switch so clips always target the live skeleton.
- * - Mixamo FBX clips use generic bone names ("mixamorigHips", ...). They still
- *   play through THREE.AnimationMixer on the VRM scene root; humanoid-normalized
- *   bones are driven by track names that match the skeleton hierarchy. We use
- *   retargetSwitches so clips bind to the VRM scene object graph.
+ * - Mixamo FBX clips use generic bone names ("mixamorigHips", ...). Before an
+ *   action is created, their tracks are retargeted to the active VRM raw bones.
  * - Procedural bone animation in main.js must back off whenever an FBX clip is
  *   active. Use isFBXActive() to gate it.
  */
@@ -117,6 +115,61 @@ const PRIORITY = {
     IDLE: 0
 }
 
+const MIXAMO_TO_VRM_BONE = {
+    mixamorigHips: 'hips',
+    mixamorigSpine: 'spine',
+    mixamorigSpine1: 'chest',
+    mixamorigSpine2: 'upperChest',
+    mixamorigNeck: 'neck',
+    mixamorigHead: 'head',
+    mixamorigLeftShoulder: 'leftShoulder',
+    mixamorigLeftArm: 'leftUpperArm',
+    mixamorigLeftForeArm: 'leftLowerArm',
+    mixamorigLeftHand: 'leftHand',
+    mixamorigRightShoulder: 'rightShoulder',
+    mixamorigRightArm: 'rightUpperArm',
+    mixamorigRightForeArm: 'rightLowerArm',
+    mixamorigRightHand: 'rightHand',
+    mixamorigLeftUpLeg: 'leftUpperLeg',
+    mixamorigLeftLeg: 'leftLowerLeg',
+    mixamorigLeftFoot: 'leftFoot',
+    mixamorigLeftToeBase: 'leftToes',
+    mixamorigRightUpLeg: 'rightUpperLeg',
+    mixamorigRightLeg: 'rightLowerLeg',
+    mixamorigRightFoot: 'rightFoot',
+    mixamorigRightToeBase: 'rightToes',
+    mixamorigLeftHandThumb1: 'leftThumbMetacarpal',
+    mixamorigLeftHandThumb2: 'leftThumbProximal',
+    mixamorigLeftHandThumb3: 'leftThumbDistal',
+    mixamorigLeftHandIndex1: 'leftIndexProximal',
+    mixamorigLeftHandIndex2: 'leftIndexIntermediate',
+    mixamorigLeftHandIndex3: 'leftIndexDistal',
+    mixamorigLeftHandMiddle1: 'leftMiddleProximal',
+    mixamorigLeftHandMiddle2: 'leftMiddleIntermediate',
+    mixamorigLeftHandMiddle3: 'leftMiddleDistal',
+    mixamorigLeftHandRing1: 'leftRingProximal',
+    mixamorigLeftHandRing2: 'leftRingIntermediate',
+    mixamorigLeftHandRing3: 'leftRingDistal',
+    mixamorigLeftHandPinky1: 'leftLittleProximal',
+    mixamorigLeftHandPinky2: 'leftLittleIntermediate',
+    mixamorigLeftHandPinky3: 'leftLittleDistal',
+    mixamorigRightHandThumb1: 'rightThumbMetacarpal',
+    mixamorigRightHandThumb2: 'rightThumbProximal',
+    mixamorigRightHandThumb3: 'rightThumbDistal',
+    mixamorigRightHandIndex1: 'rightIndexProximal',
+    mixamorigRightHandIndex2: 'rightIndexIntermediate',
+    mixamorigRightHandIndex3: 'rightIndexDistal',
+    mixamorigRightHandMiddle1: 'rightMiddleProximal',
+    mixamorigRightHandMiddle2: 'rightMiddleIntermediate',
+    mixamorigRightHandMiddle3: 'rightMiddleDistal',
+    mixamorigRightHandRing1: 'rightRingProximal',
+    mixamorigRightHandRing2: 'rightRingIntermediate',
+    mixamorigRightHandRing3: 'rightRingDistal',
+    mixamorigRightHandPinky1: 'rightLittleProximal',
+    mixamorigRightHandPinky2: 'rightLittleIntermediate',
+    mixamorigRightHandPinky3: 'rightLittleDistal',
+}
+
 /**
  * Build an AnimationManager bound to a THREE.FBXLoader instance.
  *
@@ -129,6 +182,8 @@ export function createAnimationManager(loader) {
     const clipCache = new Map()      // url -> AnimationClip[]
     const actionCache = new Map()    // clip.uuid -> AnimationAction (per mixer lifecycle)
     let mixer = null
+    let activeVRM = null
+    let mixerGeneration = 0
     let currentAction = null         // currently playing non-idle action (or null)
     let idleAction = null            // looping idle action (always alive while bound)
     let idleName = DEFAULT_IDLE
@@ -158,6 +213,46 @@ export function createAnimationManager(loader) {
 
     function urlFor(name) {
         return ANIMATION_MAP[name] || null
+    }
+
+    function isCurrentBinding(expectedMixer, expectedGeneration) {
+        return mixer === expectedMixer && mixerGeneration === expectedGeneration
+    }
+
+    function retargetClip(sourceClip) {
+        if (!activeVRM?.humanoid) return null
+
+        const tracks = []
+        let skippedTracks = 0
+        for (const sourceTrack of sourceClip.tracks) {
+            const propertyIndex = sourceTrack.name.lastIndexOf('.')
+            if (propertyIndex < 1) {
+                skippedTracks += 1
+                continue
+            }
+
+            const sourceBoneName = sourceTrack.name.slice(0, propertyIndex)
+            const targetBoneName = MIXAMO_TO_VRM_BONE[sourceBoneName]
+            const targetNode = targetBoneName
+                ? activeVRM.humanoid.getRawBoneNode(targetBoneName)
+                : null
+            if (!targetNode?.name) {
+                skippedTracks += 1
+                continue
+            }
+
+            const targetTrack = sourceTrack.clone()
+            targetTrack.name = `${targetNode.name}${sourceTrack.name.slice(propertyIndex)}`
+            tracks.push(targetTrack)
+        }
+
+        if (!tracks.length) {
+            warn(`Cannot retarget ${sourceClip.name}: no compatible VRM tracks`)
+            return null
+        }
+
+        log(`Retargeted ${sourceClip.name}: ${tracks.length} tracks, skipped ${skippedTracks}`)
+        return new THREE.AnimationClip(sourceClip.name, sourceClip.duration, tracks)
     }
 
     function randomItem(arr) {
@@ -202,7 +297,9 @@ export function createAnimationManager(loader) {
         if (actionCache.has(key)) {
             return actionCache.get(key)
         }
-        const action = mixer.clipAction(clip)
+        const retargetedClip = retargetClip(clip)
+        if (!retargetedClip) return null
+        const action = mixer.clipAction(retargetedClip)
         actionCache.set(key, action)
         return action
     }
@@ -230,7 +327,7 @@ export function createAnimationManager(loader) {
         }
         toAction.reset()
         toAction.setEffectiveWeight(0)
-        toAction.setEnabled(true)
+        toAction.enabled = true;
         toAction.play()
 
         pendingFade = {
@@ -293,14 +390,16 @@ export function createAnimationManager(loader) {
             return idleAction
         }
         // Async: load if needed, then start looping.
+        const expectedMixer = mixer
+        const expectedGeneration = mixerGeneration
         loadClips(idleName).then((clips) => {
-            if (!clips || !mixer || idleAction) return
+            if (!clips || !isCurrentBinding(expectedMixer, expectedGeneration) || idleAction) return
             const action = actionFor(clips[0])
             if (!action) return
             action.setLoop(THREE.LoopRepeat, Infinity)
             action.clampWhenFinished = false
             action.setEffectiveWeight(currentAction ? 0 : 1)
-            action.setEnabled(true)
+            action.enabled = true;
             action.play()
             idleAction = action
             log(`Idle loop started: ${idleName}`)
@@ -345,8 +444,10 @@ export function createAnimationManager(loader) {
      * currently driving the skeleton.
      */
     function playOneShot(name, afterPlay) {
+        const expectedMixer = mixer
+        const expectedGeneration = mixerGeneration
         loadClips(name).then((clips) => {
-            if (!clips || !mixer) {
+            if (!clips || !isCurrentBinding(expectedMixer, expectedGeneration)) {
                 warn(`Cannot play ${name}: no clips or no mixer`)
                 return
             }
@@ -390,12 +491,14 @@ export function createAnimationManager(loader) {
          * Attach to the renderer's current AnimationMixer. Called after every
          * avatar load/switch. Resets per-mixer caches.
          */
-        bindMixer(newMixer) {
-            if (mixer === newMixer) return
+        bindMixer(newMixer, newVRM) {
+            if (mixer === newMixer && activeVRM === newVRM) return
             if (finishedHandler && mixer) {
                 mixer.removeEventListener('finished', finishedHandler)
             }
             mixer = newMixer
+            activeVRM = newVRM || null
+            mixerGeneration += 1
             actionCache.clear()
             currentAction = null
             idleAction = null
@@ -500,7 +603,7 @@ export function createAnimationManager(loader) {
                 }
                 currentState = key
                 if (key === 'idle') {
-                    playIdle(idleName)
+                    api.playIdle(idleName)
                 } else {
                     // Listening / thinking / speaking are sustained loops.
                     playLooping(anim)
@@ -516,7 +619,7 @@ export function createAnimationManager(loader) {
 
             // Unknown -> idle is the safe default.
             currentState = 'idle'
-            playIdle(idleName)
+            api.playIdle(idleName)
         },
 
         /** Per-frame update. Call from the render loop with the frame delta. */
@@ -640,6 +743,8 @@ export function createAnimationManager(loader) {
             queue.length = 0
             setFBXActive(false)
             mixer = null
+            activeVRM = null
+            mixerGeneration += 1
             log('Unbound mixer (clips kept cached)')
         },
 
@@ -656,8 +761,10 @@ export function createAnimationManager(loader) {
      * faded out while a non-idle loop runs; when stopped it fades back.
      */
     function playLooping(name) {
+        const expectedMixer = mixer
+        const expectedGeneration = mixerGeneration
         loadClips(name).then((clips) => {
-            if (!clips || !mixer) {
+            if (!clips || !isCurrentBinding(expectedMixer, expectedGeneration)) {
                 warn(`Cannot play loop ${name}: no clips or no mixer`)
                 return
             }

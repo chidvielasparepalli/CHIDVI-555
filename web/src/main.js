@@ -387,7 +387,7 @@ function attachVRM(vrm, avatarFile) {
     currentAvatarFile = avatarFile
     currentMixer = new THREE.AnimationMixer(vrm.scene)
     // Bind the AnimationManager to the new mixer and start the idle loop.
-    animManager.bindMixer(currentMixer)
+    animManager.bindMixer(currentMixer, vrm)
     animManager.playIdle()
     logAvatar("Mixer created", "OK", avatarFile)
     activeAction = null
