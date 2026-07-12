@@ -507,6 +507,18 @@ window.loadAvatar = loadAvatar
 window.playAnimation = (name, options) => {
     animManager.play(name, options || {})
 }
+window.playGesture = (name, afterPlay) => {
+    animManager.playGesture(name, afterPlay)
+}
+window.playEmotion = (name, afterPlay) => {
+    animManager.playEmotion(name, afterPlay)
+}
+window.playState = (state) => {
+    animManager.playState(state)
+}
+window.setAnimationProfile = (profileName) => {
+    animManager.setProfile(profileName)
+}
 window.avatarDiagnostics = () => ({
     currentAvatarFile,
     hasActiveVRM: Boolean(currentVRM),

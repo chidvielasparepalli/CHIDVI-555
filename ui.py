@@ -1237,6 +1237,9 @@ class MainWindow(QMainWindow):
     _avatar_switch_sig = pyqtSignal(str)
     _avatar_action_sig = pyqtSignal(str)
     _animation_sig = pyqtSignal(str, dict)
+    _gesture_sig = pyqtSignal(str, object)
+    _emotion_sig = pyqtSignal(str, object)
+    _animation_profile_sig = pyqtSignal(str)
     
     def switch_theme(self, personality: str):
 
@@ -1315,6 +1318,9 @@ class MainWindow(QMainWindow):
         self._avatar_switch_sig.connect(self._request_avatar_switch)
         self._avatar_action_sig.connect(self._perform_avatar_action)
         self._animation_sig.connect(self._play_animation)
+        self._gesture_sig.connect(self._play_gesture)
+        self._emotion_sig.connect(self._play_emotion)
+        self._animation_profile_sig.connect(self._set_animation_profile)
 
         from core.personality_manager import get_personality
 
@@ -1740,6 +1746,30 @@ class MainWindow(QMainWindow):
             self.hud.page().runJavaScript(
                 f"window.playAnimation && window.playAnimation({safe_name}, {safe_opts});"
             )
+            
+    def _play_gesture(self, name: str, after_play: object = None):
+        if hasattr(self.hud, "page"):
+            safe_name = json.dumps(name)
+            self._log_sig.emit(f"[VRM] Gesture requested -> {name}")
+            self.hud.page().runJavaScript(
+                f"window.playGesture && window.playGesture({safe_name});"
+            )
+            
+    def _play_emotion(self, name: str, after_play: object = None):
+        if hasattr(self.hud, "page"):
+            safe_name = json.dumps(name)
+            self._log_sig.emit(f"[VRM] Emotion requested -> {name}")
+            self.hud.page().runJavaScript(
+                f"window.playEmotion && window.playEmotion({safe_name});"
+            )
+            
+    def _set_animation_profile(self, profile_name: str):
+        if hasattr(self.hud, "page"):
+            safe_name = json.dumps(profile_name)
+            self._log_sig.emit(f"[VRM] Animation profile requested -> {profile_name}")
+            self.hud.page().runJavaScript(
+                f"window.setAnimationProfile && window.setAnimationProfile({safe_name});"
+            )
 
     def _request_avatar_switch(self, avatar: str):
         if not hasattr(self.hud, "page"):
@@ -1900,12 +1930,25 @@ class JarvisUI:
     def play_animation(self, name: str, options: dict = None):
         self.write_log(f"SYS: Animation -> {name}")
         self._win._animation_sig.emit(name, options or {})
+        
+    def play_gesture(self, name: str, after_play: object = None):
+        self.write_log(f"SYS: Gesture -> {name}")
+        self._win._gesture_sig.emit(name, after_play)
+        
+    def play_emotion(self, name: str, after_play: object = None):
+        self.write_log(f"SYS: Emotion -> {name}")
+        self._win._emotion_sig.emit(name, after_play)
+        
+    def set_animation_profile(self, profile_name: str):
+        self.write_log(f"SYS: Animation profile -> {profile_name}")
+        self._win._animation_profile_sig.emit(profile_name)
 
     def apply_personality_profile(self, profile):
         personality = getattr(getattr(profile, "id", None), "value", None) or getattr(profile, "name", "")
         avatar = getattr(profile, "avatar_model", None)
         self.write_log(f"SYS: Applying avatar profile -> {personality} / {avatar}")
         self.switch_theme(personality, avatar_model=avatar)
+        self.set_animation_profile(personality)
 
     def switch_theme(self, personality: str, avatar_model: str | None = None):
 
