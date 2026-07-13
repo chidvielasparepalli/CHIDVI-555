@@ -91,19 +91,22 @@ function resetEmotionTargets() {
     }
 }
 
-function applyEmotionTarget(emotion) {
+function applyEmotionTarget(emotion, { animate = true } = {}) {
     avatarEmotion = String(emotion || "idle").toLowerCase()
     resetEmotionTargets()
     const values = emotionExpressions[avatarEmotion] || emotionExpressions.idle
     for (const [name, value] of Object.entries(values)) {
         setExpressionTarget(name, value)
     }
-    // Phase 3/5: drive skeleton animations from the runtime state/emotion.
-    animManager.onStateChange(avatarEmotion)
+    // Facial expressions can accompany a gesture without interrupting the
+    // gesture's Mixamo action. State changes still drive their own motion.
+    if (animate) {
+        animManager.onStateChange(avatarEmotion)
+    }
 }
 
-window.setAvatarEmotion = applyEmotionTarget
-window.setAvatarState = applyEmotionTarget
+window.setAvatarEmotion = (emotion) => applyEmotionTarget(emotion)
+window.setAvatarState = (state) => applyEmotionTarget(state)
 window.performAvatarAction = (action) => {
     const a = String(action || "").toLowerCase()
     // Prefer a real Mixamo FBX clip when one is available for this action.
@@ -111,17 +114,17 @@ window.performAvatarAction = (action) => {
         animManager.playGesture(a)
         // Keep facial expression in sync for actions that carry an emotion.
         if (a === "smile" || a === "happy") {
-            applyEmotionTarget("happy")
+            applyEmotionTarget("happy", { animate: false })
         } else if (a === "laugh" || a === "laughing") {
-            applyEmotionTarget("laughing")
+            applyEmotionTarget("laughing", { animate: false })
         } else if (a === "thinking") {
-            applyEmotionTarget("thinking")
+            applyEmotionTarget("thinking", { animate: false })
         } else if (a === "greeting" || a === "wave" || a === "salute") {
-            applyEmotionTarget("happy")
+            applyEmotionTarget("happy", { animate: false })
         } else if (a === "angry") {
-            applyEmotionTarget("angry")
+            applyEmotionTarget("angry", { animate: false })
         } else if (a === "sad") {
-            applyEmotionTarget("sad")
+            applyEmotionTarget("sad", { animate: false })
         }
         return
     }

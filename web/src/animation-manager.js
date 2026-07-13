@@ -51,6 +51,13 @@ const ANIMATION_MAP = {
     talking2:       '/animations/talking2.fbx',
     secret:         '/animations/secret.fbx',
     pointing:       '/animations/pointing.fbx',
+    // Command-router aliases. Keep semantic commands independent from FBX
+    // filenames so a UI command always selects the intended real clip.
+    point:          '/animations/pointing.fbx',
+    greeting:       '/animations/wave.fbx',
+    laugh:          '/animations/laughing.fbx',
+    sad:            '/animations/sad_idle.fbx',
+    excited:        '/animations/cheer.fbx',
 }
 
 // ---------------------------------------------------------------------------
@@ -82,8 +89,8 @@ const EPSILON = 0.0001
 
 // Phase 6: Available gestures
 const GESTURES = [
-    'wave', 'wave2', 'salute', 'bow', 'clap', 'point',
-    'shrug', 'nod', 'shake_head', 'jump'
+    'wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing',
+    'greeting', 'shrug', 'nod', 'shake_head', 'jump'
 ]
 
 // Phase 8: Personality animation profiles
@@ -198,6 +205,10 @@ export function createAnimationManager(loader) {
     let activeName = null
     let currentProfile = PERSONALITY_PROFILES.CHIDVI
     let currentPriority = PRIORITY.IDLE
+    let currentActionIsOneShot = false
+    let activeGesture = null
+    let activeEmotion = null
+    let retargetedClipCount = 0
 
     // -------------------------------------------------------------------------
     // Internal helpers
@@ -232,7 +243,14 @@ export function createAnimationManager(loader) {
             }
 
             const sourceBoneName = sourceTrack.name.slice(0, propertyIndex)
+            const propertyName = sourceTrack.name.slice(propertyIndex)
             const targetBoneName = MIXAMO_TO_VRM_BONE[sourceBoneName]
+            // Mixamo hips translation is root motion. The avatar is anchored
+            // at the scene origin, so retaining it causes walking/drifting.
+            if (targetBoneName === 'hips' && propertyName === '.position') {
+                skippedTracks += 1
+                continue
+            }
             const targetNode = targetBoneName
                 ? activeVRM.humanoid.getRawBoneNode(targetBoneName)
                 : null
@@ -242,7 +260,7 @@ export function createAnimationManager(loader) {
             }
 
             const targetTrack = sourceTrack.clone()
-            targetTrack.name = `${targetNode.name}${sourceTrack.name.slice(propertyIndex)}`
+            targetTrack.name = `${targetNode.name}${propertyName}`
             tracks.push(targetTrack)
         }
 
@@ -251,6 +269,7 @@ export function createAnimationManager(loader) {
             return null
         }
 
+        retargetedClipCount += 1
         log(`Retargeted ${sourceClip.name}: ${tracks.length} tracks, skipped ${skippedTracks}`)
         return new THREE.AnimationClip(sourceClip.name, sourceClip.duration, tracks)
     }
@@ -378,6 +397,17 @@ export function createAnimationManager(loader) {
         fbxActive = value
     }
 
+    function priorityForState(state) {
+        if (state === 'speaking' || state === 'thinking') return PRIORITY.SPEAKING
+        if (state === 'listening') return PRIORITY.LISTENING
+        return PRIORITY.IDLE
+    }
+
+    function animationForState(state) {
+        const profileAnimation = currentProfile[state] || STATE_ANIMATIONS[state]
+        return Array.isArray(profileAnimation) ? randomItem(profileAnimation) : profileAnimation
+    }
+
     /**
      * Play the idle loop (looping). If a non-idle action is currently active
      * it is left alone; idle is faded in underneath so it is ready when the
@@ -416,11 +446,23 @@ export function createAnimationManager(loader) {
         const finishedAction = currentAction
         currentAction = null
         activeName = null
+        currentActionIsOneShot = false
+        currentPriority = priorityForState(currentState)
+        activeGesture = null
+        activeEmotion = null
 
         if (queue.length > 0) {
             const next = queue.shift()
             log(`Queue -> playing next: ${next}`)
             playOneShot(next, null)
+            return
+        }
+
+        // Return to the runtime state, rather than always falling back to
+        // idle. A wave while speaking should resume talking when it finishes.
+        const stateAnimation = animationForState(currentState)
+        if (currentState !== 'idle' && stateAnimation) {
+            playLooping(stateAnimation, finishedAction)
             return
         }
 
@@ -443,7 +485,7 @@ export function createAnimationManager(loader) {
      * Play a one-shot (non-looping) animation, cross-fading from whatever is
      * currently driving the skeleton.
      */
-    function playOneShot(name, afterPlay) {
+    function playOneShot(name, afterPlay, priority = PRIORITY.MANUAL_GESTURE) {
         const expectedMixer = mixer
         const expectedGeneration = mixerGeneration
         loadClips(name).then((clips) => {
@@ -473,6 +515,8 @@ export function createAnimationManager(loader) {
             startCrossFade(from, next, crossFadeDuration, () => {
                 currentAction = next
                 activeName = name
+                currentActionIsOneShot = true
+                currentPriority = priority
                 setFBXActive(true)
                 log(`Playing: ${name}`)
             })
@@ -503,7 +547,11 @@ export function createAnimationManager(loader) {
             currentAction = null
             idleAction = null
             activeName = null
+            currentActionIsOneShot = false
+            activeGesture = null
+            activeEmotion = null
             pendingFade = null
+            currentPriority = PRIORITY.IDLE
             setFBXActive(false)
             log(`Mixer bound: ${mixer ? 'yes' : 'no'}`)
         },
@@ -530,6 +578,7 @@ export function createAnimationManager(loader) {
                 idleName = name
             }
             currentState = 'idle'
+            currentPriority = PRIORITY.IDLE
             ensureIdle()
         },
 
@@ -556,7 +605,12 @@ export function createAnimationManager(loader) {
          * Play a one-shot gesture then return to idle. Convenience wrapper.
          */
         playGesture(name, afterPlay) {
-            playOneShot(name, afterPlay || null)
+            if (!GESTURES.includes(name)) {
+                warn(`Unknown gesture: ${name}`)
+                return
+            }
+            activeGesture = name
+            playOneShot(name, afterPlay || null, PRIORITY.MANUAL_GESTURE)
         },
 
         /**
@@ -564,6 +618,14 @@ export function createAnimationManager(loader) {
          * one-shot finishes.
          */
         queueAnimation(name) {
+            if (!urlFor(name)) {
+                warn(`Unknown queued animation: ${name}`)
+                return
+            }
+            if (!currentActionIsOneShot) {
+                playOneShot(name, null)
+                return
+            }
             queue.push(name)
             log(`Queued: ${name} (queue len=${queue.length})`)
         },
@@ -599,9 +661,14 @@ export function createAnimationManager(loader) {
                 let anim = STATE_ANIMATIONS[key]
                 if (key === 'speaking') {
                     // Random talking variation for Phase5
-                    anim = randomItem(['talking', 'talking2', 'secret'])
+                    anim = animationForState('speaking')
                 }
                 currentState = key
+                // A direct user gesture must finish before an incidental
+                // state/emotion update is allowed to replace it.
+                if (currentActionIsOneShot && currentPriority > priorityForState(key)) {
+                    return
+                }
                 if (key === 'idle') {
                     api.playIdle(idleName)
                 } else {
@@ -613,7 +680,10 @@ export function createAnimationManager(loader) {
 
             // Then emotion mapping (Phase 5).
             if (EMOTION_ANIMATIONS[key]) {
-                playOneShot(EMOTION_ANIMATIONS[key], null)
+                activeEmotion = key
+                if (!currentActionIsOneShot || currentPriority <= PRIORITY.EMOTION) {
+                    playOneShot(EMOTION_ANIMATIONS[key], null, PRIORITY.EMOTION)
+                }
                 return
             }
 
@@ -676,7 +746,12 @@ export function createAnimationManager(loader) {
                 blendProgress: pendingFade ? Math.min(1, pendingFade.t / pendingFade.duration) : 1,
                 availableGestures: GESTURES,
                 availableEmotions: Object.keys(EMOTION_ANIMATIONS),
-                currentProfile: currentProfile.name
+                currentProfile: currentProfile.name,
+                currentPriority,
+                currentActionIsOneShot,
+                activeGesture,
+                activeEmotion,
+                retargetedClipCount
             }
         },
 
@@ -684,7 +759,10 @@ export function createAnimationManager(loader) {
         playEmotion(name, afterPlay) {
             const anim = EMOTION_ANIMATIONS[name.toLowerCase()]
             if (anim) {
-                playOneShot(anim, afterPlay)
+                activeEmotion = name.toLowerCase()
+                if (!currentActionIsOneShot || currentPriority <= PRIORITY.EMOTION) {
+                    playOneShot(anim, afterPlay, PRIORITY.EMOTION)
+                }
             } else {
                 warn(`Unknown emotion: ${name}`)
             }
@@ -693,12 +771,12 @@ export function createAnimationManager(loader) {
         // Phase 6 & 7: Convenience queue methods
         queueGesture(name) {
             if (GESTURES.includes(name)) {
-                queue.push(name)
+                api.queueAnimation(name)
             }
         },
         queueEmotion(name) {
             const anim = EMOTION_ANIMATIONS[name.toLowerCase()]
-            if (anim) queue.push(anim)
+            if (anim) api.queueAnimation(anim)
         },
 
         // Phase 8: Personality profile
@@ -739,7 +817,11 @@ export function createAnimationManager(loader) {
             currentAction = null
             idleAction = null
             activeName = null
+            currentActionIsOneShot = false
+            activeGesture = null
+            activeEmotion = null
             pendingFade = null
+            currentPriority = PRIORITY.IDLE
             queue.length = 0
             setFBXActive(false)
             mixer = null
@@ -760,7 +842,7 @@ export function createAnimationManager(loader) {
      * Play a looping clip (e.g. idle/listening/speaking). The idle action is
      * faded out while a non-idle loop runs; when stopped it fades back.
      */
-    function playLooping(name) {
+    function playLooping(name, fromAction = null) {
         const expectedMixer = mixer
         const expectedGeneration = mixerGeneration
         loadClips(name).then((clips) => {
@@ -776,7 +858,7 @@ export function createAnimationManager(loader) {
             next.clampWhenFinished = false
             next.time = 0
 
-            const from = currentAction || idleAction
+            const from = fromAction || currentAction || idleAction
             startCrossFade(from, next, crossFadeDuration, () => {
                 // If this loop replaces the idle, keep idleAction reference but
                 // it remains at weight 0 underneath.
@@ -790,6 +872,8 @@ export function createAnimationManager(loader) {
                     activeName = name
                     setFBXActive(true)
                 }
+                currentActionIsOneShot = false
+                currentPriority = priorityForState(currentState)
                 log(`Looping: ${name}`)
             })
         })

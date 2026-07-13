@@ -67,6 +67,7 @@ from actions.game_updater      import game_updater
 from core.runtime import run_desktop_app
 from core.audio.microphone import Microphone
 from core.audio.speaker import Speaker
+from core.audio.diagnostics import AudioDiagnostics
 
 def get_base_dir():
     if getattr(sys, "frozen", False):
@@ -543,8 +544,19 @@ class JarvisLive:
         self._restart_event: asyncio.Event | None = None
         self._active_api_key = None
         self.state_manager = get_state_manager()
-        self.microphone = Microphone(sample_rate=SEND_SAMPLE_RATE, chunk_size=CHUNK_SIZE)
-        self.speaker = Speaker(device=3, sample_rate=RECEIVE_SAMPLE_RATE, chunk_size=CHUNK_SIZE)
+        self.audio_diagnostics = AudioDiagnostics()
+        self.microphone = Microphone(
+            sample_rate=SEND_SAMPLE_RATE,
+            chunk_size=CHUNK_SIZE,
+            diagnostics=self.audio_diagnostics,
+        )
+        self.speaker = Speaker(
+            device=3,
+            sample_rate=RECEIVE_SAMPLE_RATE,
+            chunk_size=CHUNK_SIZE,
+            diagnostics=self.audio_diagnostics,
+        )
+        self.ui.set_audio_diagnostics_provider(self.audio_diagnostics.snapshot)
         profile = get_active_profile()
         self.state_manager.set_personality(profile.id.value, avatar=profile.avatar_model)
         get_personality_manager().set_session_restart_callback(self._request_restart)
@@ -675,6 +687,7 @@ class JarvisLive:
                 intensity=9,
                 reason="User is talking about another girl.",
             )
+            self.ui.play_emotion("angry")
 
         elif any(word in command for word in [
             "love you", "i love you", "cute", "beautiful", "pretty",
@@ -685,6 +698,7 @@ class JarvisLive:
                 intensity=8,
                 reason="User showed affection.",
             )
+            self.ui.play_emotion("embarrassed")
 
         elif any(word in command for word in ["sorry", "forgive", "please"]):
             self.emotion.calm_down()
@@ -694,9 +708,11 @@ class JarvisLive:
             self._is_speaking = value
 
         if value:
+            self.audio_diagnostics.update(ai_status="SPEAKING", tts_status="SPEAKING")
             avatar_service.handle_event(AvatarEvent.AI_STARTED_SPEAKING)
             self._set_runtime_state(RuntimeState.SPEAKING)
         else:
+            self.audio_diagnostics.update(tts_status="IDLE")
             avatar_service.handle_event(AvatarEvent.AI_STOPPED_SPEAKING)
             if not self.ui.muted:
                 self._set_runtime_state(RuntimeState.LISTENING)
@@ -904,13 +920,16 @@ class JarvisLive:
     async def _send_realtime(self):
         while True:
             msg = await self.out_queue.get()
+            self.audio_diagnostics.update(ai_status="GENERATING")
             await self.session.send_realtime_input(media=msg)
 
     async def _listen_audio(self):
         print("[JARVIS] Mic started")
+        self.ui.write_log("[MIC] Device opening")
 
         try:
             print("[JARVIS] Mic stream open")
+            self.ui.write_log("[MIC] Device opened")
             await self.microphone.stream_to_queue(
                 self.out_queue,
                 self._get_speaking,
@@ -918,6 +937,8 @@ class JarvisLive:
             )
         except Exception as e:
             print(f"[JARVIS] Mic: {e}")
+            self.audio_diagnostics.update(stt_status="ERROR", last_error=str(e))
+            self.ui.write_log(f"[MIC] ERROR: {e}")
             raise
 
     def _get_speaking(self) -> bool:
@@ -946,6 +967,7 @@ class JarvisLive:
                 async for response in self.session.receive():
 
                     if response.data and not suppress_turn_output:
+                        self.audio_diagnostics.update(tts_status="BUFFERING")
                         if self._turn_done_event and self._turn_done_event.is_set():
                             self._turn_done_event.clear()
                         try:
@@ -966,11 +988,17 @@ class JarvisLive:
                             txt = _clean_transcript(sc.output_transcription.text)
                             if txt and not suppress_turn_output:
                                 out_buf.append(txt)
+                                self.audio_diagnostics.update(ai_status="COMPLETE")
 
                         if sc.input_transcription and sc.input_transcription.text:
                             txt = _clean_transcript(sc.input_transcription.text)
                             if txt:
                                 in_buf.append(txt)
+                                self.audio_diagnostics.update(
+                                    stt_status="RECOGNIZING",
+                                    last_text=" ".join(in_buf).strip(),
+                                    ai_status="THINKING",
+                                )
                                 candidate = " ".join(in_buf).strip()
                                 if candidate and not suppress_turn_output and self._is_local_command_text(candidate):
                                     suppress_turn_output = True
@@ -987,6 +1015,12 @@ class JarvisLive:
                             full_in = " ".join(in_buf).strip()
 
                             if full_in:
+                                self.audio_diagnostics.update(
+                                    stt_status="RECOGNIZED",
+                                    last_text=full_in,
+                                    ai_status="THINKING",
+                                )
+                                self.ui.write_log(f"[STT] Recognized: {full_in}")
 
                                 if not suppress_turn_output:
                                     self.ui.write_log(f"You: {full_in}")
@@ -1001,6 +1035,7 @@ class JarvisLive:
                         
                             if full_out:
                                 self.ui.write_log(f"Jarvis: {full_out}")
+                                self.audio_diagnostics.update(ai_status="COMPLETE")
                         
                             out_buf = []
                             suppress_turn_output = False
@@ -1016,6 +1051,8 @@ class JarvisLive:
                         )
         except Exception as e:
             print(f"[JARVIS] Recv: {e}")
+            self.audio_diagnostics.update(ai_status="ERROR", last_error=str(e))
+            self.ui.write_log(f"[AI] ERROR: {e}")
             traceback.print_exc()
             raise
 
@@ -1029,6 +1066,8 @@ class JarvisLive:
             )
         except Exception as e:
             print(f"[JARVIS] Play: {e}")
+            self.audio_diagnostics.update(tts_status="ERROR", last_error=str(e))
+            self.ui.write_log(f"[TTS] ERROR: {e}")
             raise
         finally:
             self.set_speaking(False)

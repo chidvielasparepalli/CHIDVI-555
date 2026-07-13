@@ -9,6 +9,8 @@ from array import array
 import asyncio
 from typing import Callable
 
+from core.audio.diagnostics import AudioDiagnostics
+
 
 class Speaker:
     def __init__(
@@ -17,11 +19,13 @@ class Speaker:
         sample_rate: int = 24000,
         channels: int = 2,
         chunk_size: int = 1024,
+        diagnostics: AudioDiagnostics | None = None,
     ):
         self.device = device
         self.sample_rate = sample_rate
         self.channels = channels
         self.chunk_size = chunk_size
+        self.diagnostics = diagnostics
 
     def boost_voice_chunk(self, chunk: bytes) -> bytes:
         try:
@@ -68,6 +72,8 @@ class Speaker:
             blocksize=self.chunk_size,
         )
         stream.start()
+        if self.diagnostics:
+            self.diagnostics.update(tts_status="IDLE", last_error="")
 
         try:
             while True:
@@ -83,9 +89,13 @@ class Speaker:
                     continue
 
                 set_speaking(True)
+                if self.diagnostics:
+                    self.diagnostics.update(tts_status="SPEAKING")
                 mono = self.boost_voice_chunk(chunk)
                 await asyncio.to_thread(stream.write, self.mono_to_stereo(mono))
         finally:
             set_speaking(False)
+            if self.diagnostics:
+                self.diagnostics.update(tts_status="IDLE")
             stream.stop()
             stream.close()

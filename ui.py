@@ -1268,6 +1268,7 @@ class MainWindow(QMainWindow):
         self.on_text_command  = None
         self._muted           = False
         self._current_file: str | None = None
+        self._audio_diagnostics_provider = None
 
         central = QWidget()
         central.setStyleSheet(f"background: {C.BG};")
@@ -1311,6 +1312,10 @@ class MainWindow(QMainWindow):
         self._metric_tmr.timeout.connect(self._update_metrics)
         self._metric_tmr.start(2000)
         self._update_metrics()
+
+        self._audio_tmr = QTimer(self)
+        self._audio_tmr.timeout.connect(self._update_audio_diagnostics)
+        self._audio_tmr.start(50)
 
         self._log_sig.connect(self._log.append_log)
         self._log_sig.connect(lambda text: logging.getLogger("ui.runtime").info(text))
@@ -1408,6 +1413,37 @@ class MainWindow(QMainWindow):
         else:
             self._bar_tmp.set_value(0, "N/A")
 
+    def set_audio_diagnostics_provider(self, provider):
+        self._audio_diagnostics_provider = provider
+
+    def _update_audio_diagnostics(self):
+        if not self._audio_diagnostics_provider or not hasattr(self, "_bar_mic"):
+            return
+        try:
+            snap = self._audio_diagnostics_provider()
+        except Exception:
+            return
+
+        level = float(snap.get("mic_level", 0.0)) * 100
+        self._bar_mic.set_value(level, f"{level:.0f}%")
+        voice = "YES" if snap.get("voice_detected") else "NO"
+        mic = "ACTIVE" if snap.get("mic_active") else "IDLE"
+        self._audio_levels_lbl.setText(
+            f"RMS {snap.get('rms', 0.0):.3f}  PEAK {snap.get('peak', 0.0):.3f}"
+        )
+        self._audio_state_lbl.setText(
+            f"MIC {mic}  VOICE {voice}\n"
+            f"STT {snap.get('stt_status', 'IDLE')}  AI {snap.get('ai_status', 'IDLE')}\n"
+            f"TTS {snap.get('tts_status', 'IDLE')}  FPS {snap.get('frame_rate', 0.0):.1f}"
+        )
+        self._audio_device_lbl.setText(
+            f"{snap.get('sample_rate', 0)} Hz  DEV {snap.get('device', '--')}\n"
+            f"BUF {snap.get('buffer_size', 0)}  LAT {snap.get('latency_ms', 0.0):.1f} ms"
+        )
+        last_text = str(snap.get("last_text", "--"))[:72]
+        error = str(snap.get("last_error", ""))[:72]
+        self._audio_text_lbl.setText(f"LAST: {error or last_text}")
+
         try:
             boot_t  = psutil.boot_time()
             elapsed = time.time() - boot_t
@@ -1498,6 +1534,23 @@ class MainWindow(QMainWindow):
             lay.addWidget(bar)
 
         lay.addSpacing(4)
+
+        audio_hdr = QLabel("AUDIO DIAGNOSTICS")
+        audio_hdr.setFont(QFont("Courier New", 7, QFont.Weight.Bold))
+        audio_hdr.setStyleSheet(f"color: {C.GREEN}; background: transparent;")
+        lay.addWidget(audio_hdr)
+        self._bar_mic = MetricBar("MIC", C.GREEN)
+        lay.addWidget(self._bar_mic)
+        self._audio_levels_lbl = QLabel("RMS --  PEAK --")
+        self._audio_state_lbl = QLabel("MIC IDLE  VOICE NO\nSTT IDLE  AI IDLE\nTTS IDLE  FPS --")
+        self._audio_device_lbl = QLabel("0 Hz  DEV --\nBUF --  LAT --")
+        self._audio_text_lbl = QLabel("LAST: --")
+        for label in [self._audio_levels_lbl, self._audio_state_lbl,
+                      self._audio_device_lbl, self._audio_text_lbl]:
+            label.setFont(QFont("Courier New", 6))
+            label.setStyleSheet(f"color: {C.TEXT_MED}; background: transparent;")
+            label.setWordWrap(True)
+            lay.addWidget(label)
 
         info_panel = QWidget()
         info_panel.setStyleSheet(
@@ -1760,7 +1813,7 @@ class MainWindow(QMainWindow):
             safe_name = json.dumps(name)
             self._log_sig.emit(f"[VRM] Emotion requested -> {name}")
             self.hud.page().runJavaScript(
-                f"window.playEmotion && window.playEmotion({safe_name});"
+                f"window.setAvatarEmotion && window.setAvatarEmotion({safe_name});"
             )
             
     def _set_animation_profile(self, profile_name: str):
@@ -1922,6 +1975,9 @@ class JarvisUI:
 
     def write_log(self, text: str):
         self._win._log_sig.emit(text)
+
+    def set_audio_diagnostics_provider(self, provider):
+        self._win.set_audio_diagnostics_provider(provider)
 
     def perform_avatar_action(self, action: str):
         self.write_log(f"SYS: Avatar action -> {action}")
