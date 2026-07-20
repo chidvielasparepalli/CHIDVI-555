@@ -3,9 +3,6 @@ from avatars.avatar_logger import logger
 
 class AvatarManager:
 
-    def reset(self):
-        self.current_state = AvatarState.IDLE
-
     def __init__(self):
 
         self.current_state = AvatarState.IDLE

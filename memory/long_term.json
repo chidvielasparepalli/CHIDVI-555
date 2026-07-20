@@ -1,8 +1,8 @@
 {
   "identity": {
     "user_name": {
-      "value": "Hinata",
-      "updated": "2026-07-01"
+      "value": "CHIDVILAS",
+      "updated": "2026-07-15"
     },
     "photo_ownership": {
       "value": "my photo 1.png",
@@ -41,6 +41,10 @@
     "language": {
       "value": "Telugu",
       "updated": "2026-06-30"
+    },
+    "camera_capture_method": {
+      "value": "Open 'Camera' app then press 'space' key to take a picture.",
+      "updated": "2026-07-21"
     }
   },
   "projects": {

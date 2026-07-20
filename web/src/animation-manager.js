@@ -3,30 +3,33 @@ import * as THREE from 'three'
 /**
  * AnimationManager
  * ----------------
- * Loads, caches, blends, and plays Mixamo FBX animations on the
- * currently active VRM. Supports cross-fading, queueing, and an
- * automatic return-to-idle loop.
+ * Loads, caches, blends, and plays pre-retargeted FBX animations on the
+ * currently active VRM.
  *
- * Design notes:
- * - No side effects on import. Call createAnimationManager(loader) to build one.
- * - Owns no mixer. The renderer binds the current mixer via bindMixer()
- *   after every avatar load/switch so clips always target the live skeleton.
- * - Mixamo FBX clips use generic bone names ("mixamorigHips", ...). Before an
- *   action is created, their tracks are retargeted to the active VRM raw bones.
- * - Procedural bone animation in main.js must back off whenever an FBX clip is
- *   active. Use isFBXActive() to gate it.
+ * RETARGETING IS DONE OFFLINE IN BLENDER (tools/blender_pipeline/).
+ * Runtime does NO bone correction, NO quaternion conversion, NO rest-pose
+ * estimation, NO pose reconstruction.  Animations are loaded and played as-is.
+ *
+ * Pipeline:
+ *   Mixamo FBX → Blender (retarget + bake to VRM skeleton) →
+ *   Export FBX with VRM bone names → FBXLoader → AnimationClip →
+ *   AnimationMixer → crossfade → play
+ *
+ * The AnimationMixer maps clip track names to scene objects by name, so
+ * the exported FBX must use the same bone names as the VRM humanoid
+ * (hips, spine, chest, upperChest, neck, head, …).
  */
 
 // ---------------------------------------------------------------------------
-// Animation registry
-// Semantic name -> file URL under /public/animations/
+// Animation registry — semantic name → file URL under /public/animations/
 // ---------------------------------------------------------------------------
 const ANIMATION_MAP = {
-    // Idle loops
+    // --- Idle loops ---
     idle:           '/animations/idle.fbx',
     breathing_idle: '/animations/breathing_idle.fbx',
     sad_idle:       '/animations/sad_idle.fbx',
-    // Greetings / one-shot gestures
+
+    // --- Greetings / one-shot gestures ---
     wave:           '/animations/wave.fbx',
     wave2:          '/animations/wave2.fbx',
     bow:            '/animations/bow.fbx',
@@ -38,7 +41,8 @@ const ANIMATION_MAP = {
     jump:           '/animations/jump.fbx',
     blow_kiss:      '/animations/blow_kiss.fbx',
     blow_kiss2:     '/animations/blow_kiss2.fbx',
-    // Emotions
+
+    // --- Emotions ---
     happy:          '/animations/happy.fbx',
     laughing:       '/animations/laughing.fbx',
     angry:          '/animations/angry.fbx',
@@ -46,13 +50,14 @@ const ANIMATION_MAP = {
     cheer:          '/animations/cheer.fbx',
     yell:           '/animations/yell.fbx',
     thinking:       '/animations/thinking.fbx',
-    // Talking variants
+
+    // --- Talking variants ---
     talking:        '/animations/talking.fbx',
     talking2:       '/animations/talking2.fbx',
     secret:         '/animations/secret.fbx',
     pointing:       '/animations/pointing.fbx',
-    // Command-router aliases. Keep semantic commands independent from FBX
-    // filenames so a UI command always selects the intended real clip.
+
+    // --- Command-router aliases ---
     point:          '/animations/pointing.fbx',
     greeting:       '/animations/wave.fbx',
     laugh:          '/animations/laughing.fbx',
@@ -61,7 +66,7 @@ const ANIMATION_MAP = {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 3: runtime state -> animation name
+// State → animation name
 // ---------------------------------------------------------------------------
 const STATE_ANIMATIONS = {
     listening:   'breathing_idle',
@@ -71,7 +76,7 @@ const STATE_ANIMATIONS = {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 5: emotion -> animation name
+// Emotion → animation name
 // ---------------------------------------------------------------------------
 const EMOTION_ANIMATIONS = {
     happy:       'happy',
@@ -83,136 +88,111 @@ const EMOTION_ANIMATIONS = {
     laughing:    'laughing',
 }
 
-const DEFAULT_CROSS_FADE = 0.35   // seconds
+const DEFAULT_CROSS_FADE = 0.35
 const DEFAULT_IDLE = 'idle'
 const EPSILON = 0.0001
 
-// Phase 6: Available gestures
 const GESTURES = [
     'wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing',
-    'greeting', 'shrug', 'nod', 'shake_head', 'jump'
+    'greeting', 'shrug', 'nod', 'shake_head', 'jump',
 ]
 
-// Phase 8: Personality animation profiles
-const PERSONALITY_PROFILES = {
-    CHIDVI: {
+// Dynamic personality profiles map — can be extended at runtime via registerProfile()
+const PERSONALITY_PROFILES = new Map([
+    ['CHIDVI', {
         idle: 'idle',
         listening: 'breathing_idle',
         thinking: 'thinking',
         speaking: ['talking', 'talking2'],
         minimalGestures: true,
-        name: 'CHIDVI'
-    },
-    HINATA: {
+        name: 'CHIDVI',
+    }],
+    ['HINATA', {
         idle: 'breathing_idle',
         listening: 'breathing_idle',
         thinking: 'thinking',
         speaking: ['talking', 'talking2', 'secret'],
         minimalGestures: false,
-        name: 'HINATA'
-    }
-}
+        name: 'HINATA',
+    }],
+])
 
-// Phase 9: Priority levels
 const PRIORITY = {
     MANUAL_GESTURE: 10,
     EMOTION: 8,
     SPEAKING: 6,
     LISTENING: 4,
-    IDLE: 0
+    IDLE: 0,
 }
 
-const MIXAMO_TO_VRM_BONE = {
-    mixamorigHips: 'hips',
-    mixamorigSpine: 'spine',
-    mixamorigSpine1: 'chest',
-    mixamorigSpine2: 'upperChest',
-    mixamorigNeck: 'neck',
-    mixamorigHead: 'head',
-    mixamorigLeftShoulder: 'leftShoulder',
-    mixamorigLeftArm: 'leftUpperArm',
-    mixamorigLeftForeArm: 'leftLowerArm',
-    mixamorigLeftHand: 'leftHand',
-    mixamorigRightShoulder: 'rightShoulder',
-    mixamorigRightArm: 'rightUpperArm',
-    mixamorigRightForeArm: 'rightLowerArm',
-    mixamorigRightHand: 'rightHand',
-    mixamorigLeftUpLeg: 'leftUpperLeg',
-    mixamorigLeftLeg: 'leftLowerLeg',
-    mixamorigLeftFoot: 'leftFoot',
-    mixamorigLeftToeBase: 'leftToes',
-    mixamorigRightUpLeg: 'rightUpperLeg',
-    mixamorigRightLeg: 'rightLowerLeg',
-    mixamorigRightFoot: 'rightFoot',
-    mixamorigRightToeBase: 'rightToes',
-    mixamorigLeftHandThumb1: 'leftThumbMetacarpal',
-    mixamorigLeftHandThumb2: 'leftThumbProximal',
-    mixamorigLeftHandThumb3: 'leftThumbDistal',
-    mixamorigLeftHandIndex1: 'leftIndexProximal',
-    mixamorigLeftHandIndex2: 'leftIndexIntermediate',
-    mixamorigLeftHandIndex3: 'leftIndexDistal',
-    mixamorigLeftHandMiddle1: 'leftMiddleProximal',
-    mixamorigLeftHandMiddle2: 'leftMiddleIntermediate',
-    mixamorigLeftHandMiddle3: 'leftMiddleDistal',
-    mixamorigLeftHandRing1: 'leftRingProximal',
-    mixamorigLeftHandRing2: 'leftRingIntermediate',
-    mixamorigLeftHandRing3: 'leftRingDistal',
-    mixamorigLeftHandPinky1: 'leftLittleProximal',
-    mixamorigLeftHandPinky2: 'leftLittleIntermediate',
-    mixamorigLeftHandPinky3: 'leftLittleDistal',
-    mixamorigRightHandThumb1: 'rightThumbMetacarpal',
-    mixamorigRightHandThumb2: 'rightThumbProximal',
-    mixamorigRightHandThumb3: 'rightThumbDistal',
-    mixamorigRightHandIndex1: 'rightIndexProximal',
-    mixamorigRightHandIndex2: 'rightIndexIntermediate',
-    mixamorigRightHandIndex3: 'rightIndexDistal',
-    mixamorigRightHandMiddle1: 'rightMiddleProximal',
-    mixamorigRightHandMiddle2: 'rightMiddleIntermediate',
-    mixamorigRightHandMiddle3: 'rightMiddleDistal',
-    mixamorigRightHandRing1: 'rightRingProximal',
-    mixamorigRightHandRing2: 'rightRingIntermediate',
-    mixamorigRightHandRing3: 'rightRingDistal',
-    mixamorigRightHandPinky1: 'rightLittleProximal',
-    mixamorigRightHandPinky2: 'rightLittleIntermediate',
-    mixamorigRightHandPinky3: 'rightLittleDistal',
-}
+// ---------------------------------------------------------------------------
+// Reference: VRM humanoid bone names
+// After Blender pipeline the FBX clip tracks use these names directly.
+// ---------------------------------------------------------------------------
+const VRM_BONE_NAMES = [
+    'hips', 'spine', 'chest', 'upperChest', 'neck', 'head',
+    'leftShoulder', 'rightShoulder',
+    'leftUpperArm', 'rightUpperArm',
+    'leftLowerArm', 'rightLowerArm',
+    'leftHand', 'rightHand',
+    'leftUpperLeg', 'rightUpperLeg',
+    'leftLowerLeg', 'rightLowerLeg',
+    'leftFoot', 'rightFoot',
+    'leftToes', 'rightToes',
+    'leftThumbMetacarpal', 'rightThumbMetacarpal',
+    'leftThumbProximal', 'rightThumbProximal',
+    'leftThumbDistal', 'rightThumbDistal',
+    'leftIndexProximal', 'rightIndexProximal',
+    'leftIndexIntermediate', 'rightIndexIntermediate',
+    'leftIndexDistal', 'rightIndexDistal',
+    'leftMiddleProximal', 'rightMiddleProximal',
+    'leftMiddleIntermediate', 'rightMiddleIntermediate',
+    'leftMiddleDistal', 'rightMiddleDistal',
+    'leftRingProximal', 'rightRingProximal',
+    'leftRingIntermediate', 'rightRingIntermediate',
+    'leftRingDistal', 'rightRingDistal',
+    'leftLittleProximal', 'rightLittleProximal',
+    'leftLittleIntermediate', 'rightLittleIntermediate',
+    'leftLittleDistal', 'rightLittleDistal',
+]
 
 /**
  * Build an AnimationManager bound to a THREE.FBXLoader instance.
- *
- * @param {THREE.FBXLoader} loader
- * @returns {object} AnimationManager API
  */
 export function createAnimationManager(loader) {
-    // --- state -------------------------------------------------------------
-    // URL -> THREE.AnimationGroup-like object (the FBX root scene with .animations)
-    const clipCache = new Map()      // url -> AnimationClip[]
-    const actionCache = new Map()    // clip.uuid -> AnimationAction (per mixer lifecycle)
+    const clipCache = new Map()
+    const actionCache = new Map()
     let mixer = null
     let activeVRM = null
     let mixerGeneration = 0
-    let currentAction = null         // currently playing non-idle action (or null)
-    let idleAction = null            // looping idle action (always alive while bound)
+    let currentAction = null
+    let idleAction = null
     let idleName = DEFAULT_IDLE
     let currentState = 'idle'
     let queue = []
-    let pendingFade = null           // { from, to, t, duration, onDone }
-    let fbxActive = false            // true while an FBX clip drives the skeleton
+    let pendingFade = null
+    let fbxActive = false
     let crossFadeDuration = DEFAULT_CROSS_FADE
     let debug = false
 
-    // Active action metadata so the renderer/procedural layer can introspect.
     let activeName = null
-    let currentProfile = PERSONALITY_PROFILES.CHIDVI
+    let currentProfile = PERSONALITY_PROFILES.get('CHIDVI')
     let currentPriority = PRIORITY.IDLE
     let currentActionIsOneShot = false
     let activeGesture = null
     let activeEmotion = null
-    let retargetedClipCount = 0
 
-    // -------------------------------------------------------------------------
-    // Internal helpers
-    // -------------------------------------------------------------------------
+    let finishedHandler = null
+
+    // Diagnostics counters
+    let totalClipsLoaded = 0
+    let totalClipsPlayed = 0
+    const warnings = []
+    const errors = []
+
+    // -----------------------------------------------------------------
+    // Helpers
+    // -----------------------------------------------------------------
 
     function log(...args) {
         if (debug) console.info('[AnimManager]', ...args)
@@ -220,6 +200,18 @@ export function createAnimationManager(loader) {
 
     function warn(...args) {
         console.warn('[AnimManager]', ...args)
+    }
+
+    function pushWarning(msg) {
+        warnings.push(msg)
+        if (warnings.length > 50) warnings.shift()
+        warn(msg)
+    }
+
+    function pushError(msg) {
+        errors.push(msg)
+        if (errors.length > 20) errors.shift()
+        console.error('[AnimManager]', msg)
     }
 
     function urlFor(name) {
@@ -230,58 +222,23 @@ export function createAnimationManager(loader) {
         return mixer === expectedMixer && mixerGeneration === expectedGeneration
     }
 
-    function retargetClip(sourceClip) {
-        if (!activeVRM?.humanoid) return null
-
-        const tracks = []
-        let skippedTracks = 0
-        for (const sourceTrack of sourceClip.tracks) {
-            const propertyIndex = sourceTrack.name.lastIndexOf('.')
-            if (propertyIndex < 1) {
-                skippedTracks += 1
-                continue
-            }
-
-            const sourceBoneName = sourceTrack.name.slice(0, propertyIndex)
-            const propertyName = sourceTrack.name.slice(propertyIndex)
-            const targetBoneName = MIXAMO_TO_VRM_BONE[sourceBoneName]
-            // Mixamo hips translation is root motion. The avatar is anchored
-            // at the scene origin, so retaining it causes walking/drifting.
-            if (targetBoneName === 'hips' && propertyName === '.position') {
-                skippedTracks += 1
-                continue
-            }
-            const targetNode = targetBoneName
-                ? activeVRM.humanoid.getRawBoneNode(targetBoneName)
-                : null
-            if (!targetNode?.name) {
-                skippedTracks += 1
-                continue
-            }
-
-            const targetTrack = sourceTrack.clone()
-            targetTrack.name = `${targetNode.name}${propertyName}`
-            tracks.push(targetTrack)
-        }
-
-        if (!tracks.length) {
-            warn(`Cannot retarget ${sourceClip.name}: no compatible VRM tracks`)
-            return null
-        }
-
-        retargetedClipCount += 1
-        log(`Retargeted ${sourceClip.name}: ${tracks.length} tracks, skipped ${skippedTracks}`)
-        return new THREE.AnimationClip(sourceClip.name, sourceClip.duration, tracks)
-    }
-
     function randomItem(arr) {
         return arr[Math.floor(Math.random() * arr.length)]
     }
 
-    /**
-     * Load (and cache) the AnimationClip[] for a semantic animation name.
-     * Mixamo FBX files expose their clip on result.animations.
-     */
+    function entryToName(entry) {
+        if (!entry) return null
+        if (ANIMATION_MAP[entry]) return entry
+        for (const [n, u] of Object.entries(ANIMATION_MAP)) {
+            if (u === entry) return n
+        }
+        return null
+    }
+
+    // -----------------------------------------------------------------
+    // Loading — NO RETARGETING
+    // -----------------------------------------------------------------
+
     async function loadClips(name) {
         const url = urlFor(name)
         if (!url) {
@@ -298,34 +255,49 @@ export function createAnimationManager(loader) {
                 warn(`No animations found in ${url}`)
                 return null
             }
+
+            // Transitional check: warn if FBX still uses Mixamo bone names
+            for (const clip of clips) {
+                for (const track of clip.tracks) {
+                    if (track.name.startsWith('mixamorig')) {
+                        pushWarning(
+                            `"${name}" has Mixamo bone names — use Blender pipeline ` +
+                            '(tools/blender_pipeline/retarget_workflow.md) to retarget ' +
+                            'before loading at runtime'
+                        )
+                        break
+                    }
+                }
+            }
+
             clipCache.set(url, clips)
+            totalClipsLoaded += clips.length
             log(`Loaded ${name} (${clips.length} clip(s)) from ${url}`)
             return clips
         } catch (err) {
-            warn(`Failed to load animation ${name} (${url}):`, err?.message || err)
+            pushError(`Failed to load animation ${name} (${url}): ${err?.message || err}`)
             return null
         }
     }
 
-    /**
-     * Create or fetch a cached AnimationAction for a clip on the current mixer.
-     */
+    // -----------------------------------------------------------------
+    // Action management — NO RETARGETING
+    // -----------------------------------------------------------------
+
     function actionFor(clip) {
         if (!mixer) return null
         const key = clip.uuid
         if (actionCache.has(key)) {
             return actionCache.get(key)
         }
-        const retargetedClip = retargetClip(clip)
-        if (!retargetedClip) return null
-        const action = mixer.clipAction(retargetedClip)
-        actionCache.set(key, action)
+        // Use the clip directly — all retargeting is offline in Blender.
+        const action = mixer.clipAction(clip)
+        if (action) {
+            actionCache.set(key, action)
+        }
         return action
     }
 
-    /**
-     * Stop and forget a single action (fade out gracefully if requested).
-     */
     function stopAction(action, fadeSeconds = 0) {
         if (!action) return
         if (fadeSeconds > 0) {
@@ -335,10 +307,6 @@ export function createAnimationManager(loader) {
         }
     }
 
-    /**
-     * Begin a managed cross-fade between two actions.
-     * Weights are driven here each frame via update().
-     */
     function startCrossFade(fromAction, toAction, duration, onDone) {
         if (!toAction) {
             if (onDone) onDone()
@@ -346,7 +314,7 @@ export function createAnimationManager(loader) {
         }
         toAction.reset()
         toAction.setEffectiveWeight(0)
-        toAction.enabled = true;
+        toAction.enabled = true
         toAction.play()
 
         pendingFade = {
@@ -356,16 +324,8 @@ export function createAnimationManager(loader) {
             duration: Math.max(EPSILON, duration),
             onDone: onDone || null,
         }
-
-        if (fromAction) {
-            // three's built-in crossFadeTo also works, but managing weights
-            // ourselves lets us keep the idle action alive underneath.
-        }
     }
 
-    /**
-     * Advance the active cross-fade. Called every frame from update().
-     */
     function tickCrossFade(delta) {
         if (!pendingFade) return
         pendingFade.t += delta
@@ -389,10 +349,6 @@ export function createAnimationManager(loader) {
         }
     }
 
-    /**
-     * Mark the manager as driving the skeleton (so procedural pose backs off),
-     * or not (so procedural idle can resume).
-     */
     function setFBXActive(value) {
         fbxActive = value
     }
@@ -408,18 +364,13 @@ export function createAnimationManager(loader) {
         return Array.isArray(profileAnimation) ? randomItem(profileAnimation) : profileAnimation
     }
 
-    /**
-     * Play the idle loop (looping). If a non-idle action is currently active
-     * it is left alone; idle is faded in underneath so it is ready when the
-     * one-shot ends.
-     */
+    // -----------------------------------------------------------------
+    // Idle / loop / one-shot
+    // -----------------------------------------------------------------
+
     function ensureIdle() {
         if (!mixer) return null
-        if (idleAction) {
-            // Already created for this mixer lifecycle.
-            return idleAction
-        }
-        // Async: load if needed, then start looping.
+        if (idleAction) return idleAction
         const expectedMixer = mixer
         const expectedGeneration = mixerGeneration
         loadClips(idleName).then((clips) => {
@@ -429,7 +380,7 @@ export function createAnimationManager(loader) {
             action.setLoop(THREE.LoopRepeat, Infinity)
             action.clampWhenFinished = false
             action.setEffectiveWeight(currentAction ? 0 : 1)
-            action.enabled = true;
+            action.enabled = true
             action.play()
             idleAction = action
             log(`Idle loop started: ${idleName}`)
@@ -437,13 +388,8 @@ export function createAnimationManager(loader) {
         return null
     }
 
-    /**
-     * Called when a non-idle action finishes (one-shot gesture/emotion).
-     * Drains the queue, otherwise returns to idle.
-     */
     function onActionFinished() {
         log(`Action finished: ${activeName}`)
-        const finishedAction = currentAction
         currentAction = null
         activeName = null
         currentActionIsOneShot = false
@@ -458,33 +404,22 @@ export function createAnimationManager(loader) {
             return
         }
 
-        // Return to the runtime state, rather than always falling back to
-        // idle. A wave while speaking should resume talking when it finishes.
         const stateAnimation = animationForState(currentState)
         if (currentState !== 'idle' && stateAnimation) {
-            playLooping(stateAnimation, finishedAction)
+            playLooping(stateAnimation)
             return
         }
 
-        // Return to idle: fade idle weight back up, fade out the finished clip.
-        if (idleAction && finishedAction) {
-            startCrossFade(finishedAction, idleAction, crossFadeDuration, () => {
+        if (idleAction) {
+            startCrossFade(currentAction || null, idleAction, crossFadeDuration, () => {
                 setFBXActive(false)
-                // idle is now the only thing driving bones -> procedural resumes.
             })
-        } else if (idleAction) {
-            idleAction.setEffectiveWeight(1)
-            setFBXActive(false)
         } else {
             setFBXActive(false)
             ensureIdle()
         }
     }
 
-    /**
-     * Play a one-shot (non-looping) animation, cross-fading from whatever is
-     * currently driving the skeleton.
-     */
     function playOneShot(name, afterPlay, priority = PRIORITY.MANUAL_GESTURE) {
         const expectedMixer = mixer
         const expectedGeneration = mixerGeneration
@@ -501,7 +436,6 @@ export function createAnimationManager(loader) {
             next.clampWhenFinished = true
             next.time = 0
 
-            // Clear any stale 'finished' listener from a prior action.
             mixer.removeEventListener('finished', finishedHandler)
             finishedHandler = (event) => {
                 if (event.action === next) {
@@ -517,23 +451,56 @@ export function createAnimationManager(loader) {
                 activeName = name
                 currentActionIsOneShot = true
                 currentPriority = priority
+                totalClipsPlayed++
                 setFBXActive(true)
                 log(`Playing: ${name}`)
             })
         })
     }
 
-    // Holder for the current mixer 'finished' listener so we can swap it.
-    let finishedHandler = null
+    function playLooping(name, fromAction = null) {
+        const expectedMixer = mixer
+        const expectedGeneration = mixerGeneration
+        loadClips(name).then((clips) => {
+            if (!clips || !isCurrentBinding(expectedMixer, expectedGeneration)) {
+                warn(`Cannot play loop ${name}: no clips or no mixer`)
+                return
+            }
+            const clip = clips[0]
+            const next = actionFor(clip)
+            if (!next) return
 
-    // -------------------------------------------------------------------------
+            next.setLoop(THREE.LoopRepeat, Infinity)
+            next.clampWhenFinished = false
+            next.time = 0
+
+            const from = fromAction || currentAction || idleAction
+            startCrossFade(from, next, crossFadeDuration, () => {
+                if (name === idleName) {
+                    idleAction = next
+                    currentAction = null
+                    activeName = null
+                    setFBXActive(false)
+                } else {
+                    currentAction = next
+                    activeName = name
+                    setFBXActive(true)
+                }
+                currentActionIsOneShot = false
+                currentPriority = priorityForState(currentState)
+                totalClipsPlayed++
+                log(`Looping: ${name}`)
+            })
+        })
+    }
+
+    // -----------------------------------------------------------------
     // Public API
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------
 
     const api = {
         /**
-         * Attach to the renderer's current AnimationMixer. Called after every
-         * avatar load/switch. Resets per-mixer caches.
+         * Bind a new AnimationMixer and VRM. Resets all action state.
          */
         bindMixer(newMixer, newVRM) {
             if (mixer === newMixer && activeVRM === newVRM) return
@@ -553,11 +520,14 @@ export function createAnimationManager(loader) {
             pendingFade = null
             currentPriority = PRIORITY.IDLE
             setFBXActive(false)
+            // Clear transient warnings on re-bind
+            warnings.length = 0
+            errors.length = 0
             log(`Mixer bound: ${mixer ? 'yes' : 'no'}`)
         },
 
         /**
-         * Preload a list of semantic animation names (or raw URLs).
+         * Preload animation clips into cache (non-blocking).
          */
         async preload(names) {
             const list = Array.isArray(names) ? names : [names]
@@ -570,8 +540,7 @@ export function createAnimationManager(loader) {
         },
 
         /**
-         * Start (or restart) the idle loop. Optionally change which animation
-         * is used as the idle.
+         * Play the idle animation loop.
          */
         playIdle(name) {
             if (name) {
@@ -583,12 +552,7 @@ export function createAnimationManager(loader) {
         },
 
         /**
-         * Play a named animation with options.
-         * @param {string} name semantic animation name
-         * @param {object} [options]
-         *   - loop: boolean (default false)
-         *   - crossFadeDuration: number (seconds)
-         *   - afterPlay: function called when a non-loop finishes
+         * Play an animation by name.
          */
         play(name, options = {}) {
             if (options.crossFadeDuration != null) {
@@ -602,7 +566,7 @@ export function createAnimationManager(loader) {
         },
 
         /**
-         * Play a one-shot gesture then return to idle. Convenience wrapper.
+         * Play a gesture animation (one-shot, high priority).
          */
         playGesture(name, afterPlay) {
             if (!GESTURES.includes(name)) {
@@ -614,8 +578,7 @@ export function createAnimationManager(loader) {
         },
 
         /**
-         * Add an animation to the playback queue. Played when the current
-         * one-shot finishes.
+         * Queue an animation to play after the current one finishes.
          */
         queueAnimation(name) {
             if (!urlFor(name)) {
@@ -630,12 +593,16 @@ export function createAnimationManager(loader) {
             log(`Queued: ${name} (queue len=${queue.length})`)
         },
 
-        /** Empty the queue. */
+        /**
+         * Clear the animation queue.
+         */
         clearQueue() {
             queue.length = 0
         },
 
-        /** Fade out whatever is playing and return to idle immediately. */
+        /**
+         * Stop current animation and return to idle.
+         */
         stop() {
             queue.length = 0
             if (currentAction) {
@@ -648,37 +615,29 @@ export function createAnimationManager(loader) {
         },
 
         /**
-         * Phase 3 hook: called when the runtime emotion/state string changes.
-         * Maps the state to its animation and plays it. States that map to
-         * looping clips (idle/listening/speaking) play as loops; one-shot
-         * emotions fall back to play().
+         * React to a state or emotion change.
+         * State changes drive looping animations; emotions play as one-shots.
          */
         onStateChange(stateOrEmotion) {
             const key = String(stateOrEmotion || 'idle').toLowerCase()
 
-            // Try runtime-state mapping first.
             if (STATE_ANIMATIONS[key]) {
                 let anim = STATE_ANIMATIONS[key]
                 if (key === 'speaking') {
-                    // Random talking variation for Phase5
                     anim = animationForState('speaking')
                 }
                 currentState = key
-                // A direct user gesture must finish before an incidental
-                // state/emotion update is allowed to replace it.
                 if (currentActionIsOneShot && currentPriority > priorityForState(key)) {
                     return
                 }
                 if (key === 'idle') {
                     api.playIdle(idleName)
                 } else {
-                    // Listening / thinking / speaking are sustained loops.
                     playLooping(anim)
                 }
                 return
             }
 
-            // Then emotion mapping (Phase 5).
             if (EMOTION_ANIMATIONS[key]) {
                 activeEmotion = key
                 if (!currentActionIsOneShot || currentPriority <= PRIORITY.EMOTION) {
@@ -687,75 +646,141 @@ export function createAnimationManager(loader) {
                 return
             }
 
-            // Unknown -> idle is the safe default.
             currentState = 'idle'
             api.playIdle(idleName)
         },
 
-        /** Per-frame update. Call from the render loop with the frame delta. */
+        /**
+         * Per-frame update (drives crossfades).
+         */
         update(delta) {
             if (!mixer) return
             tickCrossFade(delta)
         },
 
-        /** True when an FBX clip is driving the skeleton (procedural should back off). */
         isFBXActive() {
             return fbxActive
         },
 
-        /** True if the semantic name is a known animation. */
         hasAnimation(name) {
             return Boolean(urlFor(name))
         },
 
-        /** Current semantic name being played (or null). */
         getActiveName() {
             return activeName
         },
 
-        /** Current runtime state string. */
         getCurrentState() {
             return currentState
         },
 
-        /** Enable/disable verbose console logging. */
         setDebug(value) {
             debug = Boolean(value)
         },
 
-        /** Snapshot for diagnostics. */
+        /**
+         * Return a diagnostics snapshot.
+         */
         getDiagnostics() {
+            const health = { ok: 0, warn: 0, error: 0 }
+
+            let humanoidBoneCount = 0
+            const availableBones = []
+            const missingBones = []
+            if (activeVRM?.humanoid) {
+                for (const boneName of VRM_BONE_NAMES) {
+                    const node = activeVRM.humanoid.getRawBoneNode(boneName)
+                    if (node) {
+                        humanoidBoneCount++
+                        availableBones.push(boneName)
+                    } else {
+                        missingBones.push(boneName)
+                    }
+                }
+            }
+
+            const activeGestures = []
+            if (activeGesture) activeGestures.push(activeGesture)
+            if (activeEmotion) activeGestures.push(activeEmotion)
+
+            // Compute health status
+            if (mixer) health.ok++
+            else health.error++
+            if (activeVRM) health.ok++
+            else health.warn++
+            if (idleAction) health.ok++
+            else health.warn++
+            if (errors.length === 0) health.ok++
+            else health.error += errors.length
+            if (warnings.length < 3) health.ok++
+            else health.warn++
+
             return {
+                // Status
+                status: errors.length > 0 ? 'error' : warnings.length > 3 ? 'warning' : 'healthy',
+                health,
+
+                // Binding
                 mixerBound: Boolean(mixer),
-                fbxActive,
+                vrmLoaded: Boolean(activeVRM),
+                currentVRM: activeVRM?.meta?.name || activeVRM?.scene?.name || null,
+
+                // Playback
                 activeName,
                 currentState,
                 idleName,
                 idleActionAlive: Boolean(idleAction),
                 hasCurrentAction: Boolean(currentAction),
+                fbxActive,
+                currentPriority,
+                currentActionIsOneShot,
+
+                // Blend state
+                pendingFade: Boolean(pendingFade),
+                blendProgress: pendingFade ? Math.min(1, pendingFade.t / pendingFade.duration) : 1,
+                crossFadeDuration,
+
+                // Queue
                 queueLength: queue.length,
-                queue,
+                queue: [...queue],
+
+                // Gesture & emotion
+                activeGesture,
+                activeEmotion,
+                availableGestures: GESTURES,
+                availableEmotions: Object.keys(EMOTION_ANIMATIONS),
+
+                // Profile
+                currentProfile: currentProfile.name,
+
+                // Cache
                 cachedClips: clipCache.size,
                 cachedClipNames: Array.from(clipCache.keys()).map(url => {
-                    for (const [name, u] of Object.entries(ANIMATION_MAP)) {
-                        if (u === url) return name
+                    for (const [n, u] of Object.entries(ANIMATION_MAP)) {
+                        if (u === url) return n
                     }
                     return url
                 }),
-                pendingFade: Boolean(pendingFade),
-                blendProgress: pendingFade ? Math.min(1, pendingFade.t / pendingFade.duration) : 1,
-                availableGestures: GESTURES,
-                availableEmotions: Object.keys(EMOTION_ANIMATIONS),
-                currentProfile: currentProfile.name,
-                currentPriority,
-                currentActionIsOneShot,
-                activeGesture,
-                activeEmotion,
-                retargetedClipCount
+                totalClipsLoaded,
+                totalClipsPlayed,
+
+                // Skeleton
+                humanoidBones: humanoidBoneCount,
+                totalBonesInVRM: VRM_BONE_NAMES.length,
+                missingBones,
+
+                // Warnings & errors
+                warnings: [...warnings],
+                errors: [...errors],
+
+                // FPS (caller should supply delta)
+                animationFPS: (delta) => delta > 0 ? Math.round(1 / delta) : 0,
             }
         },
 
-        // Phase 7: Emotion dispatcher
+        /**
+         * Play an emotion animation.
+         */
         playEmotion(name, afterPlay) {
             const anim = EMOTION_ANIMATIONS[name.toLowerCase()]
             if (anim) {
@@ -768,20 +793,19 @@ export function createAnimationManager(loader) {
             }
         },
 
-        // Phase 6 & 7: Convenience queue methods
         queueGesture(name) {
             if (GESTURES.includes(name)) {
                 api.queueAnimation(name)
             }
         },
+
         queueEmotion(name) {
             const anim = EMOTION_ANIMATIONS[name.toLowerCase()]
             if (anim) api.queueAnimation(anim)
         },
 
-        // Phase 8: Personality profile
         setProfile(profileName) {
-            const profile = PERSONALITY_PROFILES[profileName.toUpperCase()]
+            const profile = PERSONALITY_PROFILES.get(profileName.toUpperCase())
             if (profile) {
                 currentProfile = profile
                 idleName = profile.idle || DEFAULT_IDLE
@@ -791,20 +815,31 @@ export function createAnimationManager(loader) {
             }
         },
 
+        /**
+         * Register a new personality profile at runtime (for plugin system).
+         */
+        registerProfile(name, config) {
+            if (!name || !config) return
+            const key = name.toUpperCase()
+            PERSONALITY_PROFILES.set(key, {
+                idle: config.idle || 'idle',
+                listening: config.listening || 'breathing_idle',
+                thinking: config.thinking || 'thinking',
+                speaking: Array.isArray(config.speaking) ? config.speaking : [config.speaking || 'talking'],
+                minimalGestures: Boolean(config.minimalGestures),
+                name: key,
+            })
+            log(`Registered animation profile: ${key}`)
+        },
+
         getCurrentProfile() {
             return currentProfile.name
         },
 
-        // Phase 5: Play state explicitly
         playState(stateOrEmotion) {
             api.onStateChange(stateOrEmotion)
         },
 
-        /**
-         * Release actions bound to the current mixer but KEEP the clip cache,
-         * so FBX files are not re-downloaded on every avatar switch.
-         * Called from disposeCurrentVRM() before the mixer is torn down.
-         */
         unbindMixer() {
             if (finishedHandler && mixer) {
                 mixer.removeEventListener('finished', finishedHandler)
@@ -830,63 +865,11 @@ export function createAnimationManager(loader) {
             log('Unbound mixer (clips kept cached)')
         },
 
-        /** Tear down everything including the clip cache. */
         dispose() {
             api.unbindMixer()
             clipCache.clear()
             log('Disposed')
         },
-    }
-
-    /**
-     * Play a looping clip (e.g. idle/listening/speaking). The idle action is
-     * faded out while a non-idle loop runs; when stopped it fades back.
-     */
-    function playLooping(name, fromAction = null) {
-        const expectedMixer = mixer
-        const expectedGeneration = mixerGeneration
-        loadClips(name).then((clips) => {
-            if (!clips || !isCurrentBinding(expectedMixer, expectedGeneration)) {
-                warn(`Cannot play loop ${name}: no clips or no mixer`)
-                return
-            }
-            const clip = clips[0]
-            const next = actionFor(clip)
-            if (!next) return
-
-            next.setLoop(THREE.LoopRepeat, Infinity)
-            next.clampWhenFinished = false
-            next.time = 0
-
-            const from = fromAction || currentAction || idleAction
-            startCrossFade(from, next, crossFadeDuration, () => {
-                // If this loop replaces the idle, keep idleAction reference but
-                // it remains at weight 0 underneath.
-                if (name === idleName) {
-                    idleAction = next
-                    currentAction = null
-                    activeName = null
-                    setFBXActive(false)
-                } else {
-                    currentAction = next
-                    activeName = name
-                    setFBXActive(true)
-                }
-                currentActionIsOneShot = false
-                currentPriority = priorityForState(currentState)
-                log(`Looping: ${name}`)
-            })
-        })
-    }
-
-    function entryToName(entry) {
-        if (!entry) return null
-        if (ANIMATION_MAP[entry]) return entry
-        // Allow passing a raw URL.
-        for (const [n, u] of Object.entries(ANIMATION_MAP)) {
-            if (u === entry) return n
-        }
-        return null
     }
 
     return api

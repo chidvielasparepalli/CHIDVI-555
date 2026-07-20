@@ -48,7 +48,7 @@ class TaskQueue:
 
     def _get_executor(self):
         if self._executor is None:
-            from automation.executor import AgentExecutor
+            from assets.automations.executor import AgentExecutor
             self._executor = AgentExecutor()
         return self._executor
 

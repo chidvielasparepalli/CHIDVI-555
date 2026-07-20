@@ -1,0 +1,7 @@
+[2026-07-16 10:11:57] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-16 10:11:57] INFO     ui.runtime:2147: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-16 10:11:58] INFO     commands.router:70: Command router initialized
+[2026-07-16 10:11:58] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-16 10:11:58] INFO     ui.runtime:2147: SYS: Renderer page load started.
+[2026-07-16 10:11:59] INFO     SESSION:1154: [SESSION #1] CONNECTING...
+[2026-07-16 10:12:00] INFO     ui.runtime:2147: SYS: Renderer page load finished -> True.

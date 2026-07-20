@@ -21,7 +21,6 @@ class EventType(Enum):
     # Personality events
     PERSONALITY_CHANGED = "personality_changed"
     PERSONALITY_LOADING = "personality_loading"
-    PERSONALITY_LOADED = "personality_loaded"
     
     # Session events
     SESSION_STARTED = "session_started"
@@ -30,14 +29,10 @@ class EventType(Enum):
     SESSION_RECONNECTING = "session_reconnecting"
     
     # Audio events
-    AUDIO_STARTED = "audio_started"
-    AUDIO_STOPPED = "audio_stopped"
-    AUDIO_ERROR = "audio_error"
     AUDIO_MUTED = "audio_muted"
     AUDIO_UNMUTED = "audio_unmuted"
     
     # Command events
-    COMMAND_RECEIVED = "command_received"
     COMMAND_LOCAL = "command_local"
     COMMAND_REMOTE = "command_remote"
     COMMAND_EXECUTED = "command_executed"
@@ -45,21 +40,16 @@ class EventType(Enum):
     
     # Avatar events
     AVATAR_STATE_CHANGED = "avatar_state_changed"
-    AVATAR_EMOTION_CHANGED = "avatar_emotion_changed"
     
     # UI events
     UI_STATE_CHANGED = "ui_state_changed"
     UI_THEME_CHANGED = "ui_theme_changed"
     
     # Gemini/API events
-    GEMINI_STREAMING_START = "gemini_streaming_start"
-    GEMINI_STREAMING_END = "gemini_streaming_end"
-    GEMINI_TOOL_CALL = "gemini_tool_call"
     GEMINI_API_ERROR = "gemini_api_error"
     GEMINI_KEY_ROTATED = "gemini_key_rotated"
     
     # System events
-    SYSTEM_READY = "system_ready"
     SYSTEM_SHUTDOWN = "system_shutdown"
     SYSTEM_ERROR = "system_error"
 
@@ -147,15 +137,6 @@ class EventBus:
                 except Exception as e:
                     logger.error(f"Error in event handler for {event.type.value}: {e}")
     
-    def clear(self):
-        """Clear all subscriptions."""
-        with self._lock:
-            self._subscribers.clear()
-    
-    def get_subscriber_count(self, event_type: EventType) -> int:
-        """Get the number of subscribers for an event type."""
-        with self._lock:
-            return len(self._subscribers.get(event_type, []))
 
 
 # Global event bus instance

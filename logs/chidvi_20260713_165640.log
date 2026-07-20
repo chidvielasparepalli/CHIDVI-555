@@ -1,0 +1,13 @@
+[2026-07-13 16:56:45] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-13 16:56:46] INFO     ui.runtime:1321: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-13 16:56:57] INFO     commands.router:70: Command router initialized
+[2026-07-13 16:56:57] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-13 16:56:58] INFO     ui.runtime:1321: SYS: Renderer page load started.
+[2026-07-13 16:56:59] INFO     ui.runtime:1321: SYS: JARVIS online.
+[2026-07-13 16:56:59] INFO     ui.runtime:1321: [MIC] Device opening
+[2026-07-13 16:56:59] INFO     ui.runtime:1321: [MIC] Device opened
+[2026-07-13 16:57:01] INFO     ui.runtime:1321: SYS: Renderer page load finished -> False.
+[2026-07-13 16:57:10] INFO     ui.runtime:1321: SYS: Renderer page load started.
+[2026-07-13 16:57:13] INFO     ui.runtime:1321: SYS: Renderer page load finished -> False.
+[2026-07-13 16:58:14] INFO     ui.runtime:1321: SYS: Renderer page load started.
+[2026-07-13 16:58:16] INFO     ui.runtime:1321: SYS: Renderer page load finished -> False.

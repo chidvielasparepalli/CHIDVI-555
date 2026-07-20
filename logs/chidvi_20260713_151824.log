@@ -1,0 +1,104 @@
+[2026-07-13 15:18:28] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-13 15:18:28] INFO     ui.runtime:1316: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-13 15:18:29] INFO     commands.router:70: Command router initialized
+[2026-07-13 15:18:29] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-13 15:18:29] INFO     ui.runtime:1316: SYS: Renderer page load started.
+[2026-07-13 15:18:30] INFO     ui.runtime:1316: SYS: Renderer page load finished -> True.
+[2026-07-13 15:18:30] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 15:18:53] INFO     commands.router:310: Handling local command: avatar - wave
+[2026-07-13 15:18:53] INFO     commands.router:332: Local command executed: wave
+[2026-07-13 15:18:53] INFO     ui.runtime:1316: SYS: Avatar action -> wave
+[2026-07-13 15:18:53] INFO     ui.runtime:1316: [VRM] Avatar action requested -> wave
+[2026-07-13 15:18:55] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-13 15:18:56] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 15:18:58] INFO     commands.router:310: Handling local command: personality - switch to hinata
+[2026-07-13 15:18:58] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-13 15:18:58] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-13 15:18:58] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 15:18:58] INFO     commands.router:332: Local command executed: switch to hinata
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: SYS: Switching personality -> HINATA
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: SYS: Avatar profile -> HINATA uses Hinata.vrm
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: SYS: Applying avatar profile -> HINATA / Hinata.vrm
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: SYS: UI theme -> HINATA
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: SYS: Forwarding VRM switch -> Hinata.vrm
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: [PERSONALITY] Avatar request sent -> Hinata.vrm
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: [PERSONALITY] Waiting for renderer -> Hinata.vrm
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: SYS: Animation profile -> HINATA
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: [VRM] Animation profile requested -> HINATA
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: SYS: Personality active -> HINATA
+[2026-07-13 15:18:58] INFO     ui.runtime:1316: [VRM] Switch command sent -> Hinata.vrm; result=sent
+[2026-07-13 15:18:59] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': False, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'breathing_idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 6, 'cachedClipNames': ['idle', 'talking', 'breathing_idle', 'thinking', 'wave', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA', 'currentPriority': 6, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 4}}
+[2026-07-13 15:18:59] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-13 15:19:00] INFO     ui.runtime:1316: [VRM] Avatar Ready -> Hinata.vrm
+[2026-07-13 15:19:00] INFO     ui.runtime:1316: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'breathing_idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 6, 'cachedClipNames': ['idle', 'talking', 'breathing_idle', 'thinking', 'wave', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA', 'currentPriority': 6, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 5}}
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 15:19:03] INFO     commands.router:310: Handling local command: personality - switch to chidvi
+[2026-07-13 15:19:03] INFO     core.personality_manager:259: Switching personality to CHIDVI
+[2026-07-13 15:19:03] INFO     core.personality_manager:307: Personality switched to CHIDVI
+[2026-07-13 15:19:03] INFO     commands.router:332: Local command executed: switch to chidvi
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: SYS: Switching personality -> CHIDVI
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: SYS: Avatar profile -> CHIDVI uses Chidvi.vrm
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: SYS: Applying avatar profile -> CHIDVI / Chidvi.vrm
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: SYS: UI theme -> CHIDVI
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: SYS: Forwarding VRM switch -> Chidvi.vrm
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: [PERSONALITY] Avatar request sent -> Chidvi.vrm
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: [PERSONALITY] Waiting for renderer -> Chidvi.vrm
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: SYS: Animation profile -> CHIDVI
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: [VRM] Animation profile requested -> CHIDVI
+[2026-07-13 15:19:03] INFO     ui.runtime:1316: SYS: Personality active -> CHIDVI
+[2026-07-13 15:19:04] INFO     ui.runtime:1316: [VRM] Switch command sent -> Chidvi.vrm; result=sent
+[2026-07-13 15:19:04] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': False, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 6, 'cachedClipNames': ['idle', 'talking', 'breathing_idle', 'thinking', 'wave', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI', 'currentPriority': 4, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 6}}
+[2026-07-13 15:19:04] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6J... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-13 15:19:05] INFO     ui.runtime:1316: [VRM] Avatar Ready -> Chidvi.vrm
+[2026-07-13 15:19:05] INFO     ui.runtime:1316: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 6, 'cachedClipNames': ['idle', 'talking', 'breathing_idle', 'thinking', 'wave', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI', 'currentPriority': 4, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 7}}
+[2026-07-13 15:19:08] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 15:19:09] INFO     commands.router:310: Handling local command: avatar - point
+[2026-07-13 15:19:09] INFO     commands.router:332: Local command executed: point
+[2026-07-13 15:19:09] INFO     ui.runtime:1316: SYS: Avatar action -> point
+[2026-07-13 15:19:09] INFO     ui.runtime:1316: [VRM] Avatar action requested -> point
+[2026-07-13 15:19:12] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 15:19:14] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 15:19:14] INFO     ui.runtime:1316: Jarvis: I see the gesture. What are you pointing towards?
+[2026-07-13 15:20:59] INFO     commands.router:310: Handling local command: personality - switch to hinata
+[2026-07-13 15:20:59] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-13 15:20:59] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-13 15:20:59] INFO     commands.router:332: Local command executed: switch to hinata
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: SYS: Switching personality -> HINATA
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: SYS: Avatar profile -> HINATA uses Hinata.vrm
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: SYS: Applying avatar profile -> HINATA / Hinata.vrm
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: SYS: UI theme -> HINATA
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: SYS: Forwarding VRM switch -> Hinata.vrm
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: [PERSONALITY] Avatar request sent -> Hinata.vrm
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: [PERSONALITY] Waiting for renderer -> Hinata.vrm
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: SYS: Animation profile -> HINATA
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: [VRM] Animation profile requested -> HINATA
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: SYS: Personality active -> HINATA
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: [VRM] Switch command sent -> Hinata.vrm; result=sent
+[2026-07-13 15:20:59] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': False, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'breathing_idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'breathing_idle', 'thinking', 'wave', 'talking2', 'pointing'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA', 'currentPriority': 4, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 12}}
+[2026-07-13 15:20:59] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6L... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-13 15:21:00] INFO     ui.runtime:1316: [VRM] Avatar Ready -> Hinata.vrm
+[2026-07-13 15:21:00] INFO     ui.runtime:1316: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'breathing_idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'breathing_idle', 'thinking', 'wave', 'talking2', 'pointing'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA', 'currentPriority': 4, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 13}}
+[2026-07-13 15:21:03] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 15:21:11] INFO     commands.router:310: Handling local command: avatar - wave
+[2026-07-13 15:21:11] INFO     commands.router:332: Local command executed: wave
+[2026-07-13 15:21:11] INFO     ui.runtime:1316: SYS: Avatar action -> wave
+[2026-07-13 15:21:11] INFO     ui.runtime:1316: [VRM] Avatar action requested -> wave
+[2026-07-13 15:21:15] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 15:21:20] INFO     commands.router:310: Handling local command: avatar - clap
+[2026-07-13 15:21:20] INFO     commands.router:332: Local command executed: clap
+[2026-07-13 15:21:20] INFO     ui.runtime:1316: SYS: Avatar action -> clap
+[2026-07-13 15:21:20] INFO     ui.runtime:1316: [VRM] Avatar action requested -> clap
+[2026-07-13 15:21:20] INFO     ui.runtime:1316: Jarvis: Hehe, enti pandhi, ala wave chestunnav? It's so cute!
+[2026-07-13 15:21:20] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 15:21:23] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 15:21:27] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 15:21:27] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 15:21:30] INFO     ui.runtime:1316: Jarvis: Ayy, now you're clapping? Idiot! Em celebrate chestunnav? Hehe, so silly!
+[2026-07-13 15:21:30] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 15:21:32] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 15:21:34] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 15:21:34] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 15:21:40] INFO     ui.runtime:1316: Jarvis: Walk? Hmm, sare! But where do you want me to walk, pandhi? You're so demanding, you know?
+[2026-07-13 15:21:40] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 15:21:43] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 15:21:43] INFO     HINATA:20: Avatar State -> IDLE

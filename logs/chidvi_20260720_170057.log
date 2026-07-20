@@ -1,0 +1,5 @@
+[2026-07-20 17:01:16] INFO     core.personality_manager:136: Discovered 2 personality plugin(s): CHIDVI, HINATA
+[2026-07-20 17:01:16] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-20 17:01:16] INFO     commands.router:70: Command router initialized
+[2026-07-20 17:01:16] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-20 17:01:17] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.

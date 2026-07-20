@@ -1,0 +1,12 @@
+[2026-07-12 20:16:24] INFO     api.key_pool:128: Loaded 2 API keys
+[2026-07-12 20:16:24] WARNING  api.key_pool:74: Key rate limited: k1... (recovered at 21:16:24)
+[2026-07-12 20:16:24] INFO     commands.router:70: Command router initialized
+[2026-07-12 20:16:24] INFO     commands.router:70: Command router initialized
+[2026-07-12 20:16:24] INFO     commands.router:70: Command router initialized
+[2026-07-12 20:16:24] INFO     commands.router:70: Command router initialized
+[2026-07-12 20:16:24] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-12 20:16:24] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-12 20:16:24] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-12 20:16:24] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-12 20:16:24] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-12 20:16:24] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA

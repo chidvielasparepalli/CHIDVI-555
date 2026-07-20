@@ -1,0 +1,133 @@
+[2026-07-16 01:17:49] INFO     commands.router:70: Command router initialized
+[2026-07-16 01:17:49] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-16 01:17:49] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-16 01:17:50] INFO     SESSION:1154: [SESSION #1] CONNECTING...
+[2026-07-16 01:17:51] INFO     SESSION:1170: [SESSION #1] CONNECTED - personality=HINATA voice=Aoede
+[2026-07-16 01:17:51] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-16 01:17:51] INFO     GEMINI:943: SEND TASK STARTED
+[2026-07-16 01:17:51] INFO     MIC:963: [MIC] TASK STARTED
+[2026-07-16 01:17:51] INFO     MIC:967: [MIC] Opening stream...
+[2026-07-16 01:17:51] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-16 01:17:51] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-16 01:17:51] INFO     RECV:1002: [RECV] TASK STARTED
+[2026-07-16 01:17:51] INFO     TTS:1121: [TTS] TASK STARTED
+[2026-07-16 01:17:51] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-16 01:17:51] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-16 01:17:51] INFO     GEMINI:952: GEMINI SEND #1 - 2048 bytes
+[2026-07-16 01:18:04] INFO     MIC:76: MIC CALLBACK #201 - captured 2048 bytes
+[2026-07-16 01:18:04] INFO     GEMINI:952: GEMINI SEND #201 - 2048 bytes
+[2026-07-16 01:18:12] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:18:13] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:18:13] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:18:13] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:18:16] INFO     MIC:76: MIC CALLBACK #401 - captured 2048 bytes
+[2026-07-16 01:18:16] INFO     GEMINI:952: GEMINI SEND #401 - 2048 bytes
+[2026-07-16 01:18:21] INFO     core.proactive_conversation:257: Firing proactive trigger: greeting - Hello there! How can I help you today?...
+[2026-07-16 01:18:23] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-16 01:18:25] INFO     RECV:1029: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-16 01:18:25] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 01:18:25] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-16 01:18:33] INFO     RECV:1091: [RECV] AI RESPONSE: Hehe, hello Chidvilas! Hmm, aren't *you* supposed to be the one telling me what to do, pandhi? 😉 Wha
+[2026-07-16 01:18:33] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 01:18:38] INFO     GEMINI:952: GEMINI SEND #601 - 2048 bytes
+[2026-07-16 01:18:42] INFO     MIC:76: MIC CALLBACK #801 - captured 2048 bytes
+[2026-07-16 01:18:50] INFO     GEMINI:952: GEMINI SEND #801 - 2048 bytes
+[2026-07-16 01:18:51] INFO     core.proactive_conversation:257: Firing proactive trigger: help_offer - Is there something I can help you with?...
+[2026-07-16 01:18:54] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 01:19:03] INFO     RECV:1091: [RECV] AI RESPONSE: Ayy, you're so cute today, idiot! Hehe, don't tell me you forgot what we like to do... 🤔 What fun th
+[2026-07-16 01:19:04] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 01:19:08] INFO     MIC:76: MIC CALLBACK #1201 - captured 2048 bytes
+[2026-07-16 01:19:13] INFO     GEMINI:952: GEMINI SEND #1001 - 2048 bytes
+[2026-07-16 01:19:21] INFO     MIC:76: MIC CALLBACK #1401 - captured 2048 bytes
+[2026-07-16 01:19:26] INFO     GEMINI:952: GEMINI SEND #1201 - 2048 bytes
+[2026-07-16 01:19:33] INFO     MIC:76: MIC CALLBACK #1601 - captured 2048 bytes
+[2026-07-16 01:19:38] INFO     GEMINI:952: GEMINI SEND #1401 - 2048 bytes
+[2026-07-16 01:19:41] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:19:41] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:19:46] INFO     MIC:76: MIC CALLBACK #1801 - captured 2048 bytes
+[2026-07-16 01:19:50] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:19:51] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:19:51] INFO     GEMINI:952: GEMINI SEND #1601 - 2048 bytes
+[2026-07-16 01:19:59] INFO     MIC:76: MIC CALLBACK #2001 - captured 2048 bytes
+[2026-07-16 01:20:04] INFO     GEMINI:952: GEMINI SEND #1801 - 2048 bytes
+[2026-07-16 01:20:12] INFO     MIC:76: MIC CALLBACK #2201 - captured 2048 bytes
+[2026-07-16 01:20:17] INFO     GEMINI:952: GEMINI SEND #2001 - 2048 bytes
+[2026-07-16 01:20:25] INFO     MIC:76: MIC CALLBACK #2401 - captured 2048 bytes
+[2026-07-16 01:20:30] INFO     GEMINI:952: GEMINI SEND #2201 - 2048 bytes
+[2026-07-16 01:20:30] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:31] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:31] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:32] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:32] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:32] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:33] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:33] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:33] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:34] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:34] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:34] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:34] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:35] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:36] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:36] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:36] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:37] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:37] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:37] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:38] INFO     MIC:76: MIC CALLBACK #2601 - captured 2048 bytes
+[2026-07-16 01:20:38] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:38] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:39] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:39] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:40] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:40] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:41] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:41] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:41] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:41] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:43] INFO     GEMINI:952: GEMINI SEND #2401 - 2048 bytes
+[2026-07-16 01:20:48] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:49] INFO     RECV:1052: [STT] RESULT #1: No
+[2026-07-16 01:20:49] INFO     RECV:1052: [STT] RESULT #2: I don't think so.
+[2026-07-16 01:20:50] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:50] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:51] INFO     MIC:76: MIC CALLBACK #2801 - captured 2048 bytes
+[2026-07-16 01:20:51] INFO     RECV:1076: [STT] TURN COMPLETE: No I don't think so.
+[2026-07-16 01:20:51] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:51] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:51] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:51] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:52] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:52] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:52] INFO     RECV:1052: [STT] RESULT #3: He
+[2026-07-16 01:20:52] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:52] INFO     RECV:1052: [STT] RESULT #4: ne
+[2026-07-16 01:20:52] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:20:52] INFO     RECV:1052: [STT] RESULT #5: ver
+[2026-07-16 01:20:52] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:20:53] INFO     RECV:1052: [STT] RESULT #6: said
+[2026-07-16 01:20:53] INFO     RECV:1052: [STT] RESULT #7: that
+[2026-07-16 01:20:53] INFO     RECV:1052: [STT] RESULT #8: he like you.
+[2026-07-16 01:20:55] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 01:21:06] INFO     RECV:1076: [STT] TURN COMPLETE: He ne ver said that he like you.
+[2026-07-16 01:21:06] INFO     RECV:1091: [RECV] AI RESPONSE: Hmph! What are you talking about, idiot?! Just because he doesn't say it doesn't mean it's not true,
+[2026-07-16 01:21:06] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 01:21:07] INFO     GEMINI:952: GEMINI SEND #2601 - 2048 bytes
+[2026-07-16 01:21:10] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:21:10] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:21:10] INFO     RECV:1052: [STT] RESULT #9: No, no, no, no.
+[2026-07-16 01:21:11] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:21:11] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:21:12] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-16 01:21:12] INFO     core.audio.diagnostics:73: [VOICE] Silence
+[2026-07-16 01:21:12] INFO     RECV:1076: [STT] TURN COMPLETE: No, no, no, no.
+[2026-07-16 01:21:12] INFO     RECV:1091: [RECV] AI RESPONSE: Ayyy, you're
+[2026-07-16 01:21:13] INFO     RECV:1052: [STT] RESULT #10: said
+[2026-07-16 01:21:14] INFO     RECV:1052: [STT] RESULT #11: that
+[2026-07-16 01:21:14] INFO     RECV:1052: [STT] RESULT #12: he likes you.
+[2026-07-16 01:21:16] INFO     MIC:76: MIC CALLBACK #3201 - captured 2048 bytes
+[2026-07-16 01:21:20] INFO     GEMINI:952: GEMINI SEND #2801 - 2048 bytes
+[2026-07-16 01:21:20] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 01:21:28] INFO     RECV:1076: [STT] TURN COMPLETE: said that he likes you.
+[2026-07-16 01:21:28] INFO     RECV:1091: [RECV] AI RESPONSE: Hmph! Idiot! Why would you say that? That actually hurts me, you know... 😥 He doesn't need to say it
+[2026-07-16 01:21:32] INFO     HINATA:17: Avatar State -> IDLE

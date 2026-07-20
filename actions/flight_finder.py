@@ -32,11 +32,6 @@ _MONTH_MAP: dict[str, int] = {
     "eylül": 9, "ekim": 10,  "kasım": 11, "aralık": 12,
 }
 
-_RELATIVE_MAP_KEYS = {
-    "today", "bugün",
-    "tomorrow", "yarın",
-}
-
 
 def _parse_date(raw: str) -> str:
 

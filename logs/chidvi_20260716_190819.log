@@ -1,0 +1,24 @@
+[2026-07-16 19:08:21] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-16 19:08:21] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-16 19:08:21] INFO     commands.router:70: Command router initialized
+[2026-07-16 19:08:21] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-16 19:08:21] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-16 19:08:22] INFO     SESSION:1175: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-16 19:08:22] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-16 19:08:23] INFO     SESSION:1191: [SESSION #1] CONNECTED - personality=HINATA voice=Aoede
+[2026-07-16 19:08:23] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-16 19:08:23] INFO     GEMINI:964: SEND TASK STARTED
+[2026-07-16 19:08:23] INFO     MIC:984: [MIC] TASK STARTED
+[2026-07-16 19:08:23] INFO     MIC:988: [MIC] Opening stream...
+[2026-07-16 19:08:23] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-16 19:08:23] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-16 19:08:23] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-16 19:08:23] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-16 19:08:23] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-16 19:08:23] INFO     RECV:1023: [RECV] TASK STARTED
+[2026-07-16 19:08:23] INFO     TTS:1142: [TTS] TASK STARTED
+[2026-07-16 19:08:23] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-16 19:08:23] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-16 19:08:23] INFO     GEMINI:973: GEMINI SEND #1 - 2048 bytes
+[2026-07-16 19:08:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-16 19:08:28] INFO     RECV:1073: [STT] RESULT #1: <noise>

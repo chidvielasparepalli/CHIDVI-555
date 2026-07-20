@@ -1,0 +1,420 @@
+[2026-07-13 14:24:21] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-13 14:24:21] INFO     ui.runtime:1316: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-13 14:24:25] INFO     commands.router:70: Command router initialized
+[2026-07-13 14:24:25] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-13 14:24:25] INFO     ui.runtime:1316: SYS: Renderer page load started.
+[2026-07-13 14:24:26] INFO     ui.runtime:1316: SYS: Renderer page load finished -> True.
+[2026-07-13 14:24:26] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 14:43:30] INFO     commands.router:310: Handling local command: personality - switch to hinata
+[2026-07-13 14:43:30] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: SYS: Switching personality -> HINATA
+[2026-07-13 14:43:30] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-13 14:43:30] INFO     commands.router:332: Local command executed: switch to hinata
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: SYS: Avatar profile -> HINATA uses Hinata.vrm
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: SYS: Applying avatar profile -> HINATA / Hinata.vrm
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: SYS: UI theme -> HINATA
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: SYS: Forwarding VRM switch -> Hinata.vrm
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: [PERSONALITY] Avatar request sent -> Hinata.vrm
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: [PERSONALITY] Waiting for renderer -> Hinata.vrm
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: SYS: Animation profile -> HINATA
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: [VRM] Animation profile requested -> HINATA
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: SYS: Personality active -> HINATA
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: [VRM] Switch command sent -> Hinata.vrm; result=sent
+[2026-07-13 14:43:30] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': False, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'breathing_idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 5, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA'}}
+[2026-07-13 14:43:30] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-13 14:43:33] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at switchAvatarNow (http://localhost:5173/src/main.js:442:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:33] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at switchAvatarNow (http://localhost:5173/src/main.js:442:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:33] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:33] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:33] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: q is not defined\n    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)\n    at attachVRM (http://localhost:5173/src/main.js:397:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'breathing_idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 5, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA'}}
+[2026-07-13 14:43:34] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:34] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:34] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:34] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 14:43:35] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:35] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:35] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:35] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:36] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:36] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: q is not defined\n    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)\n    at attachVRM (http://localhost:5173/src/main.js:397:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'breathing_idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 5, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA'}}
+[2026-07-13 14:43:36] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:36] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:36] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:37] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:37] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:37] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:38] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:38] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:38] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:38] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:39] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:39] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:39] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: q is not defined\n    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)\n    at attachVRM (http://localhost:5173/src/main.js:397:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'breathing_idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 5, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA'}}
+[2026-07-13 14:43:39] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:39] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:40] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:40] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:40] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:41] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:41] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:41] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:42] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:42] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:42] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:42] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:43] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:43] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:43] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:43] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 14:43:44] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:44] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: q is not defined\n    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)\n    at attachVRM (http://localhost:5173/src/main.js:397:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'breathing_idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 5, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA'}}
+[2026-07-13 14:43:44] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:44] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:44] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:45] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:45] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:45] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:45] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-13 14:43:45] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:46] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:46] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 14:43:46] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:46] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:46] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:47] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:48] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:48] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:48] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:48] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:49] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:49] INFO     ui.runtime:1316: Jarvis: Heeeey! Pandhi! What are you doing?
+[2026-07-13 14:43:49] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 14:43:49] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:49] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:49] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: q is not defined
+    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)
+    at attachVRM (http://localhost:5173/src/main.js:397:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-13 14:43:49] INFO     ui.runtime:1316: [VRM] Avatar Ready timeout -> Hinata.vrm; diagnostics={'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: q is not defined\n    at applyProceduralPose (http://localhost:5173/src/main.js:157:41)\n    at attachVRM (http://localhost:5173/src/main.js:397:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'breathing_idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle', 'talking2', 'secret'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA'}}
+[2026-07-13 14:44:50] INFO     commands.router:310: Handling local command: personality - switch to chidvi
+[2026-07-13 14:44:50] INFO     core.personality_manager:259: Switching personality to CHIDVI
+[2026-07-13 14:44:50] INFO     core.personality_manager:307: Personality switched to CHIDVI
+[2026-07-13 14:44:50] INFO     commands.router:332: Local command executed: switch to chidvi
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: SYS: Switching personality -> CHIDVI
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: SYS: Avatar profile -> CHIDVI uses Chidvi.vrm
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: SYS: Applying avatar profile -> CHIDVI / Chidvi.vrm
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: SYS: UI theme -> CHIDVI
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: SYS: Forwarding VRM switch -> Chidvi.vrm
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: [PERSONALITY] Avatar request sent -> Chidvi.vrm
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: [PERSONALITY] Waiting for renderer -> Chidvi.vrm
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: SYS: Animation profile -> CHIDVI
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: [VRM] Animation profile requested -> CHIDVI
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: SYS: Personality active -> CHIDVI
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: [VRM] Switch command sent -> Chidvi.vrm; result=sent
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: [VRM] Avatar Ready -> Chidvi.vrm
+[2026-07-13 14:44:50] INFO     ui.runtime:1316: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 4, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle', 'talking2', 'secret'], 'pendingFade': True, 'blendProgress': 0.2865714285629137, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI'}}
+[2026-07-13 14:44:51] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6J... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-13 14:44:54] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 14:45:00] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 14:45:02] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 14:45:04] INFO     ui.runtime:1316: Jarvis: Hello CHIDVILAS! How can I assist you today?
+[2026-07-13 14:45:04] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 14:45:09] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 14:45:11] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 14:45:15] INFO     ui.runtime:1316: Jarvis: నేను చాలా బాగున్నాను, CHIDVILAS. మీకు ఈరోజు ఎలా సహాయం చేయగలను?
+[2026-07-13 14:45:15] INFO     HINATA:20: Avatar State -> IDLE

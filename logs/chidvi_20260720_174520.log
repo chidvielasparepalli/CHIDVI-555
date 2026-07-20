@@ -1,0 +1,335 @@
+[2026-07-20 17:45:23] INFO     core.personality_manager:136: Discovered 2 personality plugin(s): CHIDVI, HINATA
+[2026-07-20 17:45:23] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-20 17:45:23] INFO     commands.router:70: Command router initialized
+[2026-07-20 17:45:23] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-20 17:45:23] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-20 17:45:24] INFO     SESSION:1222: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-20 17:45:24] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-20 17:45:26] INFO     SESSION:1238: [SESSION #1] CONNECTED - personality=HINATA voice=Aoede
+[2026-07-20 17:45:26] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-20 17:45:26] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-20 17:45:26] INFO     GEMINI:1011: SEND TASK STARTED
+[2026-07-20 17:45:26] INFO     MIC:1031: [MIC] TASK STARTED
+[2026-07-20 17:45:26] INFO     MIC:1035: [MIC] Opening stream...
+[2026-07-20 17:45:26] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-20 17:45:26] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-20 17:45:26] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-20 17:45:26] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-20 17:45:26] INFO     RECV:1070: [RECV] TASK STARTED
+[2026-07-20 17:45:26] INFO     TTS:1189: [TTS] TASK STARTED
+[2026-07-20 17:45:26] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-20 17:45:26] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-20 17:45:26] INFO     GEMINI:1020: GEMINI SEND #1 - 2048 bytes
+[2026-07-20 17:45:29] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:29] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:29] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:30] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:30] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:30] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:30] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:31] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:31] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:31] INFO     RECV:1120: [STT] RESULT #1: 0
+[2026-07-20 17:45:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:31] INFO     RECV:1120: [STT] RESULT #2: 00
+[2026-07-20 17:45:31] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:31] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:31] INFO     RECV:1120: [STT] RESULT #3: सर
+[2026-07-20 17:45:32] INFO     RECV:1120: [STT] RESULT #4: देख
+[2026-07-20 17:45:32] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:32] INFO     RECV:1120: [STT] RESULT #5: िए
+[2026-07-20 17:45:32] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:32] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:32] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:32] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:33] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:33] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:33] INFO     RECV:1120: [STT] RESULT #6: नहीं
+[2026-07-20 17:45:33] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:33] INFO     RECV:1120: [STT] RESULT #7: था
+[2026-07-20 17:45:33] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:33] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:33] INFO     RECV:1120: [STT] RESULT #8: मुझे
+[2026-07-20 17:45:33] INFO     RECV:1120: [STT] RESULT #9: लग रहा
+[2026-07-20 17:45:34] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:34] INFO     RECV:1120: [STT] RESULT #10: था
+[2026-07-20 17:45:34] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:34] INFO     RECV:1120: [STT] RESULT #11: कि
+[2026-07-20 17:45:34] INFO     RECV:1120: [STT] RESULT #12: भाई
+[2026-07-20 17:45:34] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:34] INFO     RECV:1120: [STT] RESULT #13: सब
+[2026-07-20 17:45:34] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:34] INFO     RECV:1120: [STT] RESULT #14: से
+[2026-07-20 17:45:34] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:35] INFO     RECV:1120: [STT] RESULT #15: ज्यादा
+[2026-07-20 17:45:35] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:35] INFO     RECV:1120: [STT] RESULT #16: वही
+[2026-07-20 17:45:35] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:35] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:35] INFO     RECV:1120: [STT] RESULT #17: देख
+[2026-07-20 17:45:35] INFO     RECV:1120: [STT] RESULT #18: िए
+[2026-07-20 17:45:35] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:35] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:35] INFO     RECV:1120: [STT] RESULT #19: लेकिन
+[2026-07-20 17:45:35] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:35] INFO     RECV:1120: [STT] RESULT #20: वो
+[2026-07-20 17:45:36] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:36] INFO     RECV:1120: [STT] RESULT #21: सब
+[2026-07-20 17:45:36] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:36] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:36] INFO     RECV:1120: [STT] RESULT #22: से
+[2026-07-20 17:45:36] INFO     RECV:1120: [STT] RESULT #23: कम
+[2026-07-20 17:45:36] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:36] INFO     RECV:1120: [STT] RESULT #24: रे
+[2026-07-20 17:45:36] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:37] INFO     RECV:1120: [STT] RESULT #25: ंज
+[2026-07-20 17:45:37] INFO     RECV:1120: [STT] RESULT #26: उस
+[2026-07-20 17:45:37] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:37] INFO     RECV:1120: [STT] RESULT #27: ने
+[2026-07-20 17:45:37] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:37] INFO     RECV:1120: [STT] RESULT #28: दी
+[2026-07-20 17:45:37] INFO     RECV:1120: [STT] RESULT #29: है
+[2026-07-20 17:45:37] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:37] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:37] INFO     RECV:1120: [STT] RESULT #30: और
+[2026-07-20 17:45:37] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:38] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:38] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:38] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:38] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:38] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:39] INFO     RECV:1120: [STT] RESULT #31: सब
+[2026-07-20 17:45:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:39] INFO     MIC:76: MIC CALLBACK #201 - captured 2048 bytes
+[2026-07-20 17:45:39] INFO     GEMINI:1020: GEMINI SEND #201 - 2048 bytes
+[2026-07-20 17:45:39] INFO     RECV:1120: [STT] RESULT #32: से
+[2026-07-20 17:45:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:39] INFO     RECV:1120: [STT] RESULT #33: ज्या
+[2026-07-20 17:45:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:39] INFO     RECV:1120: [STT] RESULT #34: दा
+[2026-07-20 17:45:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:40] INFO     RECV:1120: [STT] RESULT #35: हम
+[2026-07-20 17:45:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:40] INFO     RECV:1120: [STT] RESULT #36: आप
+[2026-07-20 17:45:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:40] INFO     RECV:1120: [STT] RESULT #37: को
+[2026-07-20 17:45:41] INFO     RECV:1120: [STT] RESULT #38: बहुत
+[2026-07-20 17:45:41] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:41] INFO     RECV:1120: [STT] RESULT #39: ही
+[2026-07-20 17:45:41] INFO     RECV:1120: [STT] RESULT #40: सि
+[2026-07-20 17:45:41] INFO     RECV:1120: [STT] RESULT #41: ंपल
+[2026-07-20 17:45:41] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:41] INFO     RECV:1120: [STT] RESULT #42: व
+[2026-07-20 17:45:42] INFO     RECV:1120: [STT] RESULT #43: ॉइस
+[2026-07-20 17:45:42] INFO     RECV:1120: [STT] RESULT #44: में
+[2026-07-20 17:45:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:42] INFO     RECV:1120: [STT] RESULT #45: बता
+[2026-07-20 17:45:42] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:42] INFO     RECV:1120: [STT] RESULT #46: ता
+[2026-07-20 17:45:42] INFO     RECV:1120: [STT] RESULT #47: हूं
+[2026-07-20 17:45:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:42] INFO     RECV:1120: [STT] RESULT #48: कि
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:43] INFO     RECV:1120: [STT] RESULT #49: भाई
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:43] INFO     RECV:1120: [STT] RESULT #50: इस
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:43] INFO     RECV:1120: [STT] RESULT #51: को
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:43] INFO     RECV:1120: [STT] RESULT #52: कौ
+[2026-07-20 17:45:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:44] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:44] INFO     RECV:1120: [STT] RESULT #53: न
+[2026-07-20 17:45:44] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:44] INFO     RECV:1120: [STT] RESULT #54: सा
+[2026-07-20 17:45:44] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:44] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:44] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:45] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:45] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-20 17:45:45] INFO     RECV:1120: [STT] RESULT #55: ले
+[2026-07-20 17:45:45] INFO     RECV:1120: [STT] RESULT #56: ना
+[2026-07-20 17:45:45] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:45] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:45] INFO     RECV:1120: [STT] RESULT #57: चाहिए
+[2026-07-20 17:45:45] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:45] INFO     RECV:1120: [STT] RESULT #58: अब
+[2026-07-20 17:45:45] INFO     RECV:1120: [STT] RESULT #59: भाई
+[2026-07-20 17:45:45] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:45] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:46] INFO     RECV:1120: [STT] RESULT #60: अगर
+[2026-07-20 17:45:46] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:46] INFO     RECV:1120: [STT] RESULT #61: तुम
+[2026-07-20 17:45:46] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:46] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:46] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:46] INFO     RECV:1120: [STT] RESULT #62: डे
+[2026-07-20 17:45:46] INFO     RECV:1120: [STT] RESULT #63: ढ़
+[2026-07-20 17:45:46] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:47] INFO     RECV:1120: [STT] RESULT #64: लाख
+[2026-07-20 17:45:47] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:47] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:47] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:47] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:47] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:47] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:48] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:48] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:48] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:48] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:48] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:49] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:49] INFO     RECV:1120: [STT] RESULT #65: ने
+[2026-07-20 17:45:49] INFO     RECV:1120: [STT] RESULT #66: चर
+[2026-07-20 17:45:49] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:49] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:50] INFO     RECV:1120: [STT] RESULT #67: ऑफ
+[2026-07-20 17:45:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:50] INFO     RECV:1120: [STT] RESULT #68: जीएस
+[2026-07-20 17:45:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:51] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:51] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:51] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:52] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:52] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:52] INFO     MIC:76: MIC CALLBACK #401 - captured 2048 bytes
+[2026-07-20 17:45:52] INFO     GEMINI:1020: GEMINI SEND #401 - 2048 bytes
+[2026-07-20 17:45:52] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-20 17:45:52] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:52] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:52] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:52] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:53] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:53] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:45:53] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:45:53] INFO     RECV:1097: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-20 17:45:53] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-20 17:45:53] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-20 17:46:00] INFO     RECV:1144: [STT] TURN COMPLETE: 0 00 सर देख िए नहीं था मुझे लग रहा था कि भाई सब से ज्यादा वही देख िए लेकिन वो सब से कम रे ंज उस ने दी है और सब से ज्या दा हम आप को बहुत ही सि ंपल व ॉइस में बता ता हूं कि भाई इस को कौ न सा ले ना चाहिए अब भाई अगर तुम डे ढ़ लाख ने चर ऑफ जीएस
+[2026-07-20 17:46:00] INFO     RECV:1159: [RECV] AI RESPONSE: Ayy Chidvilas! What are you watching? అంత confuse అవుతున్నావు? Hehe. Prices always surprise you!
+[2026-07-20 17:46:00] INFO     ui.runtime:2258: [STT] Recognized: 0 00 सर देख िए नहीं था मुझे लग रहा था कि भाई सब से ज्यादा वही देख िए लेकिन वो सब से कम रे ंज उस ने दी है और सब से ज्या दा हम आप को बहुत ही सि ंपल व ॉइस में बता ता हूं कि भाई इस को कौ न सा ले ना चाहिए अब भाई अगर तुम डे ढ़ लाख ने चर ऑफ जीएस
+[2026-07-20 17:46:00] INFO     ui.runtime:2258: You: 0 00 सर देख िए नहीं था मुझे लग रहा था कि भाई सब से ज्यादा वही देख िए लेकिन वो सब से कम रे ंज उस ने दी है और सब से ज्या दा हम आप को बहुत ही सि ंपल व ॉइस में बता ता हूं कि भाई इस को कौ न सा ले ना चाहिए अब भाई अगर तुम डे ढ़ लाख ने चर ऑफ जीएस
+[2026-07-20 17:46:00] INFO     ui.runtime:2258: Jarvis: Ayy Chidvilas! What are you watching? అంత confuse అవుతున్నావు? Hehe. Prices always surprise you!
+[2026-07-20 17:46:00] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-20 17:46:00] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:02] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:02] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:02] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-20 17:46:07] INFO     RECV:1159: [RECV] AI RESPONSE: Yes, of course I can, Chidvilas! ఏమైంది? ఏదైనా important thing?
+[2026-07-20 17:46:07] INFO     ui.runtime:2258: Jarvis: Yes, of course I can, Chidvilas! ఏమైంది? ఏదైనా important thing?
+[2026-07-20 17:46:07] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-20 17:46:07] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:08] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:08] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:08] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:08] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:09] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:09] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:09] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:09] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:09] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:09] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:09] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:09] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:10] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:10] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:10] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:10] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:10] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:11] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:11] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:11] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:11] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:11] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:11] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:12] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:12] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:12] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:12] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:12] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:12] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:12] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:13] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:13] INFO     RECV:1120: [STT] RESULT #69: उस
+[2026-07-20 17:46:13] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:13] INFO     RECV:1120: [STT] RESULT #70: को
+[2026-07-20 17:46:13] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:13] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:13] INFO     RECV:1120: [STT] RESULT #71: मुझे
+[2026-07-20 17:46:13] INFO     RECV:1120: [STT] RESULT #72: लगता है
+[2026-07-20 17:46:13] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:13] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:14] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:14] INFO     RECV:1120: [STT] RESULT #73: कि
+[2026-07-20 17:46:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:14] INFO     RECV:1120: [STT] RESULT #74: ब
+[2026-07-20 17:46:14] INFO     RECV:1120: [STT] RESULT #75: जाज
+[2026-07-20 17:46:14] INFO     RECV:1120: [STT] RESULT #76: चे
+[2026-07-20 17:46:14] INFO     RECV:1120: [STT] RESULT #77: तक
+[2026-07-20 17:46:14] INFO     RECV:1120: [STT] RESULT #78: की
+[2026-07-20 17:46:15] INFO     RECV:1120: [STT] RESULT #79: तरफ
+[2026-07-20 17:46:15] INFO     RECV:1120: [STT] RESULT #80: जा
+[2026-07-20 17:46:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:15] INFO     RECV:1120: [STT] RESULT #81: ने
+[2026-07-20 17:46:15] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:15] INFO     RECV:1120: [STT] RESULT #82: थी
+[2026-07-20 17:46:15] INFO     RECV:1120: [STT] RESULT #83: तो
+[2026-07-20 17:46:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:15] INFO     RECV:1120: [STT] RESULT #84: भाई
+[2026-07-20 17:46:15] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:16] INFO     RECV:1120: [STT] RESULT #85: जी
+[2026-07-20 17:46:16] INFO     RECV:1120: [STT] RESULT #86: इसको
+[2026-07-20 17:46:16] INFO     RECV:1120: [STT] RESULT #87: रात
+[2026-07-20 17:46:16] INFO     RECV:1120: [STT] RESULT #88: से
+[2026-07-20 17:46:16] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:16] INFO     RECV:1120: [STT] RESULT #89: जब
+[2026-07-20 17:46:16] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:16] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:16] INFO     RECV:1120: [STT] RESULT #90: चला
+[2026-07-20 17:46:17] INFO     RECV:1120: [STT] RESULT #91: ओगे
+[2026-07-20 17:46:17] INFO     GEMINI:1020: GEMINI SEND #601 - 2048 bytes
+[2026-07-20 17:46:17] INFO     RECV:1120: [STT] RESULT #92: दिस
+[2026-07-20 17:46:17] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:17] INFO     RECV:1120: [STT] RESULT #93: वा
+[2026-07-20 17:46:17] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:17] INFO     RECV:1120: [STT] RESULT #94: ज
+[2026-07-20 17:46:17] INFO     RECV:1120: [STT] RESULT #95: ए
+[2026-07-20 17:46:18] INFO     MIC:76: MIC CALLBACK #801 - captured 2048 bytes
+[2026-07-20 17:46:18] INFO     RECV:1120: [STT] RESULT #96: आई
+[2026-07-20 17:46:18] INFO     RECV:1120: [STT] RESULT #97: क्रिए
+[2026-07-20 17:46:18] INFO     RECV:1120: [STT] RESULT #98: टेड बाय
+[2026-07-20 17:46:18] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:19] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:19] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:19] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:19] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:19] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:20] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:20] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-20 17:46:20] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-20 17:46:20] INFO     HINATA:17: Avatar State -> SPEAKING

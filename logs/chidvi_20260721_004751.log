@@ -1,0 +1,70 @@
+[2026-07-21 00:48:06] INFO     core.personality_manager:136: Discovered 2 personality plugin(s): CHIDVI, HINATA
+[2026-07-21 00:48:06] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-21 00:48:07] INFO     commands.router:70: Command router initialized
+[2026-07-21 00:48:07] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-21 00:48:07] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-21 00:48:07] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-21 00:48:07] INFO     SESSION:1222: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-21 00:48:11] INFO     SESSION:1238: [SESSION #1] CONNECTED - personality=HINATA voice=Aoede
+[2026-07-21 00:48:11] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-21 00:48:11] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-21 00:48:11] INFO     GEMINI:1011: SEND TASK STARTED
+[2026-07-21 00:48:11] INFO     MIC:1031: [MIC] TASK STARTED
+[2026-07-21 00:48:11] INFO     MIC:1035: [MIC] Opening stream...
+[2026-07-21 00:48:11] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-21 00:48:11] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-21 00:48:11] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-21 00:48:12] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-21 00:48:12] INFO     RECV:1070: [RECV] TASK STARTED
+[2026-07-21 00:48:12] INFO     TTS:1189: [TTS] TASK STARTED
+[2026-07-21 00:48:12] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-21 00:48:12] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-21 00:48:12] INFO     GEMINI:1020: GEMINI SEND #1 - 2048 bytes
+[2026-07-21 00:48:17] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 00:48:18] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-21 00:48:19] INFO     RECV:1097: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-21 00:48:19] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 00:48:19] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-21 00:48:21] INFO     RECV:1159: [RECV] AI RESPONSE: Hey there, Chidvilas! How are you?
+[2026-07-21 00:48:21] INFO     ui.runtime:2258: Jarvis: Hey there, Chidvilas! How are you?
+[2026-07-21 00:48:21] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 00:48:25] INFO     MIC:76: MIC CALLBACK #201 - captured 2048 bytes
+[2026-07-21 00:48:27] INFO     GEMINI:1020: GEMINI SEND #201 - 2048 bytes
+[2026-07-21 00:48:38] INFO     MIC:76: MIC CALLBACK #401 - captured 2048 bytes
+[2026-07-21 00:48:40] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 00:48:40] INFO     GEMINI:1020: GEMINI SEND #401 - 2048 bytes
+[2026-07-21 00:48:41] INFO     RECV:1169: [RECV] TOOL CALL: smart_scan
+[2026-07-21 00:48:41] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 00:48:48] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-21 00:48:48] INFO     ui.runtime:2258: ERR: smart_scan file uri and mime_type are required.
+[2026-07-21 00:48:50] INFO     RECV:1169: [RECV] TOOL CALL: screen_process
+[2026-07-21 00:48:50] INFO     MIC:76: MIC CALLBACK #601 - captured 2048 bytes
+[2026-07-21 00:48:51] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 00:48:53] INFO     GEMINI:1020: GEMINI SEND #601 - 2048 bytes
+[2026-07-21 00:48:53] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 00:49:01] INFO     RECV:1159: [RECV] AI RESPONSE: Ayy, it seems the smart scan didn't work properly... Hmm, don't worry, I'm using the camera now to s
+[2026-07-21 00:49:01] INFO     ui.runtime:2258: Jarvis: Ayy, it seems the smart scan didn't work properly... Hmm, don't worry, I'm using the camera now to see! What are you holding?
+[2026-07-21 00:49:01] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 00:49:03] INFO     ui.runtime:2258: Jarvis: Due to the extreme darkness and lack of detail, it is impossible to determine what is in your hand.
+[2026-07-21 00:49:03] INFO     MIC:76: MIC CALLBACK #801 - captured 2048 bytes
+[2026-07-21 00:49:10] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 00:49:12] INFO     RECV:1169: [RECV] TOOL CALL: screen_process
+[2026-07-21 00:49:12] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 00:49:12] INFO     RECV:1159: [RECV] AI RESPONSE: Let me check
+[2026-07-21 00:49:12] INFO     ui.runtime:2258: Jarvis: Let me check
+[2026-07-21 00:49:12] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 00:49:13] INFO     GEMINI:1020: GEMINI SEND #801 - 2048 bytes
+[2026-07-21 00:49:16] INFO     MIC:76: MIC CALLBACK #1001 - captured 2048 bytes
+[2026-07-21 00:49:26] INFO     GEMINI:1020: GEMINI SEND #1001 - 2048 bytes
+[2026-07-21 00:49:29] INFO     MIC:76: MIC CALLBACK #1201 - captured 2048 bytes
+[2026-07-21 00:49:35] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 00:49:37] INFO     RECV:1169: [RECV] TOOL CALL: screen_process
+[2026-07-21 00:49:37] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 00:49:39] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 00:49:41] INFO     RECV:1159: [RECV] AI RESPONSE: Just a moment, it's processing...
+[2026-07-21 00:49:41] INFO     ui.runtime:2258: Jarvis: Just a moment, it's processing...
+[2026-07-21 00:49:41] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 00:49:41] INFO     GEMINI:1020: GEMINI SEND #1201 - 2048 bytes
+[2026-07-21 00:49:42] INFO     MIC:76: MIC CALLBACK #1401 - captured 2048 bytes
+[2026-07-21 00:49:54] INFO     GEMINI:1020: GEMINI SEND #1401 - 2048 bytes
+[2026-07-21 00:49:55] INFO     MIC:76: MIC CALLBACK #1601 - captured 2048 bytes

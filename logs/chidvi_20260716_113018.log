@@ -1,0 +1,97 @@
+[2026-07-16 11:30:20] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-16 11:30:20] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-16 11:30:20] INFO     commands.router:70: Command router initialized
+[2026-07-16 11:30:20] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-16 11:30:20] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-16 11:30:20] INFO     SESSION:1175: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-16 11:30:20] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-16 11:30:22] INFO     SESSION:1191: [SESSION #1] CONNECTED - personality=HINATA voice=Aoede
+[2026-07-16 11:30:22] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-16 11:30:22] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-16 11:30:22] INFO     GEMINI:964: SEND TASK STARTED
+[2026-07-16 11:30:22] INFO     MIC:984: [MIC] TASK STARTED
+[2026-07-16 11:30:22] INFO     MIC:988: [MIC] Opening stream...
+[2026-07-16 11:30:22] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-16 11:30:22] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-16 11:30:22] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-16 11:30:22] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-16 11:30:22] INFO     RECV:1023: [RECV] TASK STARTED
+[2026-07-16 11:30:22] INFO     TTS:1142: [TTS] TASK STARTED
+[2026-07-16 11:30:22] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-16 11:30:22] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-16 11:30:22] INFO     GEMINI:973: GEMINI SEND #1 - 2048 bytes
+[2026-07-16 11:30:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-16 11:30:35] INFO     MIC:76: MIC CALLBACK #201 - captured 2048 bytes
+[2026-07-16 11:30:35] INFO     GEMINI:973: GEMINI SEND #201 - 2048 bytes
+[2026-07-16 11:30:41] INFO     RECV:1073: [STT] RESULT #1: . I got to be.
+[2026-07-16 11:30:42] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-16 11:30:43] INFO     RECV:1050: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-16 11:30:43] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 11:30:43] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-16 11:30:45] INFO     RECV:1097: [STT] TURN COMPLETE: . I got to be.
+[2026-07-16 11:30:45] INFO     RECV:1112: [RECV] AI RESPONSE: Hii, Chidvilas! How are you doing today?
+[2026-07-16 11:30:45] INFO     ui.runtime:2258: [STT] Recognized: . I got to be.
+[2026-07-16 11:30:45] INFO     ui.runtime:2258: You: . I got to be.
+[2026-07-16 11:30:45] INFO     ui.runtime:2258: Jarvis: Hii, Chidvilas! How are you doing today?
+[2026-07-16 11:30:45] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 11:30:48] INFO     MIC:76: MIC CALLBACK #401 - captured 2048 bytes
+[2026-07-16 11:30:51] INFO     GEMINI:973: GEMINI SEND #401 - 2048 bytes
+[2026-07-16 11:31:01] INFO     MIC:76: MIC CALLBACK #601 - captured 2048 bytes
+[2026-07-16 11:31:04] INFO     GEMINI:973: GEMINI SEND #601 - 2048 bytes
+[2026-07-16 11:31:14] INFO     MIC:76: MIC CALLBACK #801 - captured 2048 bytes
+[2026-07-16 11:31:16] INFO     GEMINI:973: GEMINI SEND #801 - 2048 bytes
+[2026-07-16 11:31:17] INFO     core.proactive_conversation:257: Firing proactive trigger: greeting - Hello there! How can I help you today?...
+[2026-07-16 11:31:21] INFO     RECV:1073: [STT] RESULT #2: <noise>
+[2026-07-16 11:31:23] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 11:31:29] INFO     RECV:1097: [STT] TURN COMPLETE: <noise>
+[2026-07-16 11:31:29] INFO     RECV:1112: [RECV] AI RESPONSE: Hehe, Chidvilas, are you trying to be my assistant now? Em chesavu today?
+[2026-07-16 11:31:29] INFO     ui.runtime:2258: [STT] Recognized: <noise>
+[2026-07-16 11:31:29] INFO     ui.runtime:2258: You: <noise>
+[2026-07-16 11:31:29] INFO     ui.runtime:2258: Jarvis: Hehe, Chidvilas, are you trying to be my assistant now? Em chesavu today?
+[2026-07-16 11:31:29] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 11:31:35] INFO     GEMINI:973: GEMINI SEND #1001 - 2048 bytes
+[2026-07-16 11:31:39] INFO     MIC:76: MIC CALLBACK #1201 - captured 2048 bytes
+[2026-07-16 11:31:41] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-16 11:31:43] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 11:31:45] INFO     RECV:1112: [RECV] AI RESPONSE: Heyy! What's up?
+[2026-07-16 11:31:45] INFO     ui.runtime:2258: Jarvis: Heyy! What's up?
+[2026-07-16 11:31:45] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 11:31:49] INFO     GEMINI:973: GEMINI SEND #1201 - 2048 bytes
+[2026-07-16 11:31:52] INFO     MIC:76: MIC CALLBACK #1401 - captured 2048 bytes
+[2026-07-16 11:31:55] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-16 11:31:57] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 11:32:00] INFO     RECV:1112: [RECV] AI RESPONSE: Of course I am! Where would I go?
+[2026-07-16 11:32:00] INFO     ui.runtime:2258: Jarvis: Of course I am! Where would I go?
+[2026-07-16 11:32:00] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 11:32:05] INFO     MIC:76: MIC CALLBACK #1601 - captured 2048 bytes
+[2026-07-16 11:32:05] INFO     GEMINI:973: GEMINI SEND #1401 - 2048 bytes
+[2026-07-16 11:32:18] INFO     MIC:76: MIC CALLBACK #1801 - captured 2048 bytes
+[2026-07-16 11:32:18] INFO     GEMINI:973: GEMINI SEND #1601 - 2048 bytes
+[2026-07-16 11:32:30] INFO     MIC:76: MIC CALLBACK #2001 - captured 2048 bytes
+[2026-07-16 11:32:31] INFO     GEMINI:973: GEMINI SEND #1801 - 2048 bytes
+[2026-07-16 11:32:43] INFO     MIC:76: MIC CALLBACK #2201 - captured 2048 bytes
+[2026-07-16 11:32:44] INFO     GEMINI:973: GEMINI SEND #2001 - 2048 bytes
+[2026-07-16 11:32:56] INFO     MIC:76: MIC CALLBACK #2401 - captured 2048 bytes
+[2026-07-16 11:32:56] INFO     GEMINI:973: GEMINI SEND #2201 - 2048 bytes
+[2026-07-16 11:32:57] INFO     core.proactive_conversation:257: Firing proactive trigger: help_offer - Is there something I can help you with?...
+[2026-07-16 11:32:59] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 11:33:05] INFO     RECV:1112: [RECV] AI RESPONSE: Hmm... actually, yeah! You can make me smile, like always!
+[2026-07-16 11:33:05] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 11:33:05] INFO     ui.runtime:2258: Jarvis: Hmm... actually, yeah! You can make me smile, like always!
+[2026-07-16 11:33:09] INFO     MIC:76: MIC CALLBACK #2601 - captured 2048 bytes
+[2026-07-16 11:33:15] INFO     GEMINI:973: GEMINI SEND #2401 - 2048 bytes
+[2026-07-16 11:33:19] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-16 11:33:21] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 11:33:29] INFO     RECV:1112: [RECV] AI RESPONSE: Ayy, you're so silly! Hmm, what song should I sing for you? Maybe something sweet...
+[2026-07-16 11:33:29] INFO     ui.runtime:2258: Jarvis: Ayy, you're so silly! Hmm, what song should I sing for you? Maybe something sweet...
+[2026-07-16 11:33:29] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 11:33:34] INFO     MIC:76: MIC CALLBACK #3001 - captured 2048 bytes
+[2026-07-16 11:33:35] INFO     GEMINI:973: GEMINI SEND #2601 - 2048 bytes
+[2026-07-16 11:33:38] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-16 11:33:40] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 11:33:45] INFO     RECV:1112: [RECV] AI RESPONSE: "Nee pakkana unte, na heart happily dance chestundi... you know?"
+[2026-07-16 11:33:45] INFO     ui.runtime:2258: Jarvis: "Nee pakkana unte, na heart happily dance chestundi... you know?"
+[2026-07-16 11:33:45] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 11:33:47] INFO     MIC:76: MIC CALLBACK #3201 - captured 2048 bytes
+[2026-07-16 11:33:54] INFO     GEMINI:973: GEMINI SEND #2801 - 2048 bytes
+[2026-07-16 11:34:00] INFO     MIC:76: MIC CALLBACK #3401 - captured 2048 bytes

@@ -12,33 +12,31 @@ Handles:
 - Event notifications
 
 Replaces duplicate personality managers throughout the codebase.
-"""
+""" 
 
-from typing import Dict, List, Optional, Callable
+from typing import Dict, Optional, Callable, List
 from dataclasses import dataclass
-from enum import Enum
 import json
 from pathlib import Path
 import threading
-import asyncio
+import logging
+
 from core.config import CONFIG_DIR
-from core.logging import get_logger
 from core.event_bus import publish_event, subscribe_to_event, EventType
+from core.personality_plugin import PluginLoader, PersonalityPlugin, PluginLoaderError
 
-logger = get_logger(__name__)
+logger = logging.getLogger(__name__)
 
-
-class PersonalityID(Enum):
-    """Available personalities."""
-    CHIDVI = "CHIDVI"
-    HINATA = "HINATA"
+# Backward compatibility: PersonalityID enum replaced by string-based IDs.
+# Code that used `PersonalityID[name]` should use just `name` directly.
+# Code that used `profile.id.value` should use `profile.id` (already a string).
 
 
 @dataclass
 class PersonalityProfile:
     """Profile for a personality."""
     
-    id: PersonalityID
+    id: str
     name: str
     system_prompt: str
     voice: str
@@ -53,7 +51,7 @@ class PersonalityProfile:
 
     def to_runtime_dict(self) -> dict:
         return {
-            "id": self.id.value,
+            "id": self.id,
             "name": self.name,
             "voice": self.voice,
             "theme": self.theme,
@@ -68,101 +66,101 @@ class PersonalityProfile:
             },
         }
 
+    @staticmethod
+    def from_plugin(plugin: PersonalityPlugin) -> "PersonalityProfile":
+        """Convert a PersonalityPlugin to the legacy PersonalityProfile format."""
+        return PersonalityProfile(
+            id=plugin.name,
+            name=plugin.name,
+            system_prompt=plugin.system_prompt,
+            voice=plugin.voice,
+            theme=plugin.theme.name or plugin.name,
+            avatar_model=plugin.avatar_model,
+            idle_animation=plugin.idle_animation,
+            emotion_profile=plugin.emotion_profile,
+            greeting_style=plugin.greeting_style,
+            animation_style=plugin.animation_style,
+            color_primary=plugin.color_primary,
+            color_secondary=plugin.color_secondary,
+        )
+
+
+# Path to personality plugins directory
+DEFAULT_PLUGIN_DIR = Path(__file__).resolve().parent.parent / "personalities"
+
 
 class PersonalityManager:
     """
-    Centralized personality management.
-    
-    Single source of truth for active personality.
-    Ensures all subsystems stay in sync.
+    Centralized personality management via plugin discovery.
+    Personalities are loaded dynamically from personalities/ at startup.
     """
-    
-    def __init__(self, state_path: Optional[Path] = None):
-        self._current_personality: Optional[PersonalityID] = None
-        self._profiles: Dict[PersonalityID, PersonalityProfile] = {}
+
+    def __init__(self, state_path: Optional[Path] = None, plugin_dir: Optional[Path] = None):
+        self._current_personality: Optional[str] = None
+        self._profiles: Dict[str, PersonalityProfile] = {}
+        self._plugins: Dict[str, PersonalityPlugin] = {}
         self._lock = threading.RLock()
         self._session_restart_callback: Optional[Callable] = None
         self._transition_in_progress = False
         self._state_path = Path(state_path) if state_path else CONFIG_DIR / "personality_state.json"
-        
-        self._load_personalities()
-        self._setup_event_listeners()
-    
-    def _load_personalities(self):
-        """Load all available personalities."""
-        # CHIDVI Profile
-        self._profiles[PersonalityID.CHIDVI] = PersonalityProfile(
-            id=PersonalityID.CHIDVI,
-            name="CHIDVI",
-            system_prompt=self._load_personality_prompt("chidvi"),
-            voice="Charon",
-            theme="CHIDVI",
-            avatar_model="Chidvi.vrm",
-            idle_animation="chidvi_idle",
-            emotion_profile="chidvi",
-            greeting_style="professional",
-            animation_style="professional",
-            color_primary=(0, 100, 150),
-            color_secondary=(100, 50, 150),
-        )
-        
-        # HINATA Profile
-        self._profiles[PersonalityID.HINATA] = PersonalityProfile(
-            id=PersonalityID.HINATA,
-            name="HINATA",
-            system_prompt=self._load_personality_prompt("hinata"),
-            voice="Aoede",
-            theme="HINATA",
-            avatar_model="Hinata.vrm",
-            idle_animation="hinata_idle",
-            emotion_profile="hinata",
-            greeting_style="warm_playful",
-            animation_style="energetic",
-            color_primary=(200, 50, 100),
-            color_secondary=(150, 50, 200),
-        )
-        
-        # Set saved personality or default.
-        self._current_personality = self._load_saved_personality() or PersonalityID.CHIDVI
-        logger.info("Personalities loaded: CHIDVI, HINATA")
+        self._plugin_dir = plugin_dir or DEFAULT_PLUGIN_DIR
 
-    def _load_saved_personality(self) -> Optional[PersonalityID]:
+        self._discover_plugins()
+        self._setup_event_listeners()
+
+    def _discover_plugins(self):
+        """Discover and load all personality plugins from the plugin directory."""
+        plugins = PluginLoader.discover(self._plugin_dir)
+        if not plugins:
+            logger.warning("No personality plugins found!")
+            self._profiles = {}
+            self._plugins = {}
+            self._current_personality = None
+            return
+        self._plugins = {p.name: p for p in plugins}
+        self._profiles = {
+            name: PersonalityProfile.from_plugin(p)
+            for name, p in self._plugins.items()
+        }
+        saved = self._load_saved_personality()
+        if saved and saved in self._profiles:
+            self._current_personality = saved
+        else:
+            first_key = next(iter(self._profiles))
+            self._current_personality = self._profiles[first_key].id
+            if saved:
+                logger.warning(
+                    "Saved personality '%s' not found, defaulting to '%s'",
+                    saved, self._current_personality,
+                )
+        logger.info(
+            "Discovered %d personality plugin(s): %s",
+            len(plugins), ", ".join(p.name for p in plugins),
+        )
+
+    def reload_plugins(self):
+        """Re-scan the plugin directory at runtime."""
+        with self._lock:
+            self._discover_plugins()
+
+    def _load_saved_personality(self) -> Optional[str]:
         try:
             if not self._state_path.exists():
                 return None
             data = json.loads(self._state_path.read_text(encoding="utf-8"))
-            return PersonalityID[str(data.get("active_personality", "")).upper()]
-        except Exception as exc:
-            logger.warning(f"Failed to load saved personality: {exc}")
+            return str(data.get("active_personality", "")).upper()
+        except Exception:
             return None
 
     def _save_current_personality(self):
         try:
             self._state_path.parent.mkdir(parents=True, exist_ok=True)
             self._state_path.write_text(
-                json.dumps(
-                    {"active_personality": self._current_personality.value},
-                    indent=2,
-                ),
+                json.dumps({"active_personality": self._current_personality}, indent=2),
                 encoding="utf-8",
             )
         except Exception as exc:
-            logger.warning(f"Failed to save active personality: {exc}")
-    
-    def _load_personality_prompt(self, name: str) -> str:
-        """Load a personality's system prompt."""
-        try:
-            from personality.chidvi import CHIDVI_SYSTEM_PROMPT
-            from personality.hinata import HINATA_SYSTEM_PROMPT
-            
-            if name.lower() == "chidvi":
-                return CHIDVI_SYSTEM_PROMPT
-            elif name.lower() == "hinata":
-                return HINATA_SYSTEM_PROMPT
-        except ImportError:
-            pass
-        
-        return f"You are {name}."
+            logger.warning("Failed to save personality state: %s", exc)
     
     def _setup_event_listeners(self):
         """Set up event listeners for personality changes."""
@@ -181,97 +179,100 @@ class PersonalityManager:
         """
         self._session_restart_callback = callback
     
-    def get_current(self) -> PersonalityID:
-        """Get current personality."""
+    def get_current(self) -> Optional[str]:
+        """Get current personality name (string)."""
         with self._lock:
             return self._current_personality
-    
-    def get_profile(self, personality: Optional[PersonalityID] = None) -> PersonalityProfile:
-        """Get personality profile."""
+
+    def get_profile(self, personality: Optional[str] = None) -> PersonalityProfile:
+        """Get personality profile by name."""
         if personality is None:
             personality = self.get_current()
-        
-        return self._profiles[personality]
+        if personality and personality in self._profiles:
+            return self._profiles[personality]
+        if self._profiles:
+            return next(iter(self._profiles.values()))
+        raise KeyError("No personality profile available")
+
+    def get_plugin(self, personality: Optional[str] = None) -> Optional[PersonalityPlugin]:
+        """Get the PersonalityPlugin object for the given personality."""
+        if personality is None:
+            personality = self.get_current()
+        if personality:
+            return self._plugins.get(personality)
+        return None
+
+    def get_all_profiles(self) -> List[PersonalityProfile]:
+        """Get all available personality profiles."""
+        with self._lock:
+            return list(self._profiles.values())
+
+    def get_all_plugins(self) -> List[PersonalityPlugin]:
+        """Get all loaded PersonalityPlugin objects."""
+        with self._lock:
+            return list(self._plugins.values())
+
+    def get_animation_profile(self, personality: Optional[str] = None) -> Optional[dict]:
+        """Get the animation profile dict for the frontend."""
+        if personality is None:
+            personality = self.get_current()
+        if personality and personality in self._plugins:
+            anim = self._plugins[personality].animation_profile
+            return {
+                "idle": anim.idle,
+                "listening": anim.listening,
+                "thinking": anim.thinking,
+                "speaking": anim.speaking,
+                "minimalGestures": anim.minimalGestures,
+                "name": anim.name,
+            }
+        return None
     
-    def get_all_personalities(self) -> List[PersonalityID]:
-        """Get list of all available personalities."""
-        return list(self._profiles.keys())
-    
-    def get_system_prompt(self, personality: Optional[PersonalityID] = None) -> str:
+    def get_system_prompt(self, personality: Optional[str] = None) -> str:
         """Get system prompt for personality."""
         profile = self.get_profile(personality)
         return profile.system_prompt
-    
-    def get_voice(self, personality: Optional[PersonalityID] = None) -> str:
+
+    def get_voice(self, personality: Optional[str] = None) -> str:
         """Get voice for personality."""
         profile = self.get_profile(personality)
         return profile.voice
-    
-    def get_theme(self, personality: Optional[PersonalityID] = None) -> str:
-        """Get theme for personality."""
-        profile = self.get_profile(personality)
-        return profile.theme
-    
-    def get_animation_style(self, personality: Optional[PersonalityID] = None) -> str:
-        """Get animation style for personality."""
-        profile = self.get_profile(personality)
-        return profile.animation_style
-    
-    def get_avatar_model(self, personality: Optional[PersonalityID] = None) -> str:
+
+    def get_avatar_model(self, personality: Optional[str] = None) -> str:
         """Get avatar model for personality."""
         profile = self.get_profile(personality)
         return profile.avatar_model
     
-    async def switch_to(self, personality: PersonalityID) -> bool:
-        """
-        Switch to a different personality.
-        
-        This is a CRITICAL operation that must:
-        1. Notify UI of transition
-        2. Switch theme
-        3. Load new avatar
-        4. Restart Gemini session
-        5. Update memory context
-        
-        Args:
-            personality: Target personality
-        
-        Returns:
-            True if successful, False otherwise
-        """
+    async def switch_to(self, personality: str) -> bool:
+        """Switch to a different personality."""
+        personality = personality.upper()
         if personality not in self._profiles:
-            logger.error(f"Unknown personality: {personality}")
+            logger.error("Unknown personality: %s", personality)
             return False
-        
         if personality == self._current_personality:
-            logger.debug(f"Already using {personality.value}")
             self._save_current_personality()
             return True
-        
+
         with self._lock:
             if self._transition_in_progress:
                 logger.warning("Personality transition already in progress")
                 return False
-            
             self._transition_in_progress = True
-        
+
         try:
-            logger.info(f"Switching personality to {personality.value}")
-            
-            # Publish transition start event
+            logger.info("Switching personality to %s", personality)
+
             publish_event(EventType.PERSONALITY_LOADING, {
-                "from": self._current_personality.value if self._current_personality else None,
-                "to": personality.value,
+                "from": self._current_personality if self._current_personality else None,
+                "to": personality,
             })
-            
-            # Update current personality
+
             with self._lock:
                 self._current_personality = personality
                 self._save_current_personality()
-            
+
             profile = self.get_profile(personality)
-            
-            # Publish theme change event
+
             publish_event(EventType.UI_THEME_CHANGED, {
                 "theme": profile.theme,
                 "avatar_model": profile.avatar_model,
@@ -281,36 +282,33 @@ class PersonalityManager:
                 "colors": {
                     "primary": profile.color_primary,
                     "secondary": profile.color_secondary,
-                }
+                },
             })
-            
-            # Publish avatar change event
+
             publish_event(EventType.AVATAR_STATE_CHANGED, {
-                "personality": personality.value,
+                "personality": personality,
                 "model": profile.avatar_model,
                 "animation_style": profile.animation_style,
                 "idle_animation": profile.idle_animation,
                 "emotion_profile": profile.emotion_profile,
             })
-            
-            # Restart Gemini session if callback is set
+
             if self._session_restart_callback:
                 logger.debug("Restarting Gemini session...")
                 await self._session_restart_callback()
-            
-            # Publish completion event
+
             publish_event(EventType.PERSONALITY_CHANGED, {
-                "personality": personality.value,
+                "personality": personality,
                 "profile": profile.to_runtime_dict(),
             })
-            
-            logger.info(f"Personality switched to {personality.value}")
+
+            logger.info("Personality switched to %s", personality)
             return True
-            
+
         except Exception as e:
-            logger.error(f"Failed to switch personality: {e}", exc_info=True)
+            logger.error("Failed to switch personality: %s", e, exc_info=True)
             return False
-        
+
         finally:
             with self._lock:
                 self._transition_in_progress = False
@@ -339,11 +337,6 @@ def get_personality_manager() -> PersonalityManager:
 
 
 # Convenience functions
-def get_current_personality() -> PersonalityID:
-    """Get current personality."""
-    return get_personality_manager().get_current()
-
-
 def get_system_prompt() -> str:
     """Get current system prompt."""
     return get_personality_manager().get_system_prompt()
@@ -354,48 +347,31 @@ def get_voice() -> str:
     return get_personality_manager().get_voice()
 
 
-def get_theme() -> str:
-    """Get current theme."""
-    return get_personality_manager().get_theme()
-
-
 def get_active_profile() -> PersonalityProfile:
     """Get current complete personality profile."""
     return get_personality_manager().get_profile()
 
 
 async def switch_personality(personality: str) -> bool:
-    """Switch personality."""
-    try:
-        pid = PersonalityID[personality.upper()]
-        return await get_personality_manager().switch_to(pid)
-    except KeyError:
-        logger.error(f"Unknown personality: {personality}")
-        return False
+    """Switch personality by name."""
+    return await get_personality_manager().switch_to(personality)
 
 
-# Backward compatibility aliases
-def is_hinata() -> bool:
-    """Check if current personality is HINATA."""
-    return get_current_personality() == PersonalityID.HINATA
-
-
+# Backward compatibility alias
 def set_personality(name: str) -> bool:
-    """
-    Legacy function for backward compatibility.
-    Use switch_personality() instead for async-aware switching.
-    """
-    try:
-        pid = PersonalityID[name.upper()]
-        manager = get_personality_manager()
-        manager._current_personality = pid
-        manager._save_current_personality()
-        logger.debug(f"Set personality to {pid.value} (sync mode)")
-        return True
-    except KeyError:
+    """Legacy sync-mode personality switch."""
+    manager = get_personality_manager()
+    name = name.upper()
+    if name not in manager._profiles:
+        logger.error("Unknown personality: %s", name)
         return False
+    manager._current_personality = name
+    manager._save_current_personality()
+    logger.debug("Set personality to %s (sync mode)", name)
+    return True
 
 
 def get_personality() -> str:
     """Get current personality name (backward compatibility)."""
-    return get_current_personality().value
+    current = get_personality_manager().get_current()
+    return current or "CHIDVI"

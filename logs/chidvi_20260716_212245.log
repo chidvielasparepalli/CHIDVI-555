@@ -1,0 +1,10 @@
+[2026-07-16 21:23:14] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-16 21:23:14] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-16 21:23:15] INFO     commands.router:70: Command router initialized
+[2026-07-16 21:23:15] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-16 21:23:15] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-16 21:23:15] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-16 21:23:16] INFO     SESSION:1175: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-16 21:23:16] ERROR    SESSION:1248: [SESSION #1] ERROR: [Errno 11001] getaddrinfo failed
+[2026-07-16 21:23:22] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-16 21:23:22] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.

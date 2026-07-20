@@ -7,7 +7,6 @@ from api.key_pool import APIKeyPool
 from commands.router import CommandCategory, CommandRouter, CommandType
 from core.config import ConfigManager
 from core.personality_manager import (
-    PersonalityID,
     PersonalityManager,
     get_personality_manager,
     get_system_prompt,
@@ -105,17 +104,17 @@ class PersonalityCompatibilityTests(unittest.TestCase):
             state_path = Path(tmpdir) / "personality_state.json"
             manager = PersonalityManager(state_path=state_path)
 
-            self.assertTrue(asyncio.run(manager.switch_to(PersonalityID.HINATA)))
+            self.assertTrue(asyncio.run(manager.switch_to("HINATA")))
             self.assertTrue(state_path.exists())
 
             restored = PersonalityManager(state_path=state_path)
-            self.assertEqual(restored.get_current(), PersonalityID.HINATA)
+            self.assertEqual(restored.get_current(), "HINATA")
 
     def test_personality_profiles_own_runtime_assets(self):
         manager = PersonalityManager()
 
-        chidvi = manager.get_profile(PersonalityID.CHIDVI)
-        hinata = manager.get_profile(PersonalityID.HINATA)
+        chidvi = manager.get_profile("CHIDVI")
+        hinata = manager.get_profile("HINATA")
 
         self.assertEqual(chidvi.avatar_model, "Chidvi.vrm")
         self.assertEqual(chidvi.voice, "Charon")

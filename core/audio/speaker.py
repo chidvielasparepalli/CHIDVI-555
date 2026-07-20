@@ -7,15 +7,18 @@ runtime does not need to manage speaker hardware directly.
 
 from array import array
 import asyncio
+import logging
 from typing import Callable
 
 from core.audio.diagnostics import AudioDiagnostics
+
+logger = logging.getLogger("TTS")
 
 
 class Speaker:
     def __init__(
         self,
-        device: int | None = 3,
+        device: int | None = None,
         sample_rate: int = 24000,
         channels: int = 2,
         chunk_size: int = 1024,
@@ -72,9 +75,11 @@ class Speaker:
             blocksize=self.chunk_size,
         )
         stream.start()
+        logger.info("SPEAKER OPEN - sr=%d ch=%d", self.sample_rate, self.channels)
         if self.diagnostics:
             self.diagnostics.update(tts_status="IDLE", last_error="")
 
+        chunks_played = 0
         try:
             while True:
                 try:
@@ -89,13 +94,26 @@ class Speaker:
                     continue
 
                 set_speaking(True)
+                chunks_played += 1
                 if self.diagnostics:
                     self.diagnostics.update(tts_status="SPEAKING")
+                if chunks_played == 1:
+                    logger.info("TTS START - first chunk received (%d bytes)", len(chunk))
+                if self.diagnostics:
+                    self.diagnostics.record_output(chunk)
                 mono = self.boost_voice_chunk(chunk)
                 await asyncio.to_thread(stream.write, self.mono_to_stereo(mono))
+        except asyncio.CancelledError:
+            logger.info("SPEAKER CANCELLED - played %d chunks", chunks_played)
+            raise
+        except Exception as exc:
+            logger.error("SPEAKER ERROR: %s", exc)
+            raise
         finally:
             set_speaking(False)
             if self.diagnostics:
                 self.diagnostics.update(tts_status="IDLE")
+                self.diagnostics.mark_speaker_idle()
             stream.stop()
             stream.close()
+            logger.info("SPEAKER CLOSED - played %d chunks total", chunks_played)

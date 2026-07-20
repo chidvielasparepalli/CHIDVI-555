@@ -1,0 +1,13 @@
+[2026-07-13 16:56:30] INFO     core.audio.diagnostics:73: [VOICE] Detected
+[2026-07-13 16:56:30] INFO     api.key_pool:128: Loaded 2 API keys
+[2026-07-13 16:56:30] WARNING  api.key_pool:74: Key rate limited: k1... (recovered at 17:56:30)
+[2026-07-13 16:56:30] INFO     commands.router:70: Command router initialized
+[2026-07-13 16:56:30] INFO     commands.router:70: Command router initialized
+[2026-07-13 16:56:30] INFO     commands.router:70: Command router initialized
+[2026-07-13 16:56:30] INFO     commands.router:70: Command router initialized
+[2026-07-13 16:56:30] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-13 16:56:30] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-13 16:56:30] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-13 16:56:30] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-13 16:56:30] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-13 16:56:30] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA

@@ -58,9 +58,5 @@ class AvatarService:
         elif event == AvatarEvent.AI_STOPPED_SPEAKING:
             self.idle()
 
-        def initialize_avatar():
-            print("[HINATA] Avatar Engine Initialized")
-            return avatar_service
-        
 # Global singleton instance
 avatar_service = AvatarService()

@@ -1,0 +1,128 @@
+[2026-07-21 02:02:42] INFO     core.personality_manager:136: Discovered 2 personality plugin(s): CHIDVI, HINATA
+[2026-07-21 02:02:42] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-21 02:02:42] INFO     commands.router:70: Command router initialized
+[2026-07-21 02:02:42] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-21 02:02:42] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-21 02:02:42] INFO     SESSION:1222: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-21 02:02:42] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-21 02:02:43] INFO     SESSION:1238: [SESSION #1] CONNECTED - personality=CHIDVI voice=Charon
+[2026-07-21 02:02:43] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-21 02:02:43] INFO     GEMINI:1011: SEND TASK STARTED
+[2026-07-21 02:02:43] INFO     MIC:1031: [MIC] TASK STARTED
+[2026-07-21 02:02:43] INFO     MIC:1035: [MIC] Opening stream...
+[2026-07-21 02:02:43] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-21 02:02:43] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-21 02:02:43] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-21 02:02:43] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-21 02:02:43] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-21 02:02:43] INFO     RECV:1070: [RECV] TASK STARTED
+[2026-07-21 02:02:43] INFO     TTS:1189: [TTS] TASK STARTED
+[2026-07-21 02:02:43] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-21 02:02:43] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-21 02:02:43] INFO     GEMINI:1020: GEMINI SEND #1 - 2048 bytes
+[2026-07-21 02:02:56] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:02:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:02:56] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:02:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:02:56] INFO     MIC:76: MIC CALLBACK #201 - captured 2048 bytes
+[2026-07-21 02:02:56] INFO     GEMINI:1020: GEMINI SEND #201 - 2048 bytes
+[2026-07-21 02:02:56] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:02:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:02:57] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:02:58] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:02:58] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:02:58] INFO     RECV:1120: [STT] RESULT #1: 3
+[2026-07-21 02:02:59] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:02:59] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:02:59] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:02:59] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:02:59] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:03:00] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-21 02:03:01] INFO     RECV:1144: [STT] TURN COMPLETE: 3
+[2026-07-21 02:03:01] INFO     ui.runtime:2258: [STT] Recognized: 3
+[2026-07-21 02:03:01] INFO     ui.runtime:2258: You: 3
+[2026-07-21 02:03:02] INFO     RECV:1120: [STT] RESULT #2: che
+[2026-07-21 02:03:02] INFO     RECV:1120: [STT] RESULT #3: ck watching my hand down
+[2026-07-21 02:03:03] INFO     RECV:1169: [RECV] TOOL CALL: smart_scan
+[2026-07-21 02:03:03] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 02:03:09] INFO     MIC:76: MIC CALLBACK #401 - captured 2048 bytes
+[2026-07-21 02:03:09] INFO     GEMINI:1020: GEMINI SEND #401 - 2048 bytes
+[2026-07-21 02:03:09] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-21 02:03:14] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+[2026-07-21 02:03:15] INFO     RECV:1144: [STT] TURN COMPLETE: che ck watching my hand down
+[2026-07-21 02:03:15] INFO     ui.runtime:2258: [STT] Recognized: che ck watching my hand down
+[2026-07-21 02:03:15] INFO     ui.runtime:2258: You: che ck watching my hand down
+[2026-07-21 02:03:15] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 02:03:22] INFO     MIC:76: MIC CALLBACK #601 - captured 2048 bytes
+[2026-07-21 02:03:22] INFO     GEMINI:1020: GEMINI SEND #601 - 2048 bytes
+[2026-07-21 02:03:34] INFO     MIC:76: MIC CALLBACK #801 - captured 2048 bytes
+[2026-07-21 02:03:34] INFO     GEMINI:1020: GEMINI SEND #801 - 2048 bytes
+[2026-07-21 02:03:38] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 02:03:40] INFO     RECV:1097: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-21 02:03:40] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 02:03:40] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-21 02:03:43] INFO     RECV:1159: [RECV] AI RESPONSE: Based on the scan, it appears you have a pair of headphones in your hand.
+[2026-07-21 02:03:43] INFO     ui.runtime:2258: Jarvis: Based on the scan, it appears you have a pair of headphones in your hand.
+[2026-07-21 02:03:44] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 02:03:47] INFO     MIC:76: MIC CALLBACK #1001 - captured 2048 bytes
+[2026-07-21 02:03:51] INFO     GEMINI:1020: GEMINI SEND #1001 - 2048 bytes
+[2026-07-21 02:03:52] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:03:52] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:03:52] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:03:53] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:03:54] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:03:55] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:03:55] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:03:56] INFO     RECV:1120: [STT] RESULT #4: Facebook
+[2026-07-21 02:03:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:03:57] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:03:57] INFO     RECV:1169: [RECV] TOOL CALL: browser_control
+[2026-07-21 02:03:57] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 02:03:57] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:03:57] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:03:57] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:04:00] INFO     MIC:76: MIC CALLBACK #1201 - captured 2048 bytes
+[2026-07-21 02:04:03] INFO     GEMINI:1020: GEMINI SEND #1201 - 2048 bytes
+[2026-07-21 02:04:08] INFO     ui.runtime:2258: [browser] Opened: https://www.facebook.com/
+[2026-07-21 02:04:08] INFO     RECV:1144: [STT] TURN COMPLETE: Facebook
+[2026-07-21 02:04:08] INFO     RECV:1120: [STT] RESULT #5: te
+[2026-07-21 02:04:08] INFO     RECV:1120: [STT] RESULT #6: enager watch the company.
+[2026-07-21 02:04:08] INFO     RECV:1169: [RECV] TOOL CALL: web_search
+[2026-07-21 02:04:08] INFO     ui.runtime:2258: [STT] Recognized: Facebook
+[2026-07-21 02:04:08] INFO     ui.runtime:2258: You: Facebook
+[2026-07-21 02:04:08] INFO     ui.runtime:2258: [Search] Facebook teenager watch the company
+[2026-07-21 02:04:08] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 02:04:08] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-21 02:04:13] INFO     MIC:76: MIC CALLBACK #1401 - captured 2048 bytes
+[2026-07-21 02:04:16] INFO     GEMINI:1020: GEMINI SEND #1401 - 2048 bytes
+[2026-07-21 02:04:18] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+[2026-07-21 02:04:19] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 02:04:37] INFO     RECV:1144: [STT] TURN COMPLETE: te enager watch the company.
+[2026-07-21 02:04:37] INFO     RECV:1159: [RECV] AI RESPONSE: I found information about teenagers' engagement with Facebook. Research indicates that their use has
+[2026-07-21 02:04:37] INFO     ui.runtime:2258: [STT] Recognized: te enager watch the company.
+[2026-07-21 02:04:37] INFO     ui.runtime:2258: You: te enager watch the company.
+[2026-07-21 02:04:37] INFO     ui.runtime:2258: Jarvis: I found information about teenagers' engagement with Facebook. Research indicates that their use has significantly declined, with many preferring platforms like TikTok and Instagram. While Facebook has introduced safety features, concerns persist about the impact on mental health and privacy.
+[2026-07-21 02:04:37] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 02:04:39] INFO     MIC:76: MIC CALLBACK #1801 - captured 2048 bytes
+[2026-07-21 02:04:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:04:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:04:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:04:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:04:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:04:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:04:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:04:41] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:04:41] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 02:04:41] INFO     RECV:1120: [STT] RESULT #7: Yeah
+[2026-07-21 02:04:41] INFO     RECV:1120: [STT] RESULT #8: ,
+[2026-07-21 02:04:41] INFO     RECV:1120: [STT] RESULT #9: that
+[2026-07-21 02:04:41] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 02:04:41] INFO     RECV:1120: [STT] RESULT #10: 's
+[2026-07-21 02:04:42] INFO     RECV:1120: [STT] RESULT #11: fine
+[2026-07-21 02:04:42] INFO     RECV:1120: [STT] RESULT #12: .
+[2026-07-21 02:04:42] INFO     RECV:1120: [STT] RESULT #13: I
+[2026-07-21 02:04:42] INFO     RECV:1120: [STT] RESULT #14: 'm
+[2026-07-21 02:04:42] INFO     RECV:1120: [STT] RESULT #15: gone and shut down.
+[2026-07-21 02:04:44] INFO     RECV:1169: [RECV] TOOL CALL: shutdown_jarvis
+[2026-07-21 02:04:44] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 02:04:44] INFO     ui.runtime:2258: SYS: Shutdown requested.

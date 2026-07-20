@@ -13,7 +13,7 @@ from pathlib import Path
 from core.logging import get_logger, set_debug_mode
 from core.config import config
 from core.event_bus import subscribe_to_event, EventType, publish_event
-from core.personality_manager import get_personality_manager, PersonalityID
+from core.personality_manager import get_personality_manager
 from core.session_manager import get_session_manager
 from api.key_pool import get_api_key_pool, get_next_api_key
 from commands.router import get_command_router, CommandType

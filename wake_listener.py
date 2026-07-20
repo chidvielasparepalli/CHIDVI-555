@@ -8,8 +8,6 @@ from face_auth import verify_face
 
 WAKE_WORD = "wake up jarvis"
 
-wake_phrases = [WAKE_WORD,"rise"]
-
 def jarvis_running():
     """
     Check if main.py is already running

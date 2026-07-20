@@ -1,0 +1,50 @@
+[2026-07-16 01:16:38] INFO     commands.router:70: Command router initialized
+[2026-07-16 01:16:38] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-16 01:16:38] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-16 01:16:39] INFO     SESSION:1154: [SESSION #1] CONNECTING...
+[2026-07-16 01:16:39] INFO     SESSION:1170: [SESSION #1] CONNECTED - personality=CHIDVI voice=Charon
+[2026-07-16 01:16:39] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-16 01:16:39] INFO     GEMINI:943: SEND TASK STARTED
+[2026-07-16 01:16:39] INFO     MIC:963: [MIC] TASK STARTED
+[2026-07-16 01:16:39] INFO     MIC:967: [MIC] Opening stream...
+[2026-07-16 01:16:39] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-16 01:16:39] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-16 01:16:39] INFO     RECV:1002: [RECV] TASK STARTED
+[2026-07-16 01:16:39] INFO     TTS:1121: [TTS] TASK STARTED
+[2026-07-16 01:16:41] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-16 01:16:41] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-16 01:16:41] INFO     GEMINI:952: GEMINI SEND #1 - 2048 bytes
+[2026-07-16 01:16:45] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-16 01:16:46] INFO     RECV:1029: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-16 01:16:46] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 01:16:46] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-16 01:16:49] INFO     RECV:1091: [RECV] AI RESPONSE: Hello, CHIDVILAS! How can I help you today?
+[2026-07-16 01:16:49] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 01:16:53] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-16 01:16:54] INFO     MIC:76: MIC CALLBACK #201 - captured 2048 bytes
+[2026-07-16 01:16:55] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-16 01:16:55] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-16 01:17:01] INFO     commands.router:310: Handling local command: personality - switch to hinata
+[2026-07-16 01:17:01] INFO     core.personality_manager:245: Switching personality to HINATA
+[2026-07-16 01:17:01] INFO     RESTART:575: RESTART TRIGGERED
+[2026-07-16 01:17:01] INFO     core.personality_manager:293: Personality switched to HINATA
+[2026-07-16 01:17:01] ERROR    commands.router:341: Error handling local command: 'JarvisUI' object has no attribute 'apply_personality_profile'
+Traceback (most recent call last):
+  File "D:\PROJECTS\CHIDVI-555\commands\router.py", line 325, in _handle_local_command
+    result = await handler(command)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECTS\CHIDVI-555\main.py", line 626, in _handle_local_command
+    self.ui.apply_personality_profile(profile)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'JarvisUI' object has no attribute 'apply_personality_profile'
+[2026-07-16 01:17:01] INFO     SESSION:1199: [SESSION #1] RESTART TRIGGERED
+[2026-07-16 01:17:01] INFO     GEMINI:954: SEND TASK CANCELLED after 187 messages
+[2026-07-16 01:17:01] INFO     MIC:103: STREAM CANCELLED - closing cleanly
+[2026-07-16 01:17:01] INFO     MIC:111: STREAM CLOSED - callbacks served: 317
+[2026-07-16 01:17:01] INFO     MIC:975: [MIC] TASK CANCELLED - stream closed
+[2026-07-16 01:17:01] INFO     RECV:1108: [RECV] TASK CANCELLED - responses=222 stt=0 audio=196
+[2026-07-16 01:17:01] INFO     TTS:105: SPEAKER CANCELLED - played 167 chunks
+[2026-07-16 01:17:01] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-16 01:17:01] INFO     TTS:116: SPEAKER CLOSED - played 167 chunks total
+[2026-07-16 01:17:01] INFO     TTS:1129: [TTS] TASK CANCELLED
+[2026-07-16 01:17:06] ERROR    SESSION:1214: [SESSION #1] ERROR: unhandled errors in a TaskGroup (1 sub-exception)

@@ -249,26 +249,9 @@ class ConfigManager:
         
         return value if value is not None else default
     
-    def set(self, key: str, value: Any):
-        """Set a configuration value using dot notation."""
-        keys = key.split(".")
-        config = self._config
-        
-        for k in keys[:-1]:
-            if k not in config:
-                config[k] = {}
-            config = config[k]
-        
-        config[keys[-1]] = value
-    
     def get_all(self) -> Dict[str, Any]:
         """Get all configuration."""
         return self._config.copy()
-    
-    def reload(self):
-        """Reload all configuration."""
-        self._config.clear()
-        self._load_configs()
 
 
 # Global singleton

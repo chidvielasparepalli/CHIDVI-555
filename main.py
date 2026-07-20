@@ -8,10 +8,7 @@ from commands.router import (
 from avatars.avatar_service import avatar_service
 from avatars.avatar_events import AvatarEvent
 from ui_core.themes.theme_manager import theme_manager
-from ui_core.themes.chidvi_theme import CHIDVI_THEME
-from ui_core.themes.hinata_theme import HINATA_THEME
 from core.personality_manager import (
-    PersonalityID,
     get_active_profile,
     get_system_prompt,
     get_voice,
@@ -27,6 +24,7 @@ from api.key_pool import (
 )
 from core.state_manager import RuntimeState, get_state_manager
 from personality.emotion_engine import EmotionEngine, Emotion
+from core.proactive_conversation import init_conversation_manager, get_conversation_manager
 
 os.environ["QT_LOGGING_RULES"] = "*.debug=false"
 import asyncio
@@ -36,9 +34,9 @@ import os
 
 load_dotenv()
 import threading
-import json
 import sys
 import traceback
+import time
 from pathlib import Path
 from google import genai
 from google.genai import types
@@ -64,10 +62,13 @@ from actions.dev_agent         import dev_agent
 from actions.web_search        import web_search as web_search_action
 from actions.computer_control  import computer_control
 from actions.game_updater      import game_updater
-from core.runtime import run_desktop_app
+from plugins.smart_scan       import smart_scan
+from plugins.screen_recorder  import screen_record
+from core.runtime import ensure_renderer_server, run_desktop_app
 from core.audio.microphone import Microphone
 from core.audio.speaker import Speaker
 from core.audio.diagnostics import AudioDiagnostics
+from core.proactive_conversation import init_conversation_manager, get_conversation_manager
 
 def get_base_dir():
     if getattr(sys, "frozen", False):
@@ -75,10 +76,12 @@ def get_base_dir():
     return Path(__file__).resolve().parent
 
 BASE_DIR        = get_base_dir()
-API_CONFIG_PATH = BASE_DIR / "config" / "api_keys.json"
-PROMPT_PATH     = BASE_DIR / "core" / "prompt.txt"
 LIVE_MODEL          = "models/gemini-2.5-flash-native-audio-preview-12-2025"
-CHANNELS            = 1
+FALLBACK_MODELS     = [
+    "models/gemini-2.5-flash-native-audio-preview-12-2025",
+    "models/gemini-2.0-flash-live-001",
+    "models/gemini-2.5-flash-preview-05-20",
+]
 SEND_SAMPLE_RATE    = 16000
 RECEIVE_SAMPLE_RATE = 24000
 CHUNK_SIZE          = 1024
@@ -103,6 +106,36 @@ def _is_rate_limit_error(error: Exception | str) -> bool:
             "resource exhausted",
             "unavailable",
             "api unavailable",
+        )
+    )
+
+def _is_model_error(error: Exception | str) -> bool:
+    text = str(error).lower()
+    return any(
+        token in text
+        for token in (
+            "1007",
+            "content_type_audio is not supported",
+            "model not found",
+            "invalid model",
+            "not found",
+            "not supported",
+        )
+    )
+
+def _is_network_error(error: Exception | str) -> bool:
+    text = str(error).lower()
+    return any(
+        token in text
+        for token in (
+            "timed out",
+            "timeout",
+            "connection refused",
+            "connection reset",
+            "connection aborted",
+            "network is unreachable",
+            "name resolution",
+            "errno",
         )
     )
 
@@ -522,6 +555,48 @@ TOOL_DECLARATIONS = [
             "required": ["category", "key", "value"]
         }
     },
+    {
+        "name": "smart_scan",
+        "description": (
+            "Opens the camera with a scanning animation and analyzes what it sees. "
+            "Use this when the user asks to scan an object in front of them, "
+            "check what's in their hand, identify food and whether it's safe to eat, "
+            "or get a health/mood analysis of themselves. "
+            "Modes: 'object' — identify and describe an object; "
+            "'food' — identify food and check if it's safe/healthy; "
+            "'health' — analyze a person's appearance, mood, and wellness. "
+            "After calling this tool, stay SILENT — the scanner will speak the result."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "mode": {
+                    "type": "STRING",
+                    "description": "object | food | health (default: object)"
+                }
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "screen_record",
+        "description": (
+            "Records the screen with voice narration. Use when the user wants to "
+            "record their screen, capture a tutorial, or save what's happening on their display. "
+            "Actions: 'start' — begin recording; 'stop' — stop and save; 'pause' — pause/resume. "
+            "Files are saved to the recordings/ folder."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {
+                    "type": "STRING",
+                    "description": "start | stop | pause (default: start)"
+                }
+            },
+            "required": []
+        }
+    },
 ]
 
 class JarvisLive:
@@ -543,6 +618,8 @@ class JarvisLive:
         self._restart_requested = False
         self._restart_event: asyncio.Event | None = None
         self._active_api_key = None
+        self._current_model = LIVE_MODEL
+        self._model_index = 0
         self.state_manager = get_state_manager()
         self.audio_diagnostics = AudioDiagnostics()
         self.microphone = Microphone(
@@ -551,30 +628,37 @@ class JarvisLive:
             diagnostics=self.audio_diagnostics,
         )
         self.speaker = Speaker(
-            device=3,
             sample_rate=RECEIVE_SAMPLE_RATE,
             chunk_size=CHUNK_SIZE,
             diagnostics=self.audio_diagnostics,
         )
         self.ui.set_audio_diagnostics_provider(self.audio_diagnostics.snapshot)
         profile = get_active_profile()
-        self.state_manager.set_personality(profile.id.value, avatar=profile.avatar_model)
+        self.state_manager.set_personality(profile.id, avatar=profile.avatar_model)
         get_personality_manager().set_session_restart_callback(self._request_restart)
+
+        # Track user interaction time for proactive conversation
+        self._last_user_interaction = time.monotonic()
+        self._conversation_manager = None
 
     def _on_text_command(self, text: str):
         if not self._loop:
             return
+        self._last_user_interaction = time.monotonic()
         asyncio.run_coroutine_threadsafe(
             self._handle_user_text(text, allow_remote=True),
             self._loop,
         )
 
     async def _request_restart(self):
+        import logging
+        logging.getLogger("RESTART").info("RESTART TRIGGERED")
         self._restart_requested = True
         if self._restart_event:
             self._restart_event.set()
 
     async def _handle_user_text(self, text: str, allow_remote: bool = True) -> bool:
+        self._last_user_interaction = time.monotonic()
         text = text.strip()
         if not text:
             return False
@@ -614,11 +698,11 @@ class JarvisLive:
             self.ui.write_log(f"SYS: Switching personality -> {target}")
             switched = await switch_personality(target)
             if switched:
-                profile = get_personality_manager().get_profile(PersonalityID[target])
+                profile = get_personality_manager().get_profile(target)
                 self.ui.write_log(
-                    f"SYS: Avatar profile -> {profile.id.value} uses {profile.avatar_model}"
+                    f"SYS: Avatar profile -> {profile.id} uses {profile.avatar_model}"
                 )
-                self.state_manager.set_personality(profile.id.value, avatar=profile.avatar_model)
+                self.state_manager.set_personality(profile.id, avatar=profile.avatar_model)
                 self.ui.apply_personality_profile(profile)
                 avatar_service.handle_event(AvatarEvent.IDLE)
                 self.ui.write_log(f"SYS: Personality active -> {target}")
@@ -737,6 +821,22 @@ class JarvisLive:
         self.ui.write_log(f"ERR: {tool_name} {short}")
         self.speak(f"Sir, {tool_name} encountered an error. {short}")
 
+    # Proactive conversation helpers
+    def _get_user_speaking(self) -> bool:
+        """Check if user is currently speaking (voice detected via STT)."""
+        # The audio diagnostics tracks STT status
+        snap = self.audio_diagnostics.snapshot()
+        return snap.get("stt_status") == "RECOGNIZING"
+
+    def _get_idle_time(self) -> float:
+        """Get seconds since last user interaction (voice or text)."""
+        return time.monotonic() - self._last_user_interaction
+
+    def _is_assistant_speaking(self) -> bool:
+        """Check if assistant is currently speaking."""
+        with self._speaking_lock:
+            return self._is_speaking
+
     def _build_config(self) -> types.LiveConnectConfig:
         from datetime import datetime
     
@@ -842,7 +942,22 @@ class JarvisLive:
                             "player": self.ui, "session_memory": None},
                     daemon=True
                 ).start()
-                result = "Vision module activated. Stay completely silent â€” vision module will speak directly."
+                result = "Vision module activated. Stay completely silent — vision module will speak directly."
+
+            elif name == "smart_scan":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: smart_scan(parameters=args, response=None,
+                                       player=self.ui),
+                )
+                result = r or "Scan complete."
+
+            elif name == "screen_record":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: screen_record(parameters=args),
+                )
+                result = r or "Done."
 
             elif name == "computer_settings":
                 r = await loop.run_in_executor(None, lambda: computer_settings(parameters=args, response=None, player=self.ui))
@@ -861,7 +976,7 @@ class JarvisLive:
                 result = r or "Done."
 
             elif name == "agent_task":
-                from agent.task_queue import get_queue, TaskPriority
+                from assets.automations.task_queue import get_queue, TaskPriority
                 priority_map = {"low": TaskPriority.LOW, "normal": TaskPriority.NORMAL, "high": TaskPriority.HIGH}
                 priority = priority_map.get(args.get("priority", "normal").lower(), TaskPriority.NORMAL)
                 task_id  = get_queue().submit(goal=args.get("goal", ""), priority=priority, speak=self.speak)
@@ -918,25 +1033,44 @@ class JarvisLive:
         )
 
     async def _send_realtime(self):
-        while True:
-            msg = await self.out_queue.get()
-            self.audio_diagnostics.update(ai_status="GENERATING")
-            await self.session.send_realtime_input(media=msg)
+        import logging
+        log = logging.getLogger("GEMINI")
+        log.info("SEND TASK STARTED")
+        msg_count = 0
+        try:
+            while True:
+                msg = await self.out_queue.get()
+                msg_count += 1
+                self.audio_diagnostics.update(ai_status="GENERATING")
+                await self.session.send_realtime_input(media=msg)
+                if msg_count % 200 == 1:
+                    log.info("GEMINI SEND #%d - %d bytes", msg_count, len(msg.get("data", b"")))
+        except asyncio.CancelledError:
+            log.info("SEND TASK CANCELLED after %d messages", msg_count)
+            raise
+        except Exception as exc:
+            log.error("SEND TASK ERROR: %s", exc)
+            raise
 
     async def _listen_audio(self):
-        print("[JARVIS] Mic started")
+        import logging
+        log = logging.getLogger("MIC")
+        log.info("[MIC] TASK STARTED")
         self.ui.write_log("[MIC] Device opening")
 
         try:
-            print("[JARVIS] Mic stream open")
+            log.info("[MIC] Opening stream...")
             self.ui.write_log("[MIC] Device opened")
             await self.microphone.stream_to_queue(
                 self.out_queue,
                 self._get_speaking,
                 lambda: self.ui.muted,
             )
+        except asyncio.CancelledError:
+            log.info("[MIC] TASK CANCELLED - stream closed")
+            raise
         except Exception as e:
-            print(f"[JARVIS] Mic: {e}")
+            log.error("[MIC] TASK ERROR: %s", e)
             self.audio_diagnostics.update(stt_status="ERROR", last_error=str(e))
             self.ui.write_log(f"[MIC] ERROR: {e}")
             raise
@@ -958,28 +1092,36 @@ class JarvisLive:
                 break
 
     async def _receive_audio(self):
-        print("[JARVIS]‚ Recv started")
+        import logging
+        log = logging.getLogger("RECV")
+        log.info("[RECV] TASK STARTED")
         out_buf, in_buf = [], []
         suppress_turn_output = False
+        response_count = 0
+        stt_count = 0
+        audio_chunks = 0
 
         try:
             while True:
                 async for response in self.session.receive():
+                    response_count += 1
 
                     if response.data and not suppress_turn_output:
+                        audio_chunks += 1
                         self.audio_diagnostics.update(tts_status="BUFFERING")
                         if self._turn_done_event and self._turn_done_event.is_set():
                             self._turn_done_event.clear()
                         try:
                             await self.audio_in_queue.put(response.data)
                         except asyncio.QueueFull:
-                            # Drop the oldest audio chunk
                             try:
                                 self.audio_in_queue.get_nowait()
                             except asyncio.QueueEmpty:
                                 pass
 
                             await self.audio_in_queue.put(response.data)
+                        if audio_chunks == 1:
+                            log.info("[TTS] FIRST AUDIO CHUNK received from Gemini")
 
                     if response.server_content:
                         sc = response.server_content
@@ -989,24 +1131,30 @@ class JarvisLive:
                             if txt and not suppress_turn_output:
                                 out_buf.append(txt)
                                 self.audio_diagnostics.update(ai_status="COMPLETE")
+                                log.debug("[RECV] AI TEXT: %s", txt)
 
                         if sc.input_transcription and sc.input_transcription.text:
                             txt = _clean_transcript(sc.input_transcription.text)
                             if txt:
                                 in_buf.append(txt)
+                                stt_count += 1
+                                self._last_user_interaction = time.monotonic()
                                 self.audio_diagnostics.update(
                                     stt_status="RECOGNIZING",
                                     last_text=" ".join(in_buf).strip(),
                                     ai_status="THINKING",
                                 )
+                                log.info("[STT] RESULT #%d: %s", stt_count, txt)
                                 candidate = " ".join(in_buf).strip()
                                 if candidate and not suppress_turn_output and self._is_local_command_text(candidate):
+                                    log.info("[STT] LOCAL COMMAND DETECTED: %s", candidate)
                                     suppress_turn_output = True
                                     out_buf = []
                                     self._clear_pending_audio()
                                     self.set_speaking(False)
                                     self.ui.write_log(f"You: {candidate}")
                                     await self._handle_user_text(candidate, allow_remote=False)
+                                    log.info("[STT] LOCAL COMMAND HANDLED")
 
                         if sc.turn_complete:
                             if self._turn_done_event:
@@ -1020,6 +1168,7 @@ class JarvisLive:
                                     last_text=full_in,
                                     ai_status="THINKING",
                                 )
+                                log.info("[STT] TURN COMPLETE: %s", full_in)
                                 self.ui.write_log(f"[STT] Recognized: {full_in}")
 
                                 if not suppress_turn_output:
@@ -1034,6 +1183,7 @@ class JarvisLive:
                             full_out = " ".join(out_buf).strip()
                         
                             if full_out:
+                                log.info("[RECV] AI RESPONSE: %s", full_out[:100])
                                 self.ui.write_log(f"Jarvis: {full_out}")
                                 self.audio_diagnostics.update(ai_status="COMPLETE")
                         
@@ -1043,29 +1193,38 @@ class JarvisLive:
                     if response.tool_call:
                         fn_responses = []
                         for fc in response.tool_call.function_calls:
-                            print(f"[JARVIS] {fc.name}")
+                            log.info("[RECV] TOOL CALL: %s", fc.name)
                             fr = await self._execute_tool(fc)
                             fn_responses.append(fr)
                         await self.session.send_tool_response(
                             function_responses=fn_responses
                         )
+        except asyncio.CancelledError:
+            log.info("[RECV] TASK CANCELLED - responses=%d stt=%d audio=%d",
+                     response_count, stt_count, audio_chunks)
+            raise
         except Exception as e:
-            print(f"[JARVIS] Recv: {e}")
+            log.error("[RECV] TASK ERROR: %s", e)
             self.audio_diagnostics.update(ai_status="ERROR", last_error=str(e))
             self.ui.write_log(f"[AI] ERROR: {e}")
             traceback.print_exc()
             raise
 
     async def _play_audio(self):
-        print("[JARVIS] Play started")
+        import logging
+        log = logging.getLogger("TTS")
+        log.info("[TTS] TASK STARTED")
         try:
             await self.speaker.play_queue(
                 self.audio_in_queue,
                 self._turn_done_event,
                 self.set_speaking,
             )
+        except asyncio.CancelledError:
+            log.info("[TTS] TASK CANCELLED")
+            raise
         except Exception as e:
-            print(f"[JARVIS] Play: {e}")
+            log.error("[TTS] TASK ERROR: %s", e)
             self.audio_diagnostics.update(tts_status="ERROR", last_error=str(e))
             self.ui.write_log(f"[TTS] ERROR: {e}")
             raise
@@ -1073,22 +1232,26 @@ class JarvisLive:
             self.set_speaking(False)
 
     async def run(self):
+        import logging
+        log = logging.getLogger("SESSION")
+        session_num = 0
         while True:
             key = _get_api_key()
             self._active_api_key = key
-            reconnect_delay = 3
+            reconnect_delay =3
+            session_num += 1
             client = genai.Client(
                 api_key=key,
                 http_options={"api_version": "v1beta"}
             )
 
             try:
-                print("[JARVIS] Connecting...")
+                log.info("[SESSION #%d] CONNECTING with model=%s...", session_num, self._current_model)
                 self._set_runtime_state(RuntimeState.THINKING)
                 config = self._build_config()
 
                 async with (
-                    client.aio.live.connect(model=LIVE_MODEL, config=config) as session,
+                    client.aio.live.connect(model=self._current_model, config=config) as session,
                     asyncio.TaskGroup() as tg,
                 ):
                     self.session        = session
@@ -1097,11 +1260,22 @@ class JarvisLive:
                     self.out_queue = asyncio.Queue(maxsize=100)
                     self._turn_done_event = asyncio.Event()
                     self._restart_event = asyncio.Event()
+                    self._restart_requested = False
 
-                    print("[JARVIS] Connected.")
+                    log.info("[SESSION #%d] CONNECTED - personality=%s voice=%s",
+                             session_num, get_personality(), get_voice())
                     mark_api_key_success(key)
                     self._set_runtime_state(RuntimeState.LISTENING)
                     self.ui.write_log("SYS: JARVIS online.")
+
+                    # Initialize and start proactive conversation manager
+                    self._conversation_manager = init_conversation_manager(
+                        send_message_callback=self.speak,
+                        is_user_speaking=lambda: self._get_user_speaking(),
+                        is_assistant_speaking=lambda: self._is_assistant_speaking(),
+                        get_idle_time=self._get_idle_time,
+                    )
+                    await self._conversation_manager.start()
 
                     tg.create_task(self._send_realtime())
                     tg.create_task(self._listen_audio())
@@ -1117,29 +1291,54 @@ class JarvisLive:
                         if self._restart_requested or self._restart_event.is_set():
                             self._restart_requested = False
                             self._restart_event.clear()
-                            print("[JARVIS] Restarting session...")
+                            log.info("[SESSION #%d] RESTART TRIGGERED", session_num)
                             raise ConnectionResetError("SESSION_RESTART")
 
+            except asyncio.CancelledError:
+                log.info("[SESSION #%d] CANCELLED", session_num)
+                raise
             except Exception as e:
                 if str(e) == "SESSION_RESTART":
-                    print("[JARVIS] Reloading personality...")
+                    log.info("[SESSION #%d] RELOADING PERSONALITY...", session_num)
                 elif _is_rate_limit_error(e):
-                    print("[JARVIS] API key limited/unavailable; rotating key.")
+                    log.warning("[SESSION #%d] RATE LIMITED - rotating key", session_num)
                     mark_api_key_rate_limited(key, cooldown_minutes=60)
                     self.ui.write_log("SYS: Rotating Gemini API key.")
                     reconnect_delay = 0.5
+                elif _is_model_error(e):
+                    self._model_index += 1
+                    if self._model_index < len(FALLBACK_MODELS):
+                        self._current_model = FALLBACK_MODELS[self._model_index]
+                        log.warning("[SESSION #%d] MODEL ERROR -> falling back to %s", session_num, self._current_model)
+                        self.ui.write_log(f"SYS: Model {LIVE_MODEL} unavailable, trying fallback.")
+                        reconnect_delay = 0.5
+                    else:
+                        self._model_index = 0
+                        self._current_model = FALLBACK_MODELS[0]
+                        log.error("[SESSION #%d] ALL MODELS FAILED, reverting to %s", session_num, self._current_model)
+                        self.ui.write_log("SYS: All models failed. Retrying with primary.")
+                        reconnect_delay = 5
+                elif _is_network_error(e):
+                    log.warning("[SESSION #%d] NETWORK ERROR: %s", session_num, e)
+                    reconnect_delay = 3
                 else:
-                    print(f"[JARVIS] {e}")
+                    log.error("[SESSION #%d] ERROR: %s", session_num, e)
                     mark_api_key_failed(key, str(e))
                     traceback.print_exc()
+
+            # Stop proactive conversation manager
+            if self._conversation_manager:
+                await self._conversation_manager.stop()
+                self._conversation_manager = None
 
             self.set_speaking(False)
             self._restart_event = None
             self._set_runtime_state(RuntimeState.RECONNECTING)
-            print(f"[JARVIS] Reconnecting in {reconnect_delay}s...")
+            log.info("[SESSION #%d] RECONNECTING in %ds...", session_num, reconnect_delay)
             await asyncio.sleep(reconnect_delay)
 
 def main():
+    ensure_renderer_server()
     run_desktop_app(JarvisUI, JarvisLive)
 
 if __name__ == "__main__":

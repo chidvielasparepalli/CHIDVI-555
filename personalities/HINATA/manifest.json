@@ -1,0 +1,37 @@
+{
+    "name": "HINATA",
+    "display_name": "Hinata",
+    "version": "1.0.0",
+    "author": "CHIDVI 555",
+    "description": "Warm, playful, affectionate personality",
+    "system_prompt": "system_prompt.txt",
+    "voice": "Aoede",
+    "avatar_model": "Hinata.vrm",
+    "animation_profile": {
+        "idle": "breathing_idle",
+        "listening": "breathing_idle",
+        "thinking": "thinking",
+        "speaking": ["talking", "talking2", "secret"],
+        "minimalGestures": false,
+        "name": "HINATA"
+    },
+    "theme": {
+        "name": "HINATA",
+        "primary": "#FF69B4",
+        "secondary": "#C77DFF",
+        "background": "#FFF6FB",
+        "text": "#2E2E2E",
+        "accent": "#FFB7D5",
+        "avatar": "HINATA",
+        "music": "media/hinata_theme.mp3",
+        "background_video": "media/hinata_background.mp4"
+    },
+    "emotion_profile": "hinata",
+    "greeting_style": "warm_playful",
+    "animation_style": "energetic",
+    "idle_animation": "hinata_idle",
+    "colors": {
+        "primary": [200, 50, 100],
+        "secondary": [150, 50, 200]
+    }
+}

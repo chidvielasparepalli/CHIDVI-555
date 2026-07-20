@@ -1,0 +1,37 @@
+{
+    "name": "CHIDVI",
+    "display_name": "Chidvi",
+    "version": "1.0.0",
+    "author": "CHIDVI 555",
+    "description": "Professional, efficient, primary AI personality",
+    "system_prompt": "system_prompt.txt",
+    "voice": "Charon",
+    "avatar_model": "Chidvi.vrm",
+    "animation_profile": {
+        "idle": "idle",
+        "listening": "breathing_idle",
+        "thinking": "thinking",
+        "speaking": ["talking", "talking2"],
+        "minimalGestures": true,
+        "name": "CHIDVI"
+    },
+    "theme": {
+        "name": "CHIDVI",
+        "primary": "#00D8FF",
+        "secondary": "#0099FF",
+        "background": "#050A14",
+        "text": "#FFFFFF",
+        "accent": "#00FFFF",
+        "avatar": "CHIDVI",
+        "music": "media/final work bgm.mp3",
+        "background_video": "media/interface_video.mp4"
+    },
+    "emotion_profile": "chidvi",
+    "greeting_style": "professional",
+    "animation_style": "professional",
+    "idle_animation": "chidvi_idle",
+    "colors": {
+        "primary": [0, 100, 150],
+        "secondary": [100, 50, 150]
+    }
+}

@@ -10,7 +10,3 @@ from core.personality_manager import (  # noqa: F401
     get_system_prompt,
     set_personality,
 )
-
-
-def get_prompt():
-    return get_system_prompt()

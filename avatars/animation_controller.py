@@ -20,26 +20,11 @@ class AnimationController:
     def happy(self):
         self.avatar.set_state(AvatarState.HAPPY)
 
-    def smile(self):
-        self.avatar.set_state(AvatarState.SMILE)
-
-    def laugh(self):
-        self.avatar.set_state(AvatarState.LAUGH)
-
     def sad(self):
         self.avatar.set_state(AvatarState.SAD)
 
     def worried(self):
         self.avatar.set_state(AvatarState.WORRIED)
 
-    def surprised(self):
-        self.avatar.set_state(AvatarState.SURPRISED)
-
     def blush(self):
         self.avatar.set_state(AvatarState.BLUSH)
-
-    def wave(self):
-        self.avatar.set_state(AvatarState.WAVE)
-
-    def goodbye(self):
-        self.avatar.set_state(AvatarState.GOODBYE)

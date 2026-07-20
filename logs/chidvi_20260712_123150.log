@@ -1,0 +1,453 @@
+[2026-07-12 12:31:54] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-12 12:31:54] INFO     ui.runtime:1316: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-12 12:31:54] INFO     commands.router:70: Command router initialized
+[2026-07-12 12:31:54] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-12 12:31:54] INFO     ui.runtime:1316: SYS: Renderer page load started.
+[2026-07-12 12:31:55] INFO     ui.runtime:1316: SYS: Renderer page load finished -> True.
+[2026-07-12 12:31:56] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-12 12:32:10] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-12 12:32:12] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-12 12:32:12] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-12 12:32:14] INFO     ui.runtime:1316: Jarvis: Hii pandhi! What are you up to?
+[2026-07-12 12:32:14] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-12 12:32:41] INFO     commands.router:310: Handling local command: personality - switch to chidvi
+[2026-07-12 12:32:41] INFO     core.personality_manager:259: Switching personality to CHIDVI
+[2026-07-12 12:32:41] INFO     core.personality_manager:307: Personality switched to CHIDVI
+[2026-07-12 12:32:41] INFO     commands.router:332: Local command executed: switch to chidvi
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: SYS: Switching personality -> CHIDVI
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: SYS: Avatar profile -> CHIDVI uses Chidvi.vrm
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: SYS: Applying avatar profile -> CHIDVI / Chidvi.vrm
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: SYS: UI theme -> CHIDVI
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: SYS: Forwarding VRM switch -> Chidvi.vrm
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: [PERSONALITY] Avatar request sent -> Chidvi.vrm
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: [PERSONALITY] Waiting for renderer -> Chidvi.vrm
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: SYS: Animation profile -> CHIDVI
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: [VRM] Animation profile requested -> CHIDVI
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: SYS: Personality active -> CHIDVI
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: [VRM] Switch command sent -> Chidvi.vrm; result=sent
+[2026-07-12 12:32:41] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': False, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'thinking', 'wave', 'breathing_idle', 'secret', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI'}}
+[2026-07-12 12:32:41] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-12 12:32:42] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at switchAvatarNow (http://localhost:5173/src/main.js:442:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:42] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at switchAvatarNow (http://localhost:5173/src/main.js:442:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:43] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:43] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:43] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: playIdle is not defined\n    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)\n    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)\n    at attachVRM (http://localhost:5173/src/main.js:396:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'thinking', 'wave', 'breathing_idle', 'secret', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI'}}
+[2026-07-12 12:32:44] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:44] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:44] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:44] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:45] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:45] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:45] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:45] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:45] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: playIdle is not defined\n    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)\n    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)\n    at attachVRM (http://localhost:5173/src/main.js:396:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'thinking', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'thinking', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'thinking', 'wave', 'breathing_idle', 'secret', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI'}}
+[2026-07-12 12:32:46] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:46] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:46] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-12 12:32:46] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:47] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:47] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:47] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:47] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:48] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:48] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:48] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:48] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:49] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:49] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: playIdle is not defined\n    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)\n    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)\n    at attachVRM (http://localhost:5173/src/main.js:396:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'thinking', 'wave', 'breathing_idle', 'secret', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI'}}
+[2026-07-12 12:32:49] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:49] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:49] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:50] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:50] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:50] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:50] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:51] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:51] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:51] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:52] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:52] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:52] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:52] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:53] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:53] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:53] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: playIdle is not defined\n    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)\n    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)\n    at attachVRM (http://localhost:5173/src/main.js:396:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'thinking', 'wave', 'breathing_idle', 'secret', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI'}}
+[2026-07-12 12:32:53] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:53] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:54] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:54] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:54] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:54] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:55] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:55] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:55] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:55] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:56] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:56] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:56] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:56] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:57] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:57] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:57] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:57] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:58] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:58] INFO     ui.runtime:1316: [VRM] Avatar switch error -> ReferenceError: playIdle is not defined
+    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)
+    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)
+    at attachVRM (http://localhost:5173/src/main.js:396:5)
+    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)
+    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)
+    at async loadAvatar (http://localhost:5173/src/main.js:493:16)
+[2026-07-12 12:32:58] INFO     ui.runtime:1316: [VRM] Avatar Ready timeout -> Chidvi.vrm; diagnostics={'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'rollback_failed', 'lastAvatarSwitchError': 'ReferenceError: playIdle is not defined\n    at Object.onStateChange (http://localhost:5173/src/animation-manager.js:503:21)\n    at applyEmotionTarget (http://localhost:5173/src/main.js:102:17)\n    at attachVRM (http://localhost:5173/src/main.js:396:5)\n    at restorePreviousAvatar (http://localhost:5173/src/main.js:416:9)\n    at async switchAvatarNow (http://localhost:5173/src/main.js:452:9)\n    at async loadAvatar (http://localhost:5173/src/main.js:493:16)', 'sceneChildren': 4, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 7, 'cachedClipNames': ['idle', 'talking', 'thinking', 'wave', 'breathing_idle', 'secret', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI'}}

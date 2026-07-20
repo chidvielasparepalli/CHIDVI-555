@@ -8,8 +8,8 @@ import os
 from pathlib import Path
 from typing import Callable
 
-from automation.planner       import create_plan, replan
-from agent.error_handler import analyze_error, generate_fix, ErrorDecision
+from assets.automations.planner       import create_plan, replan
+from assets.automations.error_handler import analyze_error, generate_fix, ErrorDecision
 
 
 def get_base_dir() -> Path:

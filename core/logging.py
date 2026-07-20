@@ -127,15 +127,6 @@ class LoggerManager:
         if name not in self._loggers:
             self._loggers[name] = logging.getLogger(name)
         return self._loggers[name]
-    
-    def set_debug(self, enabled: bool):
-        """Enable or disable debug logging."""
-        level = logging.DEBUG if enabled else logging.INFO
-        for handler in logging.root.handlers:
-            if isinstance(handler, logging.StreamHandler):
-                handler.setLevel(logging.DEBUG if enabled else logging.INFO)
-            elif isinstance(handler, logging.FileHandler):
-                handler.setLevel(level)
 
 
 # Global instance
@@ -145,8 +136,3 @@ logger_manager = LoggerManager()
 def get_logger(name: str) -> logging.Logger:
     """Get a logger for a module."""
     return logger_manager.get_logger(name)
-
-
-def set_debug_mode(enabled: bool):
-    """Enable or disable debug mode."""
-    logger_manager.set_debug(enabled)

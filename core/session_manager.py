@@ -17,7 +17,7 @@ import threading
 import asyncio
 from core.logging import get_logger
 from core.event_bus import publish_event, EventType
-from api.key_pool import get_api_key_pool, mark_api_key_rate_limited, mark_api_key_success
+from api.key_pool import mark_api_key_rate_limited
 
 logger = get_logger(__name__)
 

@@ -286,8 +286,3 @@ def mark_api_key_rate_limited(key: str, cooldown_minutes: int = 60):
 def mark_api_key_failed(key: str, error: str):
     """Mark an API key as failed."""
     get_api_key_pool().mark_failed(key, error)
-
-
-def get_api_pool_stats() -> dict:
-    """Get API key pool statistics."""
-    return get_api_key_pool().get_stats()

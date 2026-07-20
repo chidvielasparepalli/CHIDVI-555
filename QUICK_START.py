@@ -380,15 +380,15 @@ async def process_user_input(text: str):
 # ============================================================================
 
 # Pattern 1: Check if current personality is HINATA
-from core.personality_manager import PersonalityID, get_current_personality
-if get_current_personality() == PersonalityID.HINATA:
+from core.personality_manager import get_personality
+if get_personality() == "HINATA":
     set_avatar_emotion("excited", intensity=1.0)
 
 # Pattern 2: Get all available personalities
 from core.personality_manager import get_personality_manager
 manager = get_personality_manager()
-personalities = manager.get_all_personalities()
-# → [PersonalityID.CHIDVI, PersonalityID.HINATA]
+personalities = manager.get_all_profiles()
+# → [PersonalityProfile("CHIDVI"), PersonalityProfile("HINATA")]
 
 # Pattern 3: React to personality changes
 from core.event_bus import subscribe_to_event, EventType

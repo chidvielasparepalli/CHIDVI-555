@@ -1,0 +1,171 @@
+[2026-07-13 16:58:58] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-13 16:58:58] INFO     ui.runtime:1322: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-13 16:58:58] INFO     commands.router:70: Command router initialized
+[2026-07-13 16:58:58] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-13 16:58:58] INFO     ui.runtime:1322: SYS: Renderer page load started.
+[2026-07-13 16:58:59] INFO     ui.runtime:1322: SYS: Renderer page load finished -> True.
+[2026-07-13 16:59:00] INFO     ui.runtime:1322: SYS: JARVIS online.
+[2026-07-13 16:59:00] INFO     ui.runtime:1322: [MIC] Device opening
+[2026-07-13 16:59:00] INFO     ui.runtime:1322: [MIC] Device opened
+[2026-07-13 16:59:49] INFO     commands.router:310: Handling local command: avatar - wave
+[2026-07-13 16:59:49] INFO     commands.router:332: Local command executed: wave
+[2026-07-13 16:59:49] INFO     ui.runtime:1322: SYS: Avatar action -> wave
+[2026-07-13 16:59:49] INFO     ui.runtime:1322: [VRM] Avatar action requested -> wave
+[2026-07-13 16:59:51] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-13 16:59:52] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 16:59:54] INFO     ui.runtime:1322: Jarvis: Hello. How can I assist you today?
+[2026-07-13 16:59:54] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 16:59:59] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:00:01] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:00:03] INFO     ui.runtime:1322: Jarvis: Hello, CHIDVILAS. How can I help you?
+[2026-07-13 17:00:03] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:00:09] INFO     commands.router:310: Handling local command: avatar - laugh
+[2026-07-13 17:00:09] INFO     commands.router:332: Local command executed: laugh
+[2026-07-13 17:00:09] INFO     ui.runtime:1322: SYS: Avatar action -> laugh
+[2026-07-13 17:00:09] INFO     ui.runtime:1322: [VRM] Avatar action requested -> laugh
+[2026-07-13 17:00:11] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:00:16] INFO     ui.runtime:1322: Jarvis: It seems like something has brightened your day! What can I do for you, Hinata?
+[2026-07-13 17:00:16] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:00:24] INFO     commands.router:310: Handling local command: personality - hinata
+[2026-07-13 17:00:24] INFO     core.personality_manager:259: Switching personality to HINATA
+[2026-07-13 17:00:24] INFO     core.personality_manager:307: Personality switched to HINATA
+[2026-07-13 17:00:24] INFO     commands.router:332: Local command executed: hinata
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: SYS: Switching personality -> HINATA
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: SYS: Avatar profile -> HINATA uses Hinata.vrm
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: SYS: Applying avatar profile -> HINATA / Hinata.vrm
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: SYS: UI theme -> HINATA
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: SYS: Forwarding VRM switch -> Hinata.vrm
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: [PERSONALITY] Avatar request sent -> Hinata.vrm
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: [PERSONALITY] Waiting for renderer -> Hinata.vrm
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: SYS: Animation profile -> HINATA
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: [VRM] Animation profile requested -> HINATA
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: SYS: Personality active -> HINATA
+[2026-07-13 17:00:24] INFO     ui.runtime:1322: [VRM] Switch command sent -> Hinata.vrm; result=sent
+[2026-07-13 17:00:25] INFO     ui.runtime:1322: [VRM] Waiting for Avatar Ready -> Hinata.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': False, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'breathing_idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 6, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA', 'currentPriority': 0, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 5}}
+[2026-07-13 17:00:25] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-13 17:00:26] INFO     ui.runtime:1322: [VRM] Avatar Ready -> Hinata.vrm
+[2026-07-13 17:00:26] INFO     ui.runtime:1322: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Hinata.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'breathing_idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 6, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle', 'talking2'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'HINATA', 'currentPriority': 0, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 6}}
+[2026-07-13 17:00:29] INFO     ui.runtime:1322: SYS: JARVIS online.
+[2026-07-13 17:00:29] INFO     ui.runtime:1322: [MIC] Device opening
+[2026-07-13 17:00:29] INFO     ui.runtime:1322: [MIC] Device opened
+[2026-07-13 17:00:42] INFO     commands.router:310: Handling local command: avatar - wave hand
+[2026-07-13 17:00:42] INFO     commands.router:332: Local command executed: wave hand
+[2026-07-13 17:00:42] INFO     ui.runtime:1322: SYS: Avatar action -> wave
+[2026-07-13 17:00:42] INFO     ui.runtime:1322: [VRM] Avatar action requested -> wave
+[2026-07-13 17:00:46] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:00:48] INFO     ui.runtime:1322: Jarvis: Hehe, hi there! What do you want, idiot?
+[2026-07-13 17:00:49] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:00:50] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:00:50] INFO     ui.runtime:1322: SYS: Emotion -> embarrassed
+[2026-07-13 17:00:50] INFO     ui.runtime:1322: [VRM] Emotion requested -> embarrassed
+[2026-07-13 17:00:53] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:00:59] INFO     ui.runtime:1322: Jarvis: Hmph... making me blush, pandhi! Okay, here you go! *blows a playful kiss*
+[2026-07-13 17:01:00] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:01:07] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:01:07] INFO     ui.runtime:1322: SYS: Emotion -> embarrassed
+[2026-07-13 17:01:07] INFO     ui.runtime:1322: [VRM] Emotion requested -> embarrassed
+[2026-07-13 17:01:10] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:01:19] INFO     ui.runtime:1322: Jarvis: Ayy, again? You're so demanding, idiot! *Blushes* Hmm, alright, just this once more... *blows another kiss*
+[2026-07-13 17:01:19] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:01:26] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:01:26] INFO     ui.runtime:1322: SYS: Emotion -> embarrassed
+[2026-07-13 17:01:26] INFO     ui.runtime:1322: [VRM] Emotion requested -> embarrassed
+[2026-07-13 17:01:28] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:01:34] INFO     ui.runtime:1322: Jarvis: *Blushes deeply* Ayy, what do I even say to that, pandhi?
+[2026-07-13 17:01:34] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:01:42] INFO     commands.router:310: Handling local command: personality - chidvi
+[2026-07-13 17:01:42] INFO     core.personality_manager:259: Switching personality to CHIDVI
+[2026-07-13 17:01:42] INFO     core.personality_manager:307: Personality switched to CHIDVI
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: SYS: Switching personality -> CHIDVI
+[2026-07-13 17:01:42] INFO     commands.router:332: Local command executed: chidvi
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: SYS: Avatar profile -> CHIDVI uses Chidvi.vrm
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: SYS: Applying avatar profile -> CHIDVI / Chidvi.vrm
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: SYS: UI theme -> CHIDVI
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: SYS: Forwarding VRM switch -> Chidvi.vrm
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: [PERSONALITY] Avatar request sent -> Chidvi.vrm
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: [PERSONALITY] Waiting for renderer -> Chidvi.vrm
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: SYS: Animation profile -> CHIDVI
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: [VRM] Animation profile requested -> CHIDVI
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: SYS: Personality active -> CHIDVI
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: [VRM] Switch command sent -> Chidvi.vrm; result=sent
+[2026-07-13 17:01:42] INFO     ui.runtime:1322: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': False, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 8, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle', 'talking2', 'secret', 'bashful'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI', 'currentPriority': 0, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 12}}
+[2026-07-13 17:01:42] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6J... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-13 17:01:43] INFO     ui.runtime:1322: [VRM] Avatar Ready -> Chidvi.vrm
+[2026-07-13 17:01:43] INFO     ui.runtime:1322: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 8, 'cachedClipNames': ['idle', 'talking', 'wave', 'thinking', 'breathing_idle', 'talking2', 'secret', 'bashful'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI', 'currentPriority': 0, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 13}}
+[2026-07-13 17:01:46] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:01:46] ERROR    commands.router:367: Error handling remote command: sent 1000 (OK); then received 1000 (OK)
+Traceback (most recent call last):
+  File "D:\PROJECTS\CHIDVI-555\commands\router.py", line 364, in _handle_remote_command
+    result = await handler(command)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECTS\CHIDVI-555\main.py", line 599, in _handle_remote_command
+    await self.session.send_client_content(
+  File "D:\PROJECTS\CHIDVI-555\.venv\Lib\site-packages\google\genai\live.py", line 241, in send_client_content
+    await self._ws.send(json.dumps({'client_content': client_content_dict}))
+  File "D:\PROJECTS\CHIDVI-555\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 478, in send
+    async with self.send_context():
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\chidv\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PROJECTS\CHIDVI-555\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 965, in send_context
+    raise self.protocol.close_exc from original_exc
+websockets.exceptions.ConnectionClosedOK: sent 1000 (OK); then received 1000 (OK)
+[2026-07-13 17:01:46] INFO     ui.runtime:1322: SYS: JARVIS online.
+[2026-07-13 17:01:46] INFO     ui.runtime:1322: [MIC] Device opening
+[2026-07-13 17:01:46] INFO     ui.runtime:1322: [MIC] Device opened
+[2026-07-13 17:01:55] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:01:58] INFO     ui.runtime:1322: Jarvis: Hello Hinata! CHIDVI here. How can I help you today?
+[2026-07-13 17:01:58] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:04:40] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:04:42] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-13 17:04:42] INFO     ui.runtime:1322: [Search] CEO of Google
+[2026-07-13 17:04:42] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-13 17:04:45] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+[2026-07-13 17:04:47] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:04:50] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:04:50] INFO     ui.runtime:1322: Jarvis: The CEO of Google is Sundar Pichai.
+[2026-07-13 17:04:57] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:04:59] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:05:01] INFO     ui.runtime:1322: Jarvis: CHIDVIELAS is my creator.
+[2026-07-13 17:05:01] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:05:11] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:05:13] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:05:19] INFO     ui.runtime:1322: Jarvis: CHIDVIELAS is the creator of CHIDVI 555, a desktop agent designed to automate tasks.
+[2026-07-13 17:05:19] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:06:07] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:06:10] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:06:11] INFO     ui.runtime:1322: Jarvis: Sure, where are you located?
+[2026-07-13 17:06:12] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:06:38] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:06:40] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:06:45] INFO     ui.runtime:1322: Jarvis: I understand, but I need the city name to get the weather report. Could you please tell me which city?
+[2026-07-13 17:06:45] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:06:45] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:06:47] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-13 17:06:47] INFO     ui.runtime:1322: JARVIS: Showing the weather for hyderabad, today, sir.
+[2026-07-13 17:06:49] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:06:51] INFO     ui.runtime:1322: Jarvis: Checking the weather for Hyderabad today.
+[2026-07-13 17:06:51] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:07:24] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:07:36] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-13 17:07:36] INFO     ui.runtime:1322: [Search] interesting github repositories desktop agent automation
+[2026-07-13 17:07:36] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-13 17:07:44] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+[2026-07-13 17:07:45] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:08:09] INFO     ui.runtime:1322: Jarvis: Based on your interest in desktop agents and automation, you might find **OpenAdaptAI particularly interesting**. It allows you to record a workflow and compile it into a self-healing, deterministic automation that runs locally, leveraging AI and large language models. Another cool one is **os-ai-computer-use**, which focuses on AI controlling your operating system.
+[2026-07-13 17:08:09] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:08:18] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:08:21] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:08:24] INFO     ui.runtime:1322: Jarvis: Your precise location is set to Hyderabad.
+[2026-07-13 17:08:24] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:08:48] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:08:50] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:08:55] INFO     ui.runtime:1322: Jarvis: Which repository would you like to open? Was it **OpenAdaptAI** or **os-ai-computer-use**?
+[2026-07-13 17:08:56] INFO     HINATA:20: Avatar State -> IDLE
+[2026-07-13 17:09:11] INFO     HINATA:20: Avatar State -> LISTENING
+[2026-07-13 17:09:13] INFO     HINATA:20: Avatar State -> THINKING
+[2026-07-13 17:09:37] INFO     ui.runtime:1322: [browser] Opened: https://github.com/777genius/os-ai-computer-use
+[2026-07-13 17:09:38] INFO     HINATA:20: Avatar State -> SPEAKING
+[2026-07-13 17:09:42] INFO     ui.runtime:1322: Jarvis: I have opened the `os-ai-computer-use` repository for you.
+[2026-07-13 17:09:42] INFO     HINATA:20: Avatar State -> IDLE

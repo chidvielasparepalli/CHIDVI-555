@@ -1,0 +1,29 @@
+[2026-07-13 15:25:44] INFO     core.personality_manager:127: Personalities loaded: CHIDVI, HINATA
+[2026-07-13 15:25:44] INFO     ui.runtime:1316: SYS: Renderer initial avatar -> Hinata.vrm
+[2026-07-13 15:25:45] INFO     commands.router:70: Command router initialized
+[2026-07-13 15:25:45] INFO     api.key_pool:128: Loaded 6 API keys
+[2026-07-13 15:25:45] INFO     ui.runtime:1316: SYS: Renderer page load started.
+[2026-07-13 15:25:45] INFO     ui.runtime:1316: SYS: Renderer page load finished -> True.
+[2026-07-13 15:25:46] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 15:26:05] INFO     commands.router:310: Handling local command: personality - switch to chidvi
+[2026-07-13 15:26:05] INFO     core.personality_manager:259: Switching personality to CHIDVI
+[2026-07-13 15:26:05] INFO     core.personality_manager:307: Personality switched to CHIDVI
+[2026-07-13 15:26:05] INFO     commands.router:332: Local command executed: switch to chidvi
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: SYS: Switching personality -> CHIDVI
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: SYS: Avatar profile -> CHIDVI uses Chidvi.vrm
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: SYS: Applying avatar profile -> CHIDVI / Chidvi.vrm
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: SYS: UI theme -> CHIDVI
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: SYS: Forwarding VRM switch -> Chidvi.vrm
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: [PERSONALITY] Avatar request sent -> Chidvi.vrm
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: [PERSONALITY] Waiting for renderer -> Chidvi.vrm
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: SYS: Animation profile -> CHIDVI
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: [VRM] Animation profile requested -> CHIDVI
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: SYS: Personality active -> CHIDVI
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: [VRM] Switch command sent -> Chidvi.vrm; result=sent
+[2026-07-13 15:26:05] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6I... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-13 15:26:05] INFO     ui.runtime:1316: [VRM] Waiting for Avatar Ready -> Chidvi.vrm; diagnostics={'currentAvatarFile': None, 'hasActiveVRM': False, 'hasMixer': False, 'avatarSwitchInProgress': True, 'queuedAvatarFile': None, 'avatarUpdatePaused': True, 'lastAvatarSwitchStatus': 'switching', 'lastAvatarSwitchError': None, 'sceneChildren': 2, 'emotion': 'listening', 'activeAction': None, 'animation': {'mixerBound': False, 'fbxActive': False, 'activeName': None, 'currentState': 'listening', 'idleName': 'idle', 'idleActionAlive': False, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 5, 'cachedClipNames': ['idle', 'talking', 'thinking', 'wave', 'breathing_idle'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI', 'currentPriority': 0, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 1}}
+[2026-07-13 15:26:06] INFO     ui.runtime:1316: [VRM] Avatar Ready -> Chidvi.vrm
+[2026-07-13 15:26:06] INFO     ui.runtime:1316: [VRM] Renderer diagnostics -> {'currentAvatarFile': 'Chidvi.vrm', 'hasActiveVRM': True, 'hasMixer': True, 'avatarSwitchInProgress': False, 'queuedAvatarFile': None, 'avatarUpdatePaused': False, 'lastAvatarSwitchStatus': 'ready', 'lastAvatarSwitchError': None, 'sceneChildren': 3, 'emotion': 'idle', 'activeAction': None, 'animation': {'mixerBound': True, 'fbxActive': False, 'activeName': None, 'currentState': 'idle', 'idleName': 'idle', 'idleActionAlive': True, 'hasCurrentAction': False, 'queueLength': 0, 'queue': [], 'cachedClips': 5, 'cachedClipNames': ['idle', 'talking', 'thinking', 'wave', 'breathing_idle'], 'pendingFade': False, 'blendProgress': 1, 'availableGestures': ['wave', 'wave2', 'salute', 'bow', 'clap', 'point', 'pointing', 'greeting', 'shrug', 'nod', 'shake_head', 'jump'], 'availableEmotions': ['happy', 'sad', 'thinking', 'excited', 'embarrassed', 'angry', 'laughing'], 'currentProfile': 'CHIDVI', 'currentPriority': 0, 'currentActionIsOneShot': False, 'activeGesture': None, 'activeEmotion': None, 'retargetedClipCount': 2}}
+[2026-07-13 15:26:09] INFO     ui.runtime:1316: SYS: JARVIS online.
+[2026-07-13 15:26:16] INFO     ui.runtime:1316: SYS: Renderer page load started.
+[2026-07-13 15:26:16] INFO     ui.runtime:1316: SYS: Renderer page load finished -> True.
