@@ -1,0 +1,70 @@
+[2026-07-21 15:12:20] INFO     core.personality_manager:136: Discovered 2 personality plugin(s): CHIDVI, HINATA
+[2026-07-21 15:12:20] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-21 15:12:20] INFO     commands.router:70: Command router initialized
+[2026-07-21 15:12:20] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-21 15:12:20] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-21 15:12:21] INFO     SESSION:1777: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-21 15:12:21] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-21 15:12:21] INFO     SESSION:1793: [SESSION #1] CONNECTED - personality=CHIDVI voice=Charon
+[2026-07-21 15:12:21] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-21 15:12:21] INFO     GEMINI:1566: SEND TASK STARTED
+[2026-07-21 15:12:21] INFO     MIC:1586: [MIC] TASK STARTED
+[2026-07-21 15:12:21] INFO     MIC:1590: [MIC] Opening stream...
+[2026-07-21 15:12:21] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-21 15:12:21] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-21 15:12:21] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-21 15:12:21] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-21 15:12:21] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-21 15:12:21] INFO     RECV:1625: [RECV] TASK STARTED
+[2026-07-21 15:12:21] INFO     TTS:1744: [TTS] TASK STARTED
+[2026-07-21 15:12:21] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-21 15:12:22] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-21 15:12:22] INFO     GEMINI:1575: GEMINI SEND #1 - 2048 bytes
+[2026-07-21 15:12:22] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:12:22] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:12:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:12:24] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:12:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:12:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:12:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:12:26] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:12:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:12:27] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:12:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:12:28] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:12:28] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:12:29] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:12:46] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 15:12:48] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-21 15:12:48] INFO     RECV:1724: [RECV] TOOL CALL: face_unlock
+[2026-07-21 15:12:48] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 15:12:50] INFO     RECV:1652: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-21 15:12:50] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 15:12:50] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-21 15:12:56] INFO     RECV:1714: [RECV] AI RESPONSE: Face recognition library is not installed. To enable this, please run `pip install face_recognition 
+[2026-07-21 15:12:56] INFO     ui.runtime:2258: Jarvis: Face recognition library is not installed. To enable this, please run `pip install face_recognition dlib` in your terminal.
+[2026-07-21 15:12:56] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 15:13:12] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:13:13] INFO     MIC:76: MIC CALLBACK #801 - captured 2048 bytes
+[2026-07-21 15:13:13] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:13:13] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:13:13] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:13:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:13:14] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:13:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:13:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:13:15] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:13:15] INFO     RECV:1675: [STT] RESULT #1: Can
+[2026-07-21 15:13:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:13:15] INFO     RECV:1675: [STT] RESULT #2: you do that yourself?
+[2026-07-21 15:13:17] INFO     GEMINI:1575: GEMINI SEND #201 - 2048 bytes
+[2026-07-21 15:13:18] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:13:18] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 15:13:18] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 15:13:19] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 15:13:32] INFO     RECV:1699: [STT] TURN COMPLETE: Can you do that yourself?
+[2026-07-21 15:13:32] INFO     RECV:1714: [RECV] AI RESPONSE: I cannot directly execute that command on your machine. You will need to open your terminal or comma
+[2026-07-21 15:13:32] INFO     ui.runtime:2258: [STT] Recognized: Can you do that yourself?
+[2026-07-21 15:13:32] INFO     ui.runtime:2258: You: Can you do that yourself?
+[2026-07-21 15:13:32] INFO     ui.runtime:2258: Jarvis: I cannot directly execute that command on your machine. You will need to open your terminal or command prompt and manually
+[2026-07-21 15:13:32] INFO     HINATA:17: Avatar State -> IDLE

@@ -1,0 +1,28 @@
+[2026-07-23 10:06:55] INFO     commands.router:70: Command router initialized
+[2026-07-23 10:06:55] INFO     core.personality_manager:136: Discovered 2 personality plugin(s): CHIDVI, HINATA
+[2026-07-23 10:06:55] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-23 10:06:55] INFO     SESSION:1777: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-23 10:06:56] INFO     SESSION:1793: [SESSION #1] CONNECTED - personality=CHIDVI voice=Charon
+[2026-07-23 10:06:56] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-23 10:06:56] INFO     GEMINI:1566: SEND TASK STARTED
+[2026-07-23 10:06:56] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-23 10:06:56] INFO     MIC:1586: [MIC] TASK STARTED
+[2026-07-23 10:06:56] INFO     MIC:1590: [MIC] Opening stream...
+[2026-07-23 10:06:56] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-23 10:06:56] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-23 10:06:56] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-23 10:06:56] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-23 10:06:56] INFO     RECV:1625: [RECV] TASK STARTED
+[2026-07-23 10:06:56] INFO     TTS:1744: [TTS] TASK STARTED
+[2026-07-23 10:06:56] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-23 10:06:56] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-23 10:06:56] INFO     GEMINI:1575: GEMINI SEND #1 - 2048 bytes
+[2026-07-23 10:07:09] INFO     MIC:76: MIC CALLBACK #201 - captured 2048 bytes
+[2026-07-23 10:07:09] INFO     GEMINI:1575: GEMINI SEND #201 - 2048 bytes
+[2026-07-23 10:07:22] INFO     MIC:76: MIC CALLBACK #401 - captured 2048 bytes
+[2026-07-23 10:07:22] INFO     GEMINI:1575: GEMINI SEND #401 - 2048 bytes
+[2026-07-23 10:07:26] INFO     core.proactive_conversation:257: Firing proactive trigger: greeting - Hello there! How can I help you today?...
+[2026-07-23 10:07:28] WARNING  google_genai.types:16916: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-23 10:07:28] INFO     RECV:1652: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-23 10:07:28] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-23 10:07:28] INFO     TTS:101: TTS START - first chunk received (46080 bytes)

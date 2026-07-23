@@ -1,0 +1,704 @@
+[2026-07-21 18:23:13] INFO     core.personality_manager:136: Discovered 2 personality plugin(s): CHIDVI, HINATA
+[2026-07-21 18:23:13] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-21 18:23:13] INFO     commands.router:70: Command router initialized
+[2026-07-21 18:23:13] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-21 18:23:13] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-21 18:23:14] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-21 18:23:15] INFO     SESSION:1777: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-21 18:23:16] INFO     SESSION:1793: [SESSION #1] CONNECTED - personality=CHIDVI voice=Charon
+[2026-07-21 18:23:16] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-21 18:23:16] INFO     GEMINI:1566: SEND TASK STARTED
+[2026-07-21 18:23:16] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-21 18:23:16] INFO     MIC:1586: [MIC] TASK STARTED
+[2026-07-21 18:23:16] INFO     MIC:1590: [MIC] Opening stream...
+[2026-07-21 18:23:16] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-21 18:23:16] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-21 18:23:16] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-21 18:23:16] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-21 18:23:16] INFO     RECV:1625: [RECV] TASK STARTED
+[2026-07-21 18:23:16] INFO     TTS:1744: [TTS] TASK STARTED
+[2026-07-21 18:23:16] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-21 18:23:16] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-21 18:23:16] INFO     GEMINI:1575: GEMINI SEND #1 - 2048 bytes
+[2026-07-21 18:23:20] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:23:20] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:23:22] INFO     RECV:1675: [STT] RESULT #1: .
+[2026-07-21 18:23:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:23:23] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:23:24] INFO     RECV:1699: [STT] TURN COMPLETE: .
+[2026-07-21 18:23:24] INFO     ui.runtime:2258: [STT] Recognized: .
+[2026-07-21 18:23:24] INFO     ui.runtime:2258: You: .
+[2026-07-21 18:23:27] INFO     RECV:1675: [STT] RESULT #2: 100
+[2026-07-21 18:23:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:23:27] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:23:29] INFO     MIC:76: MIC CALLBACK #201 - captured 2048 bytes
+[2026-07-21 18:23:29] INFO     GEMINI:1575: GEMINI SEND #201 - 2048 bytes
+[2026-07-21 18:23:29] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-21 18:23:31] INFO     RECV:1652: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-21 18:23:31] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 18:23:31] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-21 18:23:31] ERROR    TTS:110: SPEAKER ERROR: Unanticipated host error [PaErrorCode -9999]: 'There is no driver installed on your system.' [MME error 6]
+[2026-07-21 18:23:31] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:23:37] INFO     TTS:119: SPEAKER CLOSED - played 1 chunks total
+[2026-07-21 18:23:37] ERROR    TTS:1755: [TTS] TASK ERROR: Unanticipated host error [PaErrorCode -9999]: 'There is no driver installed on your system.' [MME error 6]
+[2026-07-21 18:23:37] INFO     ui.runtime:2258: [TTS] ERROR: Unanticipated host error [PaErrorCode -9999]: 'There is no driver installed on your system.' [MME error 6]
+[2026-07-21 18:23:37] INFO     GEMINI:1577: SEND TASK CANCELLED after 226 messages
+[2026-07-21 18:23:37] INFO     RECV:1731: [RECV] TASK CANCELLED - responses=19 stt=2 audio=7
+[2026-07-21 18:23:37] INFO     MIC:103: STREAM CANCELLED - closing cleanly
+[2026-07-21 18:23:37] INFO     MIC:111: STREAM CLOSED - callbacks served: 320
+[2026-07-21 18:23:37] INFO     MIC:1598: [MIC] TASK CANCELLED - stream closed
+[2026-07-21 18:23:47] ERROR    SESSION:1853: [SESSION #1] ERROR: unhandled errors in a TaskGroup (1 sub-exception)
+[2026-07-21 18:23:47] WARNING  api.key_pool:84: Key marked as failed: AQ.Ab8RN6L... (unhandled errors in a TaskGroup (1 sub-exception))
+[2026-07-21 18:23:47] INFO     core.proactive_conversation:206: Proactive conversation manager stopped
+[2026-07-21 18:23:47] INFO     SESSION:1865: [SESSION #1] RECONNECTING in 3s...
+[2026-07-21 18:23:50] INFO     SESSION:1777: [SESSION #2] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-21 18:23:52] INFO     SESSION:1793: [SESSION #2] CONNECTED - personality=CHIDVI voice=Charon
+[2026-07-21 18:23:52] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-21 18:23:52] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-21 18:23:52] INFO     GEMINI:1566: SEND TASK STARTED
+[2026-07-21 18:23:52] INFO     MIC:1586: [MIC] TASK STARTED
+[2026-07-21 18:23:52] INFO     MIC:1590: [MIC] Opening stream...
+[2026-07-21 18:23:52] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-21 18:23:52] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-21 18:23:52] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-21 18:23:52] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-21 18:23:52] INFO     RECV:1625: [RECV] TASK STARTED
+[2026-07-21 18:23:52] INFO     TTS:1744: [TTS] TASK STARTED
+[2026-07-21 18:23:52] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-21 18:23:52] INFO     GEMINI:1575: GEMINI SEND #1 - 2048 bytes
+[2026-07-21 18:23:55] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:23:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:23:57] INFO     MIC:76: MIC CALLBACK #401 - captured 2048 bytes
+[2026-07-21 18:23:58] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:23:58] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:23:59] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:23:59] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:00] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:00] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:02] INFO     core.proactive_conversation:257: Firing proactive trigger: greeting - Hello there! How can I help you today?...
+[2026-07-21 18:24:02] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:02] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:03] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:03] INFO     RECV:1652: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-21 18:24:03] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 18:24:03] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-21 18:24:09] INFO     RECV:1714: [RECV] AI RESPONSE: Hello! I'm CHIDVI, your desktop agent. I'm here to assist with any tasks or commands you have. What 
+[2026-07-21 18:24:09] INFO     ui.runtime:2258: Jarvis: Hello! I'm CHIDVI, your desktop agent. I'm here to assist with any tasks or commands you have. What would you like to do?
+[2026-07-21 18:24:09] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:24:09] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:10] INFO     MIC:76: MIC CALLBACK #601 - captured 2048 bytes
+[2026-07-21 18:24:11] INFO     GEMINI:1575: GEMINI SEND #201 - 2048 bytes
+[2026-07-21 18:24:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:14] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:14] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:23] INFO     MIC:76: MIC CALLBACK #801 - captured 2048 bytes
+[2026-07-21 18:24:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:23] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:24] INFO     GEMINI:1575: GEMINI SEND #401 - 2048 bytes
+[2026-07-21 18:24:29] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:29] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:29] INFO     RECV:1675: [STT] RESULT #1: 100
+[2026-07-21 18:24:30] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:30] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:32] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 18:24:36] INFO     RECV:1699: [STT] TURN COMPLETE: 100
+[2026-07-21 18:24:36] INFO     RECV:1714: [RECV] AI RESPONSE: 100 what would you like to set? Volume, brightness, or something else?
+[2026-07-21 18:24:36] INFO     ui.runtime:2258: [STT] Recognized: 100
+[2026-07-21 18:24:36] INFO     ui.runtime:2258: You: 100
+[2026-07-21 18:24:36] INFO     ui.runtime:2258: Jarvis: 100 what would you like to set? Volume, brightness, or something else?
+[2026-07-21 18:24:36] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:24:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:41] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:42] INFO     GEMINI:1575: GEMINI SEND #601 - 2048 bytes
+[2026-07-21 18:24:42] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:42] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:44] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:44] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:47] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:47] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:48] INFO     MIC:76: MIC CALLBACK #1201 - captured 2048 bytes
+[2026-07-21 18:24:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:24:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:24:50] INFO     RECV:1675: [STT] RESULT #2: .
+[2026-07-21 18:24:52] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 18:24:53] INFO     RECV:1699: [STT] TURN COMPLETE: .
+[2026-07-21 18:24:53] INFO     RECV:1714: [RECV] AI RESPONSE: I'm ready when you are! Just let me know what you need.
+[2026-07-21 18:24:53] INFO     ui.runtime:2258: [STT] Recognized: .
+[2026-07-21 18:24:53] INFO     ui.runtime:2258: You: .
+[2026-07-21 18:24:53] INFO     ui.runtime:2258: Jarvis: I'm ready when you are! Just let me know what you need.
+[2026-07-21 18:24:55] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:24:57] INFO     GEMINI:1575: GEMINI SEND #801 - 2048 bytes
+[2026-07-21 18:24:59] INFO     RECV:1675: [STT] RESULT #3: .
+[2026-07-21 18:25:00] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 18:25:02] INFO     RECV:1699: [STT] TURN COMPLETE: .
+[2026-07-21 18:25:02] INFO     RECV:1714: [RECV] AI RESPONSE: Just give me your command.
+[2026-07-21 18:25:02] INFO     ui.runtime:2258: [STT] Recognized: .
+[2026-07-21 18:25:02] INFO     ui.runtime:2258: You: .
+[2026-07-21 18:25:02] INFO     ui.runtime:2258: Jarvis: Just give me your command.
+[2026-07-21 18:25:02] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:25:03] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 18:25:05] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:25:05] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 18:25:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:06] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:07] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:11] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:11] INFO     GEMINI:1575: GEMINI SEND #1001 - 2048 bytes
+[2026-07-21 18:25:11] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:11] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:12] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:12] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:12] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:12] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:12] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:13] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:13] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:14] INFO     MIC:76: MIC CALLBACK #1601 - captured 2048 bytes
+[2026-07-21 18:25:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:15] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:15] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:18] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:18] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:20] INFO     ui.runtime:2258: [browser] Opened: https://www.google.com/sorry/index?continue=https://
+[2026-07-21 18:25:21] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:25:23] INFO     RECV:1675: [STT] RESULT #4: ఇది
+[2026-07-21 18:25:23] INFO     RECV:1675: [STT] RESULT #5: మన
+[2026-07-21 18:25:23] INFO     RECV:1675: [STT] RESULT #6: ం
+[2026-07-21 18:25:23] INFO     RECV:1675: [STT] RESULT #7: చే
+[2026-07-21 18:25:24] INFO     RECV:1675: [STT] RESULT #8: సిన
+[2026-07-21 18:25:24] INFO     RECV:1675: [STT] RESULT #9: సాంపుల్ వచ్చేది కాదు.
+[2026-07-21 18:25:24] INFO     GEMINI:1575: GEMINI SEND #1201 - 2048 bytes
+[2026-07-21 18:25:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:26] INFO     RECV:1724: [RECV] TOOL CALL: web_search
+[2026-07-21 18:25:26] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 18:25:26] INFO     ui.runtime:2258: [Search] python 3.11.0 download official
+[2026-07-21 18:25:26] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-21 18:25:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:27] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:27] INFO     MIC:76: MIC CALLBACK #1801 - captured 2048 bytes
+[2026-07-21 18:25:27] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:27] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:28] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:28] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:28] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:28] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:31] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+[2026-07-21 18:25:31] INFO     RECV:1699: [STT] TURN COMPLETE: ఇది మన ం చే సిన సాంపుల్ వచ్చేది కాదు.
+[2026-07-21 18:25:31] INFO     RECV:1675: [STT] RESULT #10: <noise>
+[2026-07-21 18:25:31] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:25:31] INFO     ui.runtime:2258: [STT] Recognized: ఇది మన ం చే సిన సాంపుల్ వచ్చేది కాదు.
+[2026-07-21 18:25:31] INFO     ui.runtime:2258: You: ఇది మన ం చే సిన సాంపుల్ వచ్చేది కాదు.
+[2026-07-21 18:25:31] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:25:37] INFO     GEMINI:1575: GEMINI SEND #1401 - 2048 bytes
+[2026-07-21 18:25:37] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:37] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:40] INFO     MIC:76: MIC CALLBACK #2001 - captured 2048 bytes
+[2026-07-21 18:25:41] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:41] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:46] INFO     ui.runtime:2258: [browser] Could not find element: 'Download Python 3.11.0'
+[2026-07-21 18:25:46] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:46] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:48] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:25:48] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 18:25:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:49] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:49] INFO     GEMINI:1575: GEMINI SEND #1601 - 2048 bytes
+[2026-07-21 18:25:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:52] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:52] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:53] INFO     MIC:76: MIC CALLBACK #2201 - captured 2048 bytes
+[2026-07-21 18:25:53] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:54] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:54] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:54] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:54] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:54] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:54] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:54] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:55] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:55] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:56] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:56] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:58] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:58] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:58] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:58] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:59] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:59] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:59] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:25:59] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:25:59] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:00] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:00] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:00] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:00] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:02] INFO     GEMINI:1575: GEMINI SEND #1801 - 2048 bytes
+[2026-07-21 18:26:03] INFO     ui.runtime:2258: [browser] Could not find element: 'Python download page'
+[2026-07-21 18:26:04] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:04] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:26:04] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:05] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:05] INFO     MIC:76: MIC CALLBACK #2401 - captured 2048 bytes
+[2026-07-21 18:26:06] INFO     ui.runtime:2258: [browser] Opened: https://www.python.org/downloads/
+[2026-07-21 18:26:06] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:07] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:07] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:26:07] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:08] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:08] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:08] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:08] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:10] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:14] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:15] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:15] INFO     GEMINI:1575: GEMINI SEND #2001 - 2048 bytes
+[2026-07-21 18:26:16] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:16] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:16] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:17] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:17] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:17] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:18] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:18] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:18] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:18] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:18] INFO     MIC:76: MIC CALLBACK #2601 - captured 2048 bytes
+[2026-07-21 18:26:18] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:19] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:20] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:20] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:21] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:21] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:22] INFO     ui.runtime:2258: [browser] Could not find element: 'Download Python 3.11.0'
+[2026-07-21 18:26:22] INFO     RECV:1699: [STT] TURN COMPLETE: <noise>
+[2026-07-21 18:26:22] INFO     RECV:1675: [STT] RESULT #11: .
+[2026-07-21 18:26:22] INFO     ui.runtime:2258: [STT] Recognized: <noise>
+[2026-07-21 18:26:22] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:26:22] INFO     ui.runtime:2258: You: <noise>
+[2026-07-21 18:26:22] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:26:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:24] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:24] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:24] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:27] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:28] INFO     GEMINI:1575: GEMINI SEND #2201 - 2048 bytes
+[2026-07-21 18:26:28] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:29] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:29] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:29] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:29] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:29] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:30] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:31] INFO     MIC:76: MIC CALLBACK #2801 - captured 2048 bytes
+[2026-07-21 18:26:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:31] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:32] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:32] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:32] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:32] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:33] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:34] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:34] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:34] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:35] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:35] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:35] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:35] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:35] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:37] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:37] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:37] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:37] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:38] INFO     ui.runtime:2258: [browser] Could not find element: 'Download Python 3.11.0'
+[2026-07-21 18:26:38] INFO     RECV:1699: [STT] TURN COMPLETE: .
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #12: 1
+[2026-07-21 18:26:38] INFO     ui.runtime:2258: [STT] Recognized: .
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #13: 1
+[2026-07-21 18:26:38] INFO     ui.runtime:2258: You: .
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #14: .
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #15: 0
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #16: 3
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #17: .
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #18: 1
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #19: 1
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #20: .
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #21: 0
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #22: ver
+[2026-07-21 18:26:38] INFO     RECV:1675: [STT] RESULT #23: sion downward.
+[2026-07-21 18:26:38] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:26:38] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 18:26:38] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:26:38] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:38] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:38] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:38] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:38] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:41] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:41] INFO     GEMINI:1575: GEMINI SEND #2401 - 2048 bytes
+[2026-07-21 18:26:41] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:44] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:44] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:44] INFO     MIC:76: MIC CALLBACK #3001 - captured 2048 bytes
+[2026-07-21 18:26:47] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:48] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:49] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:53] INFO     RECV:1699: [STT] TURN COMPLETE: 1 1 . 0 3 . 1 1 . 0 ver sion downward.
+[2026-07-21 18:26:53] INFO     ui.runtime:2258: [browser] Could not find element: 'Download Python 3.11.0'
+[2026-07-21 18:26:53] INFO     RECV:1675: [STT] RESULT #24: اج <noise>
+[2026-07-21 18:26:53] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:26:53] INFO     ui.runtime:2258: [STT] Recognized: 1 1 . 0 3 . 1 1 . 0 ver sion downward.
+[2026-07-21 18:26:53] INFO     ui.runtime:2258: You: 1 1 . 0 3 . 1 1 . 0 ver sion downward.
+[2026-07-21 18:26:53] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 18:26:53] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:26:53] INFO     GEMINI:1575: GEMINI SEND #2601 - 2048 bytes
+[2026-07-21 18:26:56] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:56] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:56] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:57] INFO     MIC:76: MIC CALLBACK #3201 - captured 2048 bytes
+[2026-07-21 18:26:58] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:58] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:26:59] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:26:59] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:05] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:05] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:05] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:05] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:05] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:06] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:06] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:06] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:06] INFO     GEMINI:1575: GEMINI SEND #2801 - 2048 bytes
+[2026-07-21 18:27:06] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:07] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:07] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:08] INFO     ui.runtime:2258: [browser] Could not find element: 'Download Python 3.11.0'
+[2026-07-21 18:27:09] INFO     MIC:76: MIC CALLBACK #3401 - captured 2048 bytes
+[2026-07-21 18:27:10] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:10] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:10] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:10] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:10] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:27:10] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 18:27:10] INFO     ui.runtime:2258: [browser] Clicked (link): '3.11.0'
+[2026-07-21 18:27:11] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:11] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:11] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:12] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:12] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:27:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:14] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:15] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:15] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:17] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:17] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:18] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:18] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:19] INFO     GEMINI:1575: GEMINI SEND #3001 - 2048 bytes
+[2026-07-21 18:27:22] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:22] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:22] INFO     MIC:76: MIC CALLBACK #3601 - captured 2048 bytes
+[2026-07-21 18:27:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:23] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:23] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:23] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:24] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:27] INFO     ui.runtime:2258: [browser] Could not find element: 'Download installer for Python 3.11.
+[2026-07-21 18:27:28] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:27:29] INFO     ui.runtime:2258: [browser] Scrolled down.
+[2026-07-21 18:27:29] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:30] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:30] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:27:30] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:30] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:30] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:31] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:32] INFO     GEMINI:1575: GEMINI SEND #3201 - 2048 bytes
+[2026-07-21 18:27:33] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:33] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:34] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:34] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:35] INFO     MIC:76: MIC CALLBACK #3801 - captured 2048 bytes
+[2026-07-21 18:27:35] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:35] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:36] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:36] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:36] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:36] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:39] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:42] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:42] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:42] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:44] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:44] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:44] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:45] INFO     GEMINI:1575: GEMINI SEND #3401 - 2048 bytes
+[2026-07-21 18:27:45] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:45] INFO     ui.runtime:2258: [browser] Could not find element: 'download link'
+[2026-07-21 18:27:45] INFO     RECV:1699: [STT] TURN COMPLETE: اج <noise>
+[2026-07-21 18:27:45] INFO     RECV:1675: [STT] RESULT #25: <noise>
+[2026-07-21 18:27:45] INFO     ui.runtime:2258: [STT] Recognized: اج <noise>
+[2026-07-21 18:27:45] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:27:45] INFO     ui.runtime:2258: You: اج <noise>
+[2026-07-21 18:27:45] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:45] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:27:45] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:45] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:46] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:48] INFO     MIC:76: MIC CALLBACK #4001 - captured 2048 bytes
+[2026-07-21 18:27:48] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:48] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:51] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:51] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:52] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:52] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:55] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:55] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:57] INFO     GEMINI:1575: GEMINI SEND #3601 - 2048 bytes
+[2026-07-21 18:27:58] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:58] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:58] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:58] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:27:59] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:27:59] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:00] INFO     ui.runtime:2258: [browser] Could not find element: 'Windows installer 64-bit'
+[2026-07-21 18:28:00] INFO     RECV:1724: [RECV] TOOL CALL: browser_control
+[2026-07-21 18:28:00] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 18:28:01] INFO     MIC:76: MIC CALLBACK #4201 - captured 2048 bytes
+[2026-07-21 18:28:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:01] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:01] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:02] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:02] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:02] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:03] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:03] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:05] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:05] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:05] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:05] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:05] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:05] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:06] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:06] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:07] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:07] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:07] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:07] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:07] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:07] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:08] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:08] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:08] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:08] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:10] INFO     GEMINI:1575: GEMINI SEND #3801 - 2048 bytes
+[2026-07-21 18:28:13] INFO     MIC:76: MIC CALLBACK #4401 - captured 2048 bytes
+[2026-07-21 18:28:15] INFO     ui.runtime:2258: [browser] Could not find element: 'macOS 64-bit installer'
+[2026-07-21 18:28:16] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:16] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:16] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:16] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:17] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 18:28:23] INFO     RECV:1699: [STT] TURN COMPLETE: <noise>
+[2026-07-21 18:28:23] INFO     RECV:1714: [RECV] AI RESPONSE: Python 3.11.0 download page is open now. Please select the appropriate installer for your system to 
+[2026-07-21 18:28:23] INFO     ui.runtime:2258: [STT] Recognized: <noise>
+[2026-07-21 18:28:23] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:28:23] INFO     ui.runtime:2258: You: <noise>
+[2026-07-21 18:28:23] INFO     ui.runtime:2258: Jarvis: Python 3.11.0 download page is open now. Please select the appropriate installer for your system to proceed.
+[2026-07-21 18:28:23] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:23] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:24] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:25] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:25] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:26] INFO     MIC:76: MIC CALLBACK #4601 - captured 2048 bytes
+[2026-07-21 18:28:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:27] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:28] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:29] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:29] INFO     GEMINI:1575: GEMINI SEND #4001 - 2048 bytes
+[2026-07-21 18:28:30] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:30] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:30] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:31] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:31] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:32] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:33] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:33] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:33] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:33] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:33] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:34] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:34] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:36] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:36] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:36] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:36] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:36] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:36] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:38] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:38] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:38] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:39] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:39] INFO     MIC:76: MIC CALLBACK #4801 - captured 2048 bytes
+[2026-07-21 18:28:40] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:40] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:42] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:42] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:42] INFO     GEMINI:1575: GEMINI SEND #4201 - 2048 bytes
+[2026-07-21 18:28:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:43] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:43] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:44] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:46] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:46] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:48] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:49] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:49] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:49] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:49] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:50] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:51] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:51] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:51] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:52] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:52] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:52] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:52] INFO     MIC:76: MIC CALLBACK #5001 - captured 2048 bytes
+[2026-07-21 18:28:54] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:55] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:55] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:55] INFO     GEMINI:1575: GEMINI SEND #4401 - 2048 bytes
+[2026-07-21 18:28:55] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:57] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:57] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:28:57] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:28:57] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:29:00] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:29:00] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:29:03] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:29:03] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:29:03] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:29:03] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:29:05] INFO     MIC:76: MIC CALLBACK #5201 - captured 2048 bytes
+[2026-07-21 18:29:06] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:29:07] INFO     core.proactive_conversation:257: Firing proactive trigger: greeting - Hello there! How can I help you today?...
+[2026-07-21 18:29:07] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:29:08] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 18:29:11] INFO     RECV:1714: [RECV] AI RESPONSE: Hello! I'm CHIDVI, your desktop agent. How can I help you today?
+[2026-07-21 18:29:11] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 18:29:11] INFO     ui.runtime:2258: Jarvis: Hello! I'm CHIDVI, your desktop agent. How can I help you today?
+[2026-07-21 18:29:12] INFO     GEMINI:1575: GEMINI SEND #4601 - 2048 bytes
+[2026-07-21 18:29:12] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:29:13] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:29:13] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:29:13] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 18:29:14] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 18:29:14] INFO     core.audio.diagnostics:110: [VOICE] Silence

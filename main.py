@@ -64,6 +64,32 @@ from actions.computer_control  import computer_control
 from actions.game_updater      import game_updater
 from plugins.smart_scan       import smart_scan
 from plugins.screen_recorder  import screen_record
+from plugins.ai_presenter     import ai_present
+from plugins.health_plugins   import (
+    health_water_reminder,
+    health_screen_time,
+    health_eye_care,
+    health_exercise_coach,
+    health_posture,
+    health_sleep,
+    health_hub,
+    health_auto_start,
+)
+from plugins.voice_plugins    import (
+    voice_notes,
+    meeting_recorder,
+    live_translator,
+    accent_trainer,
+    pronunciation_coach,
+    voice_cloning,
+)
+from plugins.security_plugins import (
+    face_unlock,
+    voice_auth,
+    unknown_person_alert,
+    webcam_monitor,
+    usb_monitor,
+)
 from core.runtime import ensure_renderer_server, run_desktop_app
 from core.audio.microphone import Microphone
 from core.audio.speaker import Speaker
@@ -597,6 +623,367 @@ TOOL_DECLARATIONS = [
             "required": []
         }
     },
+    {
+        "name": "voice_notes",
+        "description": (
+            "Voice Notes plugin. Records spoken notes, transcribes them, cleans them up, "
+            "extracts action items, and saves audio plus markdown notes. Use when the user "
+            "asks to create, start, stop, record, dictate, or save a voice note."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop | record (default: record)"},
+                "duration": {"type": "NUMBER", "description": "Optional fixed recording duration in seconds"},
+                "title": {"type": "STRING", "description": "Optional note title for the saved markdown file"},
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "meeting_recorder",
+        "description": (
+            "Meeting Recorder plugin. Records meetings, transcribes them, creates summaries, "
+            "decisions, questions, action items, and saves audio plus markdown notes. Use for "
+            "meeting recording, minutes, meeting notes, or action item capture."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop | record (default: start)"},
+                "duration": {"type": "NUMBER", "description": "Optional fixed recording duration in seconds"},
+                "title": {"type": "STRING", "description": "Optional meeting title for the saved notes file"},
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "live_translator",
+        "description": (
+            "Live Translator plugin. Captures a short speech segment, detects or uses the source "
+            "language, translates it to the requested target language, and returns transcript plus translation."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "source_language": {"type": "STRING", "description": "Source language or auto-detect"},
+                "target_language": {"type": "STRING", "description": "Language to translate into, default English"},
+                "duration": {"type": "NUMBER", "description": "Recording duration in seconds, default 10"},
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "accent_trainer",
+        "description": (
+            "Accent Trainer plugin. Records the user's speech and gives supportive accent coaching, "
+            "clarity scoring, rhythm/stress feedback, and drills for a target accent."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "target_accent": {"type": "STRING", "description": "Desired accent, e.g. neutral international English"},
+                "practice_text": {"type": "STRING", "description": "Optional sentence the user is practicing"},
+                "duration": {"type": "NUMBER", "description": "Recording duration in seconds, default 12"},
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "pronunciation_coach",
+        "description": (
+            "Pronunciation Coach plugin. Records the user saying a target word or phrase and gives "
+            "pronunciation accuracy, syllable guidance, and mouth/tongue placement tips."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "phrase": {"type": "STRING", "description": "Target word or phrase to practice"},
+                "duration": {"type": "NUMBER", "description": "Recording duration in seconds, default 8"},
+            },
+            "required": ["phrase"]
+        }
+    },
+    {
+        "name": "voice_cloning",
+        "description": (
+            "Voice Cloning plugin for personal use only. Creates a consent-gated local voice profile "
+            "from the user's own voice, lists profiles, and prepares synthesis once a cloning/TTS backend "
+            "is configured. Never use for impersonating other people or without explicit consent."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "create_profile | list | synthesize"},
+                "profile_name": {"type": "STRING", "description": "Personal voice profile name, default my voice"},
+                "duration": {"type": "NUMBER", "description": "Reference recording duration in seconds, default 30"},
+                "consent": {"type": "STRING", "description": "Must confirm this is the user's own voice, e.g. my voice"},
+                "personal_use": {"type": "BOOLEAN", "description": "Must be true for creating a profile"},
+                "text": {"type": "STRING", "description": "Text to synthesize after a backend is configured"},
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "ai_present",
+        "description": (
+            "AI-powered presentation mode. The agent autonomously presents an app, website, "
+            "PPT, or code project by navigating through it and narrating with AI voice. "
+            "It moves the cursor, clicks elements, scrolls, changes slides/tabs, and explains "
+            "everything while recording the screen. Use when the user wants to demo or present "
+            "something automatically without manual control."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "topic": {
+                    "type": "STRING",
+                    "description": "What to present (e.g. 'React dashboard', 'my portfolio website', 'PowerPoint about AI')"
+                },
+                "content_info": {
+                    "type": "STRING",
+                    "description": "Additional context: URL, file path, or description of the content"
+                }
+            },
+            "required": ["topic"]
+        }
+    },
+    {
+        "name": "health_water_reminder",
+        "description": (
+            "Water intake reminder system. Starts a background timer that "
+            "sends toast notifications to remind the user to drink water at regular intervals. "
+            "Actions: 'start' — begin reminders; 'stop' — cancel reminders. "
+            "Optional parameter: interval (minutes between reminders, default 30)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop"},
+                "interval": {"type": "INTEGER", "description": "Minutes between reminders (default 30, min 5)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "health_screen_time",
+        "description": (
+            "Screen-time monitoring that tracks how long the user has been active "
+            "and sends break reminders. Use when the user has been working for a while or "
+            "asks for screen-time management. "
+            "Actions: 'start' — begin monitoring; 'stop' — stop; 'status' — check if running. "
+            "Parameters: break_interval (default 60 min), break_duration (default 5 min)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop | status"},
+                "break_interval": {"type": "INTEGER", "description": "Minutes of activity before break (default 60)"},
+                "break_duration": {"type": "INTEGER", "description": "Minutes for the break (default 5)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "health_eye_care",
+        "description": (
+            "20-20-20 rule eye care reminders. Sends notifications to look 20 feet away "
+            "for 20 seconds at regular intervals to reduce eye strain. "
+            "Actions: 'start' — begin reminders; 'stop' — cancel. "
+            "Optional: interval (minutes between reminders, default 20)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop"},
+                "interval": {"type": "INTEGER", "description": "Minutes between reminders (default 20, min 5)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "health_exercise_coach",
+        "description": (
+            "AI-powered exercise coach that creates custom exercise routines and guides "
+            "the user through them with voice instructions. Generates routines using AI "
+            "based on exercise type and duration. "
+            "Actions: 'start' — begin a new routine; 'stop' — end session; 'next' — skip to next exercise; "
+            "'list' — show current routine. "
+            "Parameters: exercise_type (e.g. 'desk stretch', 'neck relief', 'full body'), "
+            "duration (total minutes, default 5)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop | next | list"},
+                "exercise_type": {"type": "STRING", "description": "Type of exercise: desk stretch, neck relief, full body, yoga (default: desk stretch)"},
+                "duration": {"type": "INTEGER", "description": "Total routine duration in minutes (default 5)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "health_posture",
+        "description": (
+            "Camera-based posture detection and monitoring. Uses the webcam and Gemini Vision "
+            "to analyze sitting/standing posture and provide corrective feedback. "
+            "Actions: 'check' — take one photo and analyze now; "
+            "'start' — continuous monitoring at interval; "
+            "'stop' — stop monitoring. "
+            "Parameters: interval (minutes between checks, default 30)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "check | start | stop"},
+                "interval": {"type": "INTEGER", "description": "Minutes between posture checks (default 30)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "health_sleep",
+        "description": (
+            "Sleep tracker that logs sleep and wake times and shows sleep analytics. "
+            "Actions: 'log_sleep' — record bedtime; 'log_wake' — record wake time (auto-calculates duration); "
+            "'summary' — show sleep stats (avg hours, recent trends). "
+            "Optional: bedtime/waketime (HH:MM format), notes."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "log_sleep | log_wake | summary"},
+                "bedtime": {"type": "STRING", "description": "Time you went to bed in HH:MM format (default now)"},
+                "waketime": {"type": "STRING", "description": "Time you woke up in HH:MM format (default now)"},
+                "notes": {"type": "STRING", "description": "Optional notes about sleep quality"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "health_hub",
+        "description": (
+            "Health & Wellness hub. Lists available health features or routes to a specific one. "
+            "Use this when the user asks about health features in general or wants a summary. "
+            "Parameters: feature (optional) — specific feature to use: water_reminder, screen_time, "
+            "eye_care, exercise, posture, sleep. If omitted, lists all features."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "feature": {"type": "STRING", "description": "Specific feature: water_reminder, screen_time, eye_care, exercise, posture, sleep, or omit to list"},
+                "action": {"type": "STRING", "description": "Action for the specific feature"},
+            },
+            "required": []
+        }
+    },
+
+    # ── Security Suite ──
+    {
+        "name": "face_unlock",
+        "description": (
+            "Face Unlock system. Verifies identity using webcam face recognition. "
+            "Actions: 'verify' — capture a frame and match against known faces; "
+            "'register' — capture and save a new face as <name>; "
+            "'list' — show all registered faces; "
+            "'delete' — remove a registered face by name; "
+            "'status' — show configuration and face count. "
+            "Parameters: action (required), name (for register/delete), "
+            "tolerance (optional float, default 0.5, lower = stricter)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "verify | register | list | delete | status"},
+                "name": {"type": "STRING", "description": "Name for register/delete actions"},
+                "tolerance": {"type": "NUMBER", "description": "Match strictness 0.0-1.0, lower = stricter (default 0.5)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "voice_auth",
+        "description": (
+            "Voice Authentication system. Verifies identity using voice biometrics / voiceprint. "
+            "Records a short voice sample and matches it against stored voiceprints. "
+            "Actions: 'verify' — record and match; "
+            "'register' — record and save a voiceprint for <name>; "
+            "'list' — show all registered voiceprints; "
+            "'delete' — remove a voiceprint; "
+            "'status' — show configuration. "
+            "Parameters: action (required), name (for register/delete), "
+            "duration (recording length in seconds, 2-10, default 3)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "verify | register | list | delete | status"},
+                "name": {"type": "STRING", "description": "Name for register/delete"},
+                "duration": {"type": "INTEGER", "description": "Recording duration in seconds (2-10, default 3)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "unknown_person_alert",
+        "description": (
+            "Unknown Person Alert. Uses the webcam to monitor for unrecognized faces "
+            "in the background and alerts you if someone unknown is detected. "
+            "Actions: 'start' — begin monitoring; "
+            "'stop' — stop; "
+            "'status' — show current state. "
+            "Parameters: action (required), interval (seconds between checks, 5-300, default 10). "
+            "Requires at least one face registered via face_unlock before starting."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop | status"},
+                "interval": {"type": "INTEGER", "description": "Seconds between camera checks (5-300, default 10)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "webcam_monitor",
+        "description": (
+            "Webcam Monitor. Watches for other applications accessing the camera "
+            "and logs/alerts when webcam access is detected. "
+            "Actions: 'start' — begin monitoring; "
+            "'stop' — stop; "
+            "'status' — show current state and recent activity; "
+            "'history' — show the last 20 camera events. "
+            "Parameters: action (required), interval (seconds between polls, 2-60, default 5)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop | status | history"},
+                "interval": {"type": "INTEGER", "description": "Seconds between polls (2-60, default 5)"},
+            },
+            "required": ["action"]
+        }
+    },
+    {
+        "name": "usb_monitor",
+        "description": (
+            "USB Device Monitor. Monitors USB drive connections and disconnections. "
+            "Alerts you when new USB storage devices are connected or removed. "
+            "Actions: 'start' — begin USB monitoring; "
+            "'stop' — stop; "
+            "'status' — show current state and connected drives; "
+            "'history' — show the last 20 USB events. "
+            "Parameters: action (required), interval (seconds between polls, 2-60, default 5)."
+        ),
+        "parameters": {
+            "type": "OBJECT",
+            "properties": {
+                "action": {"type": "STRING", "description": "start | stop | status | history"},
+                "interval": {"type": "INTEGER", "description": "Seconds between polls (2-60, default 5)"},
+            },
+            "required": ["action"]
+        }
+    },
 ]
 
 class JarvisLive:
@@ -640,6 +1027,12 @@ class JarvisLive:
         # Track user interaction time for proactive conversation
         self._last_user_interaction = time.monotonic()
         self._conversation_manager = None
+
+        # ── Auto-start background health monitor ──
+        try:
+            health_auto_start(speak_callback=self.speak)
+        except Exception as e:
+            self.ui.write_log(f"Health: Auto-monitor init failed — {e}")
 
     def _on_text_command(self, text: str):
         if not self._loop:
@@ -958,6 +1351,141 @@ class JarvisLive:
                     lambda: screen_record(parameters=args),
                 )
                 result = r or "Done."
+
+            elif name == "voice_notes":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: voice_notes(parameters=args),
+                )
+                result = r or "Voice note complete."
+
+            elif name == "meeting_recorder":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: meeting_recorder(parameters=args),
+                )
+                result = r or "Meeting recorder complete."
+
+            elif name == "live_translator":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: live_translator(parameters=args),
+                )
+                result = r or "Translation complete."
+
+            elif name == "accent_trainer":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: accent_trainer(parameters=args),
+                )
+                result = r or "Accent training complete."
+
+            elif name == "pronunciation_coach":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: pronunciation_coach(parameters=args),
+                )
+                result = r or "Pronunciation coaching complete."
+
+            elif name == "voice_cloning":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: voice_cloning(parameters=args),
+                )
+                result = r or "Voice cloning action complete."
+
+            elif name == "ai_present":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: ai_present(parameters=args, speak=self.speak),
+                )
+                result = r or "Presentation complete."
+
+            # ── Health & Wellness ──
+            elif name == "health_water_reminder":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: health_water_reminder(parameters=args),
+                )
+                result = r or "Water reminder toggled."
+
+            elif name == "health_screen_time":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: health_screen_time(parameters=args),
+                )
+                result = r or "Screen-time monitor toggled."
+
+            elif name == "health_eye_care":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: health_eye_care(parameters=args),
+                )
+                result = r or "Eye care toggled."
+
+            elif name == "health_exercise_coach":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: health_exercise_coach(parameters=args, speak=self.speak),
+                )
+                result = r or "Exercise session complete."
+
+            elif name == "health_posture":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: health_posture(parameters=args, speak=self.speak),
+                )
+                result = r or "Posture check complete."
+
+            elif name == "health_sleep":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: health_sleep(parameters=args),
+                )
+                result = r or "Sleep logged."
+
+            elif name == "health_hub":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: health_hub(parameters=args),
+                )
+                result = r or "Health features listed."
+
+            # ── Security Suite ──
+            elif name == "face_unlock":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: face_unlock(parameters=args, speak=self.speak),
+                )
+                result = r or "Face unlock complete."
+
+            elif name == "voice_auth":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: voice_auth(parameters=args, speak=self.speak),
+                )
+                result = r or "Voice auth complete."
+
+            elif name == "unknown_person_alert":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: unknown_person_alert(parameters=args, speak=self.speak),
+                )
+                result = r or "Unknown person alert action complete."
+
+            elif name == "webcam_monitor":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: webcam_monitor(parameters=args, speak=self.speak),
+                )
+                result = r or "Webcam monitor action complete."
+
+            elif name == "usb_monitor":
+                r = await loop.run_in_executor(
+                    None,
+                    lambda: usb_monitor(parameters=args, speak=self.speak),
+                )
+                result = r or "USB monitor action complete."
 
             elif name == "computer_settings":
                 r = await loop.run_in_executor(None, lambda: computer_settings(parameters=args, response=None, player=self.ui))
@@ -1337,7 +1865,120 @@ class JarvisLive:
             log.info("[SESSION #%d] RECONNECTING in %ds...", session_num, reconnect_delay)
             await asyncio.sleep(reconnect_delay)
 
+def _verify_face_at_startup() -> bool:
+    """
+    Capture a webcam frame and check it against every registered face encoding
+    in security/known_faces/.  Returns True on first match, False otherwise.
+    """
+    from pathlib import Path as _Path
+
+    known_dir = _Path(__file__).resolve().parent / "security" / "known_faces"
+    npy_files = list(known_dir.glob("*.npy"))
+    jpg_files = list(known_dir.glob("*.jpg"))
+
+    if not npy_files and not jpg_files:
+        print("⚠️  No registered faces found — skipping startup verification.")
+        return True  # no faces registered yet → allow access
+
+    try:
+        import face_recognition
+        import cv2
+    except ImportError:
+        print("⚠️  Face-recognition libraries not installed — skipping verification.")
+        return True
+
+    # ── Load known encodings ────────────────────────────────────────
+    known_encodings: list = []
+    for npy in npy_files:
+        import numpy as np
+        try:
+            known_encodings.append(np.load(str(npy)))
+        except Exception:
+            continue
+    # fallback — encode from source .jpg if .npy missing
+    if not known_encodings:
+        for jpg in jpg_files:
+            try:
+                img = face_recognition.load_image_file(str(jpg))
+                encs = face_recognition.face_encodings(img)
+                if encs:
+                    known_encodings.append(encs[0])
+            except Exception:
+                continue
+
+    if not known_encodings:
+        print("⚠️  Could not load any face encodings — skipping verification.")
+        return True
+
+    # ── Camera loop ─────────────────────────────────────────────────
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    if not cap.isOpened():
+        cap = cv2.VideoCapture(0)
+    if not cap.isOpened():
+        print("⚠️  Camera unavailable — skipping startup verification.")
+        return True
+
+    start = time.time()
+    timeout = 15  # seconds
+    verified = False
+
+    cv2.namedWindow("JARVIS — Face Verification", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("JARVIS — Face Verification", 640, 480)
+
+    while time.time() - start < timeout:
+        ret, frame = cap.read()
+        if not ret:
+            continue
+
+        elapsed = int(time.time() - start)
+        remaining = timeout - elapsed
+
+        # Detect faces
+        face_locs = face_recognition.face_locations(frame)
+        match_name = None
+
+        for loc in face_locs:
+            enc = face_recognition.face_encodings(frame, [loc])[0]
+            matches = face_recognition.compare_faces(known_encodings, enc, tolerance=0.5)
+            if True in matches:
+                match_name = "Owner"
+                verified = True
+                top, right, bottom, left = loc
+                cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 3)
+                cv2.putText(frame, "VERIFIED ✓", (left, top - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+                break
+            else:
+                top, right, bottom, left = loc
+                cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+
+        # Overlay status
+        status = "VERIFIED ✓" if verified else f"Verifying... ({remaining}s)"
+        color = (0, 255, 0) if verified else (255, 255, 255)
+        cv2.putText(frame, status, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
+        cv2.putText(frame, "Look at the camera", (20, 75),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (200, 200, 200), 1)
+
+        cv2.imshow("JARVIS — Face Verification", frame)
+        cv2.waitKey(30)
+
+        if verified:
+            break
+
+    cap.release()
+    cv2.destroyWindow("JARVIS — Face Verification")
+    cv2.destroyAllWindows()
+
+    if verified:
+        print("✅ Face verified. Starting Jarvis...")
+    else:
+        print("🚫 Face verification failed — access denied.")
+    return verified
+
+
 def main():
+    if not _verify_face_at_startup():
+        sys.exit(1)
     ensure_renderer_server()
     run_desktop_app(JarvisUI, JarvisLive)
 

@@ -1,0 +1,73 @@
+[2026-07-21 10:11:13] INFO     core.personality_manager:136: Discovered 2 personality plugin(s): CHIDVI, HINATA
+[2026-07-21 10:11:13] INFO     ui.runtime:2258: SYS: Renderer initial avatar -> Chidvi.vrm
+[2026-07-21 10:11:13] INFO     commands.router:70: Command router initialized
+[2026-07-21 10:11:13] INFO     api.key_pool:128: Loaded 15 API keys
+[2026-07-21 10:11:13] INFO     ui.runtime:2258: SYS: Renderer page load started.
+[2026-07-21 10:11:13] INFO     ui.runtime:2258: SYS: Renderer page load finished -> OK.
+[2026-07-21 10:11:13] INFO     SESSION:1274: [SESSION #1] CONNECTING with model=models/gemini-2.5-flash-native-audio-preview-12-2025...
+[2026-07-21 10:11:14] INFO     SESSION:1290: [SESSION #1] CONNECTED - personality=CHIDVI voice=Charon
+[2026-07-21 10:11:14] INFO     core.proactive_conversation:195: Proactive conversation manager started
+[2026-07-21 10:11:14] INFO     GEMINI:1063: SEND TASK STARTED
+[2026-07-21 10:11:14] INFO     MIC:1083: [MIC] TASK STARTED
+[2026-07-21 10:11:14] INFO     MIC:1087: [MIC] Opening stream...
+[2026-07-21 10:11:14] INFO     MIC:96: STREAM OPEN - sr=16000 ch=1 device=None
+[2026-07-21 10:11:14] INFO     ui.runtime:2258: SYS: JARVIS online.
+[2026-07-21 10:11:14] INFO     ui.runtime:2258: [MIC] Device opening
+[2026-07-21 10:11:14] INFO     ui.runtime:2258: [MIC] Device opened
+[2026-07-21 10:11:14] INFO     MIC:99: STREAM ACTIVE - waiting for cancellation
+[2026-07-21 10:11:14] INFO     RECV:1122: [RECV] TASK STARTED
+[2026-07-21 10:11:14] INFO     TTS:1241: [TTS] TASK STARTED
+[2026-07-21 10:11:14] INFO     TTS:78: SPEAKER OPEN - sr=24000 ch=2
+[2026-07-21 10:11:14] INFO     MIC:76: MIC CALLBACK #1 - captured 2048 bytes
+[2026-07-21 10:11:14] INFO     GEMINI:1072: GEMINI SEND #1 - 2048 bytes
+[2026-07-21 10:11:22] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 10:11:22] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 10:11:22] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 10:11:22] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 10:11:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 10:11:24] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 10:11:24] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 10:11:24] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 10:11:25] INFO     RECV:1172: [STT] RESULT #1: <noise>
+[2026-07-21 10:11:26] WARNING  google_genai.types:19785: Warning: there are non-data parts in the response: ['text', 'thought'], returning concatenated data result from data parts, check out the non data parts for full response from model.
+[2026-07-21 10:11:27] INFO     core.audio.diagnostics:110: [VOICE] Detected
+[2026-07-21 10:11:27] INFO     RECV:1149: [TTS] FIRST AUDIO CHUNK received from Gemini
+[2026-07-21 10:11:27] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 10:11:27] INFO     TTS:101: TTS START - first chunk received (46080 bytes)
+[2026-07-21 10:11:28] INFO     RECV:1196: [STT] TURN COMPLETE: <noise>
+[2026-07-21 10:11:28] INFO     RECV:1211: [RECV] AI RESPONSE: How can I help you with the browser?
+[2026-07-21 10:11:28] INFO     ui.runtime:2258: [STT] Recognized: <noise>
+[2026-07-21 10:11:28] INFO     ui.runtime:2258: You: <noise>
+[2026-07-21 10:11:28] INFO     ui.runtime:2258: Jarvis: How can I help you with the browser?
+[2026-07-21 10:11:28] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 10:11:28] INFO     GEMINI:1072: GEMINI SEND #201 - 2048 bytes
+[2026-07-21 10:11:28] INFO     core.audio.diagnostics:110: [VOICE] Silence
+[2026-07-21 10:11:58] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 10:11:59] INFO     RECV:1221: [RECV] TOOL CALL: smart_scan
+[2026-07-21 10:11:59] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 10:12:06] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-21 10:12:11] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+[2026-07-21 10:12:13] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 10:12:23] INFO     RECV:1211: [RECV] AI RESPONSE: You are holding a computer mouse, an essential input device that helps you navigate your computer's 
+[2026-07-21 10:12:23] INFO     ui.runtime:2258: Jarvis: You are holding a computer mouse, an essential input device that helps you navigate your computer's graphical interface. You can use it to move the cursor, click on icons, open programs, and scroll.
+[2026-07-21 10:12:23] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 10:12:29] INFO     core.proactive_conversation:257: Firing proactive trigger: greeting - Hello there! How can I help you today?...
+[2026-07-21 10:12:30] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 10:12:35] INFO     RECV:1211: [RECV] AI RESPONSE: Hello! As CHIDVI, I am here to assist you with any tasks you have. What is on your mind today?
+[2026-07-21 10:12:35] INFO     ui.runtime:2258: Jarvis: Hello! As CHIDVI, I am here to assist you with any tasks you have. What is on your mind today?
+[2026-07-21 10:12:35] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 10:12:59] INFO     core.proactive_conversation:257: Firing proactive trigger: help_offer - Is there something I can help you with?...
+[2026-07-21 10:13:00] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 10:13:01] INFO     HINATA:17: Avatar State -> LISTENING
+[2026-07-21 10:13:01] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 10:13:04] INFO     RECV:1211: [RECV] AI RESPONSE: I am actually the one who is here to help you! What can I do for you?
+[2026-07-21 10:13:04] INFO     ui.runtime:2258: Jarvis: I am actually the one who is here to help you! What can I do for you?
+[2026-07-21 10:13:04] INFO     HINATA:17: Avatar State -> IDLE
+[2026-07-21 10:13:04] INFO     RECV:1221: [RECV] TOOL CALL: smart_scan
+[2026-07-21 10:13:04] INFO     HINATA:17: Avatar State -> THINKING
+[2026-07-21 10:13:10] INFO     google_genai.models:6510: AFC is enabled with max remote calls: 10.
+[2026-07-21 10:13:15] INFO     httpx:1025: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+[2026-07-21 10:13:16] INFO     HINATA:17: Avatar State -> SPEAKING
+[2026-07-21 10:13:22] INFO     RECV:1211: [RECV] AI RESPONSE: You are holding a smartphone in a Spider-Man themed case. Is there anything specific you would like 
+[2026-07-21 10:13:22] INFO     ui.runtime:2258: Jarvis: You are holding a smartphone in a Spider-Man themed case. Is there anything specific you would like to know about it?
+[2026-07-21 10:13:22] INFO     HINATA:17: Avatar State -> IDLE

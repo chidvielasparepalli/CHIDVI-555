@@ -219,6 +219,11 @@ class ScreenRecorder:
 _recorder = ScreenRecorder()
 
 
+def get_recorder() -> ScreenRecorder:
+    """Get the singleton ScreenRecorder instance for reuse by other plugins."""
+    return _recorder
+
+
 def screen_record(parameters: dict, **kwargs) -> str:
     """
     Main entry point. Called from the tool dispatch in main.py.
