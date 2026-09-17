@@ -2,4 +2,11 @@
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+*.log
+logs/
 config/api_keys.json
+.DS_Store
+Thumbs.db
+node_modules/
+web/dist/
