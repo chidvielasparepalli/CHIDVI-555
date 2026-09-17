@@ -1,238 +1,343 @@
-🤖 C.H.I.D.V.I.E.L.A.S (CHIDVI 555)
-The Next-Generation Cross-Platform Personal AI Assistant
+# ⚡ CHIDVI-555
 
-Designed & Developed by Chidvielas Parepalli
+### Cross-Platform Personal AI Assistant
 
-An intelligent desktop AI assistant capable of hearing, speaking, remembering, seeing, understanding, and controlling your computer in real time. Built with Google Gemini Live, advanced desktop automation, long-term memory, tool execution, and multiple AI personalities.
+**CHIDVI-555** is a desktop AI assistant built around real-time voice interaction, Gemini-powered reasoning, tool execution, computer automation, memory, vision, and interactive VRM avatars.
 
-✨ Overview
+> **Project status:** Active prototype / research project. Some advanced capabilities are experimental and may require additional configuration or external services.
 
-CHIDVI 555 is the latest evolution of the JARVIS project, transforming traditional AI assistants into a complete desktop operating companion.
+---
 
-Rather than simply answering questions, CHIDVI understands natural conversations, performs computer automation, executes intelligent workflows, analyzes files, remembers user preferences, and adapts its behavior through multiple personalities.
+## ✨ What CHIDVI-555 Does
 
-The goal is to provide a seamless Human-AI interaction experience where voice, vision, automation, memory, and intelligence work together.
+CHIDVI is designed to move beyond a simple chat interface and act as a computer companion that can **listen → understand → act → respond**.
 
-🚀 Core Capabilities
-Feature	Description
-🎙️ Real-Time Voice Conversation	Ultra-low latency voice interaction powered by Gemini Live
-🧠 Multiple AI Personalities	Instantly switch between CHIDVI and HINATA personalities
-💾 Long-Term Memory	Remembers projects, preferences, conversations, and user context
-🖥️ Desktop Automation	Open applications, control windows, execute system commands
-🌐 Browser Automation	Google search, LinkedIn, YouTube, websites, form filling
-📂 Intelligent File Processing	Analyze PDFs, Images, Code, Documents, CSV, JSON and more
-👁️ Vision Support	Understand screenshots and uploaded images
-⚡ AI Tool Calling	Executes Python tools automatically using Gemini Function Calling
-💬 Hybrid Input	Voice + Keyboard commands simultaneously
-🔊 Streaming Voice Output	Natural streaming AI speech with interruption support
-🎨 Adaptive Modern UI	Responsive futuristic desktop interface
-🧩 Multi-Step Task Planning	Breaks complex goals into executable tasks
-🔄 Cross-Platform Support	Windows • Linux • macOS
-🆕 Latest Features
-🎭 Multiple AI Personalities
+| Capability | Status |
+|---|---|
+| 🎙️ Gemini Live voice conversation | Active |
+| 🧠 CHIDVI / HINATA personalities | Active |
+| 💾 Persistent memory | Active |
+| 🖥️ Desktop automation | Active / platform-dependent |
+| 🌐 Browser automation | Active / platform-dependent |
+| 📂 File processing | Active |
+| 👁️ Screen / image understanding | Available through tools |
+| 🤖 Gemini function calling | Active |
+| 🔊 Streaming voice output | Active |
+| 🎭 VRM avatar rendering | Active |
+| 😊 Avatar expressions / blinking | Active in web renderer |
+| 🧩 Multi-step automation | Experimental |
+| 📱 Phone control | Experimental |
+| 🧪 Offline AI features | Experimental |
 
-CHIDVI 555 now supports dynamic personality switching.
+---
 
-CHIDVI
-Professional
-Logical
-Task-oriented
-Technical assistant
-Efficient responses
+## 🧠 Core Interaction Loop
 
-HINATA
-Friendly
-Caring
-Emotional
-Natural conversations
-Human-like interactions
+```text
+User
+  ↓
+Voice / Keyboard
+  ↓
+Speech + Intent Processing
+  ↓
+Gemini
+  ↓
+Tool / Automation Selection
+  ↓
+┌───────────────┬───────────────┬───────────────┐
+│ Desktop       │ Browser       │ File / Vision │
+│ Automation    │ Automation    │ Tools         │
+└───────────────┴───────────────┴───────────────┘
+  ↓
+Result + Memory Update
+  ↓
+Voice + UI + Avatar Response
+```
 
-Users can switch personalities instantly during runtime without restarting the application.
+---
 
-🧠 Persistent Memory System
+## 🎭 VRM Avatar System
 
-The assistant now remembers:
+CHIDVI-555 includes a browser-based Three.js renderer using **`@pixiv/three-vrm`**.
 
-Previous conversations
-User preferences
-Ongoing projects
-Frequently used tools
-Personal workflow
-Context between sessions
+Available avatars:
 
-This enables personalized conversations over time.
+- `Chidvi.vrm`
+- `Hinata.vrm`
 
-🛠️ AI Tool Execution
+The renderer now treats legacy **VRM 0.x** and modern **VRM 1.0** models differently instead of applying legacy conversion to every model. Avatar selection is restricted to the bundled models, load failures are surfaced cleanly, and rendering uses a capped device pixel ratio for better stability.
 
-The assistant can intelligently decide when to use tools.
+VRM assets used by the web renderer live in:
 
-Supported automation includes:
+```text
+web/public/Chidvi.vrm
+web/public/Hinata.vrm
+```
 
-Browser Control
-Application Launching
-Website Navigation
-Google Search
-LinkedIn
-YouTube
-File Analysis
-Weather
-Flight Search
-System Commands
-File Management
-Desktop Automation
-📂 Advanced File Intelligence
+The desktop UI selects the personality avatar through the local Vite page.
 
-Upload and analyze:
+---
 
-PDF
-DOCX
-TXT
-Images
-Source Code
-CSV
-JSON
-Excel
-Audio
-Video
+## 🎤 Voice Pipeline
 
-Capabilities include:
+```text
+Microphone
+   ↓
+Speech / Gemini Live
+   ↓
+Intent + Reasoning
+   ↓
+Tool Execution
+   ↓
+Response
+   ↓
+Streaming Audio + Avatar State
+```
 
-Summarization
-OCR
-Translation
-Code Review
-Bug Detection
-Documentation
-AI Explanation
-🎤 Gemini Live Voice Engine
+The application is designed for continuous interaction with interruption handling rather than one-shot text commands.
 
-Built using Google's Gemini Live API.
+---
 
-Features include:
+## 🛠️ Tool & Automation Layer
 
-Streaming speech recognition
-Streaming AI responses
-Real-time interruption handling
-Continuous conversations
-Low-latency communication
-🎨 Redesigned Desktop Interface
+Current integrations include modules for:
 
-The latest interface introduces:
+- Application launching
+- Desktop controls
+- Browser navigation and automation
+- Web search
+- YouTube
+- Weather
+- Flight search
+- File processing and file control
+- Screenshots / screen processing
+- Code assistance
+- Developer workflows
+- Reminders
+- Messaging
+- Game updates
+- Computer settings
 
-Modern futuristic dashboard
-Live AI status indicators
-Animated response logs
-Dynamic themes
-Responsive layouts
-Video-based avatar support
-Personality-specific themes
-🤖 Intelligent Automation Engine
+Individual capabilities depend on the operating system, installed applications, permissions, API keys, and external services.
 
-CHIDVI can:
+---
 
-Open software
-Close applications
-Search the web
-Manage files
-Execute terminal commands
-Navigate websites
-Perform repetitive workflows
+## 💾 Memory
 
-without requiring manual interaction.
+The memory layer is intended to preserve useful context between sessions, including:
 
-🔥 Performance Improvements
-Faster Gemini response streaming
-Improved asynchronous architecture
-Better audio queue management
-Reduced latency
-More stable tool execution
-Enhanced browser automation
-Improved UI responsiveness
-🏗️ Architecture
-                User
+- User preferences
+- Previous conversations
+- Projects and workflow context
+- Frequently used information
+- Long-term assistant state
 
-         Voice / Keyboard
+Memory components are kept under `memory/` and are accessed by the main assistant runtime.
 
-                │
+---
 
-        Speech Recognition
+## 🎨 Personalities
 
-                │
+### CHIDVI
 
-         Gemini Live API
+- Professional
+- Technical
+- Direct
+- Task-oriented
 
-                │
+### HINATA
 
-      Intent & Tool Detection
+- Friendly
+- Conversational
+- Caring
+- Emotion-oriented
 
-                │
+Personality selection also controls the corresponding avatar and UI theme.
 
-      ┌──────────────────────┐
-      │                      │
-      ▼                      ▼
+---
 
- Desktop Automation     AI Conversation
+## 📁 Project Structure
 
-      │                      │
+```text
+CHIDVI-555/
+├── actions/          # Computer, browser, files, web and task actions
+├── agent/            # Agent-oriented modules and planning placeholders
+├── api/              # API helpers / key management
+├── automation/       # Planning, execution and error handling
+├── avatar/            # VRM assets and animation engine
+├── avatars/           # Avatar state, events and service layer
+├── commands/          # Command routing
+├── config/            # Runtime configuration
+├── core/              # Core assistant services, speech and personality
+├── memory/            # Persistent memory components
+├── offline/           # Experimental offline components
+├── personality/       # CHIDVI and HINATA personalities
+├── plugins/           # Plugin infrastructure
+├── security/          # Authentication / permission experiments
+├── ui_core/           # UI support modules and themes
+├── vision/            # Vision-related components
+├── voice/             # Voice module structure
+├── web/               # Three.js + VRM avatar renderer
+├── main.py            # Main application entry point
+├── ui.py              # Desktop UI
+└── requirements.txt   # Python dependencies
+```
 
- Browser            Memory System
+---
 
- Applications       File Processing
+## ⚙️ Requirements
 
- Vision             Tool Execution
+- Python **3.11+**
+- Node.js + npm
+- Microphone for voice interaction
+- Internet connection for Gemini-powered features
+- Gemini API key
+- Windows / Linux / macOS (some automation features are OS-specific)
 
-      │
+---
 
-      ▼
+## 🚀 Installation
 
- Animated UI + Voice Response
-📋 Requirements
-Requirement	Version
-Python	3.11+
-OS	Windows / Linux / macOS
-Microphone	Required
-Internet	Required for Gemini
-Gemini API Key	Required
-⚡ Installation
+### 1. Clone
+
+```bash
 git clone https://github.com/chidvielasparepalli/CHIDVI-555.git
-
 cd CHIDVI-555
+```
 
+### 2. Create the Python environment
+
+```bash
 python -m venv .venv
+```
 
-source .venv/bin/activate
-# Windows
+**Windows:**
+
+```powershell
 .venv\Scripts\activate
+```
 
+**Linux / macOS:**
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install Python dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+If the project uses Playwright-based browser automation on your machine:
+
+```bash
 playwright install
+```
 
+### 4. Configure the Gemini key
+
+Create a `.env` file in the repository root:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+Keep API keys out of Git. `config/api_keys.json`, `.env`, logs, Python caches, `node_modules`, and build output are ignored by Git.
+
+### 5. Install the VRM web renderer
+
+```bash
+cd web
+npm install
+```
+
+### 6. Start the web renderer
+
+```bash
+npm run dev
+```
+
+The renderer serves the bundled VRM models from `web/public/`.
+
+### 7. Start CHIDVI
+
+From the repository root:
+
+```bash
 python main.py
-🛣️ Roadmap
+```
 
-Upcoming features planned for future releases:
+The desktop UI expects the local web renderer to be available when avatar rendering is enabled.
 
-🎥 Video-based animated AI avatars
-😊 Emotion-aware avatar expressions
-👄 Automatic lip synchronization
-🧠 Local Whisper speech recognition
-🧠 Offline LLM support
-👀 Continuous screen understanding
-📱 Android companion app
-🏠 Smart Home integration
-🔌 Plugin ecosystem
-🌍 Multi-language personality packs
-👨‍💻 About the Creator
+---
 
-CHIDVI 555 is an independent research and development project focused on building a true next-generation desktop AI assistant that combines conversational intelligence, automation, memory, vision, and adaptive personalities into a unified experience.
+## 🔧 VRM Troubleshooting
 
-⭐ Support the Project
+If an avatar does not appear:
 
-If you enjoy CHIDVI 555, consider:
+1. Confirm `web/public/Chidvi.vrm` or `web/public/Hinata.vrm` exists.
+2. Start the Vite renderer with `npm run dev` inside `web/`.
+3. Open the local renderer directly and check the browser console.
+4. Verify the VRM file is a valid VRM/GLB asset.
+5. Use only the bundled avatar names when testing:
 
-⭐ Starring the repository
-🍴 Forking the project
-🐞 Reporting issues
-💡 Suggesting new features
-🤝 Contributing to development
+```text
+?avatar=Chidvi.vrm
+?avatar=Hinata.vrm
+```
+
+The renderer intentionally avoids calling `VRMUtils.rotateVRM0()` on modern VRM 1.0 models because that conversion is intended for legacy VRM 0.x assets.
+
+---
+
+## 🔐 Safety & Permissions
+
+CHIDVI can interact with the local computer, so automation should be treated as a privileged capability.
+
+Recommended practice:
+
+- Keep API keys private.
+- Review automation commands before using them for destructive actions.
+- Grant only the permissions required by each feature.
+- Do not run untrusted tools or scripts with elevated privileges.
+- Keep personal files and authentication data outside the repository.
+
+---
+
+## 🧪 Development Status
+
+CHIDVI-555 is a large prototype that contains both working components and experimental architecture. Empty or placeholder modules may exist for future systems; they are intentionally separated from the active runtime rather than being treated as completed features.
+
+The practical focus of this version is:
+
+**Voice → Reasoning → Tools → Computer Interaction → Memory → Avatar/UI**
+
+---
+
+## 🛣️ Direction
+
+The project is evolving toward a more modular assistant architecture with:
+
+- Better agent planning
+- Stronger memory retrieval
+- More reliable tool execution
+- Computer vision
+- Improved voice interaction
+- Robust avatar state synchronization
+- Multi-agent experimentation
+- Safer permission handling
+
+---
+
+## 📜 License
+
+No explicit open-source license is currently declared in this repository. Treat the project as **all rights reserved** unless a license is added by the project owner.
+
+---
+
+<div align="center">
+
+**CHIDVI-555 — Listen. Understand. Act. Remember.** ⚡
+
+</div>
